@@ -5,9 +5,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=8,IE=9,IE=10,IE=Edge" />
     
-<title>Plug-in Java API</title>
+<title>CPF Client Java API</title>
     <script type="text/javascript">
-pageId = 'pluginJava';
+pageId = 'clientJava';
 		</script>
 
     <link href="https://code.jquery.com/ui/1.11.2/themes/cupertino/jquery-ui.css" rel="stylesheet" type="text/css" />
@@ -92,1281 +92,165 @@ td > ul {
 <ul>
 <li><a href="../../../ws/">HOME</a></li>
 <li><a href="../../">Developer Guide</a></li>
-<li>Plug-in Java API</li>
+<li>CPF Client Java API</li>
 </ul>
 </div>
                   
                 </div>
                 <div CLASS="bodyContent">
 
-<h1>Plug-in Java API</h1><p>The Concurrent Processing Framework Plug-in API for Java (1.6+) allows developers to create
-  business application plug-ins that can be deployed to the CPF web services.</p><div><div class="javaPackage open"><h1 id="ca.bc.gov.open.cpf.plugin.api">ca.bc.gov.open.cpf.plugin.api</h1><div class="content"><p>The Concurrent Processing Framework Java Plug-in API.</p><div class="title">Annotations</div>
-<div class="javaClass"><h2 id="ca.bc.gov.open.cpf.plugin.api.AllowedValues">AllowedValues</h2><div class="content"><p>The <code>AllowedValues</code> method annotation defines the list of valid values for a
- <a href="#ca.bc.gov.open.cpf.plugin.api.JobParameter"><code>JobParameter</code></a> or <a href="#ca.bc.gov.open.cpf.plugin.api.RequestParameter"><code>RequestParameter</code></a>. The annotation can only be defined
- on a <code>setXXX</code> method which has either the <a href="#ca.bc.gov.open.cpf.plugin.api.JobParameter"><code>JobParameter</code></a> or <a href="#ca.bc.gov.open.cpf.plugin.api.RequestParameter"><code>RequestParameter</code></a> annotations.</p>
-
- <p>The list of allowed values are encoded as strings. The string values will be
- converted to the data type of the parameter on the <code>setXXX</code> method.</p>
-
- <p>The list of allowed values is returned with the parameter descriptions in the
- business application specifications web services.</p>
- 
- <p>The list of allowed values is used to create a select list field on the job submission form. If the parameter
- is not required the select field will include "-" to indicate the null (not selected) value.</p>
- 
- <p>The following code fragment shows an example of using the API.</p>
-
- <figure><pre class="prettyprint language-java">&#064;AllowedValues(value = {
-  "MD5",
-  "SHA"
-})
-&#064;JobParameter
-&#064;RequestParameter
-public void setAlgorithmName(final String algorithmName) {
-  this.algorithmName = algorithmName;
-}</pre></figure><div class="title">Annotation Elements</div>
-<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Name</th><th>Type</th><th>Default</th><th class="description">Description</th></tr>
+<h1>CPF Client Java API</h1><p>The Concurrent Processing Framework Client API for Java (1.6+) allows client applications to use the CPF REST Web Service API
+    to query the available business applications, create jobs and download the results of jobs on behalf of their users.</p>
+    
+ <p>The client can be used from Java applications developed using Maven with the following <a href="../../maven.html">Maven settings</a>.</p><div><div class="javaPackage open"><h1 id="ca.bc.gov.open.cpf.client.api">ca.bc.gov.open.cpf.client.api</h1><div class="content"><p>The Concurrent Processing Framework Java Client API.</p><div class="title">Enums</div>
+<div class="javaClass"><h2 id="ca.bc.gov.open.cpf.client.api.ErrorCode">ErrorCode</h2><div class="content"><p>The ErrorCode enum describes the types of error that can be returned in an error file.<p><div class="title">Enum Constants</div>
+<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Constant</th><th class="description">Description</th></tr>
 </thead>
-<tbody><tr><td class="name"><a name="ca.bc.gov.open.cpf.plugin.api.AllowedValues.value">value</a>
-</td>
-<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a>[]</td>
-<td class="default">-</td>
-<td class="description">The list of allowed values encoded as strings. The string values will be converted to the data type of the parameter.</td>
+<tbody><tr><td class="constant">BAD_RESPONSE_DATA</td>
+<td class="description">Invalid response data returned from the Business Application.</td>
+</tr>
+<tr><td class="constant">RECOVERABLE_EXCEPTION</td>
+<td class="description">A temporary exception that can be recovered from.</td>
+</tr>
+<tr><td class="constant">MISSING_REQUIRED_PARAMETER</td>
+<td class="description">A required request or job parameter is missing.</td>
+</tr>
+<tr><td class="constant">INVALID_PARAMETER_VALUE</td>
+<td class="description">A supplied request or job parameter has an invalid type or value.</td>
+</tr>
+<tr><td class="constant">INPUT_DATA_UNREADABLE</td>
+<td class="description">Unable to read batch job input data.</td>
+</tr>
+<tr><td class="constant">BAD_NUMBER_REQUESTS</td>
+<td class="description">Invalid number of batch job requests.</td>
+</tr>
+<tr><td class="constant">TOO_MANY_REQUESTS</td>
+<td class="description">Too many batch job requests for this business application.</td>
+</tr>
+<tr><td class="constant">BAD_INPUT_DATA_TYPE</td>
+<td class="description">Invalid mime type for request input data.</td>
+</tr>
+<tr><td class="constant">BAD_INPUT_DATA_VALUE</td>
+<td class="description">Illegal value in request input data.</td>
+</tr>
+<tr><td class="constant">BAD_INPUT_DATA_VALUES</td>
+<td class="description">Illegal combination of values in request input data.</td>
+</tr>
+<tr><td class="constant">BAD_RESULT_DATA_TYPE</td>
+<td class="description">Invalid mime type for result data.</td>
+</tr>
+<tr><td class="constant">ERROR_PROCESSING_REQUEST</td>
+<td class="description">An unknown error occurred processing the request.</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
 </div>
-<div class="javaClass"><h2 id="ca.bc.gov.open.cpf.plugin.api.BusinessApplicationPlugin">BusinessApplicationPlugin</h2><div class="content"><p>The <code>BusinessApplicationPlugin</code> annotation marks a Java class as a CPF business
- application plug-in. The plug-in class must have the <code>public</code> keyword, be defined in a separate
- Java file, must not be in the default package (must have a package declaration) and must not
- have the <code>final</code> keyword.<p>
+<div class="title">Interfaces</div>
+<div class="javaClass"><h2 id="ca.bc.gov.open.cpf.client.api.Callback">Callback</h2><div class="content"><p>The callback interface is used by the CpfClient API to invoke code in a client application
+ to process a objects returned from the CPF REST API.</p>
+ 
+ <p>The use of a callback mechanism ensures that any connections to the server are closed
+ correctly after processing a request. The connections are closed even if there was a
+ communications error or an exception thrown by the callback.</p>
 
- <p>The instance of the plug-in is executed within a single thread so does not need to be
- synchronized. Any services that it uses must however be thread safe as they will be used by
- multiple instances of the plug-in in different threads.</p>
-
- <p class="note">NOTE: An instance of the plug-in class is created for each request processed by the plug-in.
- Therefore state will not be maintained between requests it must not include the initialization
- of any resources that have significant overhead to create. These should be defined as spring
- beans and made available to the plug-in using spring dependency injection.
- If there are data structures that vary based
- on the parameters to a request then these can be created within the plug-in.</p>
-
- <p>The following code fragment shows the implementation of a plug-in class using all of the
- annotation elements.</p>
-
-<figure><pre class="prettyprint language-java">package ca.bc.gov.demo;
-
-import ca.bc.gov.open.cpf.plugin.api.BusinessApplicationPlugin;
-
-&#064;BusinessApplicationPlugin(
-  name                    = "Demo",
-  title                   = "Demonstration Plug-in"
-  version                 = "1.1.2",
-  compatibleVersions      = { "1.1.0", "1.1.1" },
-  description             = "Demonstrates how to use the CPF plug-in API"
-  descriptionUrl          = "http://demo.gov.bc.ca",
-  inputDataContentTypes   = { "image/png", "image/jpeg" },
-  resultDataContentTypes  = { "image/png", "image/jpeg" },
-  perRequestInputData     = true,
-  perRequestResultData    = true,
-  maxRequestsPerJob       = 100,
-  numRequestsPerWorker    = 2,
-  maxConcurrentRequests   = 10,
-  batchModePermission     = "hasRoleRegex('DEMO_.*')")
-  instantModePermission   = "hasRole('DEMO_USER')",
-  logLevel                = "INFO")
-public class Demo {
-  :
-}</pre></figure><div class="title">Annotation Elements</div>
-<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Name</th><th>Type</th><th>Default</th><th class="description">Description</th></tr>
+ <p>A callback can also used to reduce the memory overhead of a client application. The CpfClient
+ reads the each result from the server and calls the process method for each object in turn. Keeping
+ only one result in memory at a time.</p><div class="title">Methods</div>
+<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.client.api.Callback.process-T" title="process"><a name="ca.bc.gov.open.cpf.client.api.Callback.process(T)"><code>void </code>
+process<code>(T object)</code>
+</a>
+</h3>
+<div class="content">Process the object.<div class="title">Parameters</div>
+<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Parameter</th><th>Type</th><th class="description">Description</th></tr>
 </thead>
-<tbody><tr><td class="name"><a name="ca.bc.gov.open.cpf.plugin.api.BusinessApplicationPlugin.batchModePermission">batchModePermission</a>
-</td>
-<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
-<td class="default">"permitAll"</td>
-<td class="description"><p>A <a href="http://static.springsource.org/spring-security/site/docs/3.0.x/reference/el-access.html">Spring security expression</a>
- indicating if a user has permission to submit single or multiple requests for batch execution.</p></td>
-</tr>
-<tr><td class="name"><a name="ca.bc.gov.open.cpf.plugin.api.BusinessApplicationPlugin.compatibleVersions">compatibleVersions</a>
-</td>
-<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a>[]</td>
-<td class="default">{}</td>
-<td class="description" />
-</tr>
-<tr><td class="name"><a name="ca.bc.gov.open.cpf.plugin.api.BusinessApplicationPlugin.description">description</a>
-</td>
-<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
-<td class="default">""</td>
-<td class="description"><p>A description of the plug-in that is displayed on the business application
- list page. Keep to a few sentences, use the descriptionUrl to link to a
- page containing more information.</p></td>
-</tr>
-<tr><td class="name"><a name="ca.bc.gov.open.cpf.plugin.api.BusinessApplicationPlugin.descriptionUrl">descriptionUrl</a>
-</td>
-<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
-<td class="default">""</td>
-<td class="description"><p>A URL to a web page providing additional documentation for the business
- application. This is displayed as a link on the application description
- page.</p></td>
-</tr>
-<tr><td class="name"><a name="ca.bc.gov.open.cpf.plugin.api.BusinessApplicationPlugin.inputDataContentTypes">inputDataContentTypes</a>
-</td>
-<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a>[]</td>
-<td class="default">{}</td>
-<td class="description"><p>The array of MIME media types of input data accepted by the plug-in. For
- perRequestInputData=false omit this value to use all the supported
- structured data MIME media types. For perRequestInputData=true set this to
- the MIME media types of the input data supported (e.g. image/jpeg).</p></td>
-</tr>
-<tr><td class="name"><a name="ca.bc.gov.open.cpf.plugin.api.BusinessApplicationPlugin.instantModePermission">instantModePermission</a>
-</td>
-<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
-<td class="default">"denyAll"</td>
-<td class="description"><p>A <a href="http://static.springsource.org/spring-security/site/docs/3.0.x/reference/el-access.html">Spring security expression</a>
- indicating if a user has permission to submit single request for instant execution.</p>
-
- <p class="note">NOTE: DO NOT enable this for plug-ins that consume lots of resources
- or take more than a second to run as it will tie up available web server threads.</p></td>
-</tr>
-<tr><td class="name"><a name="ca.bc.gov.open.cpf.plugin.api.BusinessApplicationPlugin.logLevel">logLevel</a>
-</td>
-<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
-<td class="default">"ERROR"</td>
-<td class="description"><p>The level of logging to include for requests processed by the plug-in.</p>
-
- <div class="simpleDataTable">
-   <table>
-     <thead>
-       <tr>
-         <th>Level</th>
-         <th>Description</th>
-       </tr>
-     </thead>
-     <tbody>
-       <tr>
-         <td>ERROR</td>
-         <td>Only include un-handled application errors.</td>
-       </tr>
-       <tr>
-         <td>INFO</td>
-         <td>Includes more details on the execution of groups or plug-in info level messages.</td>
-       </tr>
-       <tr>
-         <td>DEBUG</td>
-         <td>The most detailed log level, should only be used during development.</td>
-       </tr>
-     </tbody>
-   </table>
- </div>
-
- <p class="note">Enabling INFO or DEBUG will increase the time it takes to process a request
- so should not be enabled in production unless an issue is being investigated.</p></td>
-</tr>
-<tr><td class="name"><a name="ca.bc.gov.open.cpf.plugin.api.BusinessApplicationPlugin.maxConcurrentRequests">maxConcurrentRequests</a>
-</td>
-<td class="type">int</td>
-<td class="default">100</td>
-<td class="description"><p>The maximum number of concurrent execution groups that will be scheduled
- for this business application. If an application has a limit to the number
- of database connections it can use this value can be used to limit the
- number of requests that will be executed by the workers at one time.</p></td>
-</tr>
-<tr><td class="name"><a name="ca.bc.gov.open.cpf.plugin.api.BusinessApplicationPlugin.maxRequestsPerJob">maxRequestsPerJob</a>
-</td>
-<td class="type">int</td>
-<td class="default">2147483647</td>
-<td class="description"><p>The maximum number of requests that a user can submit in a batch job.</p></td>
-</tr>
-<tr><td class="name"><a name="ca.bc.gov.open.cpf.plugin.api.BusinessApplicationPlugin.name">name</a>
-</td>
-<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
-<td class="default">""</td>
-<td class="description"><p>The name of the plug-in in (lower|Upper)CaseCamelNotation (e.g.
- fibonacciSequence or FibonacciSequence) . Must be a valid Java identifier
- (no spaces or special characters). This is used in the web service URL for
- the business application and in the batch jobs in the database. The name
- should not be changed between releases. If the name changes manual changes
- will be required to the data in the database and any exteral applications
- that use the plug-in.</p></td>
-</tr>
-<tr><td class="name"><a name="ca.bc.gov.open.cpf.plugin.api.BusinessApplicationPlugin.numRequestsPerWorker">numRequestsPerWorker</a>
-</td>
-<td class="type">int</td>
-<td class="default">1</td>
-<td class="description"><p>The maximum number of requests that will be added to an execution group to send to a worker
- for sequential execution. If a plug-in takes milliseconds to execute set this to 100 to reduce
- the communication overhead in processing the requests.</p></td>
-</tr>
-<tr><td class="name"><a name="ca.bc.gov.open.cpf.plugin.api.BusinessApplicationPlugin.packageName">packageName</a>
-</td>
-<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
-<td class="default">""</td>
-<td class="description"><p>The name of the Java package that the business application is in (e.g. <code>ca.bc.gov.gba</code>).
- Currently this is used to set the logging level for any loggers created with that package
- prefix.</p></td>
-</tr>
-<tr><td class="name"><a name="ca.bc.gov.open.cpf.plugin.api.BusinessApplicationPlugin.perRequestInputData">perRequestInputData</a>
-</td>
-<td class="type">boolean</td>
-<td class="default">false</td>
-<td class="description"><p>Boolean flag indicating that the plug-in accepts a binary blob of data for each request.
- The binary data will be passed to the plug-in as URL used to access the binary blob of data.
- Use the value true if the plug-in accepts an image, GML, or some other kind of file.
- Use the value false if the plug-in is a structured
- data plug-in and the request attributes will be set using the setter methods on the plug-in.</p></td>
-</tr>
-<tr><td class="name"><a name="ca.bc.gov.open.cpf.plugin.api.BusinessApplicationPlugin.perRequestResultData">perRequestResultData</a>
-</td>
-<td class="type">boolean</td>
-<td class="default">false</td>
-<td class="description"><p>Boolean flag indicating that the plug-in will return a binary blob of data via an
- OutputStream as the result of execution. Use the value true if the plug-in generates an
- image, GML, or some other kind of file. Use the value false if the plug-in is a structured
- data plug-in and the result attributes will be read from the plug-in and these values will
- be stored against the request.</p></td>
-</tr>
-<tr><td class="name"><a name="ca.bc.gov.open.cpf.plugin.api.BusinessApplicationPlugin.resultDataContentTypes">resultDataContentTypes</a>
-</td>
-<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a>[]</td>
-<td class="default">{}</td>
-<td class="description"><p>The array of MIME media types of output data returned by the plug-in. For
- perRequestOutputData=false omit this value to use all the supported
- structured data MIME media types. For perRequestOutputData=true set this to
- the MIME media types of the output data supported (e.g. image/jpeg).</p></td>
-</tr>
-<tr><td class="name"><a name="ca.bc.gov.open.cpf.plugin.api.BusinessApplicationPlugin.title">title</a>
-</td>
-<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
-<td class="default">""</td>
-<td class="description"><p>The display title displayed on the web site for the plug-in (e.g. Fibonacci
- Sequence).</p></td>
-</tr>
-<tr><td class="name"><a name="ca.bc.gov.open.cpf.plugin.api.BusinessApplicationPlugin.version">version</a>
-</td>
-<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
-<td class="default">""</td>
-<td class="description" />
+<tbody><tr><td class="name">object</td>
+<td class="type">T</td>
+<td class="description">The object to process.</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
 </div>
-<div class="javaClass"><h2 id="ca.bc.gov.open.cpf.plugin.api.DefaultValue">DefaultValue</h2><div class="content"><p>The <code>DefaultValue</code> method annotation defines the default value to display on the form or use
- if a value was not provided for a <a href="#ca.bc.gov.open.cpf.plugin.api.JobParameter"><code>JobParameter</code></a> or <a href="#ca.bc.gov.open.cpf.plugin.api.RequestParameter"><code>RequestParameter</code></a>. The annotation
- can only be defined on a <code>setXXX</code> method which has the <a href="#ca.bc.gov.open.cpf.plugin.api.JobParameter"><code>JobParameter</code></a> or <a href="#ca.bc.gov.open.cpf.plugin.api.RequestParameter"><code>RequestParameter</code></a>.</p>
-
- <p>The default value is encoded as a string. The string values will be
- converted to the data type of the parameter on the <code>setXXX</code> method.</p>
-
- <p>The default value is displayed with the parameter descriptions in the
- business application specifications web services.</p>
- 
- <p>On the submit jobs form the default value is displayed in the text field or as selected value for
- a select list created using <a href="#ca.bc.gov.open.cpf.plugin.api.AllowedValues"><code>AllowedValues</code></a> on the form.</p>
- 
- <p>The following code fragment shows an example of using the API.</p>
-
- <figure><pre class="prettyprint language-java">&#064;DefaultValue(value = "10"})
-&#064;JobParameter
-&#064;RequestParameter
-public void setMaxResults(final int maxResults) {
-  this.maxResults = maxResults;
-}</pre></figure><div class="title">Annotation Elements</div>
-<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Name</th><th>Type</th><th>Default</th><th class="description">Description</th></tr>
-</thead>
-<tbody><tr><td class="name"><a name="ca.bc.gov.open.cpf.plugin.api.DefaultValue.value">value</a>
-</td>
-<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
-<td class="default">-</td>
-<td class="description">The default value encoded as a string. The string value will be converted to the data type of the parameter.</td>
-</tr>
-</tbody>
-</table>
 </div>
-</div>
-</div>
-<div class="javaClass"><h2 id="ca.bc.gov.open.cpf.plugin.api.GeometryConfiguration">GeometryConfiguration</h2><div class="content"><p>
- The <code>GeometryConfiguration</code> annotation can be used on a <a href="#ca.bc.gov.open.cpf.plugin.api.BusinessApplicationPlugin"><code>BusinessApplicationPlugin</code></a> class,
- a <a href="#ca.bc.gov.open.cpf.plugin.api.RequestParameter"><code>RequestParameter</code></a> <code>setXXX</code> method with a <code>com.vividsolutions.jts.geom.Geometry</code> subclass parameter,
- or a <a href="#ca.bc.gov.open.cpf.plugin.api.ResultAttribute"><code>ResultAttribute</code></a> <code>getXXX</code> method with a <code>com.vividsolutions.jts.geom.Geometry</code> subclass parameter
- to indicate the configuration of the required coordinate system,
- precision model, number of coordinate axis and if the geometry should be
- validated.</p>
-
- <p>If the input or result geometry is different from the <code>GeometryConfiguration</code>, then
- the CPF will convert the geometry to a new geometry using the <code>GeometryConfiguration</code>.</p>
-
- <p>The following example shows a geometry result attribute in BC Albers (3005), with x,y,z (3D) coordinates
- 1mm x,y precision model, 1m z precision model. The geometry will also be validated and the is the primary geometry.</p>
-
- <figure><pre class="prettyprint language-java">&#064;ResultAttribute
-&#064;GeometryConfiguration(
-  srid = 3005,
-  numAxis = 3,
-  scaleFactorXy = 1000,
-  scaleFactorZ = 1,
-  validate = true,
-  primaryGeometry = true)
-public Geometry getGeometry() {
-  return geometry;
-}</pre></figure><div class="title">Annotation Elements</div>
-<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Name</th><th>Type</th><th>Default</th><th class="description">Description</th></tr>
-</thead>
-<tbody><tr><td class="name"><a name="ca.bc.gov.open.cpf.plugin.api.GeometryConfiguration.numAxis">numAxis</a>
-</td>
-<td class="type">int</td>
-<td class="default">2</td>
-<td class="description"><p>The number or axis used in the geometry. For example a 2D geometry has x, y
- coordinates, so the number of axis is 2. A 3D geometry has x, y, z so the
- number of axis is 3. Currently only numAxis of 2 and 3 are supported.</p></td>
-</tr>
-<tr><td class="name"><a name="ca.bc.gov.open.cpf.plugin.api.GeometryConfiguration.primaryGeometry">primaryGeometry</a>
-</td>
-<td class="type">boolean</td>
-<td class="default">true</td>
-<td class="description"><p>The flag indicating that this bean property is the primary geometry. This
- is required as some spatial file formats only support a single real
- geometry field. Non-primary geometries will be written as an E-WKTR string
- field. Only one geometry set method and one geometry get method can be
- marked as primary (the input primary geometry parameter can be different
- from the result primary geometry attribute.</p></td>
-</tr>
-<tr><td class="name"><a name="ca.bc.gov.open.cpf.plugin.api.GeometryConfiguration.scaleFactorXy">scaleFactorXy</a>
-</td>
-<td class="type">double</td>
-<td class="default">0.0</td>
-<td class="description"><p>The scale factor to apply the x, y coordinates. The scale factor is 1 /
- minimum unit. For example if the minimum unit was 1mm (0.001) the scale
- factor is 1000 (1 / 0.001). The default value 0 indicates a floating
- precision model where the coordinates are not rounded.</p></td>
-</tr>
-<tr><td class="name"><a name="ca.bc.gov.open.cpf.plugin.api.GeometryConfiguration.scaleFactorZ">scaleFactorZ</a>
-</td>
-<td class="type">double</td>
-<td class="default">0.0</td>
-<td class="description"><p>The scale factor to apply the z coordinates. The scale factor is 1 /
- minimum unit. For example if the minimum unit was 1mm (0.001) the scale
- factor is 1000 (1 / 0.001). The default value 0 indicates a floating
- precision model where the coordinates are not rounded.</p></td>
-</tr>
-<tr><td class="name"><a name="ca.bc.gov.open.cpf.plugin.api.GeometryConfiguration.srid">srid</a>
-</td>
-<td class="type">int</td>
-<td class="default">0</td>
-<td class="description"><p>The srid of the coordinate system the geometry should be converted to. If
- this attribute is omitted or has the value 0 then the coordinate system of the source geometry
- will not be changed. Otherwise it will be projected to the requested
- coordinate system.</p></td>
-</tr>
-<tr><td class="name"><a name="ca.bc.gov.open.cpf.plugin.api.GeometryConfiguration.validate">validate</a>
-</td>
-<td class="type">boolean</td>
-<td class="default">false</td>
-<td class="description"><p>Boolean flag indicating if the geometry should be validated using the OGC isValid
- predicate.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<div class="javaClass"><h2 id="ca.bc.gov.open.cpf.plugin.api.JobParameter">JobParameter</h2><div class="content"><p>The <code>JobParameter</code> method annotation indicates that a <code>setXXX</code> method is
- a parameter that will be applied to all requests in a job on a <a href="#ca.bc.gov.open.cpf.plugin.api.BusinessApplicationPlugin"><code>BusinessApplicationPlugin</code></a>
- class.</p>
- 
- <p>Job parameters are implemented as Java bean properties on the plug-in class.
- The plug-in must implement a <code>setXXX</code> property method for each job parameter. The
- job parameter name is the name of the Java bean property. The parameter type can
- only use the supported <a href="../../dataTypes.html">data types</a>. The job parameters will be converted by
- the CPF from the input data to the correct Java type.</p>
- 
- <p>Before execution of the plug-in the job methods will be invoked to set the job parameter values.</p>
- 
- <p>A <code>JobParameter</code> method can also be marked as a <a href="#ca.bc.gov.open.cpf.plugin.api.RequestParameter"><code>RequestParameter</code></a> if the
- parameter can be specified either at the job or request level.</p>
- 
- <p>The following example shows the use of the annotation.</p>
- 
- <figure><pre class="prettyprint language-java">private String algorithmName;
-
-&#064;JobParameter
-public void setAlgorithmName(final String algorithmName) {
-  this.algorithmName = algorithmName;
-}</pre></figure><div class="title">Annotation Elements</div>
-<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Name</th><th>Type</th><th>Default</th><th class="description">Description</th></tr>
-</thead>
-<tbody><tr><td class="name"><a name="ca.bc.gov.open.cpf.plugin.api.JobParameter.description">description</a>
-</td>
-<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
-<td class="default">""</td>
-<td class="description">The description of the job parameter to display on the plug-in overview
- page and as instructions on the create job forms.</td>
-</tr>
-<tr><td class="name"><a name="ca.bc.gov.open.cpf.plugin.api.JobParameter.descriptionUrl">descriptionUrl</a>
-</td>
-<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
-<td class="default">""</td>
-<td class="description">The url to a page that describes the parameter in greater detail than is possible on the
- form. If specified the name of the parameter will be a hyper-link to this URL.</td>
-</tr>
-<tr><td class="name"><a name="ca.bc.gov.open.cpf.plugin.api.JobParameter.index">index</a>
-</td>
-<td class="type">int</td>
-<td class="default">-1</td>
-<td class="description">The index (position) of the job parameter in the input file form.</td>
-</tr>
-<tr><td class="name"><a name="ca.bc.gov.open.cpf.plugin.api.JobParameter.length">length</a>
-</td>
-<td class="type">int</td>
-<td class="default">-1</td>
-<td class="description">The maximum length of the job parameter including the scale. This is ignored for
- fixed size data types such as boolean, byte, short, int, long, float and
- double. The value -1 indicates no defined limit to the scale.</td>
-</tr>
-<tr><td class="name"><a name="ca.bc.gov.open.cpf.plugin.api.JobParameter.maxValue">maxValue</a>
-</td>
-<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
-<td class="default">""</td>
-<td class="description">The maximum allowed value for numeric parameters. The string value will be converted to the
- correct data type.</td>
-</tr>
-<tr><td class="name"><a name="ca.bc.gov.open.cpf.plugin.api.JobParameter.minValue">minValue</a>
-</td>
-<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
-<td class="default">""</td>
-<td class="description">The minimum allowed value for numeric parameters. The string value will be converted to the
- correct data type.</td>
-</tr>
-<tr><td class="name"><a name="ca.bc.gov.open.cpf.plugin.api.JobParameter.scale">scale</a>
-</td>
-<td class="type">int</td>
-<td class="default">-1</td>
-<td class="description">The number of decimal places for fixed precision numeric types.</td>
-</tr>
-<tr><td class="name"><a name="ca.bc.gov.open.cpf.plugin.api.JobParameter.units">units</a>
-</td>
-<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
-<td class="default">""</td>
-<td class="description">The units of measurement for numeric fields (e.g. metres, feet, degrees).
- This will be displayed after the field on the form.</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<div class="javaClass"><h2 id="ca.bc.gov.open.cpf.plugin.api.RequestParameter">RequestParameter</h2><div class="content"><p>The <code>RequestParameter</code> method annotation indicates that a <code>setXXX</code> method is
- a <a href="../../structuredData.html">structured input data</a> parameter on a <a href="#ca.bc.gov.open.cpf.plugin.api.BusinessApplicationPlugin"><code>BusinessApplicationPlugin</code></a>
- class that has perRequestInputData=false.</p>
-
- <p>Request parameters are implemented as Java bean properties on the plug-in class.
- The plug-in must implement a <code>setXXX</code> property method for each request parameter. The
- request parameter name is the name of the Java bean property. The parameter type can
- only use the supported <a href="../../dataTypes.html">data types</a>. The request parameters will be converted by
- the CPF from the input data to the correct Java type.</p>
-
- <p>Before execution of the plug-in the request methods will be invoked to set the request parameter values.</p>
-
- <p>A <code>RequestParameter</code> method can also be marked as a <a href="#ca.bc.gov.open.cpf.plugin.api.JobParameter"><code>JobParameter</code></a> if the
- parameter can be specified either at the job or request level.</p>
-
- <p>The following example shows the use of the annotation.</p>
-
- <figure><pre class="prettyprint language-java">private String algorithmName;
-
-&#064;RequestParameter
-public void setAlgorithmName(final String algorithmName) {
-  this.algorithmName = algorithmName;
-}</pre></figure><div class="title">Annotation Elements</div>
-<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Name</th><th>Type</th><th>Default</th><th class="description">Description</th></tr>
-</thead>
-<tbody><tr><td class="name"><a name="ca.bc.gov.open.cpf.plugin.api.RequestParameter.description">description</a>
-</td>
-<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
-<td class="default">""</td>
-<td class="description">The description of the request parameter to display on the plug-in overview
- page and as instructions on the create job forms.</td>
-</tr>
-<tr><td class="name"><a name="ca.bc.gov.open.cpf.plugin.api.RequestParameter.descriptionUrl">descriptionUrl</a>
-</td>
-<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
-<td class="default">""</td>
-<td class="description">The url to a page that describes the parameter in greater detail than is possible on the
- form. If specified the name of the parameter will be a hyper-link to this URL.</td>
-</tr>
-<tr><td class="name"><a name="ca.bc.gov.open.cpf.plugin.api.RequestParameter.index">index</a>
-</td>
-<td class="type">int</td>
-<td class="default">-1</td>
-<td class="description">The index (position) of the parameter in the input file form.</td>
-</tr>
-<tr><td class="name"><a name="ca.bc.gov.open.cpf.plugin.api.RequestParameter.length">length</a>
-</td>
-<td class="type">int</td>
-<td class="default">-1</td>
-<td class="description">The maximum length of the parameter including the scale. This is ignored for
- fixed size data types such as boolean, byte, short, int, long, float and
- double. The value -1 indicates no defined limit to the scale.</td>
-</tr>
-<tr><td class="name"><a name="ca.bc.gov.open.cpf.plugin.api.RequestParameter.maxValue">maxValue</a>
-</td>
-<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
-<td class="default">""</td>
-<td class="description">The maximum allowed value for numeric parameters. The string value will be converted to the
- correct data type.</td>
-</tr>
-<tr><td class="name"><a name="ca.bc.gov.open.cpf.plugin.api.RequestParameter.minValue">minValue</a>
-</td>
-<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
-<td class="default">""</td>
-<td class="description">The minimum allowed value for numeric parameters. The string value will be converted to the
- correct data type.</td>
-</tr>
-<tr><td class="name"><a name="ca.bc.gov.open.cpf.plugin.api.RequestParameter.scale">scale</a>
-</td>
-<td class="type">int</td>
-<td class="default">-1</td>
-<td class="description">The number of decimal places for fixed precision numeric types.</td>
-</tr>
-<tr><td class="name"><a name="ca.bc.gov.open.cpf.plugin.api.RequestParameter.units">units</a>
-</td>
-<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
-<td class="default">""</td>
-<td class="description">The units of measurement for numeric fields (e.g. metres, feet, degrees).
- This will be displayed after the field on the form.</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<div class="javaClass"><h2 id="ca.bc.gov.open.cpf.plugin.api.Required">Required</h2><div class="content"><p>The Required method annotation defines a
- <a href="#ca.bc.gov.open.cpf.plugin.api.JobParameter"><code>JobParameter</code></a> or <a href="#ca.bc.gov.open.cpf.plugin.api.RequestParameter"><code>RequestParameter</code></a> as being required. If a value is not specified
- for a required parameter the scheduler will exclude that request from being processed and an
- error returned. The annotation can only be defined
- on a <code>setXXX</code> method which has the <a href="#ca.bc.gov.open.cpf.plugin.api.JobParameter"><code>JobParameter</code></a> or <a href="#ca.bc.gov.open.cpf.plugin.api.RequestParameter"><code>RequestParameter</code></a> annotations.</p>
- 
- <p>The following example shows the use of the annotation on a <a href="#ca.bc.gov.open.cpf.plugin.api.JobParameter"><code>JobParameter</code></a> method.</p>
-
- <figure><pre class="prettyprint language-java">&#064;Required
-&#064;JobParameter
-public void setAlgorithmName(final String algorithmName) {
-  this.algorithmName = algorithmName;
-}</pre></figure></div>
-</div>
-<div class="javaClass"><h2 id="ca.bc.gov.open.cpf.plugin.api.ResultAttribute">ResultAttribute</h2><div class="content"><p>The <code>ResultAttribute</code> method annotation indicates that a <code>getXXX</code> or <code>isXXX</code> method is a <a href="../../structuredData.html">structured
- result data</a> attribute on a <a href="#ca.bc.gov.open.cpf.plugin.api.BusinessApplicationPlugin"><code>BusinessApplicationPlugin</code></a> or <a href="#ca.bc.gov.open.cpf.plugin.api.ResultList"><code>ResultList</code></a>
- class that has perRequestResultData=false.</p>
-
- <p>Result attributes are implemented as Java bean properties on the plug-in class or <a href="#ca.bc.gov.open.cpf.plugin.api.ResultList"><code>ResultList</code></a> class.
- The plug-in must implement a <code>getXXX</code> or <code>isXXX</code> property method for each result attribute. The
- result attribute name is the name of the Java bean property. The return type can
- only use the supported <a href="../../dataTypes.html">data types</a>. The result attributes will be converted by
- the CPF to the correct representation in the output format or a string
- representation of the value before being returned to the user.</p>
-
- <p>After execution of the plug-in the result attribute methods will be invoked to get the result attribute values.</p>
-
- <p>The following example shows the use of the annotation on a <a href="#ca.bc.gov.open.cpf.plugin.api.BusinessApplicationPlugin"><code>BusinessApplicationPlugin</code></a> class.</p>
-
- <figure><pre class="prettyprint language-java">&#064;BusinessApplicationPlugin
-public class Square {
-  private int square;
-
-  &#064;ResultAttribute(index = 2, description = "The square of a value")
-  public int getSquare() {
-    return square;
-  }
-}</pre></figure><div class="title">Annotation Elements</div>
-<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Name</th><th>Type</th><th>Default</th><th class="description">Description</th></tr>
-</thead>
-<tbody><tr><td class="name"><a name="ca.bc.gov.open.cpf.plugin.api.ResultAttribute.description">description</a>
-</td>
-<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
-<td class="default">""</td>
-<td class="description">The description of the result attribute to display on the plug-in overview
- page and as instructions on the create job forms. If the description
- is not specified and there is a <a href="#ca.bc.gov.open.cpf.plugin.api.RequestParameter"><code>RequestParameter</code></a> with the same name
- that has a description then that will be used. This simplifies coding as it
- removes the need to duplicate the description.</td>
-</tr>
-<tr><td class="name"><a name="ca.bc.gov.open.cpf.plugin.api.ResultAttribute.index">index</a>
-</td>
-<td class="type">int</td>
-<td class="default">-1</td>
-<td class="description">The index  (position) of the attribute in the output file.</td>
-</tr>
-<tr><td class="name"><a name="ca.bc.gov.open.cpf.plugin.api.ResultAttribute.length">length</a>
-</td>
-<td class="type">int</td>
-<td class="default">-1</td>
-<td class="description"><p>The maximum length of the attribute including the scale, sign '-' and decimal point '.'.
- This is ignored for fixed size data types such as boolean, byte, short, int, long.
- The value -1 indicates the use of the default value for that data type.</p>
-
- <p class="note">NOTE: decimal types such as float, double and BigDecimal should have a
- length specified if fixed size file formats such as shapefile are to be used.</p></td>
-</tr>
-<tr><td class="name"><a name="ca.bc.gov.open.cpf.plugin.api.ResultAttribute.scale">scale</a>
-</td>
-<td class="type">int</td>
-<td class="default">-1</td>
-<td class="description"><p>The number of decimal places for fixed precision numeric types. This is ignored for
- data types such as boolean, byte, short, int, long, string.
- The value -1 indicates the use of the default value for that data type.</p>
-
- <p class="note">NOTE: decimal types such as float, double and BigDecimal should have a
- scaled specified if fixed size file formats such as shapefile are to be used.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<div class="javaClass"><h2 id="ca.bc.gov.open.cpf.plugin.api.ResultList">ResultList</h2><div class="content"><p>The <code>ResultList</code> annotation can be used in <a href="../../structuredData.html">structured result data</a>
- plug-ins that return a list of structured results instead of a single result. For example a geocoder that
- returns a list of potential matches.</p>
-
- <p>To return a list of results the plug-in must implement a get method that returns a <a href="http://docs.oracle.com/javase/6/docs/api/java/util/List.html?is-external=true"><code>List</code></a> of a
- specified value object (e.g. <code>ResultObject</code>). The method must also have the
- <a href="#ca.bc.gov.open.cpf.plugin.api.ResultList"><code>ResultList</code></a> annotation. The plug-in class must not have any methods marked with the <a href="#ca.bc.gov.open.cpf.plugin.api.ResultAttribute"><code>ResultAttribute</code></a> annotation.</p>
-
- <p>The value object class contains the result attributes to return for each result in the list.
- Pick an appropriate name for the value object (e.g. Address). The value object class must have
- one or more get methods with the <a href="#ca.bc.gov.open.cpf.plugin.api.ResultAttribute"><code>ResultAttribute</code></a> annotation. These
- are the attributes that are returned to the client. The same rules apply as per structured result attributes.</p>
-
- <p>The following example shows the use of the annotation on a <a href="#ca.bc.gov.open.cpf.plugin.api.BusinessApplicationPlugin"><code>BusinessApplicationPlugin</code></a> method.</p>
-
-<figure>
-<pre class="prettyprint">private List&lt;ResultObject&gt;
-
-&#064;ResultList
-public List&lt;ResultObject&gt; getResults() {
-  return results;
-}</pre>
-</figure>
-
- <p>The following example shows the value object implementation for the above example.</p>
-
-<figure>
-<pre class="prettyprint">public class ResultObject
-private String attribute1;
-
-&#064;ResultAttribute
-public int getAttribute1 () {
-  return attribute1;
-}</pre>
-</figure></div>
 </div>
 <div class="title">Classes</div>
-<div class="javaClass"><h2 id="ca.bc.gov.open.cpf.plugin.api.GeometryFactory">GeometryFactory</h2><div class="content"><p>The CPF provides an extended version of the <a href="http://tsusiatsoftware.net/jts/main.html"/>Java Topology Suite (JTS)</a> GeometryFactory to create JTS geometries. The
- extended version includes support for coordinate system projection, precision model, and controls on the number of axis.</p>
+<div class="javaClass"><h2 id="ca.bc.gov.open.cpf.client.api.CpfClient">CpfClient</h2><div class="content"><p>
+ The CPF Java (6+) client allows applications to use the <a
+ href="../rest-api/">CPF Web Service REST API</a> to query the available
+ business applications, create jobs and download the results of
+ jobs on behalf of their users.
+ </p>
 
- <p>The <code>GeometryFactory</code> does not provide a public constructor. <code>GeometryFactory</code> instances can
- be obtained using the <code>getFactory</code> static methods described below.<div class="title">Methods</div>
-<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.plugin.api.GeometryFactory.getFactory" title="getFactory"><a name="ca.bc.gov.open.cpf.plugin.api.GeometryFactory.getFactory()"><code>GeometryFactory </code>
-<i>getFactory</i><code>()</code>
-</a>
-</h3>
-<div class="content"><p>Get a GeometryFactory with no coordinate system, 3D axis (x, y &amp; z) and a floating precision model.</p><div class="title">Return</div>
-<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Type</th><th>Description</th></tr>
-</thead>
-<tbody><tr><td class="type"><a class="" href="#ca.bc.gov.open.cpf.plugin.api.GeometryFactory">GeometryFactory</a></td>
-<td class="description">The geometry factory.</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.plugin.api.GeometryFactory.getFactory-double" title="getFactory"><a name="ca.bc.gov.open.cpf.plugin.api.GeometryFactory.getFactory(double)"><code>GeometryFactory </code>
-<i>getFactory</i><code>(double scaleXy)</code>
-</a>
-</h3>
-<div class="content"><p>Get a GeometryFactory with no coordinate system, 3D axis (x, y &amp; z) and a fixed x, y & floating z precision models.</p><div class="title">Parameters</div>
-<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Parameter</th><th>Type</th><th class="description">Description</th></tr>
-</thead>
-<tbody><tr><td class="name">scaleXy</td>
-<td class="type">double</td>
-<td class="description">The scale factor used to round the x, y coordinates. The precision is 1 / scaleXy.
- A scale factor of 1000 will give a precision of 1 / 1000 = 1mm for projected coordinate systems using metres.</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="title">Return</div>
-<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Type</th><th>Description</th></tr>
-</thead>
-<tbody><tr><td class="type"><a class="" href="#ca.bc.gov.open.cpf.plugin.api.GeometryFactory">GeometryFactory</a></td>
-<td class="description">The geometry factory.</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.plugin.api.GeometryFactory.getFactory-com.vividsolutions.jts.geom.Geometry" title="getFactory"><a name="ca.bc.gov.open.cpf.plugin.api.GeometryFactory.getFactory(com.vividsolutions.jts.geom.Geometry)"><code>GeometryFactory </code>
-<i>getFactory</i><code>(com.vividsolutions.jts.geom.Geometry geometry)</code>
-</a>
-</h3>
-<div class="content">Get the geometry factory used for an existing geometry.<div class="title">Parameters</div>
-<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Parameter</th><th>Type</th><th class="description">Description</th></tr>
-</thead>
-<tbody><tr><td class="name">geometry</td>
-<td class="type">com.vividsolutions.jts.geom.Geometry</td>
-<td class="description">The geometry to get the factory from.</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="title">Return</div>
-<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Type</th><th>Description</th></tr>
-</thead>
-<tbody><tr><td class="type"><a class="" href="#ca.bc.gov.open.cpf.plugin.api.GeometryFactory">GeometryFactory</a></td>
-<td class="description">The geometry factory;</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.plugin.api.GeometryFactory.getFactory-int" title="getFactory"><a name="ca.bc.gov.open.cpf.plugin.api.GeometryFactory.getFactory(int)"><code>GeometryFactory </code>
-<i>getFactory</i><code>(int srid)</code>
-</a>
-</h3>
-<div class="content"><p>Get a GeometryFactory with the coordinate system, 3D axis (x, y &amp; z) and a floating precision models.</p><div class="title">Parameters</div>
-<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Parameter</th><th>Type</th><th class="description">Description</th></tr>
-</thead>
-<tbody><tr><td class="name">srid</td>
-<td class="type">int</td>
-<td class="description">The <a href="http://spatialreference.org/ref/epsg/">EPSG coordinate system id</a>.</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="title">Return</div>
-<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Type</th><th>Description</th></tr>
-</thead>
-<tbody><tr><td class="type"><a class="" href="#ca.bc.gov.open.cpf.plugin.api.GeometryFactory">GeometryFactory</a></td>
-<td class="description">The geometry factory.</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.plugin.api.GeometryFactory.getFactory-int-double" title="getFactory"><a name="ca.bc.gov.open.cpf.plugin.api.GeometryFactory.getFactory(int,double)"><code>GeometryFactory </code>
-<i>getFactory</i><code>(int srid, double scaleXy)</code>
-</a>
-</h3>
-<div class="content"><p>Get a GeometryFactory with the coordinate system, 2D axis (x &amp; y) and a fixed x, y precision model.</p><div class="title">Parameters</div>
-<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Parameter</th><th>Type</th><th class="description">Description</th></tr>
-</thead>
-<tbody><tr><td class="name">srid</td>
-<td class="type">int</td>
-<td class="description">The <a href="http://spatialreference.org/ref/epsg/">EPSG coordinate system id</a>.</td>
-</tr>
-<tr><td class="name">scaleXy</td>
-<td class="type">double</td>
-<td class="description">The scale factor used to round the x, y coordinates. The precision is 1 / scaleXy.
- A scale factor of 1000 will give a precision of 1 / 1000 = 1mm for projected coordinate systems using metres.</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="title">Return</div>
-<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Type</th><th>Description</th></tr>
-</thead>
-<tbody><tr><td class="type"><a class="" href="#ca.bc.gov.open.cpf.plugin.api.GeometryFactory">GeometryFactory</a></td>
-<td class="description">The geometry factory.</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.plugin.api.GeometryFactory.getFactory-int-double-double" title="getFactory"><a name="ca.bc.gov.open.cpf.plugin.api.GeometryFactory.getFactory(int,double,double)"><code>GeometryFactory </code>
-<i>getFactory</i><code>(int srid, double scaleXy, double scaleZ)</code>
-</a>
-</h3>
-<div class="content"><p>Get a GeometryFactory with no coordinate system, 3D axis (x, y &amp; z) and a fixed x, y &amp; floating z precision models.</p><div class="title">Parameters</div>
-<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Parameter</th><th>Type</th><th class="description">Description</th></tr>
-</thead>
-<tbody><tr><td class="name">srid</td>
-<td class="type">int</td>
-<td class="description">The <a href="http://spatialreference.org/ref/epsg/">EPSG coordinate system id</a>.</td>
-</tr>
-<tr><td class="name">scaleXy</td>
-<td class="type">double</td>
-<td class="description">The scale factor used to round the x, y coordinates. The precision is 1 / scaleXy.
- A scale factor of 1000 will give a precision of 1 / 1000 = 1mm for projected coordinate systems using metres.</td>
-</tr>
-<tr><td class="name">scaleZ</td>
-<td class="type">double</td>
-<td class="description">The scale factor used to round the z coordinates. The precision is 1 / scaleZ.
- A scale factor of 1000 will give a precision of 1 / 1000 = 1mm for projected coordinate systems using metres.</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="title">Return</div>
-<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Type</th><th>Description</th></tr>
-</thead>
-<tbody><tr><td class="type"><a class="" href="#ca.bc.gov.open.cpf.plugin.api.GeometryFactory">GeometryFactory</a></td>
-<td class="description">The geometry factory.</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.plugin.api.GeometryFactory.getFactory-int-int" title="getFactory"><a name="ca.bc.gov.open.cpf.plugin.api.GeometryFactory.getFactory(int,int)"><code>GeometryFactory </code>
-<i>getFactory</i><code>(int srid, int numAxis)</code>
-</a>
-</h3>
-<div class="content"><p>Get a GeometryFactory with the coordinate system, number of axis and a floating precision model.</p><div class="title">Parameters</div>
-<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Parameter</th><th>Type</th><th class="description">Description</th></tr>
-</thead>
-<tbody><tr><td class="name">srid</td>
-<td class="type">int</td>
-<td class="description">The <a href="http://spatialreference.org/ref/epsg/">EPSG coordinate system id</a>.</td>
-</tr>
-<tr><td class="name">numAxis</td>
-<td class="type">int</td>
-<td class="description">The number of coordinate axis. 2 for 2D x &amp; y coordinates. 3 for 3D x, y &amp; z coordinates.</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="title">Return</div>
-<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Type</th><th>Description</th></tr>
-</thead>
-<tbody><tr><td class="type"><a class="" href="#ca.bc.gov.open.cpf.plugin.api.GeometryFactory">GeometryFactory</a></td>
-<td class="description">The geometry factory.</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.plugin.api.GeometryFactory.getFactory-int-int-double-double" title="getFactory"><a name="ca.bc.gov.open.cpf.plugin.api.GeometryFactory.getFactory(int,int,double,double)"><code>GeometryFactory </code>
-<i>getFactory</i><code>(int srid, int numAxis, double scaleXy, double scaleZ)</code>
-</a>
-</h3>
-<div class="content"><p>Get a GeometryFactory with the coordinate system, number of axis and a fixed x, y &amp; fixed z precision models.</p><div class="title">Parameters</div>
-<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Parameter</th><th>Type</th><th class="description">Description</th></tr>
-</thead>
-<tbody><tr><td class="name">srid</td>
-<td class="type">int</td>
-<td class="description">The <a href="http://spatialreference.org/ref/epsg/">EPSG coordinate system id</a>.</td>
-</tr>
-<tr><td class="name">numAxis</td>
-<td class="type">int</td>
-<td class="description">The number of coordinate axis. 2 for 2D x &amp; y coordinates. 3 for 3D x, y &amp; z coordinates.</td>
-</tr>
-<tr><td class="name">scaleXy</td>
-<td class="type">double</td>
-<td class="description">The scale factor used to round the x, y coordinates. The precision is 1 / scaleXy.
- A scale factor of 1000 will give a precision of 1 / 1000 = 1mm for projected coordinate systems using metres.</td>
-</tr>
-<tr><td class="name">scaleZ</td>
-<td class="type">double</td>
-<td class="description">The scale factor used to round the z coordinates. The precision is 1 / scaleZ.
- A scale factor of 1000 will give a precision of 1 / 1000 = 1mm for projected coordinate systems using metres.</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="title">Return</div>
-<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Type</th><th>Description</th></tr>
-</thead>
-<tbody><tr><td class="type"><a class="" href="#ca.bc.gov.open.cpf.plugin.api.GeometryFactory">GeometryFactory</a></td>
-<td class="description">The geometry factory.</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.plugin.api.GeometryFactory.copy-G" title="copy"><a name="ca.bc.gov.open.cpf.plugin.api.GeometryFactory.copy(G)"><code>G </code>
-copy<code>(G geometry)</code>
-</a>
-</h3>
-<div class="content"><p>Create a copy of an existing <code>com.vividsolutions.jts.geom.Geometry</code>. If the geometry is in a different coordinate system
- or precision model project the geometry to the coordinate system from this geometry factory
- and apply the precision model.</p>
+ <p><b>NOTE: The CpfClient is not thread safe. A separate instance must be
+ created for each thread that uses the API.</b></p>
 
- <p>The return type of this method will be auto-casted to the type of the variable the result is
- assigned to. Use Geometry as the type if it is not possible to guarantee that the geometry is of a specific geometry type.</p><div class="title">Parameters</div>
-<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Parameter</th><th>Type</th><th class="description">Description</th></tr>
-</thead>
-<tbody><tr><td class="name">geometry</td>
-<td class="type">G</td>
-<td class="description">The geometry.</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="title">Return</div>
-<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Type</th><th>Description</th></tr>
-</thead>
-<tbody><tr><td class="type">G</td>
-<td class="description">The copied geometry.</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.plugin.api.GeometryFactory.createGeometry-String" title="createGeometry"><a name="ca.bc.gov.open.cpf.plugin.api.GeometryFactory.createGeometry(String)"><code>T </code>
-createGeometry<code>(String wkt)</code>
+ <p>The following code fragment shows an example of using the API for an application that
+ accepts and returns <a href="../../structuredData.html">structured data</a>. Additional methods
+ are provided for opaque data. The documentation of each method in this API provides an example
+ of use.</p>
+ <p><b>NOTE:</b> The examples are simplified versions of using the API. <b>They should not be considered
+ the correct way to write an application.</b>. In the following example it waits a maximum of 2
+ seconds (2000 milliseconds) to see if the structured result file is available. In the real world
+ jobs will take a longer undetermined time to execute. Applications should use the
+ <a href="../../notificationCallback.html">notification callback</a> mechanism rather than polling the
+ server or if that is not possible something like the Java
+ <a href="http://docs.oracle.com/javase/7/docs/api/java/util/concurrent/ScheduledExecutorService.html">ScheduledExecutorService</a>.</p>
+
+ <pre class="prettyprint language-java">  String url = "https://apps.gov.bc.ca/pub/cpf";
+  String consumerKey = "cpftest";
+  String consumerSecret = "cpftest";
+  CpfClient client = new CpfClient(url, consumerKey, consumerSecret);
+  try {
+    Map&lt;String, Object&gt; parameters = new HashMap&lt;String, Object&gt;();
+    parameters.put("mapGridName", "BCGS 1:20 000");
+    parameters.put("mapTileId", "92j025");
+    String jobId = client.createJobWithStructuredSingleRequest(
+      "MapTileByTileId", parameters, "application/json");
+    try {
+      List&lt;Map&lt;String, Object&gt;&gt; results = client.getJobStructuredResults(jobId, 2000);
+      for (Map&lt;String, Object&gt; result : results) {
+        System.out.println(result);
+      }
+    } finally {
+      client.closeJob(jobId);
+    }
+  } finally {
+    client.closeConnection();
+  }</pre>
+ <p class="note">The CPF requires that <a href="http://en.wikipedia.org/wiki/UTF-8">UTF-8</a>
+ encoding be used for all text files. This includes the text in a .dbf file for a .shpz archive, unless
+ a .cpf file is provided in the shpz archive.</p><div class="title">Constructors</div>
+<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.client.api.CpfClient.CpfClient-String-String-String" title="CpfClient"><a name="ca.bc.gov.open.cpf.client.api.CpfClient.CpfClient(String,String,String)">CpfClient<code>(String url, String consumerKey, String consumerSecret)</code>
 </a>
 </h3>
-<div class="content"><p>Create a <code>com.vividsolutions.jts.geom.Geometry</code> from a <a href="http://en.wikipedia.org/wiki/Well-known_text">WKT</a> or
- <a href="http://postgis.net/docs/manual-2.0/using_postgis_dbmanagement.html#EWKB_EWKT">EWKT</a> encoded geometry.
- If the EWKT string includes a SRID the geometry will use read using that SRID and then
- projected to the SRID of the geometry factory. If the SRID was not specified the geometry will
- be assumed to be in the coordinate system of the geometry factory's SRID. The return type of
- the WKT to geometry conversion will be auto-casted to the type of the variable the result is
- assigned to. Use Geometry as the type if it is not possible to guarantee that the WKT is of a specific geometry type.</p>
+<div class="content"><p>Construct a new CpfClient connected to the specified server using the
+ consumerKey and consumerSecret for authentication.</p>
 
- <p>The following example shows a WGS84 EWKT polygon converted to a BC Albers polygon.</p>
+ <p>The following code fragment shows an example of using the API.</p>
 
- <figure>
-   <pre class="prettyprint language-java">GeometryFactory geometryFactory = GeometryFactory.getFactory(3005, 1.0);
-  String wkt = "SRID=4326;POLYGON((-122 50,-124 50,-124 51,-122 51,-122 50))";
-  Polygon polygon = geometryFactory.createGeometry(wkt);
-  System.out.println(polygon);
-  // POLYGON((1286630 561884,1143372 555809,1140228 667065,1280345 673006,1286630 561884))</pre>
- </figure><div class="title">Parameters</div>
+ <pre class="prettyprint language-java">  String url = "https://apps.gov.bc.ca/pub/cpf";
+  String consumerKey = "cpftest";
+  String consumerSecret = "cpftest";
+  CpfClient client = new CpfClient(url, consumerKey, consumerSecret);</pre><div class="title">Parameters</div>
 <div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Parameter</th><th>Type</th><th class="description">Description</th></tr>
 </thead>
-<tbody><tr><td class="name">wkt</td>
+<tbody><tr><td class="name">url</td>
 <td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
-<td class="description">The <a href="http://en.wikipedia.org/wiki/Well-known_text">WKT</a> or <a href="EWKT">http://postgis.net/docs/manual-2.0/using_postgis_dbmanagement.html#EWKB_EWKT</a> encoded geometry.</a></td>
+<td class="description">The full URL of the CPF Web Services, including the domain,
+ port number and path e.g. https://apps.gov.bc.ca/cpf/ws/</td>
 </tr>
-</tbody>
-</table>
-</div>
-<div class="title">Return</div>
-<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Type</th><th>Description</th></tr>
-</thead>
-<tbody><tr><td class="type">T</td>
-<td class="description">The created geometry.</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.plugin.api.GeometryFactory.createLinearRing-double__" title="createLinearRing"><a name="ca.bc.gov.open.cpf.plugin.api.GeometryFactory.createLinearRing(double[])"><code>com.vividsolutions.jts.geom.LinearRing </code>
-createLinearRing<code>(double[] coordinates)</code>
-</a>
-</h3>
-<div class="content"><p>Create a <code>com.vividsolutions.jts.geom.LinearRing</code> using the array of coordinates. The ring must form a closed loop.
- The size of the array should be a multiple
- of the number of axis. For example a 2D geometry will have x1,y1...,xN,yN values and a 3D x1,y1,z1...,xN,yN,zN.
- Geographic coordinates are always longitude, latitude and projected easting, northing.</p><div class="title">Parameters</div>
-<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Parameter</th><th>Type</th><th class="description">Description</th></tr>
-</thead>
-<tbody><tr><td class="name">coordinates</td>
-<td class="type">double[]</td>
-<td class="description">The coordinates.</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="title">Return</div>
-<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Type</th><th>Description</th></tr>
-</thead>
-<tbody><tr><td class="type">com.vividsolutions.jts.geom.LinearRing</td>
-<td class="description">The created linear ring.</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.plugin.api.GeometryFactory.createLineString-double__" title="createLineString"><a name="ca.bc.gov.open.cpf.plugin.api.GeometryFactory.createLineString(double[])"><code>com.vividsolutions.jts.geom.LineString </code>
-createLineString<code>(double[] coordinates)</code>
-</a>
-</h3>
-<div class="content"><p>Create a <code>com.vividsolutions.jts.geom.LineString</code> using the array of coordinates. The size of the array should be a multiple
- of the number of axis. For example a 2D geometry will have x1,y1...,xN,yN values and a 3D x1,y1,z1...,xN,yN,zN.
- Geographic coordinates are always longitude, latitude and projected easting, northing.</p><div class="title">Parameters</div>
-<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Parameter</th><th>Type</th><th class="description">Description</th></tr>
-</thead>
-<tbody><tr><td class="name">coordinates</td>
-<td class="type">double[]</td>
-<td class="description">The coordinates.</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="title">Return</div>
-<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Type</th><th>Description</th></tr>
-</thead>
-<tbody><tr><td class="type">com.vividsolutions.jts.geom.LineString</td>
-<td class="description">The created linestring.</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.plugin.api.GeometryFactory.createMultiLineString-Collection" title="createMultiLineString"><a name="ca.bc.gov.open.cpf.plugin.api.GeometryFactory.createMultiLineString(Collection)"><code>com.vividsolutions.jts.geom.MultiLineString </code>
-createMultiLineString<code>(Collection lines)</code>
-</a>
-</h3>
-<div class="content"><p>Create a <code>com.vividsolutions.jts.geom.MultiLineString</code> using the list of lines. The first ring in the list is the exterior ring and
- the other rings are the interior rings. The rings in the list can be any of the following types.</p>
-
- <ul>
-   <li><code>double[]</code></li>
-   <li><code>com.vividsolutions.jts.geom.Point</code></li>
-   <li><code>com.vividsolutions.jts.geom.Coordinate</code></li>
-   <li><code>com.revolsys.gis.model.coordinates.Coordinates</code></li>
-   <li><code>com.revolsys.gis.model.coordinates.list.CoordinatesList</code></li>
-   <li><code>com.vividsolutions.jts.geom.CoordinateSequence</code></li>
- </ul>
-
- <p>For a <code>double[]</code> the size of the array should be a multiple
- of the number of axis. For example a 2D geometry will have x1,y1...,xN,yN values and a 3D x1,y1,z1...,xN,yN,zN.
- Geographic coordinates are always longitude, latitude and projected easting, northing.</p><div class="title">Parameters</div>
-<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Parameter</th><th>Type</th><th class="description">Description</th></tr>
-</thead>
-<tbody><tr><td class="name">lines</td>
-<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/util/Collection.html?is-external=true">Collection</a>&lt;?&gt;</td>
-<td class="description">The list of lines.</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="title">Return</div>
-<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Type</th><th>Description</th></tr>
-</thead>
-<tbody><tr><td class="type">com.vividsolutions.jts.geom.MultiLineString</td>
-<td class="description">The created multi-linestring.</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.plugin.api.GeometryFactory.createMultiPoint-List" title="createMultiPoint"><a name="ca.bc.gov.open.cpf.plugin.api.GeometryFactory.createMultiPoint(List)"><code>com.vividsolutions.jts.geom.MultiPoint </code>
-createMultiPoint<code>(List points)</code>
-</a>
-</h3>
-<div class="content"><p>Create a <code>com.vividsolutions.jts.geom.MultiPoint</code> using the list of points. The points in the list can be any of the following types.</p>
-
- <ul>
-   <li><code>double[]</code></li>
-   <li><code>com.vividsolutions.jts.geom.Point</code></li>
-   <li><code>com.vividsolutions.jts.geom.Coordinate</code></li>
-   <li><code>com.revolsys.gis.model.coordinates.Coordinates</code></li>
-   <li><code>com.revolsys.gis.model.coordinates.list.CoordinatesList</code></li>
-   <li><code>com.vividsolutions.jts.geom.CoordinateSequence</code></li>
- </ul>
-
- <p>For a <code>double[]</code> the size of the array should be a multiple
- of the number of axis. For example a 2D geometry will have x1,y1...,xN,yN values and a 3D x1,y1,z1...,xN,yN,zN.
- Geographic coordinates are always longitude, latitude and projected easting, northing.</p><div class="title">Parameters</div>
-<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Parameter</th><th>Type</th><th class="description">Description</th></tr>
-</thead>
-<tbody><tr><td class="name">points</td>
-<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/util/List.html?is-external=true">List</a>&lt;?&gt;</td>
-<td class="description">The list of points.</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="title">Return</div>
-<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Type</th><th>Description</th></tr>
-</thead>
-<tbody><tr><td class="type">com.vividsolutions.jts.geom.MultiPoint</td>
-<td class="description">The created multi-point.</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.plugin.api.GeometryFactory.createMultiPolygon-Collection" title="createMultiPolygon"><a name="ca.bc.gov.open.cpf.plugin.api.GeometryFactory.createMultiPolygon(Collection)"><code>com.vividsolutions.jts.geom.MultiPolygon </code>
-createMultiPolygon<code>(Collection polygons)</code>
-</a>
-</h3>
-<div class="content"><p>Create a <code>com.vividsolutions.jts.geom.MultiPolygon</code> using the list of points. The points in the list can be any of the following types.</p>
-
- <ul>
-   <li><code>com.vividsolutions.jts.geom.Polygon</code></li>
-   <li><a href="http://docs.oracle.com/javase/6/docs/api/java/util/List.html?is-external=true"><code>List</code></a> see <a href="#ca.bc.gov.open.cpf.plugin.api.GeometryFactory.createPolygon(List)"><code>createPolygon(List)</code></a></li>
- </ul>
-
- <p>For a <code>double[]</code> the size of the array should be a multiple
- of the number of axis. For example a 2D geometry will have x1,y1...,xN,yN values and a 3D x1,y1,z1...,xN,yN,zN.
- Geographic coordinates are always longitude, latitude and projected easting, northing.</p><div class="title">Parameters</div>
-<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Parameter</th><th>Type</th><th class="description">Description</th></tr>
-</thead>
-<tbody><tr><td class="name">polygons</td>
-<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/util/Collection.html?is-external=true">Collection</a>&lt;?&gt;</td>
-<td class="description">The list of polygons.</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="title">Return</div>
-<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Type</th><th>Description</th></tr>
-</thead>
-<tbody><tr><td class="type">com.vividsolutions.jts.geom.MultiPolygon</td>
-<td class="description">The created multi-polygon.</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.plugin.api.GeometryFactory.createPoint-double__" title="createPoint"><a name="ca.bc.gov.open.cpf.plugin.api.GeometryFactory.createPoint(double[])"><code>com.vividsolutions.jts.geom.Point </code>
-createPoint<code>(double[] coordinates)</code>
-</a>
-</h3>
-<div class="content"><p>Create a point using the array of coordinates. The size of the array should be the same as the
- number of axis used on this geometry factory. If the size is less then additional axis will be
- set to 0. If greater then those values will be ignored. For example a 2D geometry will have x,y values and a 3D x,y,z.
- Geographic coordinates are always longitude, latitude and projected easting, northing.</p><div class="title">Parameters</div>
-<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Parameter</th><th>Type</th><th class="description">Description</th></tr>
-</thead>
-<tbody><tr><td class="name">coordinates</td>
-<td class="type">double[]</td>
-<td class="description">The coordinates.</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="title">Return</div>
-<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Type</th><th>Description</th></tr>
-</thead>
-<tbody><tr><td class="type">com.vividsolutions.jts.geom.Point</td>
-<td class="description">The created point.</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.plugin.api.GeometryFactory.createPolygon-List" title="createPolygon"><a name="ca.bc.gov.open.cpf.plugin.api.GeometryFactory.createPolygon(List)"><code>com.vividsolutions.jts.geom.Polygon </code>
-createPolygon<code>(List rings)</code>
-</a>
-</h3>
-<div class="content"><p>Create a polygon using the list of rings. The first ring in the list is the exterior ring and
- the other rings are the interior rings. The rings in the list can be any of the following types.</p>
-
- <ul>
-   <li><code>double[]</code></li>
-   <li><code>com.vividsolutions.jts.geom.LineString</code></li>
-   <li><code>com.vividsolutions.jts.geom.LinearRing</code></li>
-   <li><code>com.revolsys.gis.model.coordinates.list.CoordinatesList</code></li>
-   <li><code>com.vividsolutions.jts.geom.CoordinateSequence</code></li>
- </ul>
-
- <p>For a <code>double[]</code> the size of the array should be a multiple
- of the number of axis. For example a 2D geometry will have x1,y1...,xN,yN values and a 3D x1,y1,z1...,xN,yN,zN.
- Geographic coordinates are always longitude, latitude and projected easting, northing.</p><div class="title">Parameters</div>
-<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Parameter</th><th>Type</th><th class="description">Description</th></tr>
-</thead>
-<tbody><tr><td class="name">rings</td>
-<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/util/List.html?is-external=true">List</a>&lt;?&gt;</td>
-<td class="description">The list of rings.</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="title">Return</div>
-<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Type</th><th>Description</th></tr>
-</thead>
-<tbody><tr><td class="type">com.vividsolutions.jts.geom.Polygon</td>
-<td class="description">The created polygon.</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="javaPackage open"><h1 id="ca.bc.gov.open.cpf.plugin.api.log">ca.bc.gov.open.cpf.plugin.api.log</h1><div class="content"><p>The Concurrent Processing Framework Java Plug-in Logging API.</p><div class="title">Classes</div>
-<div class="javaClass"><h2 id="ca.bc.gov.open.cpf.plugin.api.log.AppLog">AppLog</h2><div class="content"><p>The AppLog class is a logging API for use by a <a href="#ca.bc.gov.open.cpf.plugin.api.BusinessApplicationPlugin"><code>BusinessApplicationPlugin</code></a> class.
- Plug-in classes can record error, info and debug messages in the execute method. These messages
- will be recorded in the Log4j log file (if that log level is enabled in the worker for the AppLog
- class). The message will also be recorded in the module log file on the master if that log level
- is enabled for the business application. This functionality allows viewing the logs for the
- all the workers from the CPF admin console.</p>
- 
- <p>The plug-in must implement the following method on the <a href="#ca.bc.gov.open.cpf.plugin.api.BusinessApplicationPlugin"><code>BusinessApplicationPlugin</code></a> class
- to obtain a AppLog instance for this request.</p>
- 
- <figure><pre class="prettyprint language-java">private AppLog appLog;
-
-public void setAppLog(final AppLog appLog) {
-  this.appLog = appLog;
-}</pre></figure><div class="title">Constructors</div>
-<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.plugin.api.log.AppLog.AppLog-String" title="AppLog"><a name="ca.bc.gov.open.cpf.plugin.api.log.AppLog.AppLog(String)">AppLog<code>(String name)</code>
-</a>
-</h3>
-<div class="content"><div class="title">Parameters</div>
-<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Parameter</th><th>Type</th><th class="description">Description</th></tr>
-</thead>
-<tbody><tr><td class="name">name</td>
+<tr><td class="name">consumerKey</td>
 <td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
-<td class="description" />
+<td class="description">The application's OAuth Consumer Key (user name) to
+ connect to the service.</td>
 </tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.plugin.api.log.AppLog.AppLog-String-String" title="AppLog"><a name="ca.bc.gov.open.cpf.plugin.api.log.AppLog.AppLog(String,String)">AppLog<code>(String name, String logLevel)</code>
-</a>
-</h3>
-<div class="content"><div class="title">Parameters</div>
-<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Parameter</th><th>Type</th><th class="description">Description</th></tr>
-</thead>
-<tbody><tr><td class="name">name</td>
+<tr><td class="name">consumerSecret</td>
 <td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
-<td class="description" />
-</tr>
-<tr><td class="name">logLevel</td>
-<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
-<td class="description" />
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.plugin.api.log.AppLog.AppLog-String-String-String" title="AppLog"><a name="ca.bc.gov.open.cpf.plugin.api.log.AppLog.AppLog(String,String,String)">AppLog<code>(String businessApplicationName, String groupId, String logLevel)</code>
-</a>
-</h3>
-<div class="content"><div class="title">Parameters</div>
-<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Parameter</th><th>Type</th><th class="description">Description</th></tr>
-</thead>
-<tbody><tr><td class="name">businessApplicationName</td>
-<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
-<td class="description" />
-</tr>
-<tr><td class="name">groupId</td>
-<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
-<td class="description" />
-</tr>
-<tr><td class="name">logLevel</td>
-<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
-<td class="description" />
+<td class="description">The OAuth Consumer Secret (encryption key) used to
+ sign the requests for the Consumer Key.</td>
 </tr>
 </tbody>
 </table>
@@ -1374,219 +258,120 @@ public void setAppLog(final AppLog appLog) {
 </div>
 </div>
 <div class="title">Methods</div>
-<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.plugin.api.log.AppLog.debug-String" title="debug"><a name="ca.bc.gov.open.cpf.plugin.api.log.AppLog.debug(String)"><code>void </code>
-debug<code>(String message)</code>
+<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.client.api.CpfClient.closeConnection" title="closeConnection"><a name="ca.bc.gov.open.cpf.client.api.CpfClient.closeConnection()"><code>void </code>
+closeConnection<code>()</code>
 </a>
 </h3>
-<div class="content"><p>Record the info message in the log if <a href="#ca.bc.gov.open.cpf.plugin.api.log.AppLog.isInfoEnabled()"><code>isInfoEnabled()</code></a> is true.</p><div class="title">Parameters</div>
-<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Parameter</th><th>Type</th><th class="description">Description</th></tr>
-</thead>
-<tbody><tr><td class="name">message</td>
-<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
-<td class="description">The message.</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.plugin.api.log.AppLog.error-String" title="error"><a name="ca.bc.gov.open.cpf.plugin.api.log.AppLog.error(String)"><code>void </code>
-error<code>(String message)</code>
-</a>
-</h3>
-<div class="content"><p>Record the error message in the log.</p><div class="title">Parameters</div>
-<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Parameter</th><th>Type</th><th class="description">Description</th></tr>
-</thead>
-<tbody><tr><td class="name">message</td>
-<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
-<td class="description">The message.</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.plugin.api.log.AppLog.error-String-Throwable" title="error"><a name="ca.bc.gov.open.cpf.plugin.api.log.AppLog.error(String,Throwable)"><code>void </code>
-error<code>(String message, Throwable exception)</code>
-</a>
-</h3>
-<div class="content"><p>Record the error message in the log with the exception.</p><div class="title">Parameters</div>
-<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Parameter</th><th>Type</th><th class="description">Description</th></tr>
-</thead>
-<tbody><tr><td class="name">message</td>
-<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
-<td class="description">The message.</td>
-</tr>
-<tr><td class="name">exception</td>
-<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Throwable.html?is-external=true">Throwable</a></td>
-<td class="description" />
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.plugin.api.log.AppLog.getLogLevel" title="getLogLevel"><a name="ca.bc.gov.open.cpf.plugin.api.log.AppLog.getLogLevel()"><code>String </code>
-getLogLevel<code>()</code>
-</a>
-</h3>
-<div class="content"><p>Get the logging level (ERROR, INFO, DEBUG).</p><div class="title">Return</div>
-<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Type</th><th>Description</th></tr>
-</thead>
-<tbody><tr><td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
-<td class="description">The logging level (ERROR, INFO, DEBUG).</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.plugin.api.log.AppLog.info-String" title="info"><a name="ca.bc.gov.open.cpf.plugin.api.log.AppLog.info(String)"><code>void </code>
-info<code>(String message)</code>
-</a>
-</h3>
-<div class="content"><p>Record the info message in the log if <a href="#ca.bc.gov.open.cpf.plugin.api.log.AppLog.isInfoEnabled()"><code>isInfoEnabled()</code></a> is true.</p><div class="title">Parameters</div>
-<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Parameter</th><th>Type</th><th class="description">Description</th></tr>
-</thead>
-<tbody><tr><td class="name">message</td>
-<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
-<td class="description">The message.</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.plugin.api.log.AppLog.isDebugEnabled" title="isDebugEnabled"><a name="ca.bc.gov.open.cpf.plugin.api.log.AppLog.isDebugEnabled()"><code>boolean </code>
-isDebugEnabled<code>()</code>
-</a>
-</h3>
-<div class="content"><p>Check to see if debug level logging is enabled. Use this in an if block around
- logging operations that create large amounts of log data to prevent that data from being
- created if logging is not enabled.</p><div class="title">Return</div>
-<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Type</th><th>Description</th></tr>
-</thead>
-<tbody><tr><td class="type">boolean</td>
-<td class="description">True if debug level logging is enabled.</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.plugin.api.log.AppLog.isInfoEnabled" title="isInfoEnabled"><a name="ca.bc.gov.open.cpf.plugin.api.log.AppLog.isInfoEnabled()"><code>boolean </code>
-isInfoEnabled<code>()</code>
-</a>
-</h3>
-<div class="content"><p>Check to see if info or debug level logging is enabled. Use this in an if block around
- logging operations that create large amounts of log data to prevent that data from being
- created if logging is not enabled.</p><div class="title">Return</div>
-<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Type</th><th>Description</th></tr>
-</thead>
-<tbody><tr><td class="type">boolean</td>
-<td class="description">True if info or debug level logging is enabled.</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.plugin.api.log.AppLog.setLogLevel-String" title="setLogLevel"><a name="ca.bc.gov.open.cpf.plugin.api.log.AppLog.setLogLevel(String)"><code>void </code>
-setLogLevel<code>(String logLevel)</code>
-</a>
-</h3>
-<div class="content"><p>Set the current logging level (ERROR, INFO, DEBUG).</p><div class="title">Parameters</div>
-<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Parameter</th><th>Type</th><th class="description">Description</th></tr>
-</thead>
-<tbody><tr><td class="name">logLevel</td>
-<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
-<td class="description">The logging level (ERROR, INFO, DEBUG).</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.plugin.api.log.AppLog.toString" title="toString"><a name="ca.bc.gov.open.cpf.plugin.api.log.AppLog.toString()"><code>String </code>
-toString<code>()</code>
-</a>
-</h3>
-<div class="content"><div class="title">Return</div>
-<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Type</th><th>Description</th></tr>
-</thead>
-<tbody><tr><td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
-<td class="description" />
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.plugin.api.log.AppLog.warn-String" title="warn"><a name="ca.bc.gov.open.cpf.plugin.api.log.AppLog.warn(String)"><code>void </code>
-warn<code>(String message)</code>
-</a>
-</h3>
-<div class="content"><p>Record the warning message in the log.</p><div class="title">Parameters</div>
-<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Parameter</th><th>Type</th><th class="description">Description</th></tr>
-</thead>
-<tbody><tr><td class="name">message</td>
-<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
-<td class="description">The warning.</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="javaPackage open"><h1 id="ca.bc.gov.open.cpf.plugin.api.security">ca.bc.gov.open.cpf.plugin.api.security</h1><div class="content"><p>The Concurrent Processing Framework Java Plug-in Security API.</p><div class="title">Interfaces</div>
-<div class="javaClass"><h2 id="ca.bc.gov.open.cpf.plugin.api.security.SecurityService">SecurityService</h2><div class="content"><p>The security service provides a mechanism for business applications to get
- information about the user and enforce access control.</p>
- 
- <p>The plug-in can use the methods on the security service to check if the user is in a
- specific group, can access a resource or perform a specified action on a resource. If the user
- does not have the correct permission then a subclass of RuntimeException can be thrown by the
- plug-in with a description of why the user did not have the appropriate permission.</p>
+<div class="content"><p>Close the connection to the CPF service. Once this method has been called
+ the client can no longer be used and a new instance must be created. This should be called
+ when the client is no longer needed to clean up resources.<p>
 
- <p>To use the security service the plug-in must implement the following field and method within
- the plug-in class. The CPF will invoke this method before the execute method to pass the
- security service to the plug-in.</p>
- 
- <figure><pre class="prettyprint language-java">private SecurityService securityService;
+ <p>The following code fragment shows an example of using the API.</p>
 
-public void setSecurityService(SecurityService securityService) {
-  this.securityService = securityService;
-}</pre></figure>
- 
- <p>See each of the methods below for examples of using the security service. All of the
- examples assume that the above field and method are defined.</p><div class="title">Methods</div>
-<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.plugin.api.security.SecurityService.canAccessResource-String-String" title="canAccessResource"><a name="ca.bc.gov.open.cpf.plugin.api.security.SecurityService.canAccessResource(String,String)"><code>boolean </code>
-canAccessResource<code>(String resourceClass, String resourceId)</code>
+ <pre class="prettyprint language-java">  String url = "https://apps.gov.bc.ca/pub/cpf";
+  String consumerKey = "cpftest";
+  String consumerSecret = "cpftest";
+  CpfClient client = new CpfClient(url, consumerKey, consumerSecret);
+  try {
+    // Use the client
+  } finally {
+    client.closeConnection();
+  }</pre></div>
+</div>
+<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.client.api.CpfClient.closeJob-String" title="closeJob"><a name="ca.bc.gov.open.cpf.client.api.CpfClient.closeJob(String)"><code>void </code>
+closeJob<code>(String jobUrl)</code>
 </a>
 </h3>
-<div class="content"><p>Check to see if the user can access the resource.</p>
+<div class="content"><p>Delete the job
+ using the <a href="../rest-api/#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.deleteJob">Delete Job</a> REST API.</p>
 
- <figure><pre class="prettyprint language-java">public void execute() {
-  String resourceClass = "report";
-  String resourceId = "demo";
-  if (securityService.canAccessResource(resourceClass, resourceId)) {
-    // Perform the request
-  } else {
-    throw new SecurityException("User cannot access the demo report");
-  }
-}</pre></figure><div class="title">Parameters</div>
+ <p>The following code fragment shows an example of using the API.</p>
+
+ <pre class="prettyprint language-java">  String url = "https://apps.gov.bc.ca/pub/cpf";
+  String consumerKey = "cpftest";
+  String consumerSecret = "cpftest";
+  CpfClient client = new CpfClient(url, consumerKey, consumerSecret);
+  try {
+    Map&lt;String, Object&gt; parameters = new HashMap&lt;String, Object&gt;();
+    parameters.put("mapGridName", "BCGS 1:20 000");
+    parameters.put("mapTileId", "92g025");
+    String jobId = client.createJobWithStructuredSingleRequest(
+      "MapTileByTileId", parameters, "application/json");
+    // Download the results of the job
+    client.closeJob(jobId);
+  } finally {
+    client.closeConnection();
+  }</pre><div class="title">Parameters</div>
 <div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Parameter</th><th>Type</th><th class="description">Description</th></tr>
 </thead>
-<tbody><tr><td class="name">resourceClass</td>
+<tbody><tr><td class="name">jobUrl</td>
 <td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
-<td class="description">The type of resource.</td>
+<td class="description">The URL of the job to be closed.</td>
 </tr>
-<tr><td class="name">resourceId</td>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.client.api.CpfClient.createJobWithOpaqueResourceRequests-String-Map-String-String-Collection" title="createJobWithOpaqueResourceRequests"><a name="ca.bc.gov.open.cpf.client.api.CpfClient.createJobWithOpaqueResourceRequests(String,Map,String,String,Collection)"><code>String </code>
+createJobWithOpaqueResourceRequests<code>(String businessApplicationName, Map jobParameters, String inputDataContentType, String resultContentType, Collection requests)</code>
+</a>
+</h3>
+<div class="content"><p>Create a new job on the CPF server for a business application that
+ accepts <a href="../../opaqueData.html">opaque input data</a>
+ using the <a href="../rest-api/#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.createJobWithMultipleRequests">Create Job With Multiple Requests</a> REST API.</p>
+
+ <p>The content of the opaque data for each request is specified using
+ a spring framework <a href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/core/io/Resource.html">Resource</a> object.</p>
+
+ <p><b>NOTE: There is a limit of 20MB of data for a multipart/form-data HTTP request. For
+ jobs with large volumes of data make the data available on a HTTP server use the URL
+ versions of this method instead.</b></p>
+
+ <p>The following code fragment shows an example of using the API.</p>
+
+ <pre class="prettyprint language-java">  String url = "https://apps.gov.bc.ca/pub/cpf";
+  String consumerKey = "cpftest";
+  String consumerSecret = "cpftest";
+  CpfClient client = new CpfClient(url, consumerKey, consumerSecret);
+  try {
+    Map&lt;String, Object&gt; parameters = new HashMap&lt;String, Object&gt;();
+    parameters.put("algorithmName", "MD5");
+
+    List&lt;Resource&gt; requests = new ArrayList&lt;Resource&gt;();
+    requests.add(new ByteArrayResource("Test string".getBytes()));
+    // requests.add(new FileSystemResource(pathToFile));
+
+    String jobId = client.createJobWithOpaqueResourceRequests("Digest",
+      "1.0.0", parameters, "text/plain", "application/json", requests);
+    // Download the results of the job
+    client.closeJob(jobId);
+  } finally {
+    client.closeConnection();
+  }</pre><div class="title">Parameters</div>
+<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Parameter</th><th>Type</th><th class="description">Description</th></tr>
+</thead>
+<tbody><tr><td class="name">businessApplicationName</td>
 <td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
-<td class="description">The resource identifier.</td>
+<td class="description">The name of the business application.</td>
+</tr>
+<tr><td class="name">jobParameters</td>
+<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/util/Map.html?is-external=true">Map</a>&lt;<a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a>, <a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true">Object</a>&gt;</td>
+<td class="description">The global job parameters.</td>
+</tr>
+<tr><td class="name">inputDataContentType</td>
+<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
+<td class="description">The <a href="../../fileFormats.html">media type</a> used for all the
+ requests.</td>
+</tr>
+<tr><td class="name">resultContentType</td>
+<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
+<td class="description">The <a href="../../fileFormats.html">media type</a> to return the result data
+ using.</td>
+</tr>
+<tr><td class="name">requests</td>
+<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/util/Collection.html?is-external=true">Collection</a>&lt;org.springframework.core.io.Resource&gt;</td>
+<td class="description">The resource for the requests.</td>
 </tr>
 </tbody>
 </table>
@@ -1594,170 +379,1135 @@ canAccessResource<code>(String resourceClass, String resourceId)</code>
 <div class="title">Return</div>
 <div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Type</th><th>Description</th></tr>
 </thead>
-<tbody><tr><td class="type">boolean</td>
-<td class="description">True if the user can access the resource, false otherwise.</td>
+<tbody><tr><td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
+<td class="description">The job id (URL) of the created job.</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
 </div>
-<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.plugin.api.security.SecurityService.canAccessResource-String-String-String" title="canAccessResource"><a name="ca.bc.gov.open.cpf.plugin.api.security.SecurityService.canAccessResource(String,String,String)"><code>boolean </code>
-canAccessResource<code>(String resourceClass, String resourceId, String actionName)</code>
+<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.client.api.CpfClient.createJobWithOpaqueResourceRequests-String-Map-String-String-org.springframework.core.io.Resource__" title="createJobWithOpaqueResourceRequests"><a name="ca.bc.gov.open.cpf.client.api.CpfClient.createJobWithOpaqueResourceRequests(String,Map,String,String,org.springframework.core.io.Resource[])"><code>String </code>
+createJobWithOpaqueResourceRequests<code>(String businessApplicationName, Map jobParameters, String inputDataContentType, String resultContentType, org.springframework.core.io.Resource[] requests)</code>
 </a>
 </h3>
-<div class="content"><p>Check to see if the user can perform the action on the resource.</p>
- 
- <figure><pre class="prettyprint language-java">public void execute() {
-  String resourceClass = "report";
-  String resourceId = "demo";
-  String actionName = "view";
-  if (securityService.canAccessResource(resourceClass, resourceId, actionName)) {
-    // Perform the request
-  } else {
-    throw new SecurityException("User cannot perform the view action on the demo report");
-  }
-}</pre></figure><div class="title">Parameters</div>
+<div class="content"><p>Create a new job on the CPF server for a business application that
+ accepts <a href="../../opaqueData.html">opaque input data</a>
+ using the <a href="../rest-api/#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.createJobWithMultipleRequests">Create Job With Multiple Requests</a> REST API.</p>
+
+ <p>The content of the opaque data for each request is specified using
+ a spring framework <a href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/core/io/Resource.html">Resource</a> object.</p>
+
+ <p><b>NOTE: There is a limit of 20MB of data for a multipart/form-data HTTP request. For
+ jobs with large volumes of data make the data available on a HTTP server use the URL
+ versions of this method instead.</b></p>
+
+ <p>The following code fragment shows an example of using the API.</p>
+
+ <pre class="prettyprint language-java">  String url = "https://apps.gov.bc.ca/pub/cpf";
+  String consumerKey = "cpftest";
+  String consumerSecret = "cpftest";
+  CpfClient client = new CpfClient(url, consumerKey, consumerSecret);
+  try {
+    Map&lt;String, Object&gt; parameters = new HashMap&lt;String, Object&gt;();
+    parameters.put("algorithmName", "MD5");
+
+    List&lt;Resource&gt; requests = new ArrayList&lt;Resource&gt;();
+    requests.add(new ByteArrayResource("Test string".getBytes()));
+    // requests.add(Resource resource = new FileSystemResource(pathToFile));
+
+    String jobId = client.createJobWithOpaqueResourceRequests("Digest",
+      "1.0.0", parameters, "text/plain", "application/json", requests);
+    // Download the results of the job
+    client.closeJob(jobId);
+  } finally {
+    client.closeConnection();
+  }</pre><div class="title">Parameters</div>
 <div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Parameter</th><th>Type</th><th class="description">Description</th></tr>
 </thead>
-<tbody><tr><td class="name">resourceClass</td>
+<tbody><tr><td class="name">businessApplicationName</td>
 <td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
-<td class="description">The type of resource.</td>
+<td class="description">The name of the business application.</td>
 </tr>
-<tr><td class="name">resourceId</td>
-<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
-<td class="description">The resource identifier.</td>
+<tr><td class="name">jobParameters</td>
+<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/util/Map.html?is-external=true">Map</a>&lt;<a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a>, <a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true">Object</a>&gt;</td>
+<td class="description">The global job parameters.</td>
 </tr>
-<tr><td class="name">actionName</td>
+<tr><td class="name">inputDataContentType</td>
 <td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
-<td class="description">The action name.</td>
+<td class="description">The <a href="../../fileFormats.html">media type</a> used for all the
+ requests.</td>
+</tr>
+<tr><td class="name">resultContentType</td>
+<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
+<td class="description">The <a href="../../fileFormats.html">media type</a> to return the result data
+ using.</td>
+</tr>
+<tr><td class="name">requests</td>
+<td class="type">org.springframework.core.io.Resource[]</td>
+<td class="description">The resource for the requests.</td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="title">Return</div>
-<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Type</th><th>Description</th></tr>
-</thead>
-<tbody><tr><td class="type">boolean</td>
-<td class="description">True if the user can perform the action on the resource, false
-         otherwise.</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.plugin.api.security.SecurityService.canPerformAction-String" title="canPerformAction"><a name="ca.bc.gov.open.cpf.plugin.api.security.SecurityService.canPerformAction(String)"><code>boolean </code>
-canPerformAction<code>(String actionName)</code>
-</a>
-</h3>
-<div class="content"><p>Check to see if the user is can perform the named action.</p>
- 
- <figure><pre class="prettyprint language-java">public void execute() {
-  if (securityService.canPerformAction("view")) {
-    // Perform the request
-  } else {
-    throw new SecurityException("User cannot perform the view action");
-  }
-}</pre></figure><div class="title">Parameters</div>
-<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Parameter</th><th>Type</th><th class="description">Description</th></tr>
-</thead>
-<tbody><tr><td class="name">actionName</td>
-<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
-<td class="description">The action name.</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="title">Return</div>
-<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Type</th><th>Description</th></tr>
-</thead>
-<tbody><tr><td class="type">boolean</td>
-<td class="description">True if the user can perform the named action, false otherwise.</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.plugin.api.security.SecurityService.getConsumerKey" title="getConsumerKey"><a name="ca.bc.gov.open.cpf.plugin.api.security.SecurityService.getConsumerKey()"><code>String </code>
-getConsumerKey<code>()</code>
-</a>
-</h3>
-<div class="content"><p>Get the consumer key of the user.</p><div class="title">Return</div>
 <div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Type</th><th>Description</th></tr>
 </thead>
 <tbody><tr><td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
-<td class="description">The user's consumer key.</td>
+<td class="description">The job id (URL) of the created job.</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
 </div>
-<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.plugin.api.security.SecurityService.getUserAttributes" title="getUserAttributes"><a name="ca.bc.gov.open.cpf.plugin.api.security.SecurityService.getUserAttributes()"><code>Map </code>
-getUserAttributes<code>()</code>
+<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.client.api.CpfClient.createJobWithOpaqueUrlRequests-String-Map-String-String-Collection" title="createJobWithOpaqueUrlRequests"><a name="ca.bc.gov.open.cpf.client.api.CpfClient.createJobWithOpaqueUrlRequests(String,Map,String,String,Collection)"><code>String </code>
+createJobWithOpaqueUrlRequests<code>(String businessApplicationName, Map jobParameters, String inputDataContentType, String resultContentType, Collection inputDataUrls)</code>
 </a>
 </h3>
-<div class="content"><p>Get the additional attributes about the user.</p><div class="title">Return</div>
+<div class="content"><p>Create a new job on the CPF server for a business application that
+ accepts <a href="../../opaqueData.html">opaque input data</a>
+ using the <a href="../rest-api/#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.createJobWithMultipleRequests">Create Job With Multiple Requests</a> REST API.</p>
+
+ <p>The content of the opaque data for each request is specified using
+ a URL to the data on a publicly accessible HTTP server.</p>
+
+ <p>The following code fragment shows an example of using the API.</p>
+
+ <pre class="prettyprint language-java">  String url = "https://apps.gov.bc.ca/pub/cpf";
+  String consumerKey = "cpftest";
+  String consumerSecret = "cpftest";
+  CpfClient client = new CpfClient(url, consumerKey, consumerSecret);
+  try {
+    Map&lt;String, Object&gt; parameters = new HashMap&lt;String, Object&gt;();
+    parameters.put("algorithmName", "MD5");
+
+    &lt;Resource&gt; inputDataUrls = new Array&lt;Resource&gt;();
+    inputDataUrls.add("https://apps.gov.bc.ca/pub/cpf/css/cpf.css");
+
+    String jobId = client.createJobWithOpaqueUrlRequests("Digest",
+      "1.0.0", parameters, "text/plain", "application/json", inputDataUrls);
+    // Download the results of the job
+    client.closeJob(jobId);
+  } finally {
+    client.closeConnection();
+  }</pre><div class="title">Parameters</div>
+<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Parameter</th><th>Type</th><th class="description">Description</th></tr>
+</thead>
+<tbody><tr><td class="name">businessApplicationName</td>
+<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
+<td class="description">The name of the business application.</td>
+</tr>
+<tr><td class="name">jobParameters</td>
+<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/util/Map.html?is-external=true">Map</a>&lt;<a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a>, ? extends <a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true">Object</a>&gt;</td>
+<td class="description">The global job parameters.</td>
+</tr>
+<tr><td class="name">inputDataContentType</td>
+<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
+<td class="description">The <a href="../../fileFormats.html">media type</a> used for all the
+ requests.</td>
+</tr>
+<tr><td class="name">resultContentType</td>
+<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
+<td class="description">The <a href="../../fileFormats.html">media type</a> to return the result data
+ using.</td>
+</tr>
+<tr><td class="name">inputDataUrls</td>
+<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/util/Collection.html?is-external=true">Collection</a>&lt;<a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a>&gt;</td>
+<td class="description">The collection of URLs for the requests.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="title">Return</div>
+<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody><tr><td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
+<td class="description">The job id (URL) of the created job.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.client.api.CpfClient.createJobWithOpaqueUrlRequests-String-Map-String-String-String__" title="createJobWithOpaqueUrlRequests"><a name="ca.bc.gov.open.cpf.client.api.CpfClient.createJobWithOpaqueUrlRequests(String,Map,String,String,String[])"><code>String </code>
+createJobWithOpaqueUrlRequests<code>(String businessApplicationName, Map jobParameters, String inputDataContentType, String resultContentType, String[] inputDataUrls)</code>
+</a>
+</h3>
+<div class="content"><p>Create a new job on the CPF server for a business application that
+ accepts <a href="../../opaqueData.html">opaque input data</a>
+ using the <a href="../rest-api/#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.createJobWithMultipleRequests">Create Job With Multiple Requests</a> REST API.</p>
+
+ <p>The content of the opaque data for each request is specified using
+ a URL to the data on a publicly accessible HTTP server.</p>
+
+ <p>The following code fragment shows an example of using the API.</p>
+
+ <pre class="prettyprint language-java">  String url = "https://apps.gov.bc.ca/pub/cpf";
+  String consumerKey = "cpftest";
+  String consumerSecret = "cpftest";
+  CpfClient client = new CpfClient(url, consumerKey, consumerSecret);
+  try {
+    Map&lt;String, Object&gt; parameters = new HashMap&lt;String, Object&gt;();
+    parameters.put("algorithmName", "MD5");
+
+    String inputDataUrl = "https://apps.gov.bc.ca/pub/cpf/css/cpf.css";
+
+    String jobId = client.createJobWithOpaqueUrlRequests("Digest",
+      "1.0.0", parameters, "text/plain", "application/json", inputDataUrl);
+    // Download the results of the job
+    client.closeJob(jobId);
+  } finally {
+    client.closeConnection();
+  }</pre><div class="title">Parameters</div>
+<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Parameter</th><th>Type</th><th class="description">Description</th></tr>
+</thead>
+<tbody><tr><td class="name">businessApplicationName</td>
+<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
+<td class="description">The name of the business application.</td>
+</tr>
+<tr><td class="name">jobParameters</td>
+<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/util/Map.html?is-external=true">Map</a>&lt;<a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a>, ? extends <a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true">Object</a>&gt;</td>
+<td class="description">The global job parameters.</td>
+</tr>
+<tr><td class="name">inputDataContentType</td>
+<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
+<td class="description">The <a href="../../fileFormats.html">media type</a> used for all the
+ requests.</td>
+</tr>
+<tr><td class="name">resultContentType</td>
+<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
+<td class="description">The <a href="../../fileFormats.html">media type</a> to return the result data
+ using.</td>
+</tr>
+<tr><td class="name">inputDataUrls</td>
+<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a>[]</td>
+<td class="description">The collection of resources for the requests.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="title">Return</div>
+<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody><tr><td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
+<td class="description">The job id (URL) of the created job.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.client.api.CpfClient.createJobWithStructuredMultipleRequestsList-String-Map-List-String" title="createJobWithStructuredMultipleRequestsList"><a name="ca.bc.gov.open.cpf.client.api.CpfClient.createJobWithStructuredMultipleRequestsList(String,Map,List,String)"><code>String </code>
+createJobWithStructuredMultipleRequestsList<code>(String businessApplicationName, Map jobParameters, List requests, String resultContentType)</code>
+</a>
+</h3>
+<div class="content"><p>Create a new job on the CPF server for a business application that
+ accepts <a href="../../structuredData.html">structured input data</a>
+ using the <a href="../rest-api/#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.createJobWithMultipleRequests">Create Job With Multiple Requests</a> REST API.</p>
+
+ <p>The content of the structured data is specified as a list of requests. Each request is specified
+ as a map containing the request parameters.</p>
+
+ <p><b>NOTE: There is a limit of 20MB of data for a multipart/form-data HTTP request. For
+ jobs with large volumes of data make the data available on a HTTP server use the URL
+ version of this method instead.</b></p>
+
+ <p>The following code fragment shows an example of using the API.</p>
+
+ <pre class="prettyprint language-java">  String url = "https://apps.gov.bc.ca/pub/cpf";
+  String consumerKey = "cpftest";
+  String consumerSecret = "cpftest";
+  CpfClient client = new CpfClient(url, consumerKey, consumerSecret);
+  try {
+    Map&lt;String, Object&gt; jobParameters = new HashMap&lt;String, Object&gt;();
+    jobParameters.put("mapGridName", "BCGS 1:20 000");
+
+    List&lt;Map&lt;String,?extends Object&gt;&gt; requests = new ArrayList&lt;Map&lt;String,?extends Object&gt;&gt;();
+    requests.add(Collections.singletonMap("mapTileId", "92j025"));
+    requests.add(Collections.singletonMap("mapTileId", "92j016"));
+
+    String jobId = client.createJobWithStructuredMultipleRequestsList(
+      "MapTileByTileId", jobParameters, requests,"application/json");
+    try {
+      List&lt;Map&lt;String, Object&gt;&gt; results = client.getJobStructuredResults(
+        jobId, 5000);
+      for (Map&lt;String, Object&gt; result : results) {
+        System.out.println(result);
+      }
+    } finally {
+      client.closeJob(jobId);
+    }
+  } finally {
+    client.closeConnection();
+  }</pre><div class="title">Parameters</div>
+<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Parameter</th><th>Type</th><th class="description">Description</th></tr>
+</thead>
+<tbody><tr><td class="name">businessApplicationName</td>
+<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
+<td class="description">The name of the web services business
+ application.</td>
+</tr>
+<tr><td class="name">jobParameters</td>
+<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/util/Map.html?is-external=true">Map</a>&lt;<a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a>, ? extends <a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true">Object</a>&gt;</td>
+<td class="description">A map of additional parameters specific to the
+ requested Business Application.</td>
+</tr>
+<tr><td class="name">requests</td>
+<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/util/List.html?is-external=true">List</a>&lt;<a class="" href="http://docs.oracle.com/javase/6/docs/api/java/util/Map.html?is-external=true">Map</a>&lt;<a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a>, ? extends <a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true">Object</a>&gt;&gt;</td>
+<td class="description">A list of data Maps of the requests.</td>
+</tr>
+<tr><td class="name">resultContentType</td>
+<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
+<td class="description">The <a href="../../fileFormats.html">media type</a> of the result data.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="title">Return</div>
+<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody><tr><td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
+<td class="description">The job id (URL) of the created job.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.client.api.CpfClient.createJobWithStructuredMultipleRequestsResource-String-Map-int-org.springframework.core.io.Resource-String-String" title="createJobWithStructuredMultipleRequestsResource"><a name="ca.bc.gov.open.cpf.client.api.CpfClient.createJobWithStructuredMultipleRequestsResource(String,Map,int,org.springframework.core.io.Resource,String,String)"><code>String </code>
+createJobWithStructuredMultipleRequestsResource<code>(String businessApplicationName, Map jobParameters, int numRequests, org.springframework.core.io.Resource inputData, String inputDataContentType, String resultContentType)</code>
+</a>
+</h3>
+<div class="content"><p>Create a new job on the CPF server for a business application that
+ accepts <a href="../../structuredData.html">structured input data</a>
+ using the <a href="../rest-api/#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.createJobWithMultipleRequests">Create Job With Multiple Requests</a> REST API.</p>
+
+ <p>The content of the structured in data for each request is specified using
+ a spring framework <a href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/core/io/Resource.html">Resource</a> object.
+ The resource must be encoded using the <a href="../../fileFormats.html">file format</a> specified by
+ the inputDataContentType. The resource must contain one record containing the request parameters
+ for each request to be processed by the business application.</p>
+
+ <p><b>NOTE: There is a limit of 20MB of data for a multipart/form-data HTTP request. For
+ jobs with large volumes of data make the data available on a HTTP server use the URL
+ version of this method instead.</b></p>
+
+ <p>The following code fragment shows an example of using the API.</p>
+
+ <pre class="prettyprint language-java">  String url = "https://apps.gov.bc.ca/pub/cpf";
+  String consumerKey = "cpftest";
+  String consumerSecret = "cpftest";
+  CpfClient client = new CpfClient(url, consumerKey, consumerSecret);
+  try {
+    Map&lt;String, Object&gt; jobParameters = new HashMap&lt;String, Object&gt;();
+    jobParameters.put("mapGridName", "NTS 1:500 000");
+
+    int numRequests = 48;
+    Resource inputData = new FileSystemResource(
+      "../cpf-war-app/src/main/webapp/docs/sample/NTS-500000-by-name.csv");
+
+    String jobId = client.createJobWithStructuredMultipleRequestsResource(
+      "MapTileByTileId", jobParameters, numRequests, inputData,
+      "text/csv", "application/json");
+    try {
+      List&lt;Map&lt;String, Object&gt;&gt; results = client.getJobStructuredResults(
+        jobId, 30000);
+      for (Map&lt;String, Object&gt; result : results) {
+        System.out.println(result);
+      }
+    } finally {
+      client.closeJob(jobId);
+    }
+  } finally {
+    client.closeConnection();
+  }</pre><div class="title">Parameters</div>
+<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Parameter</th><th>Type</th><th class="description">Description</th></tr>
+</thead>
+<tbody><tr><td class="name">businessApplicationName</td>
+<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
+<td class="description">The name of the business application.</td>
+</tr>
+<tr><td class="name">jobParameters</td>
+<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/util/Map.html?is-external=true">Map</a>&lt;<a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a>, ? extends <a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true">Object</a>&gt;</td>
+<td class="description">The global job parameters.</td>
+</tr>
+<tr><td class="name">numRequests</td>
+<td class="type">int</td>
+<td class="description">The number of requests in the input data.</td>
+</tr>
+<tr><td class="name">inputData</td>
+<td class="type">org.springframework.core.io.Resource</td>
+<td class="description">The resource containing the request input data.</td>
+</tr>
+<tr><td class="name">inputDataContentType</td>
+<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
+<td class="description">The <a href="../../fileFormats.html">media type</a> used for all the
+ requests.</td>
+</tr>
+<tr><td class="name">resultContentType</td>
+<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
+<td class="description">The <a href="../../fileFormats.html">media type</a> to return the result data
+ using.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="title">Return</div>
+<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody><tr><td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
+<td class="description">The job id (URL) of the created job.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.client.api.CpfClient.createJobWithStructuredMultipleRequestsUrl-String-Map-int-String-String-String" title="createJobWithStructuredMultipleRequestsUrl"><a name="ca.bc.gov.open.cpf.client.api.CpfClient.createJobWithStructuredMultipleRequestsUrl(String,Map,int,String,String,String)"><code>String </code>
+createJobWithStructuredMultipleRequestsUrl<code>(String businessApplicationName, Map jobParameters, int numRequests, String inputDataUrl, String inputDataContentType, String resultContentType)</code>
+</a>
+</h3>
+<div class="content"><p>Create a new job on the CPF server for a business application that
+ accepts <a href="../../structuredData.html">structured input data</a>
+ using the <a href="../rest-api/#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.createJobWithMultipleRequests">Create Job With Multiple Requests</a> REST API.</p>
+
+ <p>The content of the structured in data for each request is specified using
+ a URL to the data on a publicly accessible HTTP server.
+ The data must be encoded using the <a href="../../fileFormats.html">file format</a> specified by
+ the inputDataContentType. The data must contain one record containing the request parameters
+ for each request to be processed by the business application.</p>
+
+ <p>The following code fragment shows an example of using the API.</p>
+
+ <pre class="prettyprint language-java">  String url = "https://apps.gov.bc.ca/pub/cpf";
+  String consumerKey = "cpftest";
+  String consumerSecret = "cpftest";
+  CpfClient client = new CpfClient(url, consumerKey, consumerSecret);
+  try {
+    Map&lt;String, Object&gt; jobParameters = new HashMap&lt;String, Object&gt;();
+    jobParameters.put("mapGridName", "NTS 1:500 000");
+
+    int numRequests = 48;
+
+    String inputDataUrl = "https://apps.gov.bc.ca/pub/cpf/docs/sample/NTS-500000-by-name.csv";
+    String jobId = client.createJobWithStructuredMultipleRequestsUrl(
+      "MapTileByTileId", jobParameters, numRequests, inputDataUrl,
+      "text/csv", "application/json");
+    try {
+      List&lt;Map&lt;String, Object&gt;&gt; results = client.getJobStructuredResults(
+        jobId, 30000);
+      for (Map&lt;String, Object&gt; result : results) {
+        System.out.println(result);
+      }
+    } finally {
+      client.closeJob(jobId);
+    }
+  } finally {
+    client.closeConnection();
+  }</pre><div class="title">Parameters</div>
+<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Parameter</th><th>Type</th><th class="description">Description</th></tr>
+</thead>
+<tbody><tr><td class="name">businessApplicationName</td>
+<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
+<td class="description">The name of the business application.</td>
+</tr>
+<tr><td class="name">jobParameters</td>
+<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/util/Map.html?is-external=true">Map</a>&lt;<a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a>, ? extends <a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true">Object</a>&gt;</td>
+<td class="description">The global job parameters.</td>
+</tr>
+<tr><td class="name">numRequests</td>
+<td class="type">int</td>
+<td class="description">The number of requests in the input data.</td>
+</tr>
+<tr><td class="name">inputDataUrl</td>
+<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
+<td class="description">The URL containing the request input data.</td>
+</tr>
+<tr><td class="name">inputDataContentType</td>
+<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
+<td class="description">The <a href="../../fileFormats.html">media type</a> used for all the
+ requests.</td>
+</tr>
+<tr><td class="name">resultContentType</td>
+<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
+<td class="description">The <a href="../../fileFormats.html">media type</a> to return the result data
+ using.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="title">Return</div>
+<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody><tr><td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
+<td class="description">The job id (URL) of the created job.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.client.api.CpfClient.createJobWithStructuredSingleRequest-String-Map-String" title="createJobWithStructuredSingleRequest"><a name="ca.bc.gov.open.cpf.client.api.CpfClient.createJobWithStructuredSingleRequest(String,Map,String)"><code>String </code>
+createJobWithStructuredSingleRequest<code>(String businessApplicationName, Map parameters, String resultContentType)</code>
+</a>
+</h3>
+<div class="content"><p>Create a new job on the CPF server for a business application that
+ accepts <a href="../../structuredData.html">structured input data</a>
+ using the <a href="../rest-api/#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.createJobWithMultipleRequests">Create Job With Multiple Requests</a> REST API.</p>
+
+ <p>The job and request parameters for the single request in the job are specified using a
+ map of parameter values.</p>
+
+ <p>The following code fragment shows an example of using the API.</p>
+
+ <pre class="prettyprint language-java">  String url = "https://apps.gov.bc.ca/pub/cpf";
+  String consumerKey = "cpftest";
+  String consumerSecret = "cpftest";
+  CpfClient client = new CpfClient(url, consumerKey, consumerSecret);
+  try {
+    Map&lt;String, Object&gt; parameters = new HashMap&lt;String, Object&gt;();
+    parameters.put("mapGridName", "BCGS 1:20 000");
+    parameters.put("mapTileId", "92j025");
+    String jobId = client.createJobWithStructuredSingleRequest(
+      "MapTileByTileId", parameters, "application/json");
+    try {
+      List&lt;Map&lt;String, Object&gt;&gt; results = client.getJobStructuredResults(
+        jobId, 5000);
+      for (Map&lt;String, Object&gt; result : results) {
+        System.out.println(result);
+      }
+    } finally {
+      client.closeJob(jobId);
+    }
+  } finally {
+    client.closeConnection();
+  }</pre><div class="title">Parameters</div>
+<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Parameter</th><th>Type</th><th class="description">Description</th></tr>
+</thead>
+<tbody><tr><td class="name">businessApplicationName</td>
+<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
+<td class="description">The name of the business application.</td>
+</tr>
+<tr><td class="name">parameters</td>
+<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/util/Map.html?is-external=true">Map</a>&lt;<a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a>, ? extends <a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true">Object</a>&gt;</td>
+<td class="description">The job and request parameters.</td>
+</tr>
+<tr><td class="name">resultContentType</td>
+<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
+<td class="description">The <a href="../../fileFormats.html">media type</a> to return the result data using.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="title">Return</div>
+<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody><tr><td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
+<td class="description">The job id (URL) of the created job.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.client.api.CpfClient.getBusinessApplicationInstantSpecification-String" title="getBusinessApplicationInstantSpecification"><a name="ca.bc.gov.open.cpf.client.api.CpfClient.getBusinessApplicationInstantSpecification(String)"><code>Map </code>
+getBusinessApplicationInstantSpecification<code>(String businessApplicationName)</code>
+</a>
+</h3>
+<div class="content"><p>Get the specification of the instant execution service for a business application
+ using the <a href="../rest-api/#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplicationsInstant">Get Business Applications Instant</a> REST API.</p>
+
+ <p>The following code fragment shows an example of using the API.</p>
+
+ <pre class="prettyprint language-java">  String url = "https://apps.gov.bc.ca/pub/cpf";
+  String consumerKey = "cpftest";
+  String consumerSecret = "cpftest";
+  CpfClient client = new CpfClient(url, consumerKey, consumerSecret);
+  try {
+    Map&lt;String, Object&gt; specification = client.getBusinessApplicationInstantSpecification(
+      "MapTileByTileId");
+    System.out.println(specification);
+   } finally {
+    client.closeConnection();
+  }</pre><div class="title">Parameters</div>
+<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Parameter</th><th>Type</th><th class="description">Description</th></tr>
+</thead>
+<tbody><tr><td class="name">businessApplicationName</td>
+<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
+<td class="description">The name of the business application.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="title">Return</div>
 <div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Type</th><th>Description</th></tr>
 </thead>
 <tbody><tr><td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/util/Map.html?is-external=true">Map</a>&lt;<a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a>, <a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true">Object</a>&gt;</td>
-<td class="description">The additional attributes about the user.</td>
+<td class="description">The map containing the business application specification.</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
 </div>
-<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.plugin.api.security.SecurityService.getUserClass" title="getUserClass"><a name="ca.bc.gov.open.cpf.plugin.api.security.SecurityService.getUserClass()"><code>String </code>
-getUserClass<code>()</code>
+<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.client.api.CpfClient.getBusinessApplicationMultipleSpecification-String" title="getBusinessApplicationMultipleSpecification"><a name="ca.bc.gov.open.cpf.client.api.CpfClient.getBusinessApplicationMultipleSpecification(String)"><code>Map </code>
+getBusinessApplicationMultipleSpecification<code>(String businessApplicationName)</code>
 </a>
 </h3>
-<div class="content"><p>Get the classification (type) of user account.</p><div class="title">Return</div>
-<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Type</th><th>Description</th></tr>
-</thead>
-<tbody><tr><td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
-<td class="description">The classification (type) of user account.</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.plugin.api.security.SecurityService.getUsername" title="getUsername"><a name="ca.bc.gov.open.cpf.plugin.api.security.SecurityService.getUsername()"><code>String </code>
-getUsername<code>()</code>
-</a>
-</h3>
-<div class="content"><p>Get the login username of the user.</p><div class="title">Return</div>
-<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Type</th><th>Description</th></tr>
-</thead>
-<tbody><tr><td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
-<td class="description">The login username of the user.</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.plugin.api.security.SecurityService.isInGroup-String" title="isInGroup"><a name="ca.bc.gov.open.cpf.plugin.api.security.SecurityService.isInGroup(String)"><code>boolean </code>
-isInGroup<code>(String groupName)</code>
-</a>
-</h3>
-<div class="content"><p>Check to see if the user is a member of the named group.</p>
- 
- <figure><pre class="prettyprint language-java">public void execute() {
-  if (securityService.isInGroup("DEMO_PARTNER")) {
-    // Perform the request
-  } else {
-    throw new SecurityException("User is not a member of the DEMO_PARTNER_GROUP");
-  }
-}</pre></figure><div class="title">Parameters</div>
+<div class="content"><p>Get the specification of the create job with multiple requests service for a business application
+ using the <a href="../rest-api/#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplicationsMultiple">Get Business Applications Multiple</a> REST API.</p>
+
+ <p>The following code fragment shows an example of using the API.</p>
+
+ <pre class="prettyprint language-java">  String url = "https://apps.gov.bc.ca/pub/cpf";
+  String consumerKey = "cpftest";
+  String consumerSecret = "cpftest";
+  CpfClient client = new CpfClient(url, consumerKey, consumerSecret);
+  try {
+    Map&lt;String, Object&gt; specification = client.getBusinessApplicationMultipleSpecification(
+      "MapTileByTileId");
+    System.out.println(specification);
+   } finally {
+    client.closeConnection();
+  }</pre><div class="title">Parameters</div>
 <div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Parameter</th><th>Type</th><th class="description">Description</th></tr>
 </thead>
-<tbody><tr><td class="name">groupName</td>
+<tbody><tr><td class="name">businessApplicationName</td>
 <td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
-<td class="description">The group name.</td>
+<td class="description">The name of the business application.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="title">Return</div>
+<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody><tr><td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/util/Map.html?is-external=true">Map</a>&lt;<a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a>, <a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true">Object</a>&gt;</td>
+<td class="description">The map containing the business application specification.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.client.api.CpfClient.getBusinessApplicationNames" title="getBusinessApplicationNames"><a name="ca.bc.gov.open.cpf.client.api.CpfClient.getBusinessApplicationNames()"><code>List </code>
+getBusinessApplicationNames<code>()</code>
+</a>
+</h3>
+<div class="content"><p>Get the list of business application names a user has access to
+ using the <a href="../rest-api/#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplications">Get Business Applications</a> REST API.</p>
+
+ <p>The following code fragment shows an example of using the API.</p>
+
+ <pre class="prettyprint language-java">  String url = "https://apps.gov.bc.ca/pub/cpf";
+  String consumerKey = "cpftest";
+  String consumerSecret = "cpftest";
+  CpfClient client = new CpfClient(url, consumerKey, consumerSecret);
+  try {
+    &lt;Resource&gt; businessApplicationNames = client.getBusinessApplicationNames();
+    for (String businessApplicationName : businessApplicationNames) {
+      System.out.println(businessApplicationName);
+    }
+  } finally {
+    client.closeConnection();
+  }</pre><div class="title">Return</div>
+<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody><tr><td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/util/List.html?is-external=true">List</a>&lt;<a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a>&gt;</td>
+<td class="description">The list of business application names.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.client.api.CpfClient.getBusinessApplicationSingleSpecification-String" title="getBusinessApplicationSingleSpecification"><a name="ca.bc.gov.open.cpf.client.api.CpfClient.getBusinessApplicationSingleSpecification(String)"><code>Map </code>
+getBusinessApplicationSingleSpecification<code>(String businessApplicationName)</code>
+</a>
+</h3>
+<div class="content"><p>Get the specification of the create job with a single request service for a business application
+ using the <a href="../rest-api/#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplicationsSingle">Get Business Applications Single</a> REST API.</p>
+
+ <p>The following code fragment shows an example of using the API.</p>
+
+ <pre class="prettyprint language-java">  String url = "https://apps.gov.bc.ca/pub/cpf";
+  String consumerKey = "cpftest";
+  String consumerSecret = "cpftest";
+  CpfClient client = new CpfClient(url, consumerKey, consumerSecret);
+  try {
+    Map&lt;String, Object&gt; specification = client.getBusinessApplicationSingleSpecification(
+      "MapTileByTileId");
+    System.out.println(specification);
+   } finally {
+    client.closeConnection();
+  }</pre><div class="title">Parameters</div>
+<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Parameter</th><th>Type</th><th class="description">Description</th></tr>
+</thead>
+<tbody><tr><td class="name">businessApplicationName</td>
+<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
+<td class="description">The name of the business application.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="title">Return</div>
+<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody><tr><td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/util/Map.html?is-external=true">Map</a>&lt;<a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a>, <a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true">Object</a>&gt;</td>
+<td class="description">The map containing the business application specification.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.client.api.CpfClient.getJobErrorResults-String-long" title="getJobErrorResults"><a name="ca.bc.gov.open.cpf.client.api.CpfClient.getJobErrorResults(String,long)"><code>List </code>
+getJobErrorResults<code>(String jobIdUrl, long maxWait)</code>
+</a>
+</h3>
+<div class="content"><p>Get the list of error results for a job using the
+ using the <a href="../rest-api/#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getUsersJobsResults">Get Users Job Results</a>  and
+ <a href="../rest-api/#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getUsersJobsResult">Get Users Job Result</a> REST API.</p>
+
+ <p>Each error record is a map containing the following fields.</p>
+
+ <div class="simpleDataTable">
+   <table>
+     <thead>
+       <tr>
+         <th>Field Name</th>
+         <th>Description</th>
+     </thead>
+     <tbody>
+       <tr>
+         <th>sequenceNumber</th>
+         <td>The sequence number of the request that caused the error.</td>
+       </tr>
+       <tr>
+         <th>errorCode</th>
+         <td>The <a href="#ca.bc.gov.open.cpf.client.api.ErrorCode">Error code</a>.</td>
+       </tr>
+       <tr>
+         <th>errorMessage</th>
+         <td>A more detailed message describing the error code.</td>
+       </tr>
+     </tbody>
+   </table>
+ </div>
+
+ <p><b>NOTE: This method loads all the error results into memory. If a larger number of
+ errors were generated use the <a href="#ca.bc.gov.open.cpf.client.api.CpfClient.processJobErrorResults(String,long,ca.bc.gov.open.cpf.client.api.Callback)">processJobErrorResults</a>
+ method.</b></p>
+
+ <p>The following code fragment shows an example of using the API.</p>
+
+ <pre class="prettyprint language-java">  String url = "https://apps.gov.bc.ca/pub/cpf";
+  String consumerKey = "cpftest";
+  String consumerSecret = "cpftest";
+  CpfClient client = new CpfClient(url, consumerKey, consumerSecret);
+  try {
+    Map&lt;String, Object&gt; parameters = new HashMap&lt;String, Object&gt;();
+    parameters.put("mapGridName", "BCGS 1:20 000");
+    parameters.put("mapTileId", "INVALID");
+    String jobId = client.createJobWithStructuredSingleRequest(
+      "MapTileByTileId", parameters, "application/json");
+    try {
+      List&lt;Map&lt;String, Object&gt;&gt; results = client.getJobErrorResults(
+        jobId, 2000);
+      for (Map&lt;String, Object&gt; error : results) {
+        System.out.println(error);
+      }
+    } finally {
+      client.closeJob(jobId);
+    }
+  } finally {
+    client.closeConnection();
+  }</pre><div class="title">Parameters</div>
+<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Parameter</th><th>Type</th><th class="description">Description</th></tr>
+</thead>
+<tbody><tr><td class="name">jobIdUrl</td>
+<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
+<td class="description">The job id URL.</td>
+</tr>
+<tr><td class="name">maxWait</td>
+<td class="type">long</td>
+<td class="description">The maximum number of milliseconds to wait for the job to be
+ completed.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="title">Return</div>
+<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody><tr><td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/util/List.html?is-external=true">List</a>&lt;<a class="" href="http://docs.oracle.com/javase/6/docs/api/java/util/Map.html?is-external=true">Map</a>&lt;<a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a>, <a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true">Object</a>&gt;&gt;</td>
+<td class="description">The reader maps containing the result fields.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.client.api.CpfClient.getJobResultFileList-String-long" title="getJobResultFileList"><a name="ca.bc.gov.open.cpf.client.api.CpfClient.getJobResultFileList(String,long)"><code>List </code>
+getJobResultFileList<code>(String jobIdUrl, long maxWait)</code>
+</a>
+</h3>
+<div class="content"><p>Get the list of result file descriptions for a job using the
+ using the <a href="../rest-api/#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getUsersJobsResults">Get Users Job Results</a> REST API.</p>
+
+ <p>Each result file description contains the following fields.</p>
+
+ <div class="simpleDataTable">
+   <table>
+     <thead>
+       <tr>
+         <th>Field Name</th>
+         <th>Description</th>
+     </thead>
+     <tbody>
+       <tr>
+         <th>resourceUri</th>
+         <td>The URL the result file can be downloaded from.</td>
+       </tr>
+       <tr>
+         <th>title</th>
+         <td>A title of the result file (e.g. Batch Job 913 result 384).</td>
+       </tr>
+       <tr>
+         <th>batchJobResultType</th>
+         <td>The type of result file structuredResultData, opaqueResultData, or errorResultData.</td>
+       </tr>
+       <tr>
+         <th>batchJobResultContentType</th>
+         <td>The <a href="../../fileFormats.html">media type</a> of the data in the result file.</td>
+       </tr>
+     </tbody>
+   </table>
+ </div>
+
+ <p>The following code fragment shows an example of using the API.</p>
+
+ <pre class="prettyprint language-java">  String url = "https://apps.gov.bc.ca/pub/cpf";
+  String consumerKey = "cpftest";
+  String consumerSecret = "cpftest";
+  CpfClient client = new CpfClient(url, consumerKey, consumerSecret);
+  try {
+    Map&lt;String, Object&gt; parameters = new HashMap&lt;String, Object&gt;();
+    parameters.put("mapGridName", "BCGS 1:20 000");
+    parameters.put("mapTileId", "INVALID");
+    String jobId = client.createJobWithStructuredSingleRequest(
+      "MapTileByTileId", parameters, "application/json");
+    try {
+      List&lt;Map&lt;String, Object&gt;&gt; files = client.getJobResultFileList(jobId, 2000);
+      for (Map&lt;String, Object&gt; file : files) {
+        System.out.println(file);
+      }
+    } finally {
+      client.closeJob(jobId);
+    }
+  } finally {
+    client.closeConnection();
+  }</pre><div class="title">Parameters</div>
+<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Parameter</th><th>Type</th><th class="description">Description</th></tr>
+</thead>
+<tbody><tr><td class="name">jobIdUrl</td>
+<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
+<td class="description">The job id URL.</td>
+</tr>
+<tr><td class="name">maxWait</td>
+<td class="type">long</td>
+<td class="description">The maximum number of milliseconds to wait for the job to be
+ completed.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="title">Return</div>
+<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody><tr><td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/util/List.html?is-external=true">List</a>&lt;<a class="" href="http://docs.oracle.com/javase/6/docs/api/java/util/Map.html?is-external=true">Map</a>&lt;<a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a>, <a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true">Object</a>&gt;&gt;</td>
+<td class="description">The list of maps that describe each of the result files.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.client.api.CpfClient.getJobStatus-String" title="getJobStatus"><a name="ca.bc.gov.open.cpf.client.api.CpfClient.getJobStatus(String)"><code>Map </code>
+getJobStatus<code>(String jobUrl)</code>
+</a>
+</h3>
+<div class="content"><p>Get the <a href="../../jobStatus.html">job status</a> using the
+ <a href="../rest-api/#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getUsersJobsInfo">Get Users Jobs Info</a> REST API.</p>
+
+ <p>The following code fragment shows an example of using the API.</p>
+
+ <pre class="prettyprint language-java">  String url = "https://apps.gov.bc.ca/pub/cpf";
+  String consumerKey = "cpftest";
+  String consumerSecret = "cpftest";
+  CpfClient client = new CpfClient(url, consumerKey, consumerSecret);
+  try {
+    Map&lt;String, Object&gt; parameters = new HashMap&lt;String, Object&gt;();
+    parameters.put("mapGridName", "BCGS 1:20 000");
+    parameters.put("mapTileId", "INVALID");
+    String jobId = client.createJobWithStructuredSingleRequest(
+      "MapTileByTileId", parameters, "application/json");
+    try {
+      Map&lt;String, Object&gt; status = client.getJobStatus(jobId);
+      System.out.println(status);
+    } finally {
+      client.closeJob(jobId);
+    }
+  } finally {
+    client.closeConnection();
+  }</pre><div class="title">Parameters</div>
+<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Parameter</th><th>Type</th><th class="description">Description</th></tr>
+</thead>
+<tbody><tr><td class="name">jobUrl</td>
+<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
+<td class="description">WS URL of the job.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="title">Return</div>
+<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody><tr><td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/util/Map.html?is-external=true">Map</a>&lt;<a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a>, <a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true">Object</a>&gt;</td>
+<td class="description">A map containing the <a href="../../jobStatus.html">job status</a>.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.client.api.CpfClient.getJobStructuredResults-String-long" title="getJobStructuredResults"><a name="ca.bc.gov.open.cpf.client.api.CpfClient.getJobStructuredResults(String,long)"><code>List </code>
+getJobStructuredResults<code>(String jobIdUrl, long maxWait)</code>
+</a>
+</h3>
+<div class="content"><p>Get the list of structured data results for a job using the
+ using the <a href="../rest-api/#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getUsersJobsResults">Get Users Job Results</a>  and
+ <a href="../rest-api/#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getUsersJobsResult">Get Users Job Result</a> REST API.</p>
+
+
+ <p>Each structured data record is a map containing the following fields.</p>
+
+ <div class="simpleDataTable">
+   <table>
+     <thead>
+       <tr>
+         <th>Field Name</th>
+         <th>Description</th>
+     </thead>
+     <tbody>
+       <tr>
+         <th>sequenceNumber</th>
+         <td>The sequence number of the request that caused the error.</td>
+       </tr>
+       <tr>
+         <th>resultNumber</th>
+         <td>If the business application returned multiple results for a single request there
+         will be one record per result with an incrementing result number.</td>
+       </tr>
+       <tr>
+         <th><i>resultFieldName</i></th>
+         <td>One field for each of the business application specific result fields.</td>
+       </tr>
+     </tbody>
+   </table>
+ </div>
+
+ <p><b>NOTE: This method loads all the structured data results into memory. If a larger number of
+ results were generated use the <a href="#ca.bc.gov.open.cpf.client.api.CpfClient.processJobStructuredResults(String,long,ca.bc.gov.open.cpf.client.api.Callback)">processJobErrorResults</a>
+ method.</b></p>
+
+ <p>The following code fragment shows an example of using the API.</p>
+
+ <pre class="prettyprint language-java">  String url = "https://apps.gov.bc.ca/pub/cpf";
+  String consumerKey = "cpftest";
+  String consumerSecret = "cpftest";
+  CpfClient client = new CpfClient(url, consumerKey, consumerSecret);
+  try {
+    Map&lt;String, Object&gt; parameters = new HashMap&lt;String, Object&gt;();
+    parameters.put("mapGridName", "BCGS 1:20 000");
+    parameters.put("mapTileId", "92j025");
+    String jobId = client.createJobWithStructuredSingleRequest(
+      "MapTileByTileId", parameters, "application/json");
+    try {
+      List&lt;Map&lt;String, Object&gt;&gt; results = client.getJobStructuredResults(jobId, 2000);
+      for (Map&lt;String, Object&gt; result : results) {
+        System.out.println(result);
+      }
+    } finally {
+      client.closeJob(jobId);
+    }
+  } finally {
+    client.closeConnection();
+  }</pre><div class="title">Parameters</div>
+<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Parameter</th><th>Type</th><th class="description">Description</th></tr>
+</thead>
+<tbody><tr><td class="name">jobIdUrl</td>
+<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
+<td class="description">The job id (URL) of the job.</td>
+</tr>
+<tr><td class="name">maxWait</td>
+<td class="type">long</td>
+<td class="description">The maximum number of milliseconds to wait for the job to be completed.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="title">Return</div>
+<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody><tr><td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/util/List.html?is-external=true">List</a>&lt;<a class="" href="http://docs.oracle.com/javase/6/docs/api/java/util/Map.html?is-external=true">Map</a>&lt;<a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a>, <a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true">Object</a>&gt;&gt;</td>
+<td class="description">The list of results.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.client.api.CpfClient.getUserJobIdUrls" title="getUserJobIdUrls"><a name="ca.bc.gov.open.cpf.client.api.CpfClient.getUserJobIdUrls()"><code>List </code>
+getUserJobIdUrls<code>()</code>
+</a>
+</h3>
+<div class="content"><p>Get the job id URLs for all the user's jobs using the
+ <a href="../rest-api/#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getUsersJobs">Get Users Jobs</a> REST API.</p>
+
+ <p>The following code fragment shows an example of using the API.</p>
+
+ <pre class="prettyprint language-java">  String url = "https://apps.gov.bc.ca/pub/cpf";
+  String consumerKey = "cpftest";
+  String consumerSecret = "cpftest";
+  CpfClient client = new CpfClient(url, consumerKey, consumerSecret);
+  try {
+    Map&lt;String, Object&gt; parameters = new HashMap&lt;String, Object&gt;();
+    parameters.put("mapGridName", "BCGS 1:20 000");
+    parameters.put("mapTileId", "INVALID");
+    String jobId = client.createJobWithStructuredSingleRequest(
+      "MapTileByTileId", parameters, "application/json");
+    try {
+      &lt;Resource&gt; jobIds = client.getUserJobIdUrls();
+      for (String jobIdUrl : jobIds) {
+        System.out.println(jobIdUrl);
+      }
+      if (!jobIds.contains(jobId)) {
+        System.err.println("Missing job " + jobId);
+      }
+    } finally {
+      client.closeJob(jobId);
+    }
+  } finally {
+    client.closeConnection();
+  }</pre><div class="title">Return</div>
+<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody><tr><td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/util/List.html?is-external=true">List</a>&lt;<a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a>&gt;</td>
+<td class="description">The list of job id URLs.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.client.api.CpfClient.getUserJobIdUrls-String" title="getUserJobIdUrls"><a name="ca.bc.gov.open.cpf.client.api.CpfClient.getUserJobIdUrls(String)"><code>List </code>
+getUserJobIdUrls<code>(String businessApplicationName)</code>
+</a>
+</h3>
+<div class="content"><p>Get the job id URLs to the user's jobs for a business application using the
+ <a href="../rest-api/#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getUsersBusinessApplicationsJobs">Get Business Applications Users Jobs</a> REST API.</p>
+ Get the list of all job id URLs the user created.
+
+ <p>The following code fragment shows an example of using the API.</p>
+
+ <pre class="prettyprint language-java">  String url = "https://apps.gov.bc.ca/pub/cpf";
+  String consumerKey = "cpftest";
+  String consumerSecret = "cpftest";
+  CpfClient client = new CpfClient(url, consumerKey, consumerSecret);
+  try {
+    Map&lt;String, Object&gt; parameters = new HashMap&lt;String, Object&gt;();
+    parameters.put("mapGridName", "BCGS 1:20 000");
+    parameters.put("mapTileId", "INVALID");
+    String jobId = client.createJobWithStructuredSingleRequest(
+      "MapTileByTileId", parameters, "application/json");
+    try {
+      &lt;Resource&gt; jobIds = client.getUserJobIdUrls("MapTileByTileId");
+      for (String jobIdUrl : jobIds) {
+        System.out.println(jobIdUrl);
+      }
+      if (!jobIds.contains(jobId)) {
+        System.err.println("Missing job " + jobId);
+      }
+    } finally {
+      client.closeJob(jobId);
+    }
+  } finally {
+    client.closeConnection();
+  }</pre><div class="title">Parameters</div>
+<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Parameter</th><th>Type</th><th class="description">Description</th></tr>
+</thead>
+<tbody><tr><td class="name">businessApplicationName</td>
+<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
+<td class="description">The name of the business application.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="title">Return</div>
+<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody><tr><td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/util/List.html?is-external=true">List</a>&lt;<a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a>&gt;</td>
+<td class="description">The list of job id URLs.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.client.api.CpfClient.isJobCompleted-String-long" title="isJobCompleted"><a name="ca.bc.gov.open.cpf.client.api.CpfClient.isJobCompleted(String,long)"><code>boolean </code>
+isJobCompleted<code>(String jobIdUrl, long maxWait)</code>
+</a>
+</h3>
+<div class="content"><p>Check the <a href="../../jobStatus.html">job</a> status to see if it has been completed using the
+ <a href="../rest-api/#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getUsersJobsInfo">Get Users Jobs Info</a> REST API.</p>
+
+ <p>If the job has not been completed within the maxWait number of milliseconds false will be
+ returned.</p>
+
+ <p>The following code fragment shows an example of using the API.</p>
+
+ <pre class="prettyprint language-java">  String url = "https://apps.gov.bc.ca/pub/cpf";
+  String consumerKey = "cpftest";
+  String consumerSecret = "cpftest";
+  CpfClient client = new CpfClient(url, consumerKey, consumerSecret);
+  try {
+    Map&lt;String, Object&gt; parameters = new HashMap&lt;String, Object&gt;();
+    parameters.put("mapGridName", "BCGS 1:20 000");
+    parameters.put("mapTileId", "INVALID");
+    String jobId = client.createJobWithStructuredSingleRequest(
+      "MapTileByTileId", parameters, "application/json");
+    try {
+      boolean completed = client.isJobCompleted(jobId, 2000);
+      if (completed) {
+        System.out.println("Job Completed");
+      }
+    } finally {
+      client.closeJob(jobId);
+    }
+  } finally {
+    client.closeConnection();
+  }</pre><div class="title">Parameters</div>
+<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Parameter</th><th>Type</th><th class="description">Description</th></tr>
+</thead>
+<tbody><tr><td class="name">jobIdUrl</td>
+<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
+<td class="description">The job id URL.</td>
+</tr>
+<tr><td class="name">maxWait</td>
+<td class="type">long</td>
+<td class="description">The maximum number of milliseconds to wait.</td>
 </tr>
 </tbody>
 </table>
@@ -1766,7 +1516,220 @@ isInGroup<code>(String groupName)</code>
 <div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Type</th><th>Description</th></tr>
 </thead>
 <tbody><tr><td class="type">boolean</td>
-<td class="description">True if the user is a member of the group, false otherwise.</td>
+<td class="description">True if the job was completed, false otherwise.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.client.api.CpfClient.processJobErrorResults-String-long-ca.bc.gov.open.cpf.client.api.Callback" title="processJobErrorResults"><a name="ca.bc.gov.open.cpf.client.api.CpfClient.processJobErrorResults(String,long,ca.bc.gov.open.cpf.client.api.Callback)"><code>int </code>
+processJobErrorResults<code>(String jobIdUrl, long maxWait, Callback callback)</code>
+</a>
+</h3>
+<div class="content"><p>Process the list of error results for a job using the
+ using the <a href="../rest-api/#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getUsersJobsResults">Get Users Job Results</a>  and
+ <a href="../rest-api/#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getUsersJobsResult">Get Users Job Result</a> REST API.</p>
+
+ <p>Each error record is a map containing the following fields.</p>
+
+ <div class="simpleDataTable">
+   <table>
+     <thead>
+       <tr>
+         <th>Field Name</th>
+         <th>Description</th>
+     </thead>
+     <tbody>
+       <tr>
+         <th>sequenceNumber</th>
+         <td>The sequence number of the request that caused the error.</td>
+       </tr>
+       <tr>
+         <th>errorCode</th>
+         <td>The <a href="#ca.bc.gov.open.cpf.client.api.ErrorCode">Error code</a>.</td>
+       </tr>
+       <tr>
+         <th>errorMessage</th>
+         <td>A more detailed message describing the error code.</td>
+       </tr>
+     </tbody>
+   </table>
+ </div>
+
+ <p>The callback method will be invoked for each record in the error file.</p>
+
+ <p>The following code fragment shows an example of using the API.</p>
+
+ <pre class="prettyprint language-java">  String url = "https://apps.gov.bc.ca/pub/cpf";
+  String consumerKey = "cpftest";
+  String consumerSecret = "cpftest";
+  CpfClient client = new CpfClient(url, consumerKey, consumerSecret);
+  try {
+    Map&lt;String, Object&gt; parameters = new HashMap&lt;String, Object&gt;();
+    parameters.put("mapGridName", "BCGS 1:20 000");
+    parameters.put("mapTileId", "INVALID");
+    String jobId = client.createJobWithStructuredSingleRequest(
+      "MapTileByTileId", parameters, "application/json");
+    try {
+      int numErrors = client.processJobErrorResults(jobId, 10000,
+        new Callback&lt;Map&lt;String, Object&gt;&gt;() {
+          public void process(Map&lt;String, Object&gt; error) {
+            System.out.println(error);
+          }
+        });
+      System.out.println(numErrors);
+    } finally {
+      client.closeJob(jobId);
+    }
+  } finally {
+    client.closeConnection();
+  }</pre><div class="title">Parameters</div>
+<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Parameter</th><th>Type</th><th class="description">Description</th></tr>
+</thead>
+<tbody><tr><td class="name">jobIdUrl</td>
+<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
+<td class="description">The job id (URL) of the job.</td>
+</tr>
+<tr><td class="name">maxWait</td>
+<td class="type">long</td>
+<td class="description">The maximum number of milliseconds to wait for the job to be completed.</td>
+</tr>
+<tr><td class="name">callback</td>
+<td class="type"><a class="" href="#ca.bc.gov.open.cpf.client.api.Callback">Callback</a>&lt;<a class="" href="http://docs.oracle.com/javase/6/docs/api/java/util/Map.html?is-external=true">Map</a>&lt;<a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a>, <a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true">Object</a>&gt;&gt;</td>
+<td class="description">The call back in the client application that will be called for each error record.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="title">Return</div>
+<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody><tr><td class="type">int</td>
+<td class="description">The number of error results processed.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.client.api.CpfClient.processJobStructuredResults-String-long-ca.bc.gov.open.cpf.client.api.Callback" title="processJobStructuredResults"><a name="ca.bc.gov.open.cpf.client.api.CpfClient.processJobStructuredResults(String,long,ca.bc.gov.open.cpf.client.api.Callback)"><code>int </code>
+processJobStructuredResults<code>(String jobIdUrl, long maxWait, Callback callback)</code>
+</a>
+</h3>
+<div class="content"><p>Process the list of structured data results for a job using the
+ using the <a href="../rest-api/#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getUsersJobsResults">Get Users Job Results</a>  and
+ <a href="../rest-api/#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getUsersJobsResult">Get Users Job Result</a> REST API.</p>
+
+ <p>Each structured record is a map with the fields sequenceNumber (to map back
+ to the input request), resultNumber (if multiple results were returned for a single request
+ and the business application specific result fields.</p>
+
+ <p>The callback method will be invoked for each record in the structured result data file.</p>
+
+ <p>The following code fragment shows an example of using the API.</p>
+
+ <pre class="prettyprint language-java">  String url = "https://apps.gov.bc.ca/pub/cpf";
+  String consumerKey = "cpftest";
+  String consumerSecret = "cpftest";
+  CpfClient client = new CpfClient(url, consumerKey, consumerSecret);
+  try {
+    Map&lt;String, Object&gt; parameters = new HashMap&lt;String, Object&gt;();
+    parameters.put("mapGridName", "BCGS 1:20 000");
+    parameters.put("mapTileId", "92j025");
+    String jobId = client.createJobWithStructuredSingleRequest(
+      "MapTileByTileId", parameters, "application/json");
+    try {
+      int numResults = client.processJobStructuredResults(jobId, 10000,
+        new Callback&lt;Map&lt;String, Object&gt;&gt;() {
+          public void process(Map&lt;String, Object&gt; result) {
+            System.out.println(result);
+          }
+        });
+      System.out.println(numResults);
+    } finally {
+      client.closeJob(jobId);
+    }
+  } finally {
+    client.closeConnection();
+  }</pre><div class="title">Parameters</div>
+<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Parameter</th><th>Type</th><th class="description">Description</th></tr>
+</thead>
+<tbody><tr><td class="name">jobIdUrl</td>
+<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
+<td class="description">The job id (URL) of the job.</td>
+</tr>
+<tr><td class="name">maxWait</td>
+<td class="type">long</td>
+<td class="description">The maximum number of milliseconds to wait for the job to be completed.</td>
+</tr>
+<tr><td class="name">callback</td>
+<td class="type"><a class="" href="#ca.bc.gov.open.cpf.client.api.Callback">Callback</a>&lt;<a class="" href="http://docs.oracle.com/javase/6/docs/api/java/util/Map.html?is-external=true">Map</a>&lt;<a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a>, <a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true">Object</a>&gt;&gt;</td>
+<td class="description">The call back in the client application that will be called for each result record.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="title">Return</div>
+<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Type</th><th>Description</th></tr>
+</thead>
+<tbody><tr><td class="type">int</td>
+<td class="description">The number of results processed.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="javaMethod"><h3 class="title" id="ca.bc.gov.open.cpf.client.api.CpfClient.processResultFile-String-ca.bc.gov.open.cpf.client.api.Callback" title="processResultFile"><a name="ca.bc.gov.open.cpf.client.api.CpfClient.processResultFile(String,ca.bc.gov.open.cpf.client.api.Callback)"><code>void </code>
+processResultFile<code>(String jobResultUrl, Callback resultProcessor)</code>
+</a>
+</h3>
+<div class="content"><p>Process the result file for a job using the
+ <a href="../rest-api/#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getUsersJobsResult">Get Users Job Result</a> REST API.</p>
+
+ <p>The callback method will be invoked with the input stream to the file. This method ensures
+ that the input stream is closed correctly after being processed.</p>
+
+ <p>The following code fragment shows an example of using the API.</p>
+
+ <pre class="prettyprint language-java">  String url = "https://apps.gov.bc.ca/pub/cpf";
+  String consumerKey = "cpftest";
+  String consumerSecret = "cpftest";
+  CpfClient client = new CpfClient(url, consumerKey, consumerSecret);
+  try {
+    Map&lt;String, Object&gt; parameters = new HashMap&lt;String, Object&gt;();
+    parameters.put("mapGridName", "BCGS 1:20 000");
+    parameters.put("mapTileId", "92j016");
+    String jobId = client.createJobWithStructuredSingleRequest(
+      "MapTileByTileId", parameters, "application/json");
+    try {
+      List&lt;Map&lt;String, Object&gt;&gt; files = client.getJobResultFileList(
+        jobId, 5000);
+      for (Map&lt;String, Object&gt; file : files) {
+       String jobResultUrl = (String)file.get("resourceUri");
+      client.processResultFile(jobResultUrl , new Callback&lt;InputStream&gt;() {
+        public void process(InputStream in) {
+          // Read file from input stream
+        }
+      });
+      }
+    } finally {
+      client.closeJob(jobId);
+    }
+  } finally {
+    client.closeConnection();
+  }</pre><div class="title">Parameters</div>
+<div class="simpleDataTable parameters"><table class="data"><thead><tr><th>Parameter</th><th>Type</th><th class="description">Description</th></tr>
+</thead>
+<tbody><tr><td class="name">jobResultUrl</td>
+<td class="type"><a class="" href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true">String</a></td>
+<td class="description">The URL to the job result file.</td>
+</tr>
+<tr><td class="name">resultProcessor</td>
+<td class="type"><a class="" href="#ca.bc.gov.open.cpf.client.api.Callback">Callback</a>&lt;<a class="" href="http://docs.oracle.com/javase/6/docs/api/java/io/InputStream.html?is-external=true">InputStream</a>&gt;</td>
+<td class="description">The processor to process the input stream returned
+ from the web service.</td>
 </tr>
 </tbody>
 </table>
