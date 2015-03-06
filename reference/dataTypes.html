@@ -8,7 +8,7 @@
 
 	<head>
 		<meta charset="UTF-8" />
-		<title>Concurrent Processing Framework &#x2013; Client Developer Guide</title>
+		<title>Concurrent Processing Framework &#x2013; Data Types</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="description" content="" />
 		<meta http-equiv="content-language" content="en" />
@@ -34,7 +34,7 @@
 
 	</head>
 
-	<body class="page-client-index project-cpf-parent" data-spy="scroll" data-offset="60" data-target="#toc-scroll-target">
+	<body class="page-reference-datatypes project-cpf-parent" data-spy="scroll" data-offset="60" data-target="#toc-scroll-target">
 
 		<div class="navbar navbar-fixed-top">
 			<div class="navbar-inner">
@@ -51,12 +51,12 @@
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Documentation <b class="caret"></b></a>
 								<ul class="dropdown-menu">
 									<li ><a href="../index.html" title="About">About</a></li>
-									<li class="active"><a href="" title="Client Developer Guide">Client Developer Guide</a></li>
+									<li ><a href="../client/index.html" title="Client Developer Guide">Client Developer Guide</a></li>
 									<li class="dropdown-submenu disabled">
 										<a title="Reference">Reference</a>
 										<ul class="dropdown-menu">
-											<li ><a href="../reference/dataTypes.html" title="Data Types">Data Types</a></li>
-											<li ><a href="../reference/fileFormats.html" title="File Formats">File Formats</a></li>
+											<li class="active"><a href="" title="Data Types">Data Types</a></li>
+											<li ><a href="fileFormats.html" title="File Formats">File Formats</a></li>
 										</ul>
 									</li>
 								</ul>
@@ -146,7 +146,7 @@
 			<ul class="breadcrumb">
 				<li><a href="../" title="Concurrent Processing Framework">Concurrent Processing Framework</a></li>
 				<li class="divider">/</li>
-				<li>Client Developer Guide</li>
+				<li>Data Types</li>
 			</ul>
 		</div>
 		<hr class="toc-separator" />
@@ -160,10 +160,7 @@
 					</a>
 					<div class="nav-collapse collapse" id="toc-nav-collapse">
 						<ul id="toc" class="nav">
-						<li class="toplevel"><a href="#Client_Developer_Guide" title="Client Developer Guide">Client Developer Guide</a></li>
-						<li class="toplevel"><a href="#Security" title="Security">Security</a></li>
-						<li class="toplevel"><a href="#Direct_Web_Browser_Access" title="Direct Web Browser Access">Direct Web Browser Access</a></li>
-						<li class="toplevel"><a href="#Java" title="Java">Java</a></li>
+						<li class="toplevel"><a href="#Data_Types" title="Data Types">Data Types</a></li>
 						</ul>
 					</div>
 				</div>
@@ -177,35 +174,100 @@
 			<div class="body-content">
 <div class="section"> 
  <div class="page-header">
-  <h2 id="Client_Developer_Guide">Client Developer Guide</h2>
+  <h2 id="Data_Types">Data Types</h2>
  </div> 
- <p>The Concurrent Processing Framework (CPF) provides a <a href="cpf-api-app/rest-api/">REST Web Service API</a> that can be used to develop client applications in Java, Python or another programming language to submit batch jobs to the CPF and to download the results of those batch jobs. The API can also be accessed directly in a web browser. JavaScript is not supported at this time.</p> 
- <div class="section"> 
-  <h3 id="Security">Security</h3> 
-  <p>Access to the REST web service API is limited to authorized users.</p> 
- </div> 
- <div class="section"> 
-  <h3 id="Direct_Web_Browser_Access">Direct Web Browser Access</h3> 
-  <p>The <a href="cpf-api-app/rest-api/">REST Web Service API</a> can be accessed directly using a web browser. In this mode the service returns styled HTML pages and forms that canbe used without any programming.</p> 
- </div> 
- <div class="section"> 
-  <h3 id="Java">Java</h3> 
-  <p>The CPF provides a <a href="cpf-api-client/java-api/">Client API</a> for the Java programming language. This can be included in a <a class="externalLink" href="http://maven.apache.org">Maven</a> project using the following dependency in the project’s pom.xml file. The Java Client API can also be used in <a class="externalLink" href="http://pauldaustin.github.io/cpf/cpf-api-client/dependency-info.html">Other Build Systems</a>.</p> 
-  <div class="source"> 
-   <div class="source"> 
-    <pre>&lt;project&gt;
-  &lt;dependencies&gt;
-    &lt;dependency&gt;
-      &lt;groupId&gt;ca.bc.gov.open.cpf&lt;/groupId&gt;
-      &lt;artifactId&gt;cpf-api-client&lt;/artifactId&gt;
-      &lt;version&gt;${project.version}&lt;/version&gt;
-    &lt;/dependency&gt;
-  &lt;/dependencies&gt;
-&lt;/project&gt;
-</pre> 
-   </div> 
-  </div> 
- </div> 
+ <p>The CPF supports common data types that can be used for batch job parameters, <a href="structuredData.html">structured data</a> parameters, and result fields for a business application. The CPF does not support custom data types or Enums, these must be converted to/from one of the standard data types by the business application.</p> 
+ <p>If the <a href="fileFormats.html">File Format</a> supports the data type then the value must be encoded according to that file format.</p> 
+ <p>Otherwise the values must be converted to a string representation using the following rules.</p> 
+ <ul> 
+  <li>UTF-8 or US-ASCII encoding must be used for strings and text files.</li> 
+  <li>Numbers will use the sign (-) prefix for negative numbers, the digits (0-9) for the integer portion, a period (‘.’) for decimal numbers, and the digits (0-9) for the fractional part. For example -1234.56789.</li> 
+  <li>Booleans use the values true and false.</li> 
+  <li> <p>Geometries can be encoded using OGC <a class="externalLink" href="http://en.wikipedia.org/wiki/Well-known_text">Well-Known Text</a> (WKT) or PostGIS <a class="externalLink" href="http://postgis.net/docs/manual-2.0/using_postgis_dbmanagement.html#EWKB_EWKT">Extended-WKT</a> (EWKT). For example <tt>SRID=4326;POINT(-124 50)</tt>.</p> <p>Internally the CPF converts all values to the string encoded form.</p></li> 
+ </ul> 
+ <p>The table below shows the supported data types.</p> 
+ <table border="0" class="data"> 
+  <thead> 
+   <tr class="a"> 
+    <th>Data Type</th> 
+    <th>Description</th> 
+   </tr> 
+  </thead> 
+  <tbody> 
+   <tr class="b" id="boolean"> 
+    <td>boolean</td> 
+    <td>true or false.</td> 
+   </tr> 
+   <tr class="a" id="byte"> 
+    <td>byte</td> 
+    <td>8-bit signed number.</td> 
+   </tr> 
+   <tr class="b" id="short"> 
+    <td>short</td> 
+    <td>16-bit signed number.</td> 
+   </tr> 
+   <tr class="a" id="int"> 
+    <td>int</td> 
+    <td>32-bit signed number.</td> 
+   </tr> 
+   <tr class="b" id="long"> 
+    <td>long</td> 
+    <td>64-bit signed number.</td> 
+   </tr> 
+   <tr class="a" id="float"> 
+    <td>float</td> 
+    <td>32-bit IEEE 754 floating point number.</td> 
+   </tr> 
+   <tr class="b" id="double"> 
+    <td>double</td> 
+    <td>64-bit IEEE 754 floating point number.</td> 
+   </tr> 
+   <tr class="a" id="String"> 
+    <td>String</td> 
+    <td>A character string.</td> 
+   </tr> 
+   <tr class="b" id="Date"> 
+    <td>Date</td> 
+    <td>A Date in the format yyyy-MM-dd.</td> 
+   </tr> 
+   <tr class="a" id="DateTime"> 
+    <td>DateTime</td> 
+    <td>A Date with millisecond precision time in the format yyyy-MM-dd HH:mm:ss.SSS format.</td> 
+   </tr> 
+   <tr class="b" id="Timestamp"> 
+    <td>DateTime</td> 
+    <td>A Date with nanosecond precision time in the format yyyy-MM-dd HH:mm:ss.SSSSSSSSS format.</td> 
+   </tr> 
+   <tr class="a" id="URL"> 
+    <td>URL</td> 
+    <td>A URL or the string encoding of a URL.</td> 
+   </tr> 
+   <tr class="b" id="Point"> 
+    <td>Point</td> 
+    <td>A Point geometry.</td> 
+   </tr> 
+   <tr class="a" id="LineString"> 
+    <td>LineString</td> 
+    <td>A LineString geometry.</td> 
+   </tr> 
+   <tr class="b" id="Polygon"> 
+    <td>Polygon</td> 
+    <td>A Polygon geometry.</td> 
+   </tr> 
+   <tr class="a" id="MultiPoint"> 
+    <td>MultiPoint</td> 
+    <td>A MultiPoint geometry.</td> 
+   </tr> 
+   <tr class="b" id="MultiLineString"> 
+    <td>MultiLineString</td> 
+    <td>A MultiLineString geometry.</td> 
+   </tr> 
+   <tr class="a" id="MultiPolygon"> 
+    <td>MultiPolygon</td> 
+    <td>A MultiPolygon geometry.</td> 
+   </tr> 
+  </tbody> 
+ </table> 
 </div>
 			</div>
 		</div>
