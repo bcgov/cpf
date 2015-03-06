@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resource>
+  <resourceUri>https:/delivery.apps.gov.bc.ca/pub/cpf/secure/ws/apps.xml</resourceUri>
+  <title>Business Appliations</title>
+  <resources>
+    <resource>
+      <resourceUri>https://delivery.apps.gov.bc.ca/pub/cpf/secure/ws/apps/bsoe.xml</resourceUri>
+      <title>Batch Spatial Overlay</title>
+      <businessApplicationName>bsoe</businessApplicationName>
+    </resource>
+    <resource>
+      <resourceUri>https://delivery.apps.gov.bc.ca/pub/cpf/secure/ws/apps/geocoder.xml</resourceUri>
+      <title>Batch Geocoder</title>
+      <businessApplicationName>geocoder</businessApplicationName>
+    </resource>
+    <resource>
+      <resourceUri>https://delivery.apps.gov.bc.ca/pub/cpf/secure/ws/apps/GeometryValidator.xml</resourceUri>
+      <title>GeometryValidator</title>
+      <businessApplicationName>GeometryValidator</businessApplicationName>
+    </resource>
+    <resource>
+      <resourceUri>https://delivery.apps.gov.bc.ca/pub/cpf/secure/ws/apps/MapTileByLocation.xml</resourceUri>
+      <title>MapTileByLocation</title>
+      <businessApplicationName>MapTileByLocation</businessApplicationName>
+    </resource>
+    <resource>
+      <resourceUri>https://delivery.apps.gov.bc.ca/pub/cpf/secure/ws/apps/MapTileByTileId.xml</resourceUri>
+      <title>MapTileByTileId</title>
+      <businessApplicationName>MapTileByTileId</businessApplicationName>
+    </resource>
+    <resource>
+      <resourceUri>https://delivery.apps.gov.bc.ca/pub/cpf/secure/ws/apps/MultipartToSimpleGeometry.xml</resourceUri>
+      <title>MultipartToSimpleGeometry</title>
+      <businessApplicationName>MultipartToSimpleGeometry</businessApplicationName>
+    </resource>
+    <resource>
+      <resourceUri>https://delivery.apps.gov.bc.ca/pub/cpf/secure/ws/apps/pig.xml</resourceUri>
+      <title>Postal ID Geocoder</title>
+      <businessApplicationName>pig</businessApplicationName>
+    </resource>
+    <resource>
+      <resourceUri>https://delivery.apps.gov.bc.ca/pub/cpf/secure/ws/apps/TestAllDataTypes.xml</resourceUri>
+      <title>TestAllDataTypes</title>
+      <businessApplicationName>TestAllDataTypes</businessApplicationName>
+    </resource>
+  </resources>
+</resource>

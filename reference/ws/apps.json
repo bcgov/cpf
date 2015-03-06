@@ -1,0 +1,46 @@
+{
+  "resourceUri":"https:\/delivery.apps.gov.bc.ca\/pub\/cpf\/secure\/ws\/apps.json",
+  "title":"Business Appliations",
+  "resources":[
+    {
+      "resourceUri":"https:\/\/delivery.apps.gov.bc.ca\/pub\/cpf\/secure\/ws\/apps\/bsoe.json",
+      "title":"Batch Spatial Overlay",
+      "businessApplicationName":"bsoe"
+    },
+    {
+      "resourceUri":"https:\/\/delivery.apps.gov.bc.ca\/pub\/cpf\/secure\/ws\/apps\/geocoder.json",
+      "title":"Batch Geocoder",
+      "businessApplicationName":"geocoder"
+    },
+    {
+      "resourceUri":"https:\/\/delivery.apps.gov.bc.ca\/pub\/cpf\/secure\/ws\/apps\/GeometryValidator.json",
+      "title":"GeometryValidator",
+      "businessApplicationName":"GeometryValidator"
+    },
+    {
+      "resourceUri":"https:\/\/delivery.apps.gov.bc.ca\/pub\/cpf\/secure\/ws\/apps\/MapTileByLocation.json",
+      "title":"MapTileByLocation",
+      "businessApplicationName":"MapTileByLocation"
+    },
+    {
+      "resourceUri":"https:\/\/delivery.apps.gov.bc.ca\/pub\/cpf\/secure\/ws\/apps\/MapTileByTileId.json",
+      "title":"MapTileByTileId",
+      "businessApplicationName":"MapTileByTileId"
+    },
+    {
+      "resourceUri":"https:\/\/delivery.apps.gov.bc.ca\/pub\/cpf\/secure\/ws\/apps\/MultipartToSimpleGeometry.json",
+      "title":"MultipartToSimpleGeometry",
+      "businessApplicationName":"MultipartToSimpleGeometry"
+    },
+    {
+      "resourceUri":"https:\/\/delivery.apps.gov.bc.ca\/pub\/cpf\/secure\/ws\/apps\/pig.json",
+      "title":"Postal ID Geocoder",
+      "businessApplicationName":"pig"
+    },
+    {
+      "resourceUri":"https:\/\/delivery.apps.gov.bc.ca\/pub\/cpf\/secure\/ws\/apps\/TestAllDataTypes.json",
+      "title":"TestAllDataTypes",
+      "businessApplicationName":"TestAllDataTypes"
+    }
+  ]
+}
