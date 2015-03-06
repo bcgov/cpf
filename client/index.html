@@ -8,7 +8,7 @@
 
 	<head>
 		<meta charset="UTF-8" />
-		<title>Concurrent Processing Framework &#x2013; Client API Developer Guide</title>
+		<title>Concurrent Processing Framework &#x2013; Client Developer Guide</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="description" content="" />
 		<meta http-equiv="content-language" content="en" />
@@ -51,7 +51,7 @@
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Documentation <b class="caret"></b></a>
 								<ul class="dropdown-menu">
 									<li ><a href="../index.html" title="About">About</a></li>
-									<li class="active"><a href="" title="Client">Client</a></li>
+									<li class="active"><a href="" title="Client Developer Guide">Client Developer Guide</a></li>
 								</ul>
 							</li>
 							<li class="dropdown">
@@ -139,7 +139,7 @@
 			<ul class="breadcrumb">
 				<li><a href="../" title="Concurrent Processing Framework">Concurrent Processing Framework</a></li>
 				<li class="divider">/</li>
-				<li>Client API Developer Guide</li>
+				<li>Client Developer Guide</li>
 			</ul>
 		</div>
 		<hr class="toc-separator" />
@@ -153,18 +153,10 @@
 					</a>
 					<div class="nav-collapse collapse" id="toc-nav-collapse">
 						<ul id="toc" class="nav">
-						<li class="toplevel"><a href="#client_api_developer_guide" title="Client API Developer Guide">Client API Developer Guide</a></li>
-						<li class="dropdown">
-							<a href="#Accessing_the_Concurrent_Processing_Framework" title="Accessing the Concurrent Processing Framework" class="dropdown-toggle" role="button" data-toggle="dropdown" data-target="#">Accessing the Concurrent Processing Framework <b class="caret"></b></a>
-							<ul class="dropdown-menu" role="menu">
-								<!-- Repeat the item, otherwise it is not clickable as the dropdown root -->
-								<li><a href="#Accessing_the_Concurrent_Processing_Framework" title="Accessing the Concurrent Processing Framework">Accessing the Concurrent Processing Framework</a></li>
-								<li class="divider"></li>
-								<li><a href="#Security" title="Security">Security</a></li>
-
-							</ul>
-						</li>
-						<li class="toplevel"><a href="#API_Documentation_and_Download" title="API Documentation and Download">API Documentation and Download</a></li>
+						<li class="toplevel"><a href="#Client_Developer_Guide" title="Client Developer Guide">Client Developer Guide</a></li>
+						<li class="toplevel"><a href="#Security" title="Security">Security</a></li>
+						<li class="toplevel"><a href="#Direct_Web_Browser_Access" title="Direct Web Browser Access">Direct Web Browser Access</a></li>
+						<li class="toplevel"><a href="#Java" title="Java">Java</a></li>
 						</ul>
 					</div>
 				</div>
@@ -176,43 +168,36 @@
 	<div class="row">
 		<div class="span12">
 			<div class="body-content">
-<div class="page-header">
- <h1 id="client_api_developer_guide">Client API Developer Guide</h1>
-</div> 
-<p>The Concurrent Processing Framework (CPF) provides a REST web service API that can be used to develop client applications in Java, Python or another programming language to submit batch jobs to the CPF and to download the results of those batch jobs. The API can also be accessed directly in a web browser.</p> 
 <div class="section"> 
- <h2 id="Accessing_the_Concurrent_Processing_Framework">Accessing the Concurrent Processing Framework</h2> 
- <p>Concurrent Processing Framework is a REST web service enabled application. The web service can be used by end users using a web browser. In this mode the service returns styled HTML pages that can be used without any programming. The web service can also be accessed using a programming language using the <a href="cpf-api-app/rest-api/">REST Web Service API</a>. A <a href="cpf-api-client/java-api/">Java Client API</a> is provided. Other programming languages can also access the <a href="cpf-api-app/rest-api/">REST Web Service API</a> using custom code.</p> 
+ <div class="page-header">
+  <h2 id="Client_Developer_Guide">Client Developer Guide</h2>
+ </div> 
+ <p>The Concurrent Processing Framework (CPF) provides a <a href="cpf-api-app/rest-api/">REST Web Service API</a> that can be used to develop client applications in Java, Python or another programming language to submit batch jobs to the CPF and to download the results of those batch jobs. The API can also be accessed directly in a web browser. JavaScript is not supported at this time.</p> 
  <div class="section"> 
   <h3 id="Security">Security</h3> 
   <p>Access to the REST web service API is limited to authorized users.</p> 
  </div> 
-</div> 
-<div class="section"> 
- <h2 id="API_Documentation_and_Download">API Documentation and Download</h2> 
- <p>Use the links in the following table to view the Client API documentation or download the API libraries.</p> 
- <div class="simpleDataTable"> 
-  <table border="0" class="bodyTable table table-striped table-hover" style="width: auto; margin-left:0px"> 
-   <thead> 
-    <tr class="a"> 
-     <th>API</th> 
-     <th>Documentation</th> 
-     <th>Download</th> 
-    </tr> 
-   </thead> 
-   <tbody> 
-    <tr class="b"> 
-     <td>Client REST Web Service API</td> 
-     <td><a href="rest-api/">API Docs</a></td> 
-     <td>n/a</td> 
-    </tr> 
-    <tr class="a"> 
-     <td>Client Java (6+)</td> 
-     <td><a href="java-api/">API Docs</a></td> 
-     <td><a href="../../lib/cpf-api-client-${project.version}.jar">Download</a></td> 
-    </tr> 
-   </tbody> 
-  </table> 
+ <div class="section"> 
+  <h3 id="Direct_Web_Browser_Access">Direct Web Browser Access</h3> 
+  <p>The <a href="cpf-api-app/rest-api/">REST Web Service API</a> can be accessed directly using a web browser. In this mode the service returns styled HTML pages and forms that canbe used without any programming.</p> 
+ </div> 
+ <div class="section"> 
+  <h3 id="Java">Java</h3> 
+  <p>The CPF provides a <a href="cpf-api-client/java-api/">Client API</a> for the Java programming language. This can be included in a <a class="externalLink" href="http://maven.apache.org">Maven</a> project using the following dependency in the project’s pom.xml file.</p> 
+  <div class="source"> 
+   <div class="source"> 
+    <pre>&lt;project&gt;
+  &lt;dependencies&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;ca.bc.gov.open.cpf&lt;/groupId&gt;
+      &lt;artifactId&gt;cpf-api-client&lt;/artifactId&gt;
+      &lt;version&gt;${project.version}
+    &lt;/dependency&gt;
+  &lt;/dependencies&gt;
+&lt;/project&gt;
+</pre> 
+   </div> 
+  </div> 
  </div> 
 </div>
 			</div>
@@ -234,7 +219,7 @@
 							<a href="../index.html" title="About">About</a>
 						</li>
 						<li class="active">
-							<a href="#" title="Client">Client</a>
+							<a href="#" title="Client Developer Guide">Client Developer Guide</a>
 						</li>
 						<li class="nav-header">Modules</li>
 						<li >
