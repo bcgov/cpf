@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<items>
+<Buffer>
+<title>Buffered centroid of BC</title>
+<buffer>10000</buffer>
+<geometry>SRID=3005;POINT(921100.281 1076394.357)</geometry>
+</Buffer>
+<Buffer>
+<title>Stanley Park</title>
+<buffer>1000</buffer>
+<geometry>SRID=3005;POINT(1207714.288 480508.637)</geometry>
+</Buffer>
+</items>

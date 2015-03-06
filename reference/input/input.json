@@ -1,0 +1,12 @@
+{"items": [
+{
+"title": "Buffered centroid of BC",
+"buffer": 10000,
+"geometry": "SRID=3005;POINT(921100.281 1076394.357)"
+},
+{
+"title": "Stanley Park",
+"buffer": 1000,
+"geometry": "SRID=3005;POINT(1207714.288 480508.637)"
+}
+]}

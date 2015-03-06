@@ -51,7 +51,12 @@
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Documentation <b class="caret"></b></a>
 								<ul class="dropdown-menu">
 									<li ><a href="../index.html" title="About">About</a></li>
-									<li class="active"><a href="" title="Client Developer Guide">Client Developer Guide</a></li>
+									<li class="dropdown-submenu active">
+										<a href="" title="Client Developer Guide">Client Developer Guide</a>
+										<ul class="dropdown-menu">
+											<li ><a href="../reference/fileFormats.html" title="File Formats">File Formats</a></li>
+										</ul>
+									</li>
 								</ul>
 							</li>
 							<li class="dropdown">
@@ -183,7 +188,7 @@
  </div> 
  <div class="section"> 
   <h3 id="Java">Java</h3> 
-  <p>The CPF provides a <a href="cpf-api-client/java-api/">Client API</a> for the Java programming language. This can be included in a <a class="externalLink" href="http://maven.apache.org">Maven</a> project using the following dependency in the project’s pom.xml file.</p> 
+  <p>The CPF provides a <a href="cpf-api-client/java-api/">Client API</a> for the Java programming language. This can be included in a <a class="externalLink" href="http://maven.apache.org">Maven</a> project using the following dependency in the project’s pom.xml file. The Java Client API can also be used in <a class="externalLink" href="http://pauldaustin.github.io/cpf/cpf-api-client/dependency-info.html">Other Build Systems</a>.</p> 
   <div class="source"> 
    <div class="source"> 
     <pre>&lt;project&gt;
