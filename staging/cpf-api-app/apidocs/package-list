@@ -1,0 +1,14 @@
+ca.bc.gov.open.cpf.api.controller
+ca.bc.gov.open.cpf.api.domain
+ca.bc.gov.open.cpf.api.scheduler
+ca.bc.gov.open.cpf.api.scheduler.spi.adminjobs
+ca.bc.gov.open.cpf.api.security
+ca.bc.gov.open.cpf.api.security.digest
+ca.bc.gov.open.cpf.api.security.interceptor
+ca.bc.gov.open.cpf.api.security.oauth
+ca.bc.gov.open.cpf.api.security.service
+ca.bc.gov.open.cpf.api.web
+ca.bc.gov.open.cpf.api.web.builder
+ca.bc.gov.open.cpf.api.web.controller
+ca.bc.gov.open.cpf.api.web.rest
+ca.bc.gov.open.cpf.api.web.service
