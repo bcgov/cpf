@@ -8,7 +8,7 @@
 
 	<head>
 		<meta charset="UTF-8" />
-		<title>Concurrent Processing Framework &#x2013; File formats</title>
+		<title>Concurrent Processing Framework &#x2013; Job Status</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="description" content="" />
 		<meta http-equiv="content-language" content="en" />
@@ -34,7 +34,7 @@
 
 	</head>
 
-	<body class="page-reference-fileformats project-cpf-parent" data-spy="scroll" data-offset="60" data-target="#toc-scroll-target">
+	<body class="page-reference-jobstatus project-cpf-parent" data-spy="scroll" data-offset="60" data-target="#toc-scroll-target">
 
 		<div class="navbar navbar-fixed-top">
 			<div class="navbar-inner">
@@ -56,9 +56,9 @@
 										<a title="Reference">Reference</a>
 										<ul class="dropdown-menu">
 											<li ><a href="dataTypes.html" title="Data Types">Data Types</a></li>
-											<li class="active"><a href="" title="File Formats">File Formats</a></li>
+											<li ><a href="fileFormats.html" title="File Formats">File Formats</a></li>
 											<li ><a href="resourceDescription.html" title="Resource Description">Resource Description</a></li>
-											<li ><a href="jobStatus.html" title="Job Status">Job Status</a></li>
+											<li class="active"><a href="" title="Job Status">Job Status</a></li>
 										</ul>
 									</li>
 								</ul>
@@ -148,7 +148,7 @@
 			<ul class="breadcrumb">
 				<li><a href="../" title="CPF">CPF</a></li>
 				<li class="divider">/</li>
-				<li>File formats</li>
+				<li>Job Status</li>
 			</ul>
 		</div>
 		<hr class="toc-separator" />
@@ -162,7 +162,7 @@
 					</a>
 					<div class="nav-collapse collapse" id="toc-nav-collapse">
 						<ul id="toc" class="nav">
-						<li class="toplevel"><a href="#File_formats" title="File formats">File formats</a></li>
+						<li class="toplevel"><a href="#Job_Status" title="Job Status">Job Status</a></li>
 						</ul>
 					</div>
 				</div>
@@ -176,110 +176,89 @@
 			<div class="body-content">
 <div class="section"> 
  <div class="page-header">
-  <h2 id="File_formats">File formats</h2>
+  <h2 id="Job_Status">Job Status</h2>
  </div> 
- <p>The table below shows the file formats supported by the CPF web service for web service resources, structured input data, and structured result data. Click the ‘view’ links below to download a sample of the resource in the each file format.</p> 
- <p>The CPF requires that <a class="externalLink" href="http://en.wikipedia.org/wiki/UTF-8">UTF-8</a> encoding be used for all text files. This includes the text in a .dbf file for a .shpz archive, unless a .cpg file is provided in the .shpz archive.</p> 
+ <p>The following status fields are returned with the job status.</p> 
  <table border="0" class="bodyTable table table-striped table-hover"> 
   <thead> 
    <tr class="a"> 
-    <th>File Extension</th> 
-    <th>Media Type</th> 
-    <th>Web Service</th> 
-    <th>Input</th> 
-    <th>Result</th> 
+    <th>resultsUrl</th> 
+    <td>If the job has completed successfully, and result data files have been generated, then this URL will list the URL and details of each result file associated with this job. This field will not be present if the job processing has not completed.</td> 
+   </tr> 
+  </thead> 
+  <thead> 
+   <tr class="b"> 
+    <th>numFailedRequests</th> 
+    <td>The current number of Batch Job Requests that have failed processing by the Business Application. If any input request data fails validation, then the job is not processed at all by the Business Application, and the number of failed requests will be set to the number of submitted requests.</td> 
+   </tr> 
+  </thead> 
+  <thead> 
+   <tr class="a"> 
+    <th>numCompletedRequests</th> 
+    <td>The current number of Batch Job Requests successfully processed and returned by the Business Application.</td> 
+   </tr> 
+  </thead> 
+  <thead> 
+   <tr class="b"> 
+    <th>numSubmittedRequests</th> 
+    <td>Initially this will be set to the value passed in with the job. Once the input request data has been validated, it will be updated to the actual number of requests in the Batch Job.</td> 
+   </tr> 
+  </thead> 
+  <thead> 
+   <tr class="a"> 
+    <th>secondsToWaitForStatusCheck</th> 
+    <td>The minimum number of seconds a client should wait before checking the status of a job again. 0 if the job processing has completed.</td> 
+   </tr> 
+  </thead> 
+  <thead> 
+   <tr class="b"> 
+    <th>jobStatus</th> 
+    <td>The current processing status of this job. A completed job will have a status of &quot;resultsCreated&quot;, while a job that has yet to be queued for processing will have a status of &quot;submitted&quot;.</td> 
+   </tr> 
+  </thead> 
+  <thead> 
+   <tr class="a"> 
+    <th>resultDataContentType</th> 
+    <td>The desired <a href="fileFormats.html">file format</a> type of the generated result data files.</td> 
+   </tr> 
+  </thead> 
+  <thead> 
+   <tr class="b"> 
+    <th><i>&lt;jobParameter&gt;</i></th> 
+    <td>Each business application specific job parameter will be included as a field.</td> 
+   </tr> 
+  </thead> 
+  <thead> 
+   <tr class="a"> 
+    <th>businessApplicationVersion</th> 
+    <td>The version of the business application associated with this job.</td> 
+   </tr> 
+  </thead> 
+  <thead> 
+   <tr class="b"> 
+    <th>businessApplicationName</th> 
+    <td>The business application name associated with this job.</td> 
+   </tr> 
+  </thead> 
+  <thead> 
+   <tr class="a"> 
+    <th>consumerKey</th> 
+    <td>The oAuth Consumer Key of the user who submitted the job.</td> 
+   </tr> 
+  </thead> 
+  <thead> 
+   <tr class="b"> 
+    <th>id</th> 
+    <td>The id of this job, in the form of URL to the job.</td> 
+   </tr> 
+  </thead> 
+  <thead> 
+   <tr class="a"> 
+    <th>Field Name</th> 
     <th>Description</th> 
    </tr> 
   </thead> 
   <tbody> 
-   <tr class="b" id="csv"> 
-    <td>csv</td> 
-    <td>text/csv</td> 
-    <td><img src="../images/cross.png" alt="No" /></td> 
-    <td><img src="../images/tick.png" alt="Yes" /><br /> <a href="input/input.csv">view</a></td> 
-    <td><img src="../images/tick.png" alt="Yes" /><br /> <a href="result/result.csv">view</a></td> 
-    <td>A <a class="externalLink" href="http://tools.ietf.org/html/rfc4180">Comma-Separated Values</a> file with a header line containing the field labels and one line for each feature record.</td> 
-   </tr> 
-   <tr class="a" id="dbf"> 
-    <td>dbf</td> 
-    <td>application/dbf</td> 
-    <td><img src="../images/cross.png" alt="No" /></td> 
-    <td><img src="../images/tick.png" alt="Yes" /><br /> <a href="input/input.dbf">view</a></td> 
-    <td><img src="../images/tick.png" alt="Yes" /><br /> <a href="result/result.dbf">view</a></td> 
-    <td> <p>A <a class="externalLink" href="http://en.wikipedia.org/wiki/DBase">DBase</a> file containing the attribution.</p> <p>Each feature record is one record in the DBase file.</p></td> 
-   </tr> 
-   <tr class="b" id="geojson"> 
-    <td>geojson</td> 
-    <td>application/x-geo+json</td> 
-    <td><img src="../images/cross.png" alt="No" /></td> 
-    <td><img src="../images/cross.png" alt="No" /></td> 
-    <td><img src="../images/tick.png" alt="Yes" /><br /> <a href="result/result.geojson">view</a></td> 
-    <td> <p> <a class="externalLink" href="http:/geojson.org/">GeoJSON</a> is a geospatial data interchange format based on <a class="externalLink" href="http:/json.org/">JavaScript Object Notation (JSON)</a>. GeoJSON can be used to create web browser based GIS applications in JavaScript. </p> <p>Each feature record is one feature object in a feature collection object. If there is only one record the feature object will not be wrapped in a feature collection.</p></td> 
-   </tr> 
-   <tr class="a" id="gml"> 
-    <td>gml</td> 
-    <td>application/gml+xml</td> 
-    <td><img src="../images/cross.png" alt="No" /></td> 
-    <td><img src="../images/cross.png" alt="No" /></td> 
-    <td><img src="../images/tick.png" alt="Yes" /><br /> <a href="result/result.gml">view</a></td> 
-    <td> <p> <a class="externalLink" href="http:/en.wikipedia.org/wiki/Geography_Markup_Language">Geography Markup Language (GML)</a> is an <a class="externalLink" href="http:/www.opengeospatial.org/standards/gml">international standard</a> for exchange of geographical feature maintained by the <a class="externalLink" href="http:/www.opengeospatial.org/">Open Geospatial Consortium (OGC)</a>. </p> <p>Each feature is one GML feature of the Feature Type from the 'Geomark Geometry Representations' table. The features are wrapped in a gml:FeatureCollection</p></td> 
-   </tr> 
-   <tr class="b" id="html"> 
-    <td>html</td> 
-    <td>text/html</td> 
-    <td><img src="../images/cross.png" alt="No" /></td> 
-    <td><img src="../images/cross.png" alt="No" /></td> 
-    <td><img src="../images/tick.png" alt="Yes" /><br /> <a href="result/result.html">view</a></td> 
-    <td> <p>A HTML document containing a table with a head section containing the field lables for each column row for each feature record.</p></td> 
-   </tr> 
-   <tr class="a" id="json"> 
-    <td>json</td> 
-    <td>application/json</td> 
-    <td><img src="../images/tick.png" alt="Yes" /><br /> <a href="ws/apps.json">view</a></td> 
-    <td><img src="../images/tick.png" alt="Yes" /><br /> <a href="input/input.json">view</a></td> 
-    <td><img src="../images/tick.png" alt="Yes" /><br /> <a href="result/result.json">view</a></td> 
-    <td><a class="externalLink" href="http://www.json.org/">JavaScript Object Notation (JSON)</a>. The geomark info is wrapped in a JSON object with one attribute for each geomark attributes. The resource links are a a JSON list with one JSON object per link.</td> 
-   </tr> 
-   <tr class="b" id="kml"> 
-    <td>kml</td> 
-    <td>application/vnd.google-earth.kml+xml</td> 
-    <td><img src="../images/cross.png" alt="No" /></td> 
-    <td><img src="../images/cross.png" alt="No" /></td> 
-    <td><img src="../images/tick.png" alt="Yes" /><br /> <a href="result/result.kml">view</a></td> 
-    <td> <p> <a class="externalLink" href="http:/code.google.com/apis/kml/">Keyhole Markup Language (KML)</a> is used to display geographic data in an Earth browser, such as <a class="externalLink" href="http:/www.google.com/earth/">Google Earth</a>. <a class="externalLink" href="http:/www.opengeospatial.org/standards/kml/">KML is an international standard</a> maintained by the <a class="externalLink" href="http:/www.opengeospatial.org/">Open Geospatial Consortium, Inc. (OGC)</a>. </p> <p>Each feature record will be encoded using a Placemark with the geomark's attributes as ExtendedData. If there are more than one record the Placemarks will be wrapped in a Document element, otherwise the Placemark will be a child of the kml element.</p></td> 
-   </tr> 
-   <tr class="a" id="kmz"> 
-    <td>kml</td> 
-    <td>application/vnd.google-earth.kmz</td> 
-    <td><img src="../images/cross.png" alt="No" /></td> 
-    <td><img src="../images/cross.png" alt="No" /></td> 
-    <td><img src="../images/tick.png" alt="Yes" /><br /> <a href="result/result.kmz">view</a></td> 
-    <td> <p> <a class="externalLink" href="http:/code.google.com/apis/kml/">Keyhole Markup Language (KML)</a> is used to display geographic data in an Earth browser, such as <a class="externalLink" href="http:/www.google.com/earth/">Google Earth</a>. <a class="externalLink" href="http:/www.opengeospatial.org/standards/kml/">KML is an international standard</a> maintained by the <a class="externalLink" href="http:/www.opengeospatial.org/">Open Geospatial Consortium, Inc. (OGC)</a>. </p> <p>The KMZ is a Zip file with a single kml document. Typically named doc.kml.</p> <p>Each feature record will be encoded using a Placemark with the geomark's attributes as ExtendedData. If there are more than one record the Placemarks will be wrapped in a Document element, otherwise the Placemark will be a child of the kml element.</p></td> 
-   </tr> 
-   <tr class="b" id="shpz"> 
-    <td>shpz</td> 
-    <td>application/x-shp+zip</td> 
-    <td><img src="../images/cross.png" alt="No" /></td> 
-    <td><img src="../images/tick.png" alt="Yes" /><br /> <a href="input/input.shpz">view</a></td> 
-    <td><img src="../images/tick.png" alt="Yes" /><br /> <a href="result/result.shpz">view</a></td> 
-    <td> <p> developed by ESRI for ArcMap which is a multi-file GIS format that <a class="externalLink" href="http:/en.wikipedia.org/wiki/Shapefile">ESRI Shapefile</a> uses <a class="externalLink" href="http://en.wikipedia.org/wiki/DBase">DBase</a> file for the attribution and a prj file for the coordinate system. Due to the multi-file nature the shp, dbf, shx and prj files are compressed into a ZIP file for download or upload. </p> <p>Each feature record is one record in the ESRI shapefile.</p> </td> 
-   </tr> 
-   <tr class="a" id="xhtml"> 
-    <td>xhtml</td> 
-    <td>application/xhtml+xml</td> 
-    <td><img src="../images/cross.png" alt="No" /></td> 
-    <td><img src="../images/cross.png" alt="No" /></td> 
-    <td><img src="../images/tick.png" alt="Yes" /><br /> <a href="result/result.xhtml">view</a></td> 
-    <td> <p>A XHTML document containing a table with a head section containing the field lables for each column row for each feature record.</p></td> 
-   </tr> 
-   <tr class="b" id="xml"> 
-    <td>xml</td> 
-    <td>text/xml</td> 
-    <td><img src="../images/tick.png" alt="Yes" /><br /> <a href="ws/apps.xml">view</a></td> 
-    <td><img src="../images/tick.png" alt="Yes" /><br /> <a href="input/input.xml">view</a></td> 
-    <td><img src="../images/tick.png" alt="Yes" /><br /> <a href="result/result.xml">view</a></td> 
-    <td><a class="externalLink" href="http://www.w3.org/XML/">Extensible Markup Language (XML)</a>. The geomark info is wrapped in the GeomarkInfo XML tag with one XML tag for each geomark attributes. Each resource link is contained in a resourceLink XML tag with one XML tag for each resource link attribute.</td> 
-   </tr> 
   </tbody> 
  </table> 
 </div>
