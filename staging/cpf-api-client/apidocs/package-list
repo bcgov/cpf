@@ -1,0 +1,6 @@
+ca.bc.gov.open.cpf.client.api
+ca.bc.gov.open.cpf.client.httpclient
+net.oauth
+net.oauth.client.httpclient4
+net.oauth.signature
+net.oauth.signature.pem
