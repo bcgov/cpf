@@ -916,7 +916,81 @@ public void setResultDataContentType(final String format) {
      <tr class="a"> 
       <td><tt>formSectionsMap</tt><br /> <tt>formSectionsMapInstant</tt><br /> <tt>formSectionsMapSingle</tt><br /> <tt>formSectionsMapMultiple</tt></td> 
       <td><tt>List&lt;String&gt;</tt></td> 
-      <td>This property is used to customize the sections and the fields in each section that appear on the job submission forms. The section field can be specified for all forms <tt>formSectionsMap</tt> or for a specific form <tt>formSectionsMapInstant</tt>, <tt>formSectionsMapSingle</tt>, <tt>formSectionsMapMultiple</tt>. The property is a <tt>map</tt> where the <tt>key</tt> on the <tt>entry</tt> is the name of the section and the value is a <tt>list</tt> of the field names. Section names should be in lowerCamelCase notation. The titles on the sections are converted to capitalized words from the section name (e.g. Lower Camel Case). Fields not applicable for a form will not be displayed. Any business application parameters not listed will be put into the <tt>applicationParameters</tt> section. Any CPF parameters not listed will be in the sections shown below. **Default Form Fields by Section** ```xml <map> inputDataContentType inputDataUrl inputData srid resultSrid resultDataContentType format resultNumAxis resultScaleFactorXy resultScaleFactorZ notificationEmail notificationUrl cpfPlug-inTest cpfMinExecutionTime cpfMeanExecutionTime cpfStandardDeviation cpfMaxExecutionTime cpfMeanNumResults </map> ``` **Plug-in Form Fields by Section Customization** ```xml <map> <map> jobParameter1 </map> <map> jobParameter1 </map> </map> ``` </td> 
+      <td> <p>This property is used to customize the sections and the fields in each section that appear on the job submission forms. The section field can be specified for all forms <tt>formSectionsMap</tt> or for a specific form <tt>formSectionsMapInstant</tt>, <tt>formSectionsMapSingle</tt>, <tt>formSectionsMapMultiple</tt>. The property is a <tt>map</tt> where the <tt>key</tt> on the <tt>entry</tt> is the name of the section and the value is a <tt>list</tt> of the field names. Section names should be in lowerCamelCase notation. The titles on the sections are converted to capitalized words from the section name (e.g. Lower Camel Case). Fields not applicable for a form will not be displayed. Any business application parameters not listed will be put into the <tt>applicationParameters</tt> section. Any CPF parameters not listed will be in the sections shown below.</p> <b>Default Form Fields by Section</b> 
+       <div class="source"> 
+        <div class="source"> 
+         <pre class="xml">&lt;map&gt;
+  &lt;entry key=&quot;inputData&quot;&gt;
+    &lt;list&gt;
+      &lt;value&gt;inputDataContentType&lt;/value&gt;
+      &lt;value&gt;inputDataUrl&lt;/value&gt;
+      &lt;value&gt;inputData&lt;/value&gt;
+      &lt;value&gt;srid&lt;/value&gt;
+    &lt;/list&gt;
+  &lt;/entry&gt;
+  &lt;entry key=&quot;resultFormat&quot;&gt;
+    &lt;list&gt;
+      &lt;value&gt;resultSrid&lt;/value&gt;
+      &lt;value&gt;resultDataContentType&lt;/value&gt;
+      &lt;value&gt;format&lt;/value&gt;
+    &lt;/list&gt;
+  &lt;/entry&gt;
+  &lt;entry key=&quot;resultFormatAdvanced&quot;&gt;
+    &lt;list&gt;
+      &lt;value&gt;resultNumAxis&lt;/value&gt;
+      &lt;value&gt;resultScaleFactorXy&lt;/value&gt;
+      &lt;value&gt;resultScaleFactorZ&lt;/value&gt;
+    &lt;/list&gt;
+  &lt;/entry&gt;
+  &lt;entry key=&quot;notification&quot;&gt;
+    &lt;list&gt;
+      &lt;value&gt;notificationEmail&lt;/value&gt;
+      &lt;value&gt;notificationUrl&lt;/value&gt;
+    &lt;/list&gt;
+  &lt;/entry&gt;
+  &lt;entry key=&quot;testParameters&quot;&gt;
+    &lt;list&gt;
+      &lt;value&gt;cpfPlug-inTest&lt;/value&gt;
+      &lt;value&gt;cpfMinExecutionTime&lt;/value&gt;
+      &lt;value&gt;cpfMeanExecutionTime&lt;/value&gt;
+      &lt;value&gt;cpfStandardDeviation&lt;/value&gt;
+      &lt;value&gt;cpfMaxExecutionTime&lt;/value&gt;
+      &lt;value&gt;cpfMeanNumResults&lt;/value&gt;
+    &lt;/list&gt;
+  &lt;/entry&gt;
+&lt;/map&gt;
+</pre> 
+        </div> 
+       </div> <b>Plug-in Form Fields by Section Customization</b> 
+       <div class="source"> 
+        <div class="source"> 
+         <pre class="xml">&lt;util:map id=&quot;properties&quot;&gt;
+  &lt;entry key=&quot;demo&quot;&gt;
+    &lt;map&gt;
+      &lt;entry key=&quot;formSectionsMapInstant&quot;&gt;
+        &lt;map&gt;
+          &lt;entry key=&quot;jonbParmaters&quot;&gt;
+            &lt;list&gt;
+              &lt;value&gt;jobParameter1&lt;/value&gt;
+            &lt;/list&gt;
+          &lt;/entry&gt;
+        &lt;/map&gt;
+      &lt;/entry&gt;
+      &lt;entry key=&quot;formSectionsMapSingle&quot;&gt;
+        &lt;map&gt;
+          &lt;entry key=&quot;jonbParmaters&quot;&gt;
+            &lt;list&gt;
+              &lt;value&gt;jobParameter1&lt;/value&gt;
+            &lt;/list&gt;
+          &lt;/entry&gt;
+        &lt;/map&gt;
+      &lt;/entry&gt;
+    &lt;/map&gt;
+  &lt;/entry&gt;
+&lt;/util:map&gt;
+</pre> 
+        </div> 
+       </div> </td> 
      </tr> 
      <tr class="b"> 
       <td><tt>inputDataContentType</tt> or <tt>inputDataFileExtension</tt></td> 
