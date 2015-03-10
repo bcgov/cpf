@@ -170,6 +170,13 @@
 						<ul id="toc" class="nav">
 						<li class="toplevel"><a href="#Plug-in_Developer_Guide" title="Plug-in Developer Guide">Plug-in Developer Guide</a></li>
 						<li class="toplevel"><a href="#Plug-in_Overview" title="Plug-in Overview">Plug-in Overview</a></li>
+						<li class="divider-vertical"></li>
+						<li class="toplevel"><a href="#CPF_Plug-in_Maven_Project" title="CPF Plug-in Maven Project">CPF Plug-in Maven Project</a></li>
+						<li class="toplevel"><a href="#Create_a_plug-in_project" title="Create a plug-in project">Create a plug-in project</a></li>
+						<li class="toplevel"><a href="#Add_Dependencies" title="Add Dependencies">Add Dependencies</a></li>
+						<li class="toplevel"><a href="#JDBC_Dependencies" title="JDBC Dependencies">JDBC Dependencies</a></li>
+						<li class="toplevel"><a href="#Build_the_plug-in" title="Build the plug-in">Build the plug-in</a></li>
+						<li class="toplevel"><a href="#Deploy_a_Plug-in" title="Deploy a Plug-in">Deploy a Plug-in</a></li>
 						<li class="toplevel"><a href="#API_Documentation_and_Download" title="API Documentation and Download">API Documentation and Download</a></li>
 						</ul>
 					</div>
@@ -203,6 +210,184 @@
    <li>The list of structured results also creates a single output file for the user to download. There will be one record for each entry in the list of results, with a relative result number showing the order of the result in the list of results.</li> 
    <li>Like per request input data, per request result data returns one binary blob of data for each request. There will be one file for the user to download for each request. For example a WMS service would return a JPEG, or PNG for each map to render.</li> 
   </ul> 
+ </div> 
+</div> 
+<div class="section"> 
+ <h2 id="CPF_Plug-in_Maven_Project">CPF Plug-in Maven Project</h2> 
+ <p>The CPF uses maven modules for the deployment of plug-in modules to the CPF web services. Each CPF plug-in module is a maven project that contains all the code and dependencies of the plug-in. Within the CPF plug-in module one or more <a href="#Business_Application_Classes">Business Application Classes</a> are defined.</p> 
+ <div class="section"> 
+  <h3 id="Create_a_plug-in_project">Create a plug-in project</h3> 
+  <p>The first step is to create a plug-in project. Plug-ins must be developed using Apache Maven 3.0.x.</p> 
+  <p>A new plug-in project can be created using the Maven archetype mechanism. The archetype defines a template project that can be created by passing in parameters to the following command.</p> 
+  <div class="source"> 
+   <div class="source"> 
+    <pre>cd ~/projects
+mvn \
+&nbsp;&nbsp;archetype:generate \
+&nbsp; -DinteractiveMode=false \
+&nbsp; -DarchetypeGroupId=ca.bc.gov.open.cpf \
+&nbsp; -DarchetypeArtifactId=cpf-archetype-plug-in \
+&nbsp;&nbsp;-DarchetypeVersion=${project.version} \
+&nbsp;&nbsp;-DgroupId=ca.bc.gov \
+&nbsp; -DartifactId=demo \
+&nbsp; -Dversion=1.0.0-SNAPSHOT \
+&nbsp;&nbsp;-Dpackage=ca.bc.gov.demo \
+&nbsp;&nbsp;-Dplug-inName=Demo \
+&nbsp;&nbsp;-Dplug-inAcronym=demo
+</pre> 
+   </div> 
+  </div> 
+  <table border="0" class="bodyTable table table-striped table-hover"> 
+   <thead> 
+    <tr class="a"> 
+     <th>Parameter</th> 
+     <th>Description</th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr class="b"> 
+     <td><tt>archetypeVersion</tt></td> 
+     <td>The most recent version of the CPF framework.</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><tt>groupId</tt></td> 
+     <td>The maven group identifier also used as the java package name for the plug-in class. For BC Government plug-ins this should be ca.bc.gov.</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><tt>artifactId</tt></td> 
+     <td>The base maven artifact identifier used for the maven modules created in the project. This should be the project acronym for BC Government projects.</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><tt>version</tt></td> 
+     <td>The version identifier you’d like to give to your plug-in. Must include -SNAPSHOT the -SNAPSHOT is removed on migration to test and production.</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><tt>package</tt></td> 
+     <td>The Java package name for the generated code. Must be <tt>ca.bc.gov.{acronym}</tt> for BC Government projects.</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><tt>pluginName</tt></td> 
+     <td>The name of the plug-in. This will be used to generate the plug-in class name and for descriptions in the Maven build files.</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><tt>pluginAcronym</tt></td> 
+     <td>The acronym of the plug-in. This will be used to generate the plug-in jar name.</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+  <p>The following directory structure would be created if the command were run using the parameters above.</p> 
+  <table border="0" class="bodyTable table table-striped table-hover"> 
+   <thead> 
+    <tr class="a"> 
+     <th>File/Directory</th> 
+     <th>Description</th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr class="b"> 
+     <td><tt>demo/</tt></td> 
+     <td>The root directory of the plug-in project.</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><tt>&nbsp;&nbsp;scripts/</tt></td> 
+     <td>Any SQL scripts required to create the database or data required by the plug-in. Samples are included.</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><tt>&nbsp;&nbsp;README.txt</tt></td> 
+     <td>A sample readme file for deployment to the Ministry. Edit for your application.</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><tt>&nbsp;&nbsp;pom.xml</tt></td> 
+     <td>The maven build file for the plug-in.</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><tt>&nbsp;&nbsp;src/</tt></td> 
+     <td>The root folder containing the source code and resources.</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><tt>&nbsp;&nbsp;&nbsp;&nbsp;main/java/ca.bc.gov/demo/</tt></td> 
+     <td>The java package for the plug-in, add any support classes in here.</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DemoPlug-in.java</tt></td> 
+     <td>The java class for the plug-in.</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><tt>&nbsp;&nbsp;&nbsp;&nbsp;main/resources/</tt></td> 
+     <td>The non-java resource files to include in the plug-in jar.</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;META-INF/</tt></td> 
+     <td>The META-INF directory for the plug-in jar.</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ca.bc.gov.open.cpf.plugin.sf.xml</tt></td> 
+     <td>The main CPF spring configuration file for the plug-ins in this module.</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ca/bc/gov/demo/Demo.sf.xml</tt></td> 
+     <td>The spring configuration file containing any beans used by the plug-ins.</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="Add_Dependencies">Add Dependencies</h3> 
+  <p>A plug-in can include dependencies to additional libraries that are not deployed as part of the core CPF application. These must be approved prior to delivering to the Ministry.</p> 
+  <p>All plug-ins must either be available in the <a class="externalLink" href="http://search.maven.org/">Maven central repository</a>. Or a private repository that the CPF is configured to access.</p> 
+  <p>If any of the dependencies include dependencies to logging frameworks such as LOG4J, SLF4J and especially commons-logging these must be <a class="externalLink" href="http://maven.apache.org/guides/introduction/introduction-to-optional-and-excludes-dependencies.html#Dependency_Exclusions">excluded</a> from those dependencies. This ensures that carefully controlled versions of these files are used. The CPF internally uses SLF4J as the logging API with a LOG4J binding to perform the actual logging and a bridge so that commons logging is logged via SLF4J. It is recommended for plug-ins to use SLF4J for logging in their module. Plug-ins must not include a <tt>log4j.xml</tt> file in their Jar file. A <tt>log4j.xml</tt> file can however be included in <tt>src/test/resources</tt> for testing the plug-in.</p> 
+  <p>Any dependencies that are included in the CPF application itself must be marked with a scope of <tt>provided</tt>. If they are dependencies of other modules then they should be excluded from that dependency. CPF ignores any dependencies to the CPF libraries or the libraries it uses. This ensures that the correct versions of these libraries are used at runtime.</p> 
+  <p>Any dependencies to test frameworks such as junit must be included using the <tt>test</tt> scope so that they are not included in the jar. Also any test code must be included below <tt>src/test</tt> as opposed to <tt>src/main</tt>.</p> 
+ </div> 
+ <div class="section"> 
+  <h3 id="JDBC_Dependencies">JDBC Dependencies</h3> 
+  <p>The CPF supports the Oracle and PostgreSQL with PostGIS extensions JDBC drivers. The dependencies to these drivers are included through the <tt>cpf-api-plugin</tt> dependency.</p> 
+  <blockquote> 
+   <p>*<i>NOTE:</i> At this time no other versions of these JDBC drivers or 3rd party JDBC drivers are supported. Any dependencies to those drivers must be excluded from the plug-in’s dependencies. Other JDBC driver versions may interfere with the running of the CPF application.</p> 
+  </blockquote> 
+ </div> 
+ <div class="section"> 
+  <h3 id="Build_the_plug-in">Build the plug-in</h3> 
+  <p>The plug-in is built using maven. Use the following command to create a clean build that is deployed to your local maven repository.</p> 
+  <div class="source"> 
+   <div class="source"> 
+    <pre>mvn clean install
+</pre> 
+   </div> 
+  </div> 
+  <p>The plug-in must be deployed to a maven repository so that the CPF can download the plug-in. If on a developers workstation a local maven cache can be used instead of this step.</p> 
+  <div class="source"> 
+   <div class="source"> 
+    <pre>mvn deploy
+</pre> 
+   </div> 
+  </div> 
+ </div> 
+ <div class="section"> 
+  <h3 id="Deploy_a_Plug-in">Deploy a Plug-in</h3> 
+  <p>Plug-ins are deployed dynamically using the CPF admin application. Follow this procedure to deploy a new module.</p> 
+  <ol style="list-style-type: decimal"> 
+   <li>Open the CPF modules admin page.</li> 
+   <li>Click the Add button on the Modules page.</li> 
+   <li>Enter the project acronym as the module name (e.g. DEMO), it will be converted to upper case.</li> 
+   <li>Enter in the maven module Id for your plug-in in the format <tt>{groupId}:{artifactId}:{version}</tt>. For example <tt>com.myapplication:demo:1.0.0-SNAPSHOT</tt>.</li> 
+   <li>Click the Save button</li> 
+   <li>The module view page will be displayed.</li> 
+  </ol> 
+  <p>If the version number of a module changes, follow this procedure to update the version for an existing module.</p> 
+  <ol style="list-style-type: decimal"> 
+   <li>Open the CPF modules admin page.</li> 
+   <li>Click on the name of the module in the table, this will open the module view page.</li> 
+   <li>Click on the name of the module in the table, this will open the module view page.</li> 
+   <li>Click Edit button to edit the module.</li> 
+   <li>Enter in the maven module Id for your plug-in in the format <tt>{groupId}:{artifactId}:{version}</tt>. For example <tt>com.myapplication:demo:1.0.0-SNAPSHOT</tt>.</li> 
+   <li>Click the Save button</li> 
+   <li>The module view page will be displayed.</li> 
+   <li>Click the restart button to load the new version of the module.</li> 
+  </ol> 
+  <blockquote> 
+   <p><b>NOTE:</b> You cannot change the name of the module. Delete the existing module and create a new one.</p> 
+  </blockquote> 
  </div> 
  <div class="section"> 
   <h3 id="API_Documentation_and_Download">API Documentation and Download</h3> 
