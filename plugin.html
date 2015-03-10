@@ -180,10 +180,44 @@
 								<li><a href="#Add_Dependencies" title="Add Dependencies">Add Dependencies</a></li>
 								<li><a href="#JDBC_Dependencies" title="JDBC Dependencies">JDBC Dependencies</a></li>
 								<li><a href="#Build_the_plug-in" title="Build the plug-in">Build the plug-in</a></li>
+								<li><a href="#Deploy_a_Plug-in" title="Deploy a Plug-in">Deploy a Plug-in</a></li>
 
 							</ul>
 						</li>
-						<li class="toplevel"><a href="#Deploy_a_Plug-in" title="Deploy a Plug-in">Deploy a Plug-in</a></li>
+						<li class="dropdown">
+							<a href="#Business_Application_Class" title="Business Application Class" class="dropdown-toggle" role="button" data-toggle="dropdown" data-target="#">Business Application Class <b class="caret"></b></a>
+							<ul class="dropdown-menu" role="menu">
+								<!-- Repeat the item, otherwise it is not clickable as the dropdown root -->
+								<li><a href="#Business_Application_Class" title="Business Application Class">Business Application Class</a></li>
+								<li class="divider"></li>
+								<li><a href="#Java_Class" title="Java Class">Java Class</a></li>
+								<li><a href="#Plug-in_Spring_Configuration_File" title="Plug-in Spring Configuration File">Plug-in Spring Configuration File</a></li>
+								<li><a href="#Plug-in_Resource_Beans" title="Plug-in Resource Beans">Plug-in Resource Beans</a></li>
+								<li><a href="#Plug-in_Job_Parameters__Structured_Request_Parameters" title="Plug-in Job Parameters & Structured Request Parameters">Plug-in Job Parameters & Structured Request Parameters</a></li>
+								<li><a href="#Per_request_input_data" title="Per request input data">Per request input data</a></li>
+								<li class="dropdown-submenu">
+									<a href="#Structured_Result_Attributes" title="Structured Result Attributes">Structured Result Attributes</a>
+									<ul class="dropdown-menu" role="menu">
+								<li><a href="#List_of_Structured_Result_Attributes" title="List of Structured Result Attributes">List of Structured Result Attributes</a></li>
+
+									</ul>
+								</li>
+								<li><a href="#Structured_Data_Geometry_Request_Parameters_and_Result_Attributes" title="Structured Data Geometry Request Parameters and Result Attributes">Structured Data Geometry Request Parameters and Result Attributes</a></li>
+								<li><a href="#Geometry_Job__Request_Parameters" title="Geometry Job & Request Parameters">Geometry Job & Request Parameters</a></li>
+								<li class="dropdown-submenu">
+									<a href="#Geometry_Result_Attributes" title="Geometry Result Attributes">Geometry Result Attributes</a>
+									<ul class="dropdown-menu" role="menu">
+								<li><a href="#Geometry_Processing" title="Geometry Processing">Geometry Processing</a></li>
+
+									</ul>
+								</li>
+								<li><a href="#Per_request_result_data" title="Per request result data<">Per request result data<</a></li>
+								<li><a href="#Execute_method" title="Execute method">Execute method</a></li>
+								<li><a href="#Logging" title="Logging">Logging</a></li>
+								<li><a href="#Memory_Management" title="Memory Management">Memory Management</a></li>
+
+							</ul>
+						</li>
 						<li class="toplevel"><a href="#API_Documentation_and_Download" title="API Documentation and Download">API Documentation and Download</a></li>
 						</ul>
 					</div>
@@ -369,32 +403,383 @@ mvn \
     </div> 
    </div> 
   </div> 
+  <div class="section"> 
+   <h4 id="Deploy_a_Plug-in">Deploy a Plug-in</h4> 
+   <p>Plug-ins are deployed dynamically using the CPF admin application. Follow this procedure to deploy a new module.</p> 
+   <ol style="list-style-type: decimal"> 
+    <li>Open the CPF modules admin page.</li> 
+    <li>Click the Add button on the Modules page.</li> 
+    <li>Enter the project acronym as the module name (e.g. DEMO), it will be converted to upper case.</li> 
+    <li>Enter in the maven module Id for your plug-in in the format <tt>{groupId}:{artifactId}:{version}</tt>. For example <tt>com.myapplication:demo:1.0.0-SNAPSHOT</tt>.</li> 
+    <li>Click the Save button</li> 
+    <li>The module view page will be displayed.</li> 
+   </ol> 
+   <p>If the version number of a module changes, follow this procedure to update the version for an existing module.</p> 
+   <ol style="list-style-type: decimal"> 
+    <li>Open the CPF modules admin page.</li> 
+    <li>Click on the name of the module in the table, this will open the module view page.</li> 
+    <li>Click on the name of the module in the table, this will open the module view page.</li> 
+    <li>Click Edit button to edit the module.</li> 
+    <li>Enter in the maven module Id for your plug-in in the format <tt>{groupId}:{artifactId}:{version}</tt>. For example <tt>com.myapplication:demo:1.0.0-SNAPSHOT</tt>.</li> 
+    <li>Click the Save button</li> 
+    <li>The module view page will be displayed.</li> 
+    <li>Click the restart button to load the new version of the module.</li> 
+   </ol> 
+   <blockquote> 
+    <p><b>NOTE:</b> You cannot change the name of the module. Delete the existing module and create a new one.</p> 
+   </blockquote> 
+  </div> 
  </div> 
  <div class="section"> 
-  <h3 id="Deploy_a_Plug-in">Deploy a Plug-in</h3> 
-  <p>Plug-ins are deployed dynamically using the CPF admin application. Follow this procedure to deploy a new module.</p> 
-  <ol style="list-style-type: decimal"> 
-   <li>Open the CPF modules admin page.</li> 
-   <li>Click the Add button on the Modules page.</li> 
-   <li>Enter the project acronym as the module name (e.g. DEMO), it will be converted to upper case.</li> 
-   <li>Enter in the maven module Id for your plug-in in the format <tt>{groupId}:{artifactId}:{version}</tt>. For example <tt>com.myapplication:demo:1.0.0-SNAPSHOT</tt>.</li> 
-   <li>Click the Save button</li> 
-   <li>The module view page will be displayed.</li> 
-  </ol> 
-  <p>If the version number of a module changes, follow this procedure to update the version for an existing module.</p> 
-  <ol style="list-style-type: decimal"> 
-   <li>Open the CPF modules admin page.</li> 
-   <li>Click on the name of the module in the table, this will open the module view page.</li> 
-   <li>Click on the name of the module in the table, this will open the module view page.</li> 
-   <li>Click Edit button to edit the module.</li> 
-   <li>Enter in the maven module Id for your plug-in in the format <tt>{groupId}:{artifactId}:{version}</tt>. For example <tt>com.myapplication:demo:1.0.0-SNAPSHOT</tt>.</li> 
-   <li>Click the Save button</li> 
-   <li>The module view page will be displayed.</li> 
-   <li>Click the restart button to load the new version of the module.</li> 
-  </ol> 
-  <blockquote> 
-   <p><b>NOTE:</b> You cannot change the name of the module. Delete the existing module and create a new one.</p> 
-  </blockquote> 
+  <h3 id="Business_Application_Class">Business Application Class</h3> 
+  <div class="section"> 
+   <h4 id="Java_Class">Java Class</h4> 
+   <p>A business application plug-in is implemented as a Java class with the <a href="cpf-api-plugin/java-api/#ca.bc.gov.open.cpf.plugin.api.BusinessApplicationPlugin">BusinessApplicationPlugin</a> annotation. See <a href="cpf-api-plugin/java-api/#ca.bc.gov.open.cpf.plugin.api.BusinessApplicationPlugin">BusinessApplicationPlugin</a> for details of the annotation elements that can be used to configure the business application.</p> 
+   <p>A single plug-in module can have more than one plug-in class, one for each plug-in provided by that module.</p> 
+  </div> 
+  <div class="section"> 
+   <h4 id="Plug-in_Spring_Configuration_File">Plug-in Spring Configuration File</h4> 
+   <p>The CPF business application plug-in classes are registered with the CPF by including the plug-in definition spring file <tt>src/main/resources/META-INF/ca.bc.gov.open.cpf.plugin.sf.xml</tt> in the Maven project.</p> 
+   <p>The following file shows an example of this file.</p> 
+   <div class="source"> 
+    <div class="source"> 
+     <pre>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans
+&nbsp; xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+&nbsp; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+&nbsp; xmlns:util=&quot;http://www.springframework.org/schema/util&quot;
+&nbsp; xmlns:p=&quot;http://www.springframework.org/schema/p&quot;
+&nbsp; xsi:schemaLocation=&quot;
+    http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/util
+    http://www.springframework.org/schema/util/spring-util-3.0.xsd
+&nbsp; &quot;
+&gt;
+&nbsp; &lt;util:list id=&quot;beanImports&quot;&gt;
+&nbsp;  &lt;value&gt;classpath:/ca/bc/gov/demo/Demo.sf.xml&lt;/value&gt;
+&nbsp; &lt;/util:list&gt;
+
+&nbsp; &lt;bean
+&nbsp;  id=&quot;demo&quot;
+&nbsp;  class=&quot;ca.bc.gov.demo.DemoPlug-in&quot;
+&nbsp;  p:dataSource-ref=&quot;demoDataSource&quot;
+&nbsp;  scope=&quot;prototype&quot; /&gt;
+&lt;/beans&gt;
+</pre> 
+    </div> 
+   </div> 
+   <p>This file may only contain bean definitions for the plug-ins and an optional <b>beanImports</b> list.</p> 
+   <p>The bean definitions must have the id attribute equal to the business application plug-in name defined in the plug-in class. The class must be the fully qualified class name of the plug-in class. The scope on the bean must be set to prototype. This ensures that a new instance of the plug-in be created on each request to get the bean. The <a class="externalLink" href="http://static.springsource.org/spring/docs/3.0.x/spring-framework-reference/html/beans.html#beans-p-namespace">p:{propertyName}</a> or <a class="externalLink" href="http://static.springsource.org/spring/docs/3.0.x/spring-framework-reference/html/beans.html#beans-p-namespace">p:{propertyName}-ref</a> attribute styles can be used to inject dependencies into the bean when it is created.</p> 
+   <p>If the plug-in requires other beans such as JDBC data sources or a caching service that are expensive to create these must be defined in plug-in resource spring configuration files. The plug-in archetype includes a blank spring file for this purpose. The <tt>beanImports</tt> list includes a reference to each plug-in resource spring file used by the plug-ins. This is used instead of the spring <tt>import</tt> mechanism so that the beans defined in those files are only instantiated on the worker nodes. Within the plug-in definition spring file no regular spring imports can be used, spring imports can however be used in the plug-in resource spring files. Additional <tt>beanImports</tt> can be added if required.</p> 
+  </div> 
+  <div class="section"> 
+   <h4 id="Plug-in_Resource_Beans">Plug-in Resource Beans</h4> 
+   <p>A new instance of the plug-in class is created for each request processed in a job. Therefore the plug-in class should not perform any complex instantiation in the constructor. Instead any resources (such as data sources) or a caching service should be defined as singleton beans in the plug-in resource spring files.</p> 
+   <p>The plug-in bean will have a property (set/get method pair) for each resource bean it uses.</p> 
+   <div class="source"> 
+    <div class="source"> 
+     <pre>private DataSource dataSource;
+
+private void setDataSource(DataSource dataSource) {
+&nbsp; this.dataSource = dataSource;
+}
+
+private DataSource getDataSource() {
+&nbsp; return dataSource;
+}
+</pre> 
+    </div> 
+   </div> 
+   <p>The ca/bc/gov/demo/Demo.sf.xml plug-in resource spring file would define the bean as shown below.</p> 
+   <blockquote> 
+    <p><b>NOTE:</b> this example introduces the <tt>JdbcDataSourceFactoryBean</tt>. This can be used to create a pooling data source without needing to know the underlying database data source used. By changing the URL to an Oracle JDBC URL it will create an Oracle data source. The config properties are set on the data source instance. Consult the database vendor’s documentation for the available parameters.</p> 
+   </blockquote> 
+   <div class="source"> 
+    <div class="source"> 
+     <pre>&lt;bean
+&nbsp;&nbsp;id=&quot;demoDataSource&quot;
+&nbsp; class=&quot;com.revolsys.jdbc.io.JdbcDataSourceFactoryBean&quot;
+&nbsp; p:url=&quot;jdbc:postgresql://localhost:5432/demo&quot;
+&nbsp; p:username=&quot;demo&quot;
+&nbsp; p:password=&quot;12345678&quot;
+&gt;
+&nbsp; &lt;property
+&nbsp;  name=&quot;config&quot;
+&nbsp; &gt;
+&nbsp;  &lt;map&gt;
+&nbsp;&nbsp;&nbsp;  &lt;entry
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  key=&quot;initialConnections&quot;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  value=&quot;0&quot; /&gt;
+&nbsp;&nbsp;&nbsp;  &lt;entry
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  key=&quot;maxConnections&quot;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  value=&quot;10&quot; /&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/map&gt;
+&nbsp; &lt;/property&gt;
+&lt;/bean&gt;
+</pre> 
+    </div> 
+   </div> 
+   <blockquote> 
+    <p>*<i>NOTE:</i> Beans should not be defined with <tt>lazy-init=&quot;true&quot;</tt>. This will cause the system to think the plug-in has been loaded when not all beans are ready. This can cause worker threads to be blocked waiting for the beans to initialize.</p> 
+   </blockquote> 
+   <p>Finally the demoDataSource bean will be injected into the <tt>dataSource</tt> property on the <tt>demo</tt> bean definition in the plug-in definition spring file.</p> 
+   <div class="source"> 
+    <div class="source"> 
+     <pre>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans
+&nbsp; xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+&nbsp; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+&nbsp; xmlns:util=&quot;http://www.springframework.org/schema/util&quot;
+&nbsp; xmlns:p=&quot;http://www.springframework.org/schema/p&quot;
+&nbsp; xsi:schemaLocation=&quot;
+&nbsp;   http://www.springframework.org/schema/beans
+&nbsp;   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+&nbsp;   http://www.springframework.org/schema/util
+&nbsp;   http://www.springframework.org/schema/util/spring-util-3.0.xsd
+&nbsp; &quot;
+&gt;
+&nbsp; &lt;util:list id=&quot;&lt;b&gt;beanImports&lt;/b&gt;&quot;&gt;
+&nbsp;  &lt;value&gt;classpath:/com/mycompany/demo/Demo.sf.xml&lt;/value&gt;
+&nbsp; &lt;/util:list&gt;
+
+  &lt;bean
+&nbsp;  id=&quot;demo&quot;
+&nbsp;  class=&quot;ca.bc.gov.demo.DemoPlug-in&quot;
+&nbsp;  p:dataSource-ref=&quot;demoDataSource&quot;
+&nbsp;  scope=&quot;prototype&quot; /&gt;
+&lt;/beans&gt;
+</pre> 
+    </div> 
+   </div> 
+   <p>Any required dependencies can be injected using the basic approach shown above.</p> 
+  </div> 
+  <div class="section"> 
+   <h4 id="Plug-in_Job_Parameters__Structured_Request_Parameters">Plug-in Job Parameters &amp; Structured Request Parameters</h4> 
+   <p>A plug-in can implement parameters that the user can specify when submitting a job. Parameters can be global for all the requests in a job using the <a href="cpf-api-plugin/java-api//#ca.bc.gov.open.cpf.plugin.api.JobParameter">JobParameter</a> annotation. Parameters for <a href="reference/structuredData.html">structured input data</a> plug-ins with <a href="cpf-api-plugin/java-api//#ca.bc.gov.open.cpf.plugin.api.BusinessApplicationPlugin.perRequestInputData">perRequestInputData</a>=false must have parameters specific to an individual request within the job using the <a href="cpf-api-plugin/java-api//#ca.bc.gov.open.cpf.plugin.api.RequestParameter">RequestParameter</a> annotation.</p> 
+   <p>Parameter methods can also have the following annotations.</p> 
+   <ul> 
+    <li>[](cpf-api-plugin/java-api//#ca.bc.gov.open.cpf.plugin.api.AllowedValues)</li> 
+    <li>[](cpf-api-plugin/java-api//#ca.bc.gov.open.cpf.plugin.api.DefaultValue)</li> 
+    <li>[](cpf-api-plugin/java-api//#ca.bc.gov.open.cpf.plugin.api.GeometryConfiguration)</li> 
+    <li>[](cpf-api-plugin/java-api//#ca.bc.gov.open.cpf.plugin.api.Required)</li> 
+   </ul> 
+  </div> 
+  <div class="section"> 
+   <h4 id="Per_request_input_data">Per request input data</h4> 
+   <p><a href="reference/opaqueData.html">Opaque input data</a> plug-ins with <a href="cpf-api-plugin/java-api//#ca.bc.gov.open.cpf.plugin.api.BusinessApplicationPlugin.perRequestInputData">perRequestInputData</a>=true must implement the following methods to set the content type of the binary blob and URL which can be used to access the binary blob of the input data for that request. The input stream for the URL can be read in the execute method of the plug-in. When getting the input stream for the URL any HTTP redirects must be followed to get the final content to read.</p> 
+   <div class="source"> 
+    <div class="source"> 
+     <pre>private URL inputDataUrl;
+
+private String inputDataContentType;
+
+public void setInputDataUrl(final URL inputDataUrl) {
+&nbsp; this.inputDataUrl = inputDataUrl;
+}
+
+public void setInputDataContentType (final String inputDataContentType) {
+&nbsp; this.inputDataContentType = inputDataContentType;
+}
+</pre> 
+    </div> 
+   </div> 
+  </div> 
+  <div class="section"> 
+   <h4 id="Structured_Result_Attributes">Structured Result Attributes</h4> 
+   <p><a href="reference/structuredData.html">Structured result data</a> plug-ins with <a href="cpf-api-plugin/java-api//#ca.bc.gov.open.cpf.plugin.api.BusinessApplicationPlugin.perRequestResultData">perRequestInputData</a>=false must implement result data properties using the <a href="cpf-api-plugin/java-api//#ca.bc.gov.open.cpf.plugin.api.ResultAttribute">ResultAttribute</a> annotation for more details.</p> 
+   <p>Parameter methods can also have the following annotations.</p> 
+   <ul> 
+    <li>[](cpf-api-plugin/java-api//#ca.bc.gov.open.cpf.plugin.api.GeometryConfiguration)</li> 
+   </ul> 
+   <div class="section"> 
+    <h5 id="List_of_Structured_Result_Attributes">List of Structured Result Attributes</h5> 
+    <p><a href="reference/structuredData.html">Structured result data</a> plug-ins can use the <a href="cpf-api-plugin/java-api//#ca.bc.gov.open.cpf.plugin.api.ResultList">ResultList</a> annotation to return multiple results from a single request.</p> 
+   </div> 
+  </div> 
+  <div class="section"> 
+   <h4 id="Structured_Data_Geometry_Request_Parameters_and_Result_Attributes">Structured Data Geometry Request Parameters and Result Attributes</h4> 
+   <p>The CPF includes spatial support for structured input data and result data files. This enables plug-ins to define job parameters, request parameters and result attributes to use <a class="externalLink" href="http://tsusiatsoftware.net/jts/main.html">Java Topology Suite</a> (JTS) Geometry objects. The CPF reads the input data files (e.g. ESRI Shapefile in a Zip file) and converts the values into JTS Geometry objects for processing by the business application. After processing the JTS Geometry objects are converted back into the requested output spatial file format. The CPF also handles projection of the geometries if required.</p> 
+   <p>The CPF can use <a class="externalLink" href="http://en.wikipedia.org/wiki/Well-known_text">Well-known_text</a> (WKT) and <a class="externalLink" href="http://postgis.org/documentation/manual-1.5/ch04.html#EWKB_EWKT">Extended WKT</a> (EWKT) geometry strings for geometries in the input data files submitted by the user or the result data files generated by the CPF. This can be used in non-spatial file formats or where there are multiple geometries in a spatial file format that only supports a single geometry. These EWKT geometries will be converted to JST Geometry objects. EWKT geometries are also used for job parameters as they are passed as HTML form parameters. We however don’t recommend using geometries as job parameters.</p> 
+  </div> 
+  <div class="section"> 
+   <h4 id="Geometry_Job__Request_Parameters">Geometry Job &amp; Request Parameters</h4> 
+   <p>Adding a geometry job parameter or request parameter is exactly the same as any other business application parameter. The parameter type must be a JTS Geometry class or subclass. The only difference is that the <a href="cpf-api-plugin/java-api//#ca.bc.gov.open.cpf.plugin.api.GeometryConfiguration">GeometryConfiguration</a> annotation can also be specified. If the configuration is not set on the method then the annotation from the class is used.</p> 
+  </div> 
+  <div class="section"> 
+   <h4 id="Geometry_Result_Attributes">Geometry Result Attributes</h4> 
+   <p>Adding a geometry result attribute is exactly the same as any other business application result attributes. The return type must be a JTS Geometry class or subclass. The only difference is that the <a href="cpf-api-plugin/java-api//#ca.bc.gov.open.cpf.plugin.api.GeometryConfiguration">GeometryConfiguration</a> annotation can also be specified. If the configuration is not set on the method then the annotation from the class is used.</p> 
+   <blockquote> 
+    <p><b>NOTE:</b> All geometries created by a business application must have the SRID set on the geometry object.</p> 
+   </blockquote> 
+   <p>The user when creating a job can override the srid, numAxis, scaleFactorXy and scaleFactorZ. The required conversion will be performed by the CPF. The business application can implement any one of the following methods to receive the values requested by the user. This might be useful if the application wants to perform it’s own projection or reduce work by not creating z-values if they are not required.</p> 
+   <div class="source"> 
+    <div class="source"> 
+     <pre>public void setResultNumAxis(final int resultNumAxis) {
+&nbsp; this.resultNumAxis = resultNumAxis;
+}
+
+public void setResultScaleXy(final double resultScaleXy) {
+&nbsp; this.resultScaleXy = resultScaleXy;
+}
+
+public void setResultScaleZ(final double resultScaleZ) {
+&nbsp;&nbsp;this.resultScaleZ = resultScaleZ;
+}
+
+public void setResultSrid(final int resultSrid) {
+&nbsp;  this.resultSrid = resultSrid;
+}
+</pre> 
+    </div> 
+   </div> 
+   <div class="section"> 
+    <h5 id="Geometry_Processing">Geometry Processing</h5> 
+    <p>See the <a href="cpf-api-plugin/java-api//#ca.bc.gov.open.cpf.plugin.api.GeometryFactory">GeometryFactory</a> class for details on creating <a class="externalLink" href="http://tsusiatsoftware.net/jts/main.html">Java Topology Suite</a> (JTS) geometry objects.</p> 
+   </div> 
+  </div> 
+  <div class="section"> 
+   <h4 id="Per_request_result_data">Per request result data&lt;</h4> 
+   <p><a href="reference/opaqueData.html">Opaque input data</a> plug-ins with <a href="cpf-api-plugin/java-api//#ca.bc.gov.open.cpf.plugin.api.BusinessApplicationPlugin.perRequestResultData">perRequestResultData</a>=true cannot return result attributes. They can only return the binary content of the result data. The plug-in must implement the following methods. The <tt>resultData</tt> output stream can be used to write the result binary blob data. The <tt>resultDataContentType</tt> indicates to the plug-in the type of result data it should generate.</p> 
+   <div class="source"> 
+    <div class="source"> 
+     <pre>private OutputStream resultData;
+
+private String resultDataContentType;
+
+public void setResultData(final OutputStream resultData) {
+  this.resultData = resultData;
+}
+
+public void setResultDataContentType(final String format) {
+  this.resultDataContentType = format;
+}
+</pre> 
+    </div> 
+   </div> 
+  </div> 
+  <div class="section"> 
+   <h4 id="Execute_method">Execute method</h4> 
+   <p>The plug-in must implement a public void <tt>execute()</tt> method. When the CPF has set all the parameters on the plug-in it invokes the execute method so that the plug-in can perform the request using the parameters and generate the result.</p> 
+   <p>The following is a simple example of an execute method that takes the value request field, calculates the square and stores this in the square result attribute.</p> 
+   <div class="source"> 
+    <div class="source"> 
+     <pre>public void execute() {
+  this.square = this.value * this.value;
+}
+</pre> 
+    </div> 
+   </div> 
+   <p>The following is an example of a per request input data execute method. The plug-in gets the input stream from the inputDataUrl, performs some processing on the data and stores the result in the digest result attribute.</p> 
+   <div class="source"> 
+    <div class="source"> 
+     <pre>public void execute() {
+  try {
+    MessageDigest digester = MessageDigest.getInstance(&quot;MD5&quot;);
+    InputStream in = this.inputDataUrl.openStream();
+    byte[] buffer = new byte[4096];
+    for (int count = in.read(buffer); count != -1; count = in.read(buffer)) {
+  &nbsp;    digester.update(buffer, 0, count);
+  &nbsp;  }
+    byte[] data = digester.digest();
+    this.digest = new String(Hex.encodeHex(data));
+  } catch (NoSuchAlgorithmException e) {
+    throw new IllegalArgumentException(&quot;Cannot find digest algorithm &quot; + algorithmName, e);
+  } catch (IOException e) {
+    throw new RuntimeException(&quot;Cannot read input data&quot;, e);
+  }
+}
+</pre> 
+    </div> 
+   </div> 
+   <p>The following is an example of a per request result data execute method. The plug-in creates query string parameters from the plug-in request parameters and creates a connection to a web service. The plug-in then writes the response from the web service to the result data.</p> 
+   <div class="source"> 
+    <div class="source"> 
+     <pre>public void execute() {
+&nbsp; Map&lt;String, Object&gt; parameters = new LinkedHashMap&lt;String, Object&gt;();
+&nbsp; parameters.put(&quot;SERVICE&quot;, &quot;WMS&quot;);
+&nbsp; parameters.put(&quot;VERSION&quot;, &quot;1.1.1&quot;);
+&nbsp; parameters.put(&quot;REQUEST&quot;, &quot;GetMap&quot;);
+&nbsp; parameters.put(&quot;LAYERS&quot;, &lt;b&gt;this.layers&lt;/b&gt;);
+&nbsp; parameters.put(&quot;STYLES&quot;, &lt;b&gt;this.styles&lt;/b&gt;);
+&nbsp; parameters.put(&quot;CRS&quot;, &lt;b&gt;this.crs&lt;/b&gt;);
+&nbsp; parameters.put(&quot;BBOX&quot;, &lt;b&gt;this.bbox&lt;/b&gt;);
+&nbsp; parameters.put(&quot;WIDTH&quot;, &lt;b&gt;this.width&lt;/b&gt;);
+&nbsp; parameters.put(&quot;HEIGHT&quot;, &lt;b&gt;this.height&lt;/b&gt;);
+&nbsp; parameters.put(&quot;FORMAT&quot;, &lt;b&gt;this.resultDataContentType&lt;/b&gt;);
+&nbsp; parameters.put(&quot;EXCEPTIONS&quot;, &quot;INIMAGE&quot;);
+&nbsp; String url = UrlUtil.getUrl(&lt;b&gt;this.wmsUrl&lt;/b&gt;, parameters);
+&nbsp; try {
+&nbsp;&nbsp;&nbsp; InputStream in = new URL(url).openStream();
+&nbsp;&nbsp;&nbsp; try {
+&nbsp;&nbsp;&nbsp;&nbsp;  FileUtil.copy(in, &lt;b&gt;this.resultData&lt;/b&gt;);
+&nbsp;&nbsp;  } finally {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; FileUtil.closeSilent(&lt;b&gt;this.resultData&lt;/b&gt;);
+&nbsp;&nbsp;&nbsp;&nbsp;  FileUtil.closeSilent(in);
+&nbsp;&nbsp;&nbsp; }
+&nbsp; } catch (MalformedURLException e) {
+&nbsp;&nbsp;&nbsp; throw new IllegalArgumentException(url + &quot; is not valid URL&quot;);
+&nbsp; } catch (IOException e) {
+&nbsp;&nbsp;  throw new RuntimeException(&quot;Unable to get map&quot;, e);
+&nbsp; }
+}
+</pre> 
+    </div> 
+   </div> 
+  </div> 
+  <div class="section"> 
+   <h4 id="Logging">Logging</h4> 
+   <p>The CPF automatically creates <a href="admin/log.html">Log Files</a> for each module and business application running within the master and worker processes. For a business application the log level can be changed using the <a href="admin/app.html#edit">Edit Business Application</a> page without requiring a restart to the module.</p> 
+   <blockquote> 
+    <p><b>NOTE:</b> Applications MUST NOT include logging configuration files (e.g. log4j.xml) in their jars. They must also not manually create Appenders or otherwise change the logging configuration.</p> 
+   </blockquote> 
+   <p>The preferred approach is for business application plug-ins to use the <a href="cpf-api-plugin/java-api//#ca.bc.gov.open.cpf.plugin.api.log.AppLog">AppLog</a> class for logging to have the messages appear in the appropriate log file.</p> 
+   <p>The plug-in The plug-in may also use <a class="externalLink" href="http://www.slf4j.org/">slf4j</a> (preferred) or <a class="externalLink" href="http://logging.apache.org/log4j/">log4j</a> or with the following logger name sub trees.</p> 
+   <ul> 
+    <li>Loggers below <tt>{ModuleName}.{BusinessApplicationName}</tt> (e.g. <tt>DEMO.demoApp</tt>).</li> 
+    <li>Loggers below the <a href="cpf-api-plugin/java-api//#ca.bc.gov.open.cpf.plugin.api.BusinessApplicationPlugin.packageName">BusinessApplicationPlugin.packageName</a> (e.g. <tt>ca.bc.gov.demo</tt>)</li> 
+   </ul> 
+  </div> 
+  <div class="section"> 
+   <h4 id="Memory_Management">Memory Management</h4> 
+   <p>Plug-ins must ensure that their data and classes can be garbage collected when the plug-in is stopped. Below are some guidelines for ensuring garbage collection.</p> 
+   <ul> 
+    <li>Avoid using the Java singleton pattern for cached data structures. The data won’t be released until the class is garbage collected (which maybe neve depending on the JVM). Use a spring bean with the default singleton scope instead.</li> 
+    <li>Avoid aspect oriented libraries, especially that use CGLIB. These sometimes create classes that can’t get garbage collected.</li> 
+    <li>If using Java introspection/reflection, ensure that class and method references are not stored in a cache owned by another JVM. CPF has code to perform cache clearing for commons beanutils.</li> 
+    <li>Implement a cleanup method on each bean (other than the plug-in prototype bean). This method must close any resources it created (e.g. database connections), clear any cached values and preferably set any fields to null. See the spring framework documentation for details on implementing <a class="externalLink" href="http://docs.spring.io/spring/docs/3.0.7.RELEASE/reference/beans.html#beans-factory-lifecycle-disposablebean">Destruction call-backs</a> or <a class="externalLink" href="http://docs.spring.io/spring/docs/3.0.7.RELEASE/reference/beans.html#beans-postconstruct-and-predestroy-annotations">@PreDestory</a> annotation. Spring will automatically call those methods when the plug-in is stopped.</li> 
+   </ul> 
+   <p>The CPF Tomcat JVM should be started with the following parameters to allow class unloading. Consult your JVM’s documentation for more details.</p> 
+   <div class="source"> 
+    <div class="source"> 
+     <pre>-XX:+UseConcMarkSweepGC -XX:+CMSClassUnloadingEnabled -XX:+UseCodeCacheFlushing
+</pre> 
+    </div> 
+   </div> 
+   <p>In a non-production environment you can also turn on the following option to see the classes that were garbage collected on the console output from the Tomcat command.</p> 
+   <div class="source"> 
+    <div class="source"> 
+     <pre>-XX:+TraceClassUnloading
+</pre> 
+    </div> 
+   </div> 
+   <p>The following procedure can be used to see if a CPF module can be un-loaded successfully.</p> 
+   <ol style="list-style-type: decimal"> 
+    <li>Restart the Tomcat JVM to ensure a clean start.</li> 
+    <li>Make sure the CPF module is started (don’t restart if already started).</li> 
+    <li>Stop the CPF module using the CPF admin application. Or to test CPF too undeploy the CPF web apps using the Tomcat manager.</li> 
+    <li>Use the jconsole tool that comes with the JDK (not JRE) to connect to the Tomcat Java process.</li> 
+    <li>Click on the memory tab.</li> 
+    <li>Click on ‘Perform GC’ about 5 times to force a garbage collection.</li> 
+    <li>Click on the Classes tab and see if the Loaded count is lower than the Total Loaded. This shows that some classes were garbage collected. You may need to do ‘Perform GC’ or wait a while as there is no contract as to when the class garbage collection will occur.</li> 
+    <li>The following command creates a memory dump of the JVM you will need to know the process id [PID] of the Tomcat JVM. <tt>jmap -dump:live,format=b,file=cpf.hprof {PID}</tt>.</li> 
+    <li>The cpf.hprof can be loaded into a Java Heap analyzer or the following command can be used to create a web server where you can browse the memory.</li> 
+    <li><tt>jhat -J-mx1024m cpf.hprof</tt> (<b>NOTE</b>: you may need more memory depending on the amount of memory used in the Tomcat JVM).</li> 
+    <li>Open [](<a class="externalLink" href="http://localhost:7000/">http://localhost:7000/</a>) in a web browser. The <a class="externalLink" href="http://localhost:7000/showInstanceCounts/">Show Instance Counts</a> page is the most useful as it shows the counts of objects by class for non core Java class.</li> 
+    <li>Check that the custom classes used by your application do no appear on this page. If they do then the application has not been garbage collected.</li> 
+    <li>Click the instances link next to a class to see the instances. From there you can navigate to see the references to that object. This will help identify where cleanup code should be implemented.</li> 
+   </ol> 
+  </div> 
  </div> 
  <div class="section"> 
   <h3 id="API_Documentation_and_Download">API Documentation and Download</h3> 
