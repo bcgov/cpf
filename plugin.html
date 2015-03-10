@@ -78,7 +78,7 @@
 									<li ><a href="cpf-api-worker/index.html" title="CPF Worker API">CPF Worker API</a></li>
 									<li ><a href="cpf-security-openid/index.html" title="CPF Security OpenID">CPF Security OpenID</a></li>
 									<li ><a href="cpf-war-app/index.html" title="CPF Application WAR">CPF Application WAR</a></li>
-									<li ><a href="cpf-war-worker/index.html" title="Concurrent Processing Framework Base WAR Worker">Concurrent Processing Framework Base WAR Worker</a></li>
+									<li ><a href="cpf-war-worker/index.html" title="CPF Base WAR Worker">CPF Base WAR Worker</a></li>
 									<li ><a href="cpf-archetype-plugin/index.html" title="CPF Plug-in Archetype">CPF Plug-in Archetype</a></li>
 									<li ><a href="cpf-archetype-web/index.html" title="CPF Web Archetype">CPF Web Archetype</a></li>
 									<li ><a href="cpf-plugin-test/index.html" title="CPF Test Plug-ins">CPF Test Plug-ins</a></li>
@@ -916,63 +916,7 @@ public void setResultDataContentType(final String format) {
      <tr class="a"> 
       <td><tt>formSectionsMap</tt><br /> <tt>formSectionsMapInstant</tt><br /> <tt>formSectionsMapSingle</tt><br /> <tt>formSectionsMapMultiple</tt></td> 
       <td><tt>List&lt;String&gt;</tt></td> 
-      <td>This property is used to customize the sections and the fields in each section that appear on the job submission forms. The section field can be specified for all forms <tt>formSectionsMap</tt> or for a specific form <tt>formSectionsMapInstant</tt>, <tt>formSectionsMapSingle</tt>, <tt>formSectionsMapMultiple</tt>. The property is a <tt>map</tt> where the <tt>key</tt> on the <tt>entry</tt> is the name of the section and the value is a <tt>list</tt> of the field names. Section names should be in lowerCamelCase notation. The titles on the sections are converted to capitalized words from the section name (e.g. Lower Camel Case). Fields not applicable for a form will not be displayed. Any business application parameters not listed will be put into the <tt>applicationParameters</tt> section. Any CPF parameters not listed will be in the sections shown below. 
-       <div> 
-        <pre class="prettyprint"><map>
-  
-    
-      inputDataContentType
-      inputDataUrl
-      inputData
-      srid
-    
-  
-  
-    
-      resultSrid
-      resultDataContentType
-      format
-    
-  
-  
-    
-      resultNumAxis
-      resultScaleFactorXy
-      resultScaleFactorZ
-    
-  
-  
-    
-      notificationEmail
-      notificationUrl
-    
-  
-  
-    
-      cpfPlug-inTest
-      cpfMinExecutionTime
-      cpfMeanExecutionTime
-      cpfStandardDeviation
-      cpfMaxExecutionTime
-      cpfMeanNumResults
-    
-  
-</map></pre> 
-       </div> Default Form Fields by Section 
-       <div> 
-        <pre class="prettyprint">
-  
-    <map>
-      
-        <map> jobParameter1 </map>
-      
-      
-        <map> jobParameter1 </map>
-      
-    </map>
-  
-</pre> 
-       </div> Plug-in Form Fields by Section Customization </td> 
+      <td>This property is used to customize the sections and the fields in each section that appear on the job submission forms. The section field can be specified for all forms <tt>formSectionsMap</tt> or for a specific form <tt>formSectionsMapInstant</tt>, <tt>formSectionsMapSingle</tt>, <tt>formSectionsMapMultiple</tt>. The property is a <tt>map</tt> where the <tt>key</tt> on the <tt>entry</tt> is the name of the section and the value is a <tt>list</tt> of the field names. Section names should be in lowerCamelCase notation. The titles on the sections are converted to capitalized words from the section name (e.g. Lower Camel Case). Fields not applicable for a form will not be displayed. Any business application parameters not listed will be put into the <tt>applicationParameters</tt> section. Any CPF parameters not listed will be in the sections shown below. **Default Form Fields by Section** ```xml <map> inputDataContentType inputDataUrl inputData srid resultSrid resultDataContentType format resultNumAxis resultScaleFactorXy resultScaleFactorZ notificationEmail notificationUrl cpfPlug-inTest cpfMinExecutionTime cpfMeanExecutionTime cpfStandardDeviation cpfMaxExecutionTime cpfMeanNumResults </map> ``` **Plug-in Form Fields by Section Customization** ```xml <map> <map> jobParameter1 </map> <map> jobParameter1 </map> </map> ``` </td> 
      </tr> 
      <tr class="b"> 
       <td><tt>inputDataContentType</tt> or <tt>inputDataFileExtension</tt></td> 
@@ -1381,7 +1325,7 @@ public void setResultDataContentType(final String format) {
     <div class="source"> 
      <pre>[
 &nbsp; {
-&nbsp;&nbsp;&nbsp;&nbsp;&quot;name&quot;: &quot;&lt;b&gt;DEMO_PARTNER&lt;/b&gt;&quot;,
+&nbsp;&nbsp;&nbsp;&nbsp;&quot;name&quot;: &quot;DEMO_PARTNER&quot;,
 &nbsp;&nbsp;&nbsp;&nbsp;&quot;permissions&quot;: [
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &quot;resourceClass&quot;&nbsp; : &quot;reportName&quot;,
@@ -1391,7 +1335,7 @@ public void setResultDataContentType(final String format) {
 &nbsp;&nbsp;&nbsp;&nbsp;]
 &nbsp; },
 &nbsp; {
-&nbsp;&nbsp;&nbsp; &quot;name&quot;: &lt;b&gt;BCGOV_INTERNAL&lt;/b&gt;,
+&nbsp;&nbsp;&nbsp; &quot;name&quot;: BCGOV_INTERNAL,
 &nbsp;&nbsp;&nbsp; &quot;permissions&quot;: [
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &quot;resourceClass&nbsp; : &quot;reportName&quot;,
