@@ -8,7 +8,7 @@
 
 	<head>
 		<meta charset="UTF-8" />
-		<title>Concurrent Processing Framework &#x2013; Plug-in Developer Guide</title>
+		<title>Concurrent Processing Framework &#x2013; Plug-in Guide</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="description" content="" />
 		<meta http-equiv="content-language" content="en" />
@@ -154,7 +154,7 @@
 			<ul class="breadcrumb">
 				<li><a href="./" title="CPF">CPF</a></li>
 				<li class="divider">/</li>
-				<li>Plug-in Developer Guide</li>
+				<li>Plug-in Guide</li>
 			</ul>
 		</div>
 		<hr class="toc-separator" />
@@ -168,8 +168,17 @@
 					</a>
 					<div class="nav-collapse collapse" id="toc-nav-collapse">
 						<ul id="toc" class="nav">
-						<li class="toplevel"><a href="#Plug-in_Developer_Guide" title="Plug-in Developer Guide">Plug-in Developer Guide</a></li>
-						<li class="toplevel"><a href="#Overview" title="Overview">Overview</a></li>
+						<li class="toplevel"><a href="#Plug-in_Guide" title="Plug-in Guide">Plug-in Guide</a></li>
+						<li class="dropdown">
+							<a href="#Overview" title="Overview" class="dropdown-toggle" role="button" data-toggle="dropdown" data-target="#">Overview <b class="caret"></b></a>
+							<ul class="dropdown-menu" role="menu">
+								<!-- Repeat the item, otherwise it is not clickable as the dropdown root -->
+								<li><a href="#Overview" title="Overview">Overview</a></li>
+								<li class="divider"></li>
+								<li><a href="#API__Download" title="API & Download">API & Download</a></li>
+
+							</ul>
+						</li>
 						<li class="dropdown">
 							<a href="#Maven_Project" title="Maven Project" class="dropdown-toggle" role="button" data-toggle="dropdown" data-target="#">Maven Project <b class="caret"></b></a>
 							<ul class="dropdown-menu" role="menu">
@@ -264,7 +273,6 @@
 
 							</ul>
 						</li>
-						<li class="toplevel"><a href="#API__Download" title="API & Download">API & Download</a></li>
 						</ul>
 					</div>
 				</div>
@@ -278,7 +286,7 @@
 			<div class="body-content">
 <div class="section"> 
  <div class="page-header">
-  <h2 id="Plug-in_Developer_Guide">Plug-in Developer Guide</h2>
+  <h2 id="Plug-in_Guide">Plug-in Guide</h2>
  </div> 
  <p>The Concurrent Processing Framework (CPF) Plug-in Developers Guide provides instructions for developers to be able to develop and test CPF plug-in modules containing business application plug-ins in their environment and to deliver them to the ministry.</p> 
  <p>See the Plug-in links in the menu on the left of this page for more details on developing a plug-in.</p> 
@@ -297,6 +305,28 @@
    <li>The list of structured results also creates a single output file for the user to download. There will be one record for each entry in the list of results, with a relative result number showing the order of the result in the list of results.</li> 
    <li>Like per request input data, per request result data returns one binary blob of data for each request. There will be one file for the user to download for each request. For example a WMS service would return a JPEG, or PNG for each map to render.</li> 
   </ul> 
+  <p>The CPF and plug-ins depend heavily on the <a class="externalLink" href="http://static.springsource.org/spring/docs/3.0.x/spring-framework-reference/html/">Spring Framework</a> and the XML configuration mechanism. Developers should have a least a basic understanding of defining spring beans and dependency injection.</p> 
+  <div class="section"> 
+   <h4 id="API__Download">API &amp; Download</h4> 
+   <p>The most recent version of the CPF is ${project.version}. For development purposes the most recent snapshot version of the CPF libraries and the trunk sub-tree in the subversion repository should be used. The snapshot and the trunk are only updated under controlled circumstances when new functionality or bug fixes are to be delivered to the plug-in developers. When delivering a final version of the application to the Ministry the plug-in must use the same version as is deployed to the Ministry’s server.</p> 
+   <p>Use the links in the following table to view the Plug-in API documentation or download the API libraries.</p> 
+   <table border="0" class="bodyTable table table-striped table-hover"> 
+    <thead> 
+     <tr class="a"> 
+      <th>API</th> 
+      <th>Documentation</th> 
+      <th>Download</th> 
+     </tr> 
+    </thead> 
+    <tbody> 
+     <tr class="b"> 
+      <td>Plug-in Java (6+)</td> 
+      <td><a href="java-api">API Docs</a></td> 
+      <td><a href="../../lib/cpf-api-plugin-${project.version}.jar">Download</a></td> 
+     </tr> 
+    </tbody> 
+   </table> 
+  </div> 
  </div> 
  <div class="section"> 
   <h3 id="Maven_Project">Maven Project</h3> 
@@ -1433,28 +1463,6 @@ public void setResultDataContentType(final String format) {
    <p>The BusinessApplicationPluginExecutor class allows developers to execute a single request against their plug-in without deploying it to the CPF infrastructure. The executor converts the input parameters to a JSON object and back again to simulate what happens in the internal CPF processing.</p> 
    <p>To create a test harness construct an instance of ca.bc.gov.open.cpf.plugin.api.BusinessApplicationPluginExecutor and then use one of the following methods to invoke the plug-in.</p> 
   </div> 
- </div> 
- <div class="section"> 
-  <h3 id="API__Download">API &amp; Download</h3> 
-  <p>The most recent version of the CPF is ${project.version}. For development purposes the most recent snapshot version of the CPF libraries and the trunk sub-tree in the subversion repository should be used. The snapshot and the trunk are only updated under controlled circumstances when new functionality or bug fixes are to be delivered to the plug-in developers. When delivering a final version of the application to the Ministry the plug-in must use the same version as is deployed to the Ministry’s server.</p> 
-  <p>The CPF and plug-ins depend heavily on the <a class="externalLink" href="http://static.springsource.org/spring/docs/3.0.x/spring-framework-reference/html/">Spring Framework</a> and the XML configuration mechanism. Developers should have a least a basic understanding of defining spring beans and dependency injection.</p> 
-  <p>Use the links in the following table to view the Plug-in API documentation or download the API libraries.</p> 
-  <table border="0" class="bodyTable table table-striped table-hover"> 
-   <thead> 
-    <tr class="a"> 
-     <th>API</th> 
-     <th>Documentation</th> 
-     <th>Download</th> 
-    </tr> 
-   </thead> 
-   <tbody> 
-    <tr class="b"> 
-     <td>Plug-in Java (6+)</td> 
-     <td><a href="java-api">API Docs</a></td> 
-     <td><a href="../../lib/cpf-api-plugin-${project.version}.jar">Download</a></td> 
-    </tr> 
-   </tbody> 
-  </table> 
  </div> 
 </div>
 			</div>
