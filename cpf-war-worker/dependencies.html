@@ -66,7 +66,7 @@
 									<li ><a href="../index.html" title="About">About</a></li>
 									<li ><a href="../install.html" title="Installation">Installation</a></li>
 									<li ><a href="../plugin.html" title="Plug-in Developer Guide">Plug-in Developer Guide</a></li>
-									<li ><a href="../client/index.html" title="Client Developer Guide">Client Developer Guide</a></li>
+									<li ><a href="../client.html" title="Client Developer Guide">Client Developer Guide</a></li>
 									<li class="dropdown-submenu disabled">
 										<a title="Reference">Reference</a>
 										<ul class="dropdown-menu">
@@ -237,11 +237,11 @@
      <td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></td> 
     </tr> 
     <tr class="a"> 
-     <td>javassist</td> 
+     <td>org.javassist</td> 
      <td><a class="externalLink" href="http://www.javassist.org/">javassist</a></td> 
-     <td>3.8.0.GA</td> 
+     <td>3.19.0-GA</td> 
      <td>jar</td> 
-     <td>-</td> 
+     <td><a class="externalLink" href="http://www.mozilla.org/MPL/MPL-1.1.html">MPL 1.1</a>-<a class="externalLink" href="http://www.gnu.org/licenses/lgpl-2.1.html">LGPL 2.1</a>-<a class="externalLink" href="http://www.apache.org/licenses/">Apache License 2.0</a></td> 
     </tr> 
    </tbody> 
   </table> 
@@ -264,7 +264,7 @@
     <tr class="b"> 
      <td>javax.servlet</td> 
      <td>servlet-api</td> 
-     <td>2.4</td> 
+     <td>2.5</td> 
      <td>jar</td> 
      <td>-</td> 
     </tr> 
@@ -713,7 +713,7 @@
      </table> 
     </div> 
     <ul> 
-     <li>javax.servlet:servlet-api:jar:2.4 (provided) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep2"><i class="icon-info-sign"></i></button> 
+     <li>javax.servlet:servlet-api:jar:2.5 (provided) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep2"><i class="icon-info-sign"></i></button> 
       <div id="_dep2" style="" class=" collapse"> 
        <table border="0" class="bodyTable table table-striped table-hover"> 
         <thead> 
@@ -728,7 +728,7 @@
         </tbody> 
        </table> 
       </div></li> 
-     <li>javassist:javassist:jar:3.8.0.GA (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep4"><i class="icon-info-sign"></i></button> 
+     <li>org.javassist:javassist:jar:3.19.0-GA (compile) <button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#_dep4"><i class="icon-info-sign"></i></button> 
       <div id="_dep4" style="" class=" collapse"> 
        <table border="0" class="bodyTable table table-striped table-hover"> 
         <thead> 
@@ -738,7 +738,7 @@
         </thead> 
         <tbody> 
          <tr class="b"> 
-          <td> <p><b>Description: </b>Javassist (JAVA programming ASSISTant) makes Java bytecode manipulation simple. It is a class library for editing bytecodes in Java.</p> <p><b>URL: </b><a class="externalLink" href="http://www.javassist.org/">http://www.javassist.org/</a></p> <p><b>Project License: </b>No license is defined for this project.</p></td> 
+          <td> <p><b>Description: </b>Javassist (JAVA programming ASSISTant) makes Java bytecode manipulation simple. It is a class library for editing bytecodes in Java.</p> <p><b>URL: </b><a class="externalLink" href="http://www.javassist.org/">http://www.javassist.org/</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.mozilla.org/MPL/MPL-1.1.html">MPL 1.1</a>, <a class="externalLink" href="http://www.gnu.org/licenses/lgpl-2.1.html">LGPL 2.1</a>, <a class="externalLink" href="http://www.apache.org/licenses/">Apache License 2.0</a></p></td> 
          </tr> 
         </tbody> 
        </table> 
@@ -1617,16 +1617,19 @@
  <h2 id="Licenses">Licenses</h2> 
  <p><b>Public Domain: </b>AOP alliance</p> 
  <p><b>Apache 2: </b>Joda time, RS Core, RS Oracle, RS PostgreSQL, RS Web</p> 
- <p><b>Unknown: </b>Javassist, sdoapi, servlet-api, spring-aop, spring-asm, spring-beans, spring-context, spring-context-support, spring-core, spring-expression, spring-jdbc, spring-tx, spring-web, spring-webmvc</p> 
+ <p><b>Unknown: </b>sdoapi, servlet-api, spring-aop, spring-asm, spring-beans, spring-context, spring-context-support, spring-core, spring-expression, spring-jdbc, spring-tx, spring-web, spring-webmvc</p> 
  <p><b>Eclipse Public License - v 1.0: </b>AspectJ runtime, AspectJ weaver</p> 
  <p><b>Apache License, Version 2.0: </b>Apache Extras Companion™ for Apache log4j™., CPF Client API, CPF Plug-in, CPF Worker API, Concurrent Processing Framework Base WAR Worker</p> 
+ <p><b>LGPL 2.1: </b>Javassist</p> 
+ <p><b>MPL 1.1: </b>Javassist</p> 
  <p><b>COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) Version 1.0: </b>JSR-250 Common Annotations for the JavaTM Platform</p> 
- <p><b>The Apache Software License, Version 2.0: </b>Akiban SQL Parser, Apache Commons DBCP, Apache Commons Pool, Apache Log4j, Apache XBean :: Spring, Commons BeanUtils, Commons CLI, Commons Codec, Commons FileUpload, Commons IO, Commons JEXL, Spring Security - Core, Spring Security - Web Application Security Module, StAX API, Woodstox, XML Commons External Components XML APIs, Xalan Java, Xalan Java Serializer</p> 
  <p><b>GNU Lesser General Public License: </b>Postgis JDBC Driver</p> 
+ <p><b>The Apache Software License, Version 2.0: </b>Akiban SQL Parser, Apache Commons DBCP, Apache Commons Pool, Apache Log4j, Apache XBean :: Spring, Commons BeanUtils, Commons CLI, Commons Codec, Commons FileUpload, Commons IO, Commons JEXL, Spring Security - Core, Spring Security - Web Application Security Module, StAX API, Woodstox, XML Commons External Components XML APIs, Xalan Java, Xalan Java Serializer</p> 
  <p><b>The BSD License: </b>Stax2 API</p> 
  <p><b>Lesser General Public License (LGPL): </b>JTS Topology Suite</p> 
  <p><b>BSD License: </b>PostgreSQL JDBC Driver</p> 
  <p><b>Apache License: </b>HttpClient, HttpCore, HttpMime</p> 
+ <p><b>Apache License 2.0: </b>Javassist</p> 
  <p><b>MIT License: </b>JCL 1.1.1 implemented over SLF4J, SLF4J API Module, SLF4J LOG4J-12 Binding</p> 
  <p><b>Specification License: </b>JSR-275</p> 
  <p><b>Oracle Technology Network Development and Distribution License Terms: </b>Oracle JDBC Driver</p> 
@@ -1997,14 +2000,6 @@
     <td>-</td> 
    </tr> 
    <tr class="b"> 
-    <td>javassist:javassist:jar:3.8.0.GA</td> 
-    <td>-</td> 
-    <td>-</td> 
-    <td>-</td> 
-    <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/javassist/javassist/3.8.0.GA/javassist-3.8.0.GA.jar"><i class="icon-ok"></i></a></td> 
-    <td>-</td> 
-   </tr> 
-   <tr class="a"> 
     <td>javax.annotation:jsr250-api:jar:1.0</td> 
     <td>-</td> 
     <td>-</td> 
@@ -2012,7 +2007,7 @@
     <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/javax/annotation/jsr250-api/1.0/jsr250-api-1.0.jar"><i class="icon-ok"></i></a></td> 
     <td>-</td> 
    </tr> 
-   <tr class="b"> 
+   <tr class="a"> 
     <td>javax.measure:jsr-275:jar:0.9.4</td> 
     <td>-</td> 
     <td>-</td> 
@@ -2020,15 +2015,15 @@
     <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/javax/measure/jsr-275/0.9.4/jsr-275-0.9.4.jar"><i class="icon-ok"></i></a></td> 
     <td>-</td> 
    </tr> 
-   <tr class="a"> 
-    <td>javax.servlet:servlet-api:jar:2.4</td> 
+   <tr class="b"> 
+    <td>javax.servlet:servlet-api:jar:2.5</td> 
     <td>-</td> 
     <td>-</td> 
     <td>-</td> 
-    <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/javax/servlet/servlet-api/2.4/servlet-api-2.4.jar"><i class="icon-ok"></i></a></td> 
+    <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/javax/servlet/servlet-api/2.5/servlet-api-2.5.jar"><i class="icon-ok"></i></a></td> 
     <td>-</td> 
    </tr> 
-   <tr class="b"> 
+   <tr class="a"> 
     <td>joda-time:joda-time:jar:1.6</td> 
     <td>-</td> 
     <td>-</td> 
@@ -2036,7 +2031,7 @@
     <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/joda-time/joda-time/1.6/joda-time-1.6.jar"><i class="icon-ok"></i></a></td> 
     <td>-</td> 
    </tr> 
-   <tr class="a"> 
+   <tr class="b"> 
     <td>log4j:apache-log4j-extras:jar:1.1</td> 
     <td>-</td> 
     <td>-</td> 
@@ -2044,7 +2039,7 @@
     <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/log4j/apache-log4j-extras/1.1/apache-log4j-extras-1.1.jar"><i class="icon-ok"></i></a></td> 
     <td>-</td> 
    </tr> 
-   <tr class="b"> 
+   <tr class="a"> 
     <td>log4j:log4j:jar:1.2.17</td> 
     <td>-</td> 
     <td>-</td> 
@@ -2052,7 +2047,7 @@
     <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/log4j/log4j/1.2.17/log4j-1.2.17.jar"><i class="icon-ok"></i></a></td> 
     <td>-</td> 
    </tr> 
-   <tr class="a"> 
+   <tr class="b"> 
     <td>org.apache.commons:commons-dbcp2:jar:2.0.1</td> 
     <td>-</td> 
     <td>-</td> 
@@ -2060,7 +2055,7 @@
     <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/apache/commons/commons-dbcp2/2.0.1/commons-dbcp2-2.0.1.jar"><i class="icon-ok"></i></a></td> 
     <td>-</td> 
    </tr> 
-   <tr class="b"> 
+   <tr class="a"> 
     <td>org.apache.commons:commons-pool2:jar:2.2</td> 
     <td>-</td> 
     <td>-</td> 
@@ -2068,7 +2063,7 @@
     <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/apache/commons/commons-pool2/2.2/commons-pool2-2.2.jar"><i class="icon-ok"></i></a></td> 
     <td>-</td> 
    </tr> 
-   <tr class="a"> 
+   <tr class="b"> 
     <td>org.apache.httpcomponents:httpclient:jar:4.1.2</td> 
     <td>-</td> 
     <td>-</td> 
@@ -2076,7 +2071,7 @@
     <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/apache/httpcomponents/httpclient/4.1.2/httpclient-4.1.2.jar"><i class="icon-ok"></i></a></td> 
     <td>-</td> 
    </tr> 
-   <tr class="b"> 
+   <tr class="a"> 
     <td>org.apache.httpcomponents:httpcore:jar:4.1.2</td> 
     <td>-</td> 
     <td>-</td> 
@@ -2084,7 +2079,7 @@
     <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/apache/httpcomponents/httpcore/4.1.2/httpcore-4.1.2.jar"><i class="icon-ok"></i></a></td> 
     <td>-</td> 
    </tr> 
-   <tr class="a"> 
+   <tr class="b"> 
     <td>org.apache.httpcomponents:httpmime:jar:4.1.2</td> 
     <td>-</td> 
     <td>-</td> 
@@ -2092,7 +2087,7 @@
     <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/apache/httpcomponents/httpmime/4.1.2/httpmime-4.1.2.jar"><i class="icon-ok"></i></a></td> 
     <td>-</td> 
    </tr> 
-   <tr class="b"> 
+   <tr class="a"> 
     <td>org.apache.xbean:xbean-spring:jar:3.5</td> 
     <td>-</td> 
     <td>-</td> 
@@ -2100,7 +2095,7 @@
     <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/apache/xbean/xbean-spring/3.5/xbean-spring-3.5.jar"><i class="icon-ok"></i></a></td> 
     <td>-</td> 
    </tr> 
-   <tr class="a"> 
+   <tr class="b"> 
     <td>org.aspectj:aspectjrt:jar:1.6.8</td> 
     <td>-</td> 
     <td>-</td> 
@@ -2108,7 +2103,7 @@
     <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/aspectj/aspectjrt/1.6.8/aspectjrt-1.6.8.jar"><i class="icon-ok"></i></a></td> 
     <td>-</td> 
    </tr> 
-   <tr class="b"> 
+   <tr class="a"> 
     <td>org.aspectj:aspectjweaver:jar:1.6.8</td> 
     <td>-</td> 
     <td>-</td> 
@@ -2116,7 +2111,7 @@
     <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/aspectj/aspectjweaver/1.6.8/aspectjweaver-1.6.8.jar"><i class="icon-ok"></i></a></td> 
     <td>-</td> 
    </tr> 
-   <tr class="a"> 
+   <tr class="b"> 
     <td>org.codehaus.woodstox:stax2-api:jar:3.0.1</td> 
     <td>-</td> 
     <td>-</td> 
@@ -2124,12 +2119,20 @@
     <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/codehaus/woodstox/stax2-api/3.0.1/stax2-api-3.0.1.jar"><i class="icon-ok"></i></a></td> 
     <td>-</td> 
    </tr> 
-   <tr class="b"> 
+   <tr class="a"> 
     <td>org.codehaus.woodstox:woodstox-core-asl:jar:4.0.7</td> 
     <td>-</td> 
     <td>-</td> 
     <td>-</td> 
     <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/codehaus/woodstox/woodstox-core-asl/4.0.7/woodstox-core-asl-4.0.7.jar"><i class="icon-ok"></i></a></td> 
+    <td>-</td> 
+   </tr> 
+   <tr class="b"> 
+    <td>org.javassist:javassist:jar:3.19.0-GA</td> 
+    <td>-</td> 
+    <td>-</td> 
+    <td>-</td> 
+    <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/javassist/javassist/3.19.0-GA/javassist-3.19.0-GA.jar"><i class="icon-ok"></i></a></td> 
     <td>-</td> 
    </tr> 
    <tr class="a"> 
