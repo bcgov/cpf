@@ -254,7 +254,7 @@
  </div> 
  <div class="section"> 
   <h3 id="CPF_Plug-in_Maven_Project">CPF Plug-in Maven Project</h3> 
-  <p>The CPF uses maven modules for the deployment of plug-in modules to the CPF web services. Each CPF plug-in module is a maven project that contains all the code and dependencies of the plug-in. Within the CPF plug-in module one or more <a href="#Business_Application_Classes">Business Application Classes</a> are defined.</p> 
+  <p>The CPF uses maven modules for the deployment of plug-in modules to the CPF web services. Each CPF plug-in module is a maven project that contains all the code and dependencies of the plug-in. Within the CPF plug-in module one or more <a href="#Business_Application_Class">Business Application Classes</a> implementations can be defined.</p> 
   <div class="section"> 
    <h4 id="Create_a_plug-in_project">Create a plug-in project</h4> 
    <p>The first step is to create a plug-in project. Plug-ins must be developed using Apache Maven 3.0.x.</p> 
@@ -383,7 +383,7 @@ mvn \
    <h4 id="JDBC_Dependencies">JDBC Dependencies</h4> 
    <p>The CPF supports the Oracle and PostgreSQL with PostGIS extensions JDBC drivers. The dependencies to these drivers are included through the <tt>cpf-api-plugin</tt> dependency.</p> 
    <blockquote> 
-    <p>*<i>NOTE:</i> At this time no other versions of these JDBC drivers or 3rd party JDBC drivers are supported. Any dependencies to those drivers must be excluded from the plug-in’s dependencies. Other JDBC driver versions may interfere with the running of the CPF application.</p> 
+    <p><b>NOTE:</b> At this time no other versions of these JDBC drivers or 3rd party JDBC drivers are supported. Any dependencies to those drivers must be excluded from the plug-in’s dependencies. Other JDBC driver versions may interfere with the running of the CPF application.</p> 
    </blockquote> 
   </div> 
   <div class="section"> 
@@ -539,7 +539,7 @@ private DataSource getDataSource() {
 &nbsp;   http://www.springframework.org/schema/util/spring-util-3.0.xsd
 &nbsp; &quot;
 &gt;
-&nbsp; &lt;util:list id=&quot;&lt;b&gt;beanImports&lt;/b&gt;&quot;&gt;
+&nbsp; &lt;util:list id=&quot;beanImports&quot;&gt;
 &nbsp;  &lt;value&gt;classpath:/com/mycompany/demo/Demo.sf.xml&lt;/value&gt;
 &nbsp; &lt;/util:list&gt;
 
@@ -559,10 +559,10 @@ private DataSource getDataSource() {
    <p>A plug-in can implement parameters that the user can specify when submitting a job. Parameters can be global for all the requests in a job using the <a href="cpf-api-plugin/java-api//#ca.bc.gov.open.cpf.plugin.api.JobParameter">JobParameter</a> annotation. Parameters for <a href="reference/structuredData.html">structured input data</a> plug-ins with <a href="cpf-api-plugin/java-api//#ca.bc.gov.open.cpf.plugin.api.BusinessApplicationPlugin.perRequestInputData">perRequestInputData</a>=false must have parameters specific to an individual request within the job using the <a href="cpf-api-plugin/java-api//#ca.bc.gov.open.cpf.plugin.api.RequestParameter">RequestParameter</a> annotation.</p> 
    <p>Parameter methods can also have the following annotations.</p> 
    <ul> 
-    <li>[](cpf-api-plugin/java-api//#ca.bc.gov.open.cpf.plugin.api.AllowedValues)</li> 
-    <li>[](cpf-api-plugin/java-api//#ca.bc.gov.open.cpf.plugin.api.DefaultValue)</li> 
-    <li>[](cpf-api-plugin/java-api//#ca.bc.gov.open.cpf.plugin.api.GeometryConfiguration)</li> 
-    <li>[](cpf-api-plugin/java-api//#ca.bc.gov.open.cpf.plugin.api.Required)</li> 
+    <li><a href="cpf-api-plugin/java-api//#ca.bc.gov.open.cpf.plugin.api.AllowedValues">ca.bc.gov.open.cpf.plugin.api.AllowedValues</a></li> 
+    <li><a href="cpf-api-plugin/java-api//#ca.bc.gov.open.cpf.plugin.api.DefaultValue">ca.bc.gov.open.cpf.plugin.api.DefaultValue</a></li> 
+    <li><a href="cpf-api-plugin/java-api//#ca.bc.gov.open.cpf.plugin.api.GeometryConfiguration">ca.bc.gov.open.cpf.plugin.api.GeometryConfiguration</a></li> 
+    <li><a href="cpf-api-plugin/java-api//#ca.bc.gov.open.cpf.plugin.api.Required">ca.bc.gov.open.cpf.plugin.api.Required</a></li> 
    </ul> 
   </div> 
   <div class="section"> 
@@ -590,7 +590,7 @@ public void setInputDataContentType (final String inputDataContentType) {
    <p><a href="reference/structuredData.html">Structured result data</a> plug-ins with <a href="cpf-api-plugin/java-api//#ca.bc.gov.open.cpf.plugin.api.BusinessApplicationPlugin.perRequestResultData">perRequestInputData</a>=false must implement result data properties using the <a href="cpf-api-plugin/java-api//#ca.bc.gov.open.cpf.plugin.api.ResultAttribute">ResultAttribute</a> annotation for more details.</p> 
    <p>Parameter methods can also have the following annotations.</p> 
    <ul> 
-    <li>[](cpf-api-plugin/java-api//#ca.bc.gov.open.cpf.plugin.api.GeometryConfiguration)</li> 
+    <li><a href="cpf-api-plugin/java-api//#ca.bc.gov.open.cpf.plugin.api.GeometryConfiguration">ca.bc.gov.open.cpf.plugin.api.GeometryConfiguration</a></li> 
    </ul> 
    <div class="section"> 
     <h5 id="List_of_Structured_Result_Attributes">List of Structured Result Attributes</h5> 
@@ -700,21 +700,21 @@ public void setResultDataContentType(final String format) {
 &nbsp; parameters.put(&quot;SERVICE&quot;, &quot;WMS&quot;);
 &nbsp; parameters.put(&quot;VERSION&quot;, &quot;1.1.1&quot;);
 &nbsp; parameters.put(&quot;REQUEST&quot;, &quot;GetMap&quot;);
-&nbsp; parameters.put(&quot;LAYERS&quot;, &lt;b&gt;this.layers&lt;/b&gt;);
-&nbsp; parameters.put(&quot;STYLES&quot;, &lt;b&gt;this.styles&lt;/b&gt;);
-&nbsp; parameters.put(&quot;CRS&quot;, &lt;b&gt;this.crs&lt;/b&gt;);
-&nbsp; parameters.put(&quot;BBOX&quot;, &lt;b&gt;this.bbox&lt;/b&gt;);
-&nbsp; parameters.put(&quot;WIDTH&quot;, &lt;b&gt;this.width&lt;/b&gt;);
-&nbsp; parameters.put(&quot;HEIGHT&quot;, &lt;b&gt;this.height&lt;/b&gt;);
-&nbsp; parameters.put(&quot;FORMAT&quot;, &lt;b&gt;this.resultDataContentType&lt;/b&gt;);
+&nbsp; parameters.put(&quot;LAYERS&quot;, this.layers);
+&nbsp; parameters.put(&quot;STYLES&quot;, this.styles);
+&nbsp; parameters.put(&quot;CRS&quot;, this.crs);
+&nbsp; parameters.put(&quot;BBOX&quot;, this.bbox);
+&nbsp; parameters.put(&quot;WIDTH&quot;, this.width);
+&nbsp; parameters.put(&quot;HEIGHT&quot;, this.height);
+&nbsp; parameters.put(&quot;FORMAT&quot;, this.resultDataContentType);
 &nbsp; parameters.put(&quot;EXCEPTIONS&quot;, &quot;INIMAGE&quot;);
-&nbsp; String url = UrlUtil.getUrl(&lt;b&gt;this.wmsUrl&lt;/b&gt;, parameters);
+&nbsp; String url = UrlUtil.getUrl(this.wmsUrl, parameters);
 &nbsp; try {
 &nbsp;&nbsp;&nbsp; InputStream in = new URL(url).openStream();
 &nbsp;&nbsp;&nbsp; try {
-&nbsp;&nbsp;&nbsp;&nbsp;  FileUtil.copy(in, &lt;b&gt;this.resultData&lt;/b&gt;);
+&nbsp;&nbsp;&nbsp;&nbsp;  FileUtil.copy(in, this.resultData);
 &nbsp;&nbsp;  } finally {
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; FileUtil.closeSilent(&lt;b&gt;this.resultData&lt;/b&gt;);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; FileUtil.closeSilent(this.resultData);
 &nbsp;&nbsp;&nbsp;&nbsp;  FileUtil.closeSilent(in);
 &nbsp;&nbsp;&nbsp; }
 &nbsp; } catch (MalformedURLException e) {
@@ -775,7 +775,7 @@ public void setResultDataContentType(final String format) {
     <li>The following command creates a memory dump of the JVM you will need to know the process id [PID] of the Tomcat JVM. <tt>jmap -dump:live,format=b,file=cpf.hprof {PID}</tt>.</li> 
     <li>The cpf.hprof can be loaded into a Java Heap analyzer or the following command can be used to create a web server where you can browse the memory.</li> 
     <li><tt>jhat -J-mx1024m cpf.hprof</tt> (<b>NOTE</b>: you may need more memory depending on the amount of memory used in the Tomcat JVM).</li> 
-    <li>Open [](<a class="externalLink" href="http://localhost:7000/">http://localhost:7000/</a>) in a web browser. The <a class="externalLink" href="http://localhost:7000/showInstanceCounts/">Show Instance Counts</a> page is the most useful as it shows the counts of objects by class for non core Java class.</li> 
+    <li>Open <a class="externalLink" href="http://localhost:7000/">http://localhost:7000/</a> in a web browser. The <a class="externalLink" href="http://localhost:7000/showInstanceCounts/">Show Instance Counts</a> page is the most useful as it shows the counts of objects by class for non core Java class.</li> 
     <li>Check that the custom classes used by your application do no appear on this page. If they do then the application has not been garbage collected.</li> 
     <li>Click the instances link next to a class to see the instances. From there you can navigate to see the references to that object. This will help identify where cleanup code should be implemented.</li> 
    </ol> 
