@@ -1251,6 +1251,7 @@
     <th>URL</th> 
     <th>Release</th> 
     <th>Snapshot</th> 
+    <th>Blacklisted</th> 
    </tr> 
   </thead> 
   <tbody> 
@@ -1259,29 +1260,34 @@
     <td><a class="externalLink" href="http://people.apache.org/repo/m2-snapshot-repository">http://people.apache.org/repo/m2-snapshot-repository</a></td> 
     <td>No</td> 
     <td>Yes</td> 
+    <td>Yes</td> 
    </tr> 
    <tr class="a"> 
     <td>sonatype-nexus-snapshots</td> 
     <td><a class="externalLink" href="https://oss.sonatype.org/content/repositories/snapshots">https://oss.sonatype.org/content/repositories/snapshots</a></td> 
     <td>No</td> 
     <td>Yes</td> 
+    <td>No</td> 
    </tr> 
    <tr class="b"> 
     <td>revolsys</td> 
     <td><a class="externalLink" href="http://open.revolsys.com/artifactory/local-releases/">http://open.revolsys.com/artifactory/local-releases/</a></td> 
     <td>Yes</td> 
     <td>Yes</td> 
+    <td>No</td> 
    </tr> 
    <tr class="a"> 
     <td>maven2-repository.dev.java.net</td> 
     <td><a class="externalLink" href="http://download.java.net/maven/2/">http://download.java.net/maven/2/</a></td> 
     <td>Yes</td> 
     <td>Yes</td> 
+    <td>No</td> 
    </tr> 
    <tr class="b"> 
     <td>central</td> 
     <td><a class="externalLink" href="http://repo.maven.apache.org/maven2">http://repo.maven.apache.org/maven2</a></td> 
     <td>Yes</td> 
+    <td>No</td> 
     <td>No</td> 
    </tr> 
    <tr class="a"> 
@@ -1289,6 +1295,7 @@
     <td><a class="externalLink" href="http://open.revolsys.com/artifactory/local-snapshots/">http://open.revolsys.com/artifactory/local-snapshots/</a></td> 
     <td>Yes</td> 
     <td>Yes</td> 
+    <td>No</td> 
    </tr> 
   </tbody> 
  </table> 
@@ -1297,7 +1304,6 @@
   <thead> 
    <tr class="a"> 
     <th>Total</th> 
-    <th>apache.snapshots</th> 
     <th>sonatype-nexus-snapshots</th> 
     <th>revolsys</th> 
     <th>maven2-repository.dev.java.net</th> 
@@ -1308,7 +1314,6 @@
   <thead> 
    <tr class="a"> 
     <th>Artifact</th> 
-    <th>apache.snapshots</th> 
     <th>sonatype-nexus-snapshots</th> 
     <th>revolsys</th> 
     <th>maven2-repository.dev.java.net</th> 
@@ -1322,13 +1327,11 @@
     <td>-</td> 
     <td>-</td> 
     <td>-</td> 
-    <td>-</td> 
     <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/aopalliance/aopalliance/1.0/aopalliance-1.0.jar"><i class="icon-ok"></i></a></td> 
     <td>-</td> 
    </tr> 
    <tr class="a"> 
     <td>com.akiban:akiban-sql-parser:jar:1.0.16</td> 
-    <td>-</td> 
     <td>-</td> 
     <td>-</td> 
     <td>-</td> 
@@ -1338,7 +1341,6 @@
    <tr class="b"> 
     <td>com.oracle:ojdbc6:jar:11.2.0.3</td> 
     <td>-</td> 
-    <td>-</td> 
     <td><a class="externalLink" href="http://open.revolsys.com/artifactory/local-releases//com/oracle/ojdbc6/11.2.0.3/ojdbc6-11.2.0.3.jar"><i class="icon-ok"></i></a></td> 
     <td>-</td> 
     <td>-</td> 
@@ -1346,7 +1348,6 @@
    </tr> 
    <tr class="a"> 
     <td>com.oracle:sdoapi:jar:11.2.0.3</td> 
-    <td>-</td> 
     <td>-</td> 
     <td><a class="externalLink" href="http://open.revolsys.com/artifactory/local-releases//com/oracle/sdoapi/11.2.0.3/sdoapi-11.2.0.3.jar"><i class="icon-ok"></i></a></td> 
     <td>-</td> 
@@ -1360,11 +1361,9 @@
     <td>-</td> 
     <td>-</td> 
     <td>-</td> 
-    <td>-</td> 
    </tr> 
    <tr class="a"> 
     <td>com.revolsys.open:com.revolsys.open.gis.oracle:jar:CPF-SNAPSHOT</td> 
-    <td>-</td> 
     <td>-</td> 
     <td>-</td> 
     <td>-</td> 
@@ -1378,11 +1377,9 @@
     <td>-</td> 
     <td>-</td> 
     <td>-</td> 
-    <td>-</td> 
    </tr> 
    <tr class="a"> 
     <td>com.vividsolutions:jts:jar:1.12</td> 
-    <td>-</td> 
     <td>-</td> 
     <td>-</td> 
     <td>-</td> 
@@ -1394,13 +1391,11 @@
     <td>-</td> 
     <td>-</td> 
     <td>-</td> 
-    <td>-</td> 
     <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/commons-beanutils/commons-beanutils/1.8.3/commons-beanutils-1.8.3.jar"><i class="icon-ok"></i></a></td> 
     <td>-</td> 
    </tr> 
    <tr class="a"> 
     <td>commons-cli:commons-cli:jar:1.2</td> 
-    <td>-</td> 
     <td>-</td> 
     <td>-</td> 
     <td>-</td> 
@@ -1412,7 +1407,6 @@
     <td>-</td> 
     <td>-</td> 
     <td>-</td> 
-    <td>-</td> 
     <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/commons-io/commons-io/2.3/commons-io-2.3.jar"><i class="icon-ok"></i></a></td> 
     <td>-</td> 
    </tr> 
@@ -1421,13 +1415,11 @@
     <td>-</td> 
     <td>-</td> 
     <td>-</td> 
-    <td>-</td> 
     <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/commons-jexl/commons-jexl/1.1/commons-jexl-1.1.jar"><i class="icon-ok"></i></a></td> 
     <td>-</td> 
    </tr> 
    <tr class="b"> 
     <td>javax.measure:jsr-275:jar:0.9.4</td> 
-    <td>-</td> 
     <td>-</td> 
     <td>-</td> 
     <td><a class="externalLink" href="http://download.java.net/maven/2//javax/measure/jsr-275/0.9.4/jsr-275-0.9.4.jar"><i class="icon-ok"></i></a></td> 
@@ -1439,13 +1431,11 @@
     <td>-</td> 
     <td>-</td> 
     <td>-</td> 
-    <td>-</td> 
     <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/joda-time/joda-time/1.6/joda-time-1.6.jar"><i class="icon-ok"></i></a></td> 
     <td>-</td> 
    </tr> 
    <tr class="b"> 
     <td>log4j:apache-log4j-extras:jar:1.1</td> 
-    <td>-</td> 
     <td>-</td> 
     <td>-</td> 
     <td>-</td> 
@@ -1457,13 +1447,11 @@
     <td>-</td> 
     <td>-</td> 
     <td>-</td> 
-    <td>-</td> 
     <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/log4j/log4j/1.2.17/log4j-1.2.17.jar"><i class="icon-ok"></i></a></td> 
     <td>-</td> 
    </tr> 
    <tr class="b"> 
     <td>org.apache.commons:commons-dbcp2:jar:2.0.1</td> 
-    <td>-</td> 
     <td>-</td> 
     <td>-</td> 
     <td>-</td> 
@@ -1475,13 +1463,11 @@
     <td>-</td> 
     <td>-</td> 
     <td>-</td> 
-    <td>-</td> 
     <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/apache/commons/commons-pool2/2.2/commons-pool2-2.2.jar"><i class="icon-ok"></i></a></td> 
     <td>-</td> 
    </tr> 
    <tr class="b"> 
     <td>org.codehaus.woodstox:stax2-api:jar:3.0.1</td> 
-    <td>-</td> 
     <td>-</td> 
     <td>-</td> 
     <td>-</td> 
@@ -1493,13 +1479,11 @@
     <td>-</td> 
     <td>-</td> 
     <td>-</td> 
-    <td>-</td> 
     <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/codehaus/woodstox/woodstox-core-asl/4.0.7/woodstox-core-asl-4.0.7.jar"><i class="icon-ok"></i></a></td> 
     <td>-</td> 
    </tr> 
    <tr class="b"> 
     <td>org.postgis:postgis-jdbc:jar:1.3.3</td> 
-    <td>-</td> 
     <td>-</td> 
     <td>-</td> 
     <td>-</td> 
@@ -1511,13 +1495,11 @@
     <td>-</td> 
     <td>-</td> 
     <td>-</td> 
-    <td>-</td> 
     <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/slf4j/jcl-over-slf4j/1.7.5/jcl-over-slf4j-1.7.5.jar"><i class="icon-ok"></i></a></td> 
     <td>-</td> 
    </tr> 
    <tr class="b"> 
     <td>org.slf4j:slf4j-api:jar:1.7.5</td> 
-    <td>-</td> 
     <td>-</td> 
     <td>-</td> 
     <td>-</td> 
@@ -1529,13 +1511,11 @@
     <td>-</td> 
     <td>-</td> 
     <td>-</td> 
-    <td>-</td> 
     <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/slf4j/slf4j-log4j12/1.7.5/slf4j-log4j12-1.7.5.jar"><i class="icon-ok"></i></a></td> 
     <td>-</td> 
    </tr> 
    <tr class="b"> 
     <td>org.springframework:spring-aop:jar:3.0.7.RELEASE</td> 
-    <td>-</td> 
     <td>-</td> 
     <td>-</td> 
     <td>-</td> 
@@ -1547,13 +1527,11 @@
     <td>-</td> 
     <td>-</td> 
     <td>-</td> 
-    <td>-</td> 
     <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/springframework/spring-asm/3.0.7.RELEASE/spring-asm-3.0.7.RELEASE.jar"><i class="icon-ok"></i></a></td> 
     <td>-</td> 
    </tr> 
    <tr class="b"> 
     <td>org.springframework:spring-beans:jar:3.0.7.RELEASE</td> 
-    <td>-</td> 
     <td>-</td> 
     <td>-</td> 
     <td>-</td> 
@@ -1565,13 +1543,11 @@
     <td>-</td> 
     <td>-</td> 
     <td>-</td> 
-    <td>-</td> 
     <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/springframework/spring-context/3.0.7.RELEASE/spring-context-3.0.7.RELEASE.jar"><i class="icon-ok"></i></a></td> 
     <td>-</td> 
    </tr> 
    <tr class="b"> 
     <td>org.springframework:spring-core:jar:3.0.7.RELEASE</td> 
-    <td>-</td> 
     <td>-</td> 
     <td>-</td> 
     <td>-</td> 
@@ -1583,13 +1559,11 @@
     <td>-</td> 
     <td>-</td> 
     <td>-</td> 
-    <td>-</td> 
     <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/springframework/spring-expression/3.0.7.RELEASE/spring-expression-3.0.7.RELEASE.jar"><i class="icon-ok"></i></a></td> 
     <td>-</td> 
    </tr> 
    <tr class="b"> 
     <td>org.springframework:spring-jdbc:jar:3.0.7.RELEASE</td> 
-    <td>-</td> 
     <td>-</td> 
     <td>-</td> 
     <td>-</td> 
@@ -1601,13 +1575,11 @@
     <td>-</td> 
     <td>-</td> 
     <td>-</td> 
-    <td>-</td> 
     <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/org/springframework/spring-tx/3.0.7.RELEASE/spring-tx-3.0.7.RELEASE.jar"><i class="icon-ok"></i></a></td> 
     <td>-</td> 
    </tr> 
    <tr class="b"> 
     <td>postgresql:postgresql:jar:9.1-901.jdbc4</td> 
-    <td>-</td> 
     <td>-</td> 
     <td>-</td> 
     <td>-</td> 
@@ -1619,13 +1591,11 @@
     <td>-</td> 
     <td>-</td> 
     <td>-</td> 
-    <td>-</td> 
     <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/stax/stax-api/1.0.1/stax-api-1.0.1.jar"><i class="icon-ok"></i></a></td> 
     <td>-</td> 
    </tr> 
    <tr class="b"> 
     <td>xalan:serializer:jar:2.7.1</td> 
-    <td>-</td> 
     <td>-</td> 
     <td>-</td> 
     <td>-</td> 
@@ -1637,7 +1607,6 @@
     <td>-</td> 
     <td>-</td> 
     <td>-</td> 
-    <td>-</td> 
     <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/xalan/xalan/2.7.1/xalan-2.7.1.jar"><i class="icon-ok"></i></a></td> 
     <td>-</td> 
    </tr> 
@@ -1646,13 +1615,11 @@
     <td>-</td> 
     <td>-</td> 
     <td>-</td> 
-    <td>-</td> 
     <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/xml-apis/xml-apis/1.3.04/xml-apis-1.3.04.jar"><i class="icon-ok"></i></a></td> 
     <td>-</td> 
    </tr> 
    <tr class="b"> 
     <td>37 (compile: 37)</td> 
-    <td>0</td> 
     <td>0</td> 
     <td>2</td> 
     <td>1</td> 
