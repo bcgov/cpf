@@ -169,12 +169,12 @@
 					<div class="nav-collapse collapse" id="toc-nav-collapse">
 						<ul id="toc" class="nav">
 						<li class="toplevel"><a href="#Plug-in_Developer_Guide" title="Plug-in Developer Guide">Plug-in Developer Guide</a></li>
-						<li class="toplevel"><a href="#Plug-in_Overview" title="Plug-in Overview">Plug-in Overview</a></li>
+						<li class="toplevel"><a href="#Overview" title="Overview">Overview</a></li>
 						<li class="dropdown">
-							<a href="#CPF_Plug-in_Maven_Project" title="CPF Plug-in Maven Project" class="dropdown-toggle" role="button" data-toggle="dropdown" data-target="#">CPF Plug-in Maven Project <b class="caret"></b></a>
+							<a href="#Maven_Project" title="Maven Project" class="dropdown-toggle" role="button" data-toggle="dropdown" data-target="#">Maven Project <b class="caret"></b></a>
 							<ul class="dropdown-menu" role="menu">
 								<!-- Repeat the item, otherwise it is not clickable as the dropdown root -->
-								<li><a href="#CPF_Plug-in_Maven_Project" title="CPF Plug-in Maven Project">CPF Plug-in Maven Project</a></li>
+								<li><a href="#Maven_Project" title="Maven Project">Maven Project</a></li>
 								<li class="divider"></li>
 								<li><a href="#Create_a_plug-in_project" title="Create a plug-in project">Create a plug-in project</a></li>
 								<li><a href="#Add_Dependencies" title="Add Dependencies">Add Dependencies</a></li>
@@ -219,10 +219,10 @@
 							</ul>
 						</li>
 						<li class="dropdown">
-							<a href="#Customization_Properties" title="Customization Properties<" class="dropdown-toggle" role="button" data-toggle="dropdown" data-target="#">Customization Properties< <b class="caret"></b></a>
+							<a href="#Customization" title="Customization" class="dropdown-toggle" role="button" data-toggle="dropdown" data-target="#">Customization <b class="caret"></b></a>
 							<ul class="dropdown-menu" role="menu">
 								<!-- Repeat the item, otherwise it is not clickable as the dropdown root -->
-								<li><a href="#Customization_Properties" title="Customization Properties<">Customization Properties<</a></li>
+								<li><a href="#Customization" title="Customization">Customization</a></li>
 								<li class="divider"></li>
 								<li><a href="#Defining_Customization_Properties" title="Defining Customization Properties">Defining Customization Properties</a></li>
 								<li><a href="#Form_Customization_Properties" title="Form Customization Properties">Form Customization Properties</a></li>
@@ -230,12 +230,12 @@
 
 							</ul>
 						</li>
-						<li class="toplevel"><a href="#Plug-in_Configuration" title="Plug-in Configuration">Plug-in Configuration</a></li>
+						<li class="toplevel"><a href="#Configuration" title="Configuration">Configuration</a></li>
 						<li class="dropdown">
-							<a href="#CPF_Plug-in_Security" title="CPF Plug-in Security" class="dropdown-toggle" role="button" data-toggle="dropdown" data-target="#">CPF Plug-in Security <b class="caret"></b></a>
+							<a href="#Security" title="Security" class="dropdown-toggle" role="button" data-toggle="dropdown" data-target="#">Security <b class="caret"></b></a>
 							<ul class="dropdown-menu" role="menu">
 								<!-- Repeat the item, otherwise it is not clickable as the dropdown root -->
-								<li><a href="#CPF_Plug-in_Security" title="CPF Plug-in Security">CPF Plug-in Security</a></li>
+								<li><a href="#Security" title="Security">Security</a></li>
 								<li class="divider"></li>
 								<li class="dropdown-submenu">
 									<a href="#Security_Groups" title="Security Groups">Security Groups</a>
@@ -254,17 +254,17 @@
 							</ul>
 						</li>
 						<li class="dropdown">
-							<a href="#Testing_a_Plug-in" title="Testing a Plug-in" class="dropdown-toggle" role="button" data-toggle="dropdown" data-target="#">Testing a Plug-in <b class="caret"></b></a>
+							<a href="#Testing" title="Testing" class="dropdown-toggle" role="button" data-toggle="dropdown" data-target="#">Testing <b class="caret"></b></a>
 							<ul class="dropdown-menu" role="menu">
 								<!-- Repeat the item, otherwise it is not clickable as the dropdown root -->
-								<li><a href="#Testing_a_Plug-in" title="Testing a Plug-in">Testing a Plug-in</a></li>
+								<li><a href="#Testing" title="Testing">Testing</a></li>
 								<li class="divider"></li>
 								<li><a href="#CPF_Web_Site" title="CPF Web Site">CPF Web Site</a></li>
 								<li><a href="#Test_Harness" title="Test Harness">Test Harness</a></li>
 
 							</ul>
 						</li>
-						<li class="toplevel"><a href="#API_Documentation_and_Download" title="API Documentation and Download">API Documentation and Download</a></li>
+						<li class="toplevel"><a href="#API__Download" title="API & Download">API & Download</a></li>
 						</ul>
 					</div>
 				</div>
@@ -283,7 +283,7 @@
  <p>The Concurrent Processing Framework (CPF) Plug-in Developers Guide provides instructions for developers to be able to develop and test CPF plug-in modules containing business application plug-ins in their environment and to deliver them to the ministry.</p> 
  <p>See the Plug-in links in the menu on the left of this page for more details on developing a plug-in.</p> 
  <div class="section"> 
-  <h3 id="Plug-in_Overview">Plug-in Overview</h3> 
+  <h3 id="Overview">Overview</h3> 
   <p>A CPF Plug-in module is a Maven project that contains one or more business application plug-ins. A business application plug-in is a service that takes one or more request parameters, performs an action using the request parameters and generates one or more result attributes. The CPF allows a user to create a job that contains one or more requests to be executed against a single business application. For example a job may contain 1 million addresses to geocode. </p> 
   <p>For an example a power service would have the request parameters <tt>base</tt> and <tt>exponent</tt> and the result attribute <tt>result</tt>, which is the calculation of base to the power of exponent.</p> 
   <p>For input parameters a plug-in can accept either one or more structured request attributes or a per request input data with an InputStream containing an opaque blob of data.</p> 
@@ -299,7 +299,7 @@
   </ul> 
  </div> 
  <div class="section"> 
-  <h3 id="CPF_Plug-in_Maven_Project">CPF Plug-in Maven Project</h3> 
+  <h3 id="Maven_Project">Maven Project</h3> 
   <p>The CPF uses maven modules for the deployment of plug-in modules to the CPF web services. Each CPF plug-in module is a maven project that contains all the code and dependencies of the plug-in. Within the CPF plug-in module one or more <a href="#Business_Application_Class">Business Application Classes</a> implementations can be defined.</p> 
   <div class="section"> 
    <h4 id="Create_a_plug-in_project">Create a plug-in project</h4> 
@@ -828,7 +828,7 @@ public void setResultDataContentType(final String format) {
   </div> 
  </div> 
  <div class="section"> 
-  <h3 id="Customization_Properties">Customization Properties&lt;</h3> 
+  <h3 id="Customization">Customization</h3> 
   <p>Plug-ins can customize certain aspects of the HTML forms for submitting jobs or how the files generated by the CPF for structured results. For example the sections to group fields on the forms or the URL to the style document to be used in KML documents.</p> 
   <div class="section"> 
    <h4 id="Defining_Customization_Properties">Defining Customization Properties</h4> 
@@ -1069,7 +1069,7 @@ public void setResultDataContentType(final String format) {
   </div> 
  </div> 
  <div class="section"> 
-  <h3 id="Plug-in_Configuration">Plug-in Configuration</h3> 
+  <h3 id="Configuration">Configuration</h3> 
   <p>Plug-ins can include a default configuration file that contains any configuration that will change from environment to environment. Such as database connection URLs and passwords. The configuration file provided in the application is a template that is used to populate the CPF configuration database with initial values for the administrator to edit with the values for that environment.</p> 
   <blockquote> 
    <p>NOTE:** Plug-ins must fully document all supported configuration properties in their readme file and other documentation where appropriate.</p> 
@@ -1172,11 +1172,11 @@ public void setResultDataContentType(final String format) {
    <li>Click on the name of the module in the table, this will open the module view page.</li> 
    <li>Click the Module Config Properties tab to view the current properties.</li> 
    <li>Click the id of a property to view it and then click Edit to change the value.</li> 
-   <li> <p>Click the id of a property to view it and then click Edit to change the value or click Add to add a new property.</p></li> 
+   <li>Click the id of a property to view it and then click Edit to change the value or click Add to add a new property.</li> 
   </ol> 
  </div> 
  <div class="section"> 
-  <h3 id="CPF_Plug-in_Security">CPF Plug-in Security</h3> 
+  <h3 id="Security">Security</h3> 
   <p>The CPF provides a Security service that allows a plug-in to query information about the user, check group memberships and check permission to access resources.</p> 
   <div class="section"> 
    <h4 id="Security_Groups">Security Groups</h4> 
@@ -1393,7 +1393,7 @@ public void setResultDataContentType(final String format) {
   </div> 
  </div> 
  <div class="section"> 
-  <h3 id="Testing_a_Plug-in">Testing a Plug-in</h3> 
+  <h3 id="Testing">Testing</h3> 
   <p>The business application plug-in can be tested by creating a test harness, using the CPF web site or using a CPF client to connect to the CPF web services.</p> 
   <div class="section"> 
    <h4 id="CPF_Web_Site">CPF Web Site</h4> 
@@ -1435,7 +1435,7 @@ public void setResultDataContentType(final String format) {
   </div> 
  </div> 
  <div class="section"> 
-  <h3 id="API_Documentation_and_Download">API Documentation and Download</h3> 
+  <h3 id="API__Download">API &amp; Download</h3> 
   <p>The most recent version of the CPF is ${project.version}. For development purposes the most recent snapshot version of the CPF libraries and the trunk sub-tree in the subversion repository should be used. The snapshot and the trunk are only updated under controlled circumstances when new functionality or bug fixes are to be delivered to the plug-in developers. When delivering a final version of the application to the Ministry the plug-in must use the same version as is deployed to the Ministry’s server.</p> 
   <p>The CPF and plug-ins depend heavily on the <a class="externalLink" href="http://static.springsource.org/spring/docs/3.0.x/spring-framework-reference/html/">Spring Framework</a> and the XML configuration mechanism. Developers should have a least a basic understanding of defining spring beans and dependency injection.</p> 
   <p>Use the links in the following table to view the Plug-in API documentation or download the API libraries.</p> 
