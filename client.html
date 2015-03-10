@@ -8,7 +8,7 @@
 
 	<head>
 		<meta charset="UTF-8" />
-		<title>Concurrent Processing Framework</title>
+		<title>Concurrent Processing Framework &#x2013; Client Developer Guide</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="description" content="" />
 		<meta http-equiv="content-language" content="en" />
@@ -34,7 +34,7 @@
 
 	</head>
 
-	<body class="page-index project-cpf-parent" data-spy="scroll" data-offset="60" data-target="#toc-scroll-target">
+	<body class="page-client project-cpf-parent" data-spy="scroll" data-offset="60" data-target="#toc-scroll-target">
 
 		<div class="navbar navbar-fixed-top">
 			<div class="navbar-inner">
@@ -50,10 +50,10 @@
 							<li class="dropdown active">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Documentation <b class="caret"></b></a>
 								<ul class="dropdown-menu">
-									<li class="active"><a href="" title="About">About</a></li>
+									<li ><a href="index.html" title="About">About</a></li>
 									<li ><a href="install.html" title="Installation">Installation</a></li>
 									<li ><a href="plugin.html" title="Plug-in Developer Guide">Plug-in Developer Guide</a></li>
-									<li ><a href="client.html" title="Client Developer Guide">Client Developer Guide</a></li>
+									<li class="active"><a href="" title="Client Developer Guide">Client Developer Guide</a></li>
 									<li class="dropdown-submenu disabled">
 										<a title="Reference">Reference</a>
 										<ul class="dropdown-menu">
@@ -98,7 +98,7 @@
 									<li ><a href="http://bcdevexchange.org/" title="BC Developer Exchange" target="_blank" class="externalLink">BC Developer Exchange</a></li>
 								</ul>
 							</li>
-							<li class="dropdown active">
+							<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Maven documentation <b class="caret"></b></a>
 								<ul class="dropdown-menu">
 									<li class="dropdown-submenu ">
@@ -108,7 +108,7 @@
 											<li ><a href="dependency-info.html" title="Dependency Information">Dependency Information</a></li>
 											<li ><a href="dependency-management.html" title="Dependency Management">Dependency Management</a></li>
 											<li ><a href="distribution-management.html" title="Distribution Management">Distribution Management</a></li>
-											<li class="active"><a href="" title="About">About</a></li>
+											<li ><a href="index.html" title="About">About</a></li>
 											<li ><a href="license.html" title="Project License">Project License</a></li>
 											<li ><a href="modules.html" title="Project Modules">Project Modules</a></li>
 											<li ><a href="plugin-management.html" title="Plugin Management">Plugin Management</a></li>
@@ -150,25 +150,71 @@
 			</div>
 		</div>
 	</div>
+		<div>
+			<ul class="breadcrumb">
+				<li><a href="./" title="CPF">CPF</a></li>
+				<li class="divider">/</li>
+				<li>Client Developer Guide</li>
+			</ul>
+		</div>
+		<hr class="toc-separator" />
+		<div id="toc-bar" class="navbar" data-spy="affix" data-offset-top="250">
+			<div class="navbar-inner">
+				<div id="toc-scroll-target" class="container">
+					<a class="btn btn-navbar" data-toggle="collapse" data-target="#toc-nav-collapse">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</a>
+					<div class="nav-collapse collapse" id="toc-nav-collapse">
+						<ul id="toc" class="nav">
+						<li class="toplevel"><a href="#Client_Developer_Guide" title="Client Developer Guide">Client Developer Guide</a></li>
+						<li class="toplevel"><a href="#Security" title="Security">Security</a></li>
+						<li class="toplevel"><a href="#Direct_Web_Browser_Access" title="Direct Web Browser Access">Direct Web Browser Access</a></li>
+						<li class="toplevel"><a href="#Java" title="Java">Java</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
 	</header>
 
 	<div class="main-body">
 	<div class="row">
 		<div class="span12">
 			<div class="body-content">
-				<p>The Concurrent Processing Framework (CPF) Client APIs allows web applications to be developed using JavaScript, Java or another programming language to submit batch jobs to the CPF and to download the results of those jobs.</p>
-<p>The CPF is a framework for building, deploying and running request/response style web services (business applications).</p>
-<p>A business application accepts input parameters, performs some processing using those parameters and then returns the result of the processing.</p>
-<p>For example:</p>
-
-<ul>
-  
-<li>A web map image business application accepts the bounding box, map layers, image size and projection for a map image, it then creates a map image using those parameters and returns the image to the user.</li>
-  
-<li>A geo-coder business application accepts and address and city as parameters, searches the database for the address matches and returns the full address and the point location.</li>
-</ul>
-<p>The CPF extends the web service paradigm by adding support for asynchronous processing of a request to a business application and batching of multiple business application requests into a job for asynchronous processing. The asynchronous processing solves the issue of network timeouts/disconnects when waiting for a response for a request. The multiple requests in a single job solves several issues. For the user they only need to submit one request containing all the request parameters rather than thousands or millions of individual requests, this also reduces processing requirements on the clients. For the server/administrator it allows better control over access to the resource as the CPF can distribute the work across multiple worker servers and limit the number of concurrent requests.</p>
-<p>The asynchronous processing allows a user to submit the requests for a job with a single web service API call and disconnect from the CPF server. At a later time the user can check the status of the status of the job and if it is completed download the result of all the requests in the job.</p>
+<div class="section"> 
+ <div class="page-header">
+  <h2 id="Client_Developer_Guide">Client Developer Guide</h2>
+ </div> 
+ <p>The Concurrent Processing Framework (CPF) provides a <a href="cpf-api-app/rest-api/">REST Web Service API</a> that can be used to develop client applications in Java, Python or another programming language to submit batch jobs to the CPF and to download the results of those batch jobs. The API can also be accessed directly in a web browser. JavaScript is not supported at this time.</p> 
+ <div class="section"> 
+  <h3 id="Security">Security</h3> 
+  <p>Access to the REST web service API is limited to authorized users.</p> 
+ </div> 
+ <div class="section"> 
+  <h3 id="Direct_Web_Browser_Access">Direct Web Browser Access</h3> 
+  <p>The <a href="cpf-api-app/rest-api/">REST Web Service API</a> can be accessed directly using a web browser. In this mode the service returns styled HTML pages and forms that canbe used without any programming.</p> 
+ </div> 
+ <div class="section"> 
+  <h3 id="Java">Java</h3> 
+  <p>The CPF provides a <a href="cpf-api-client/java-api/">Client API</a> for the Java programming language. This can be included in a <a class="externalLink" href="http://maven.apache.org">Maven</a> project using the following dependency in the project’s pom.xml file. The Java Client API can also be used in <a class="externalLink" href="http://pauldaustin.github.io/cpf/cpf-api-client/dependency-info.html">Other Build Systems</a>.</p> 
+  <div class="source"> 
+   <div class="source"> 
+    <pre>&lt;project&gt;
+  &lt;dependencies&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;ca.bc.gov.open.cpf&lt;/groupId&gt;
+      &lt;artifactId&gt;cpf-api-client&lt;/artifactId&gt;
+      &lt;version&gt;${project.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+  &lt;/dependencies&gt;
+&lt;/project&gt;
+</pre> 
+   </div> 
+  </div> 
+ </div> 
+</div>
 			</div>
 		</div>
 	</div>
