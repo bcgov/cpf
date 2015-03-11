@@ -208,7 +208,7 @@
 								<!-- Repeat the item, otherwise it is not clickable as the dropdown root -->
 								<li><a href="#Applications" title="Applications">Applications</a></li>
 								<li class="divider"></li>
-								<li><a href="#Business_Applications_Overview" title="Business Applications Overview">Business Applications Overview</a></li>
+								<li><a href="#Business_Application_Overview" title="Business Application Overview">Business Application Overview</a></li>
 								<li class="dropdown-submenu">
 									<a href="#Business_Application_Fields" title="Business Application Fields">Business Application Fields</a>
 									<ul class="dropdown-menu" role="menu">
@@ -381,16 +381,18 @@
    <ol style="list-style-type: decimal"> 
     <li>Open the <a href="#Modules_List">Modules List</a> page.</li> 
     <li>Click <button>Add</button> button.</li> 
-    <li>Edit the field values.</li> 
-    <li>Enter a Module Name. 
-     <ul> 
-      <li>Must be unique across all module names.</li> 
-      <li>Can only contain the characters <tt>a-z</tt>, <tt>0-9</tt>, or <tt>_</tt>.</li> 
-      <li>Automatically converted to upper case.</li> 
-      <li>Must not be one of the reserved words CPF, VIEW, EDIT, ADD, DELETE, APP, ADMIN, DEFAULT, COPY, CLONE, MODULE, GROUP.</li> 
-     </ul></li> 
-    <li>Enter the <a href="#Module_mavenModuleId">Maven Module Id</a>.</li> 
-    <li>Select if the module is to be <a href="#Module_enabled">enabled</a>.</li> 
+    <li>Edit the field values. 
+     <ol style="list-style-type: decimal"> 
+      <li>Enter a Module Name. 
+       <ul> 
+        <li>Must be unique across all module names.</li> 
+        <li>Can only contain the characters <tt>a-z</tt>, <tt>0-9</tt>, or <tt>_</tt>.</li> 
+        <li>Automatically converted to upper case.</li> 
+        <li>Must not be one of the reserved words CPF, VIEW, EDIT, ADD, DELETE, APP, ADMIN, DEFAULT, COPY, CLONE, MODULE, GROUP.</li> 
+       </ul></li> 
+      <li>Enter the <a href="#Module_mavenModuleId">Maven Module Id</a>.</li> 
+      <li>Select if the module is to be <a href="#Module_enabled">enabled</a>.</li> 
+     </ol></li> 
     <li>Click the <button>Save</button> button to create the module, <button>Clear Fields</button> to undo any changes, or <button>Cancel</button> to return to the previous page.</li> 
    </ol> 
   </div> 
@@ -417,9 +419,11 @@
    <ol style="list-style-type: decimal"> 
     <li>Open the <a href="#View_Module">View Module</a> page.</li> 
     <li>Click the <button>Edit</button> button.</li> 
-    <li>Edit the field values.</li> 
-    <li>Enter the <a href="#Module_mavenModuleId">Maven Module Id</a>.</li> 
-    <li>Select if the user is to be <a href="#Module_enabled">enabled</a>.</li> 
+    <li>Edit the field values. 
+     <ol style="list-style-type: decimal"> 
+      <li>Enter the <a href="#Module_mavenModuleId">Maven Module Id</a>.</li> 
+      <li>Select if the user is to be <a href="#Module_enabled">enabled</a>.</li> 
+     </ol></li> 
     <li>Click the <button>Save</button> button to save changes, <tt>Revert to Saved</tt> to undo any changes, or <button>Cancel</button> to return to previous page.</li> 
    </ol> 
   </div> 
@@ -466,7 +470,7 @@
  <div class="section"> 
   <h3 id="Applications">Applications</h3> 
   <div class="section"> 
-   <h4 id="Business_Applications_Overview">Business Applications Overview</h4> 
+   <h4 id="Business_Application_Overview">Business Application Overview</h4> 
    <p>Each CPF <a href="#Modules">Module</a> can contain one or more business application. This page describes how to manage those business applications.</p> 
    <p>In addition to the business application administration pages described here the following sections describe how to manage items related to a business application.</p> 
    <ul> 
@@ -629,19 +633,28 @@
     <p>The simplest permission is uses the <tt>hasRole</tt> function to see if the user is a member of a CPF group. The function takes a single argument that is the CPF group name prefixed by <tt>ROLE_</tt>. The following example grants access to all internal users.</p> 
     <div class="source"> 
      <div class="source"> 
-      <pre>The `hasAnyRole` function will allow access if the user is a member of any of the listed groups. The
-following example grants access to all internal and business users.
-  
+      <pre>hasRole('ROLE_BCGOV_INTERNAL')
+</pre> 
+     </div> 
+    </div> 
+    <p>The <tt>hasAnyRole</tt> function will allow access if the user is a member of any of the listed groups. The following example grants access to all internal and business users.</p> 
+    <div class="source"> 
+     <div class="source"> 
+      <pre>hasAnyRole('ROLE_BCGOV_INTERNAL','ROLE_BCGOV_BUSINESS')
 </pre> 
      </div> 
     </div> 
     <p>This could also be written using the <tt>or</tt> operator.</p> 
     <div class="source"> 
      <div class="source"> 
-      <pre>The `hasRoleRegex` will allow users who have a CPF group that matches the
-[Java regular expression](http://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html).
-The following example matches all CPF groups that start with BCGOV
-
+      <pre>hasRole('ROLE_BCGOV_INTERNAL') or hasRole('ROLE_BCGOV_BUSINESS')
+</pre> 
+     </div> 
+    </div> 
+    <p>The <tt>hasRoleRegex</tt> will allow users who have a CPF group that matches the <a class="externalLink" href="http://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html">Java regular expression</a>. The following example matches all CPF groups that start with BCGOV</p> 
+    <div class="source"> 
+     <div class="source"> 
+      <pre>hasRoleRegex('ROLE_BCGOV_.*')
 </pre> 
      </div> 
     </div> 
@@ -657,7 +670,7 @@ The following example matches all CPF groups that start with BCGOV
    <h4 id="All_Business_Applications_List">All Business Applications List</h4> 
    <p>The list of all business applications a user has permission for can be viewed using the following steps.</p> 
    <ol style="list-style-type: decimal"> 
-    <li>Open the [CPF Admin Application](&lt;a href=&quot;<a class="externalLink" href="http://localhost/admin/">http://localhost/admin/</a>)</li> 
+    <li>Open the <a class="externalLink" href="http://localhost/admin/">CPF Admin Application</a></li> 
     <li>Click the <a class="externalLink" href="http://localhost/admin/apps/">Business Applications</a> menu item.</li> 
    </ol> 
   </div> 
@@ -687,14 +700,16 @@ The following example matches all CPF groups that start with BCGOV
    <ol style="list-style-type: decimal"> 
     <li>Open the <a href="View_Business_Application">View Business Application</a> page.</li> 
     <li>Click the <button>Edit button</button>.</li> 
-    <li>Edit the field values.</li> 
-    <li><a href="#BusinessApplication_logLevel">Log Level</a></li> 
-    <li><a href="#BusinessApplication_testModeEnabled">Test Mode Enabled</a></li> 
-    <li><a href="#Busineslication_batchModePermission">Batch Mode Permission</a></li> 
-    <li><a href="#BusinessApplication_instantModePermission">Instant Mode Permission</a></li> 
-    <li><a href="#BusinessApplication_maxRequestsPerJob">Max Requests Per Job</a></li> 
-    <li><a href="#BusinessApplication_maxConcurrentRequests">Max Concurrent Requests</a></li> 
-    <li><a href="#BusinessApplication_numRequestsPerWorker">Num Requests Per Worker</a></li> 
+    <li>Edit the field values. 
+     <ol style="list-style-type: decimal"> 
+      <li><a href="#BusinessApplication_logLevel">Log Level</a></li> 
+      <li><a href="#BusinessApplication_testModeEnabled">Test Mode Enabled</a></li> 
+      <li><a href="#Busineslication_batchModePermission">Batch Mode Permission</a></li> 
+      <li><a href="#BusinessApplication_instantModePermission">Instant Mode Permission</a></li> 
+      <li><a href="#BusinessApplication_maxRequestsPerJob">Max Requests Per Job</a></li> 
+      <li><a href="#BusinessApplication_maxConcurrentRequests">Max Concurrent Requests</a></li> 
+      <li><a href="#BusinessApplication_numRequestsPerWorker">Num Requests Per Worker</a></li> 
+     </ol></li> 
     <li>Click the <button>Save</button> button to save changes, <button>Revert to Saved</button> to undo any changes, or <button>Cancel</button> to return to previous page.</li> 
    </ol> 
   </div> 
