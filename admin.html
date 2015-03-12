@@ -724,7 +724,7 @@
    <p>In addition to the business application administration pages described here the following sections describe how to manage items related to a business application.</p> 
    <ul> 
     <li><a href="#Business_Application_Statistics">Dashboard Statistics</a></li> 
-    <li><a href="#Business_Application_Config_Poperties">Config Properties</a></li> 
+    <li><a href="#Business_Application_Configuration_Poperties">Config Properties</a></li> 
     <li><a href="#Business_Application_Batch_Job_List">Batch Jobs</a></li> 
    </ul> 
    <blockquote> 
@@ -953,7 +953,7 @@
      <ol style="list-style-type: decimal"> 
       <li><a href="#BusinessApplication_logLevel">Log Level</a></li> 
       <li><a href="#BusinessApplication_testModeEnabled">Test Mode Enabled</a></li> 
-      <li><a href="#Busineslication_batchModePermission">Batch Mode Permission</a></li> 
+      <li><a href="#BusinesApplication_batchModePermission">Batch Mode Permission</a></li> 
       <li><a href="#BusinessApplication_instantModePermission">Instant Mode Permission</a></li> 
       <li><a href="#BusinessApplication_maxRequestsPerJob">Max Requests Per Job</a></li> 
       <li><a href="#BusinessApplication_maxConcurrentRequests">Max Concurrent Requests</a></li> 
@@ -1220,65 +1220,44 @@
        <td>The HTTP URL to the OAuth/Digest secured CPF web services, including context path on the server cpf is deployed to. The trailing / must be omitted.</td> 
        <td><img src="images/cross.png" alt="No" title="No" /></td> 
        <td>URI</td> 
-       <td><a class="externalLink" href="http://localhost/cpf">http://localhost/cpf</a></td> 
+       <td><tt>http://localhost/cpf/</tt></td> 
       </tr> 
       <tr class="a"> 
-       <td><tt>cpfConfig.secureBaseUrl</tt></td> 
-       <td>The HTTPS URL to the Siteminder secured CPF web services, including context path on the server cpf is deployed to. The trailing / must be omitted.</td> 
-       <td><img src="images/cross.png" alt="No" title="No" /></td> 
-       <td>URI</td> 
-       <td><a class="externalLink" href="https://localhost/cpf/secure">https://localhost/cpf/secure</a></td> 
-      </tr> 
-      <tr class="b"> 
        <td><tt>cpfDataSource.url</tt></td> 
        <td>The JDBC URL to the cpf database.</td> 
        <td><img src="images/cross.png" alt="No" title="No" /></td> 
        <td>URI</td> 
        <td><tt>jdbc:oracle:thin:@localhost:1521:cpf</tt> or <tt>jdbc\:postgresql\://localhost\:5432/cpf</tt></td> 
       </tr> 
-      <tr class="a"> 
+      <tr class="b"> 
        <td><tt>cpfDataSource.password</tt></td> 
        <td>The password for the PROXY_CPF_WEB user account.</td> 
        <td><img src="images/cross.png" alt="No" title="No" /></td> 
        <td>String</td> 
        <td>cpf_2009</td> 
       </tr> 
-      <tr class="b"> 
-       <td id="configProperty_repositoryServer"><tt>ca.bc.gov.cpf.repositoryServer</tt></td> 
-       <td>The maven repository to download plugins from.</td> 
-       <td><img src="images/cross.png" alt="No" title="No" /></td> 
-       <td>int</td> 
-       <td>https://developer.gov.bc.ca/artifactory/repo/</td> 
-      </tr> 
       <tr class="a"> 
-       <td id="configProperty_repositoryDirectory"><tt>ca.bc.gov.cpf.repositoryDirectory</tt></td> 
-       <td>The cache directory to store maven artifacts.</td> 
-       <td><img src="images/cross.png" alt="No" title="No" /></td> 
-       <td>String</td> 
-       <td>/apps/cpf/repository/</td> 
-      </tr> 
-      <tr class="b"> 
        <td><tt>batchJobService.maxWorkerWaitTime</tt></td> 
        <td>The maximum time (in seconds) the worker will wait in a HTTP request for group to process before trying a new HTTP request. This limits the number of polling requests to the server. Must be less than any HTTP server inactivity timeouts.</td> 
        <td><img src="images/tick.png" alt="Yes" title="Yes" /></td> 
        <td>int</td> 
        <td>100</td> 
       </tr> 
-      <tr class="a"> 
+      <tr class="b"> 
        <td><tt>batchJobService.fromEmail</tt></td> 
        <td>The email address any emails will be sent from.</td> 
        <td><img src="images/tick.png" alt="Yes" title="Yes" /></td> 
        <td>String</td> 
        <td>cpf@localhost</td> 
       </tr> 
-      <tr class="b"> 
+      <tr class="a"> 
        <td><tt>mailSender.host</tt></td> 
        <td>The mail server to send emails via.</td> 
        <td><img src="images/tick.png" alt="Yes" title="Yes" /></td> 
        <td>String</td> 
        <td>localhost</td> 
       </tr> 
-      <tr class="a"> 
+      <tr class="b"> 
        <td>removeOldBatchJobs.daysToKeepOldJobs</td> 
        <td>The number of days that jobs will be kept after the results have been created. After that time the jobs will be removed in the next daily cleanup.</td> 
        <td><img src="images/tick.png" alt="Yes" title="Yes" /></td> 
@@ -1318,13 +1297,13 @@
       </tr> 
       <tr class="b"> 
        <td><tt>cpfWorker.environmentName</tt></td> 
-       <td>The <a href="#environmentName">environment name</a> used for the worker.</td> 
+       <td>The <a href="#Environment_Name">environment name</a> used for the worker.</td> 
        <td><img src="images/cross.png" alt="No" title="No" /></td> 
        <td>String</td> 
        <td>default</td> 
       </tr> 
       <tr class="a"> 
-       <td id="workerPoolSize"><tt>cpfWorker.maximumPoolSize</tt></td> 
+       <td id="ConfigProperty_workerPoolSize"><tt>cpfWorker.maximumPoolSize</tt></td> 
        <td>The maximum number of threads on the worker used to execute requests.</td> 
        <td><img src="images/tick.png" alt="Yes" title="Yes" /></td> 
        <td>int</td> 
@@ -1699,10 +1678,10 @@
     <p>The list of module specific user groups can be viewed using the following steps. The list also includes the USER_TYPE and GLOBAL user groups so that permissions can be granted to them.</p> 
     <blockquote> 
      <p><b>NOTE:</b> The user must be in the ADMIN, ADMIN<i>MODULE</i>[MODULE_NAME]_ADMIN, or ADMIN<i>MODULE</i>[MODULE_NAME]_SECURITY groups.</p> 
-     <p><b>NOTE:</b> If a GLOBAL group is viewed from this page then the option to delete the group or view, add, or remove members from the group will not be available. That is only available from the <a href="#userGroupAllList">All User Groups List</a> page.</p> 
+     <p><b>NOTE:</b> If a GLOBAL group is viewed from this page then the option to delete the group or view, add, or remove members from the group will not be available. That is only available from the <a href="All_User_Group_List">All User Group List</a> page.</p> 
     </blockquote> 
     <ol style="list-style-type: decimal"> 
-     <li>Open the <a href="#Module_View">Module View</a> page.</li> 
+     <li>Open the <a href="#View_Module">Module View</a> page.</li> 
      <li>Click the ‘User Groups’ tab.</li> 
     </ol> 
    </div> 
@@ -1713,7 +1692,7 @@
      <p><b>NOTE:</b> The user must be in the ADMIN, or ADMIN<i>MODULE</i>[MODULE_NAME]_ADMIN groups.</p> 
     </blockquote> 
     <ol style="list-style-type: decimal"> 
-     <li>Open the <a href="#Module_View">Module View</a> page.</li> 
+     <li>Open the <a href="#View_Module">Module View</a> page.</li> 
      <li>Click the <tt>'Module Admin User Groups'</tt> tab.</li> 
     </ol> 
    </div> 
@@ -1865,7 +1844,7 @@
   </div> 
   <div class="section"> 
    <h4 id="User_Group_Permission">User Group Permission</h4> 
-   <p>CPF modules can use User Group Permissions to grant permissions for users who are a member of a group permission to perform an action on a resource. Permissions are granted to a User Group for a Module. Cross module permissions are not supported. User group permissions grant the group permission to perform an action (Action Name) on a resource (Resource Class + Resource Id). For example view (Action Name) the reportUrl (Resource Class) <a class="externalLink" href="http://reports.com/demoReport.json">http://reports.com/demoReport.json</a> (Resource Id).</p> 
+   <p>CPF modules can use User Group Permissions to grant permissions for users who are a member of a group permission to perform an action on a resource. Permissions are granted to a User Group for a Module. Cross module permissions are not supported. User group permissions grant the group permission to perform an action (Action Name) on a resource (Resource Class + Resource Id). For example <tt>view</tt> (Action Name) the <tt>reportUrl</tt> (Resource Class) <tt>http://reports.com/demoReport.json</tt> (Resource Id).</p> 
    <blockquote> 
     <p><b>NOTE:</b> NOTE: CPF itself does not use user group permissions. Each CPF module can decide if &amp; how they use user group permissions. Consult the module’s readme file for details on the supported resource classes, resource id schemes and action names.</p> 
     <p><b>NOTE:</b> NOTE: The master and worker for a given user may cache user accounts, user groups and user group permissions for up to 5 minutes. Wait 5 minutes if the user doesn’t have the correct permissions after a change.</p> 
@@ -2386,7 +2365,7 @@ Caused by: java.net.SocketTimeoutException: connect timed out
       </ul></li> 
      <li>Check there is a worker connected using the <a href="#Worker_List">Worker List</a> page.</li> 
      <li>Check the module is started using the <a href="#Worker_Module_List">Worker Module List</a> page.</li> 
-     <li>If not started check for module errors using the <a href="#Worker_Module_View">Worker Module View</a> page.</li> 
+     <li>If not started check for module errors using the <a href="#View_Worker_Module">View Worker Module</a> page.</li> 
      <li>Check the worker module log file <tt>{moduleName}/{moduleName}_worker_{environmentName}_{hostName}_{port}_{contextPath}.log</tt> for more details on the error.</li> 
     </ul> 
     <p>If the plug-in loaded successfully the master module log file <tt>{moduleName}/{moduleName}_master.log</tt> and worker module log file <tt>{moduleName}/{moduleName}_worker_{environmentName}_{hostName}_{port}_{contextPath}.log</tt> will be rolled over and the following entries will appear at the top of the log file.</p> 
@@ -2421,7 +2400,7 @@ Caused by: java.net.SocketTimeoutException: connect timed out
     <h5 id="Job_Processing">Job Processing</h5> 
     <p>If the job was submitted but is not completed in the expected time check the following.</p> 
     <ul> 
-     <li>Check the module is loaded on the worker using the <a href="#Worker_Module_View">Worker Module View</a> page. Some modules may take 30 minutes to initialize after restart on the worker</li> 
+     <li>Check the module is loaded on the worker using the <a href="#View_Worker_Module">View Worker Module</a> page. Some modules may take 30 minutes to initialize after restart on the worker</li> 
      <li>Submit jobs to another business application so see if the system generally works.</li> 
      <li>If the job is stuck in the creatingRequests or creatingResults states check the master module and app log file for any errors. If the error was due to out of memory or database space allocate more space or cancel the job. Otherwise send the errors to the CPF developer for review, don’t cancel delete the job until it has been investigated.</li> 
      <li>If the job is stuck in the processing stage check the master and worker module and app log files for any errors. Send to the CPF developer for review.</li> 
