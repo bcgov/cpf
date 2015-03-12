@@ -88,8 +88,8 @@
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Contribute <b class="caret"></b></a>
 								<ul class="dropdown-menu">
-									<li ><a href="http://github.com/pauldaustin/cpf/" title="GitHub Project" class="externalLink">GitHub Project</a></li>
-									<li ><a href="http://github.com/pauldaustin/cpf/issues/" title="Issues (GitHub)" class="externalLink">Issues (GitHub)</a></li>
+									<li ><a href="https://github.com/pauldaustin/cpf/" title="GitHub Project" class="externalLink">GitHub Project</a></li>
+									<li ><a href="https://github.com/pauldaustin/cpf/issues/" title="Issues (GitHub)" class="externalLink">Issues (GitHub)</a></li>
 								</ul>
 							</li>
 							<li class="dropdown">
@@ -245,7 +245,7 @@
 									<ul class="dropdown-menu" role="menu">
 								<li><a href="#Configuration_Property_Fields" title="Configuration Property Fields">Configuration Property Fields</a></li>
 								<li><a href="#Environment_Name" title="Environment Name">Environment Name</a></li>
-								<li><a href="#Data_Types" title="Data Types">Data Types</a></li>
+								<li><a href="#Data_Type" title="Data Type">Data Type</a></li>
 
 									</ul>
 								</li>
@@ -542,12 +542,12 @@
    <ul> 
     <li><a href="#Application">Business Application</a></li> 
     <li><a href="#Configuration">Configuration Property</a></li> 
-    <li><a href="#Dashboard">Dashboard Statistics</a></li> 
-    <li><a href="#Jobs_appList">Business Application Jobs</a></li> 
-    <li><a href="#UserGroup_userGroupModuleList">Module User Groups</a></li> 
-    <li><a href="#UserGroup_userGroupModuleAdminList">Module Admin User Groups</a></li> 
-    <li>[User Group Permissions](#User Group Permissions)</li> 
-    <li><a href="#ConfigProperty_moduleList">Module Config Properties</a></li> 
+    <li><a href="#Statistics">Dashboard Statistics</a></li> 
+    <li><a href="#Business_Application_Batch_Job_List">Business Application Jobs</a></li> 
+    <li><a href="#Module_User_Group_List">Module User Groups</a></li> 
+    <li><a href="#Module_Admin_User_Group_List">Module Admin User Groups</a></li> 
+    <li><a href="#User_Group_Permission">User Group Permissions</a></li> 
+    <li><a href="#Module_Configuration_Properties">Module Configuration Properties</a></li> 
    </ul> 
    <blockquote> 
     <p><b>NOTE</b> The user must be in the ADMIN, ADMIN<i>MODULE</i>[MODULE_NAME]_ADMIN, or ADMIN<i>MODULE</i>[MODULE_NAME]_SECURITY groups to manage modules. Module admins will only see modules they are admins for.</p> 
@@ -725,7 +725,7 @@
    <ul> 
     <li><a href="#Business_Application_Statistics">Dashboard Statistics</a></li> 
     <li><a href="#Business_Application_Config_Poperties">Config Properties</a></li> 
-    <li><a href="#Business_Application_Jobs">Jobs</a></li> 
+    <li><a href="#Business_Application_Batch_Job_List">Batch Jobs</a></li> 
    </ul> 
    <blockquote> 
     <p><b>NOTE:</b> The user must be in the ADMIN, or ADMIN<i>MODULE</i>[MODULE_NAME]_ADMIN groups to manage business applications. Module admins will only see business applications they are module admins for.</p> 
@@ -1001,7 +1001,7 @@
       </tr> 
       <tr class="a"> 
        <td>Value Type</td> 
-       <td>The <a href="Data Type">data type</a> the value will be converted to.</td> 
+       <td>The <a href="#Data_Type">data type</a> the value will be converted to.</td> 
       </tr> 
      </tbody> 
     </table> 
@@ -1013,7 +1013,7 @@
     <p>For example the system could have two worker servers. The first has 2 CPUs and the second has 4. The first could support 16 threads and the second 32 threads. Two environment names 2cpu and 4cpu could be created. The first worker’s environment name would be set to 2cpu and the second 4cpu. A configuration property can be created for the property name cpfWorker.maximumPoolSize for each environment with the values 16 and 32 respectively.</p> 
    </div> 
    <div class="section"> 
-    <h5 id="Data_Types">Data Types</h5> 
+    <h5 id="Data_Type">Data Type</h5> 
     <table border="0" class="bodyTable table table-striped table-hover"> 
      <thead> 
       <tr> 
@@ -1220,72 +1220,65 @@
        <td>The HTTP URL to the OAuth/Digest secured CPF web services, including context path on the server cpf is deployed to. The trailing / must be omitted.</td> 
        <td><img src="images/cross.png" alt="No" title="No" /></td> 
        <td>URI</td> 
-       <td><a class="externalLink" href="http://apps.gov.bc.ca/pub/cpf">http://apps.gov.bc.ca/pub/cpf</a></td> 
+       <td><a class="externalLink" href="http://localhost/cpf">http://localhost/cpf</a></td> 
       </tr> 
       <tr class="a"> 
        <td><tt>cpfConfig.secureBaseUrl</tt></td> 
        <td>The HTTPS URL to the Siteminder secured CPF web services, including context path on the server cpf is deployed to. The trailing / must be omitted.</td> 
        <td><img src="images/cross.png" alt="No" title="No" /></td> 
        <td>URI</td> 
-       <td><a class="externalLink" href="https://apps.gov.bc.ca/pub/cpf/secure">https://apps.gov.bc.ca/pub/cpf/secure</a></td> 
+       <td><a class="externalLink" href="https://localhost/cpf/secure">https://localhost/cpf/secure</a></td> 
       </tr> 
       <tr class="b"> 
-       <td><tt>cpfSiteminderLogoutSuccess.logoutUrl</tt></td> 
-       <td>The URL to the siteminder logoff page.</td> 
-       <td><img src="images/cross.png" alt="No" title="No" /></td> 
-       <td>URI</td> 
-       <td><a class="externalLink" href="https://logon.gov.bc.ca/clp-cgi/logoff.cgi">https://logon.gov.bc.ca/clp-cgi/logoff.cgi</a> or <a class="externalLink" href="https://logontest.gov.bc.ca/clp-cgi/logoff.cgi">https://logontest.gov.bc.ca/clp-cgi/logoff.cgi</a></td> 
-      </tr> 
-      <tr class="a"> 
        <td><tt>cpfDataSource.url</tt></td> 
        <td>The JDBC URL to the cpf database.</td> 
        <td><img src="images/cross.png" alt="No" title="No" /></td> 
        <td>URI</td> 
        <td><tt>jdbc:oracle:thin:@localhost:1521:cpf</tt> or <tt>jdbc\:postgresql\://localhost\:5432/cpf</tt></td> 
       </tr> 
-      <tr class="b"> 
+      <tr class="a"> 
        <td><tt>cpfDataSource.password</tt></td> 
        <td>The password for the PROXY_CPF_WEB user account.</td> 
        <td><img src="images/cross.png" alt="No" title="No" /></td> 
        <td>String</td> 
        <td>cpf_2009</td> 
       </tr> 
-      <tr class="a"> 
+      <tr class="b"> 
        <td id="configProperty_repositoryServer"><tt>ca.bc.gov.cpf.repositoryServer</tt></td> 
        <td>The maven repository to download plugins from.</td> 
        <td><img src="images/cross.png" alt="No" title="No" /></td> 
        <td>int</td> 
        <td>https://developer.gov.bc.ca/artifactory/repo/</td> 
       </tr> 
-      <tr class="b"> 
+      <tr class="a"> 
        <td id="configProperty_repositoryDirectory"><tt>ca.bc.gov.cpf.repositoryDirectory</tt></td> 
        <td>The cache directory to store maven artifacts.</td> 
        <td><img src="images/cross.png" alt="No" title="No" /></td> 
        <td>String</td> 
        <td>/apps/cpf/repository/</td> 
       </tr> 
-      <tr class="a"> 
+      <tr class="b"> 
        <td><tt>batchJobService.maxWorkerWaitTime</tt></td> 
        <td>The maximum time (in seconds) the worker will wait in a HTTP request for group to process before trying a new HTTP request. This limits the number of polling requests to the server. Must be less than any HTTP server inactivity timeouts.</td> 
        <td><img src="images/tick.png" alt="Yes" title="Yes" /></td> 
        <td>int</td> 
        <td>100</td> 
       </tr> 
-      <tr class="b"> 
+      <tr class="a"> 
        <td><tt>batchJobService.fromEmail</tt></td> 
        <td>The email address any emails will be sent from.</td> 
        <td><img src="images/tick.png" alt="Yes" title="Yes" /></td> 
        <td>String</td> 
        <td>cpf@localhost</td> 
       </tr> 
-      <tr class="a"> 
+      <tr class="b"> 
        <td><tt>mailSender.host</tt></td> 
        <td>The mail server to send emails via.</td> 
        <td><img src="images/tick.png" alt="Yes" title="Yes" /></td> 
        <td>String</td> 
        <td>localhost</td> 
       </tr> 
-      <tr class="b"> 
+      <tr class="a"> 
        <td>removeOldBatchJobs.daysToKeepOldJobs</td> 
        <td>The number of days that jobs will be kept after the results have been created. After that time the jobs will be removed in the next daily cleanup.</td> 
        <td><img src="images/tick.png" alt="Yes" title="Yes" /></td> 
@@ -2370,7 +2363,7 @@ Caused by: java.net.SocketTimeoutException: connect timed out
         <li>Check the error code/message to verify if the database server was out of tablespace storage. Delete old jobs or increase the storage as required.</li> 
         <li>Check the error code/message to verify if it’s an invalid SQL statement. If it is contact the CPF developer if it has CPF has a table schema name in the SQL, otherwise contact the plug-in developer.</li> 
        </ul></li> 
-      <li><tt>java.lang.OutOfMemoryError</tt> This could occur if the request data is to large to fit into memory or if the plug-ins or CPF has been re-dployed too many times and is not being garbage collected (perm gen errors). Typically this error will show up in the catalina.out file. Rebooting the application server is the best way to resolve these issues. If the error occurs repeatedly then verify that the <tt>-Xmx</tt> option for tomcat is large enough for the business applications and for perm gen errors check the <tt>-XX:MaxPermSize</tt> option. The CPF and plug-ins should be developed so that they can be garbage collected when stopped or restarted. Details on this are in the <a href="#client.html">client developers guide</a>.</li> 
+      <li><tt>java.lang.OutOfMemoryError</tt> This could occur if the request data is to large to fit into memory or if the plug-ins or CPF has been re-dployed too many times and is not being garbage collected (perm gen errors). Typically this error will show up in the catalina.out file. Rebooting the application server is the best way to resolve these issues. If the error occurs repeatedly then verify that the <tt>-Xmx</tt> option for tomcat is large enough for the business applications and for perm gen errors check the <tt>-XX:MaxPermSize</tt> option. The CPF and plug-ins should be developed so that they can be garbage collected when stopped or restarted. Details on this are in the <a href="client.html">client developers guide</a>.</li> 
       <li><tt>org.springframework.security.authentication.*Exception</tt> This indicates that the user is not valid or does not have permission to access the resource. Contact the CPF developer as these should not be logged in the log file and just displayed to the user.</li> 
      </ul> 
     </div> 
