@@ -1,110 +1,91 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html>
-<html xml:lang="en">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=8,IE=9,IE=10,IE=Edge" />
-    
-<title>Client REST API</title>
-    <script type="text/javascript">
-pageId = 'clientRest';
-		</script>
+<!DOCTYPE html><html xmlns="xml" lang="en">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CPF Client REST API</title>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.2/flatly/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<style type="text/css">body{padding-top:60px}
+*[id]:before {display:block;content:' ';margin-top:-75px;height:75px;visibility:hidden;}</style>
+</head>
 
-    <link href="https://code.jquery.com/ui/1.11.2/themes/cupertino/jquery-ui.css" rel="stylesheet" type="text/css" />
-    <link href="https://cdn.datatables.net/1.10.4/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
-    <link href="https://cdn.datatables.net/scroller/1.2.2/css/dataTables.scroller.css" rel="stylesheet" type="text/css" />
-    <link href="../../../css/prettify.css" rel="stylesheet" type="text/css" />
-    <link href="../../../css/rs.css" rel="stylesheet" type="text/css" />
-    <link href="../../../css/bcgov.css" rel="stylesheet" type="text/css" />
-    <link href="../../../css/cpf.css" rel="stylesheet" type="text/css" />
-    <link href="javadoc.css" rel="stylesheet" type="text/css" />
-
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script type="text/javascript" src="https://code.jquery.com/ui/1.11.2/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/scroller/1.2.2/js/dataTables.scroller.min.js"></script>
-    <script type="text/javascript" src="../../../js/rs.js"></script>
-    <script type="text/javascript" src="../../../js/cpf_client.js"></script>
-    <script type="text/javascript" src="prettify.js"></script>
-    <script type="text/javascript" src="javadoc.js"></script>
-    <script type="text/javascript">
-$(document).ready(function() {
-  prettyPrint();
-  setPageId(pageId);
-  createToc();
-});
-	</script>
-    <style type="text/css">
-td > ul {
-  margin: 0px;
-}
-    </style>
-
-  </head>
-  <body>
-    <div CLASS="body">
-      <div class="header">
-        <div class="headerContent">
-          <div class="title">
-            Concurrent Processing Framework - Developer Guide
-           </div>
-        </div>
-      </div>
-      <div CLASS="columns_2_2">
-        <div CLASS="columns_2_1">
-          <div>
-            <div class="column_2_1">
-              <div class="sideNav">
-                <div class="sideMenu">
-                  <div class="title"><a href="http://www.gov.bc.ca/" title="B.C. Home">B.C. Home</a></div>
-                  <ul>
-                    <li><a href="../../../ws/">Home</a></li>
-                    <li id="overviewMenu"><a href="../../">Overview</a></li>
-                    <li id="clientMenu"><a href="../../client/">Client Development</a><ul>
-                      <li id="clientRestMenu"><a href="../../client/rest-api/">Client REST API</a></li>
-                      <li id="clientJavaMenu"><a href="../../client/java-api/">Client Java API</a></li>
-                     <!-- <li id="clientJavaMenu"><a href="../../client/javascript-api/">Client JavaScript API</a></li>-->
-                    </ul></li>
-                    <li id="pluginMenu"><a href="../../plugin/">Plug-in Development</a><ul>
-                      <li id="pluginOverviewMenu"><a href="../../plugin/overview.html">Plug-in Overview</a></li>
-                      <li id="pluginProjectMenu"><a href="../../plugin/mavenProject.html">Plug-in Maven Project</a></li>
-                      <li id="pluginAppMenu"><a href="../../plugin/businessApplication.html">Plug-in Business Application Class</a></li>
-                      <li id="pluginCustomizationMenu"><a href="../../plugin/customization.html">Plug-in Customization Properties</a></li>
-                      <li id="pluginConfigurationMenu"><a href="../../plugin/config.html">Plug-in Configuration Properties</a></li>
-                      <li id="pluginSecurityMenu"><a href="../../plugin/security.html">Plug-in Security</a></li>
-                      <li id="pluginTestingMenu"><a href="../../plugin/testing.html">Plug-in Testing</a></li>
-                      <li id="pluginJavaMenu"><a href="../../plugin/java-api/" title="Plug-in Java API">Plug-in Java API</a></li>
-                    </ul></li>
-                    <li id="installMenu"><a href="../../install/">Installation</a><ul>
-                      <li id="dbInstallMenu"><a href="../../install/database.html">Database Installation</a></li>
-                      <li id="webInstallMenu"><a href="../../install/webapp.html">Web Application Installation</a></li>
-                    </ul></li>
-                    <li id="adminMenu"><a href="../../admin/">Administration</a></li>
-                  </ul>
-                  </div>
-              </div>
-            </div>
-            <div CLASS="column_2_2">
-              <div CLASS="bodyContainer">
-                <div class="breadcrumbs">
-                    <div class="breadcrumb">
-<ul>
-<li><a href="../../../ws/">HOME</a></li>
-<li><a href="../../">Developer Guide</a></li>
-<li>Client REST API</li>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top">
+<div class="container">
+<div class="navbar-header">
+<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+<span class="sr-only">Toggle navigation</span>
+</button>
+<a class="navbar-brand" href="#">CPF Client REST API</a>
+</div>
+<div id="navbar" class="navbar-collapse">
+<ul class="nav navbar-nav">
+<li class="dropdown">
+<a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Concurrent Processing Framework</a>
+<ul class="dropdown-menu" role="menu">
+<li>
+<a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.createJobWithMultipleRequests">Create Job With Multiple Requests</a>
+</li>
+<li>
+<a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.createJobWithSingleRequest">Create Job With Single Request</a>
+</li>
+<li>
+<a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.deleteJob">Delete Job</a>
+</li>
+<li>
+<a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getAuthenticated">Get Authenticated</a>
+</li>
+<li>
+<a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplications">Get Business Applications</a>
+</li>
+<li>
+<a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplicationsInstant">Get Business Applications Instant</a>
+</li>
+<li>
+<a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplicationsJobs">Get Business Applications Jobs</a>
+</li>
+<li>
+<a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplicationsMultiple">Get Business Applications Multiple</a>
+</li>
+<li>
+<a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplicationsResources">Get Business Applications Resources</a>
+</li>
+<li>
+<a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplicationsSingle">Get Business Applications Single</a>
+</li>
+<li>
+<a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getJobs">Get Jobs</a>
+</li>
+<li>
+<a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getJobsInfo">Get Jobs Info</a>
+</li>
+<li>
+<a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getJobsResult">Get Jobs Result</a>
+</li>
+<li>
+<a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getJobsResults">Get Jobs Results</a>
+</li>
+<li>
+<a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getRoot">Get Root</a>
+</li>
+</ul>
+</li>
 </ul>
 </div>
-                  
-                </div>
-                <div CLASS="bodyContent">
-
-<div class="javaPackage open">
-<h1 id="clientRest">Client REST API</h1>
-<div class="content">
-<div class="javaClass open">
-<h2 id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework">Concurrent Processing Framework</h2>
-<div class="content"><p>The Concurrent Processing Framework REST API allows client applications in Java, JavaScript or other
+</div>
+</nav>
+<div class="container-fluid">
+<div class="row">
+<div class="col-md-12">
+<h1>CPF Client REST API</h1>
+<div class="panel panel-default">
+<div class="panel-heading">
+<h2 id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework" class="panel-title">Concurrent Processing Framework</h2>
+</div>
+<div class="panel-body"><p>The Concurrent Processing Framework REST API allows client applications in Java, JavaScript or other
  programming languages to query the available business applications, create jobs and download
  the results of jobs on behalf of their users.<p>
 
@@ -119,9 +100,11 @@ td > ul {
  described in this API. The HTML user interface allows full access to the CPF without any programming
  experience required. The HTML user interface will be slightly different from the responses
  described in this API.</p>
-<div class="javaMethod">
-<h3 id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.createJobWithMultipleRequests">Create Job With Multiple Requests</h3>
-<div class="content"><p>Create a new job containing multiple requests to be processed by the
+<div class="panel panel-primary">
+<div class="panel-heading">
+<h3 id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.createJobWithMultipleRequests" class="panel-title">Create Job With Multiple Requests</h3>
+</div>
+<div class="panel-body"><p>Create a new job containing multiple requests to be processed by the
  business application.</p>
 
  <p>The service parameters must be passed
@@ -132,18 +115,18 @@ td > ul {
  <a href= "#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplicationsMultiple">Get Business Applications Multiple</a>
  resource should be consulted to get the full list of supported parameters. </p>
 
- <h5>Structured Input Data</h5>
+ <h4>Structured Input Data</h4>
 
  <p>For structured input data business applications the requests are specified
  using either a single inputData file or a single inputDataUrl can be
- specified. The file must be in the <a href="../../fileFormats.html">file
+ specified. The file must be in the <a href="/reference/fileFormats.html">file
  format</a> specified by a single inputDataContentType. The contents of the
  file must contain one record for each request to be processed in the batch
  job. The fields of each record must contain the request parameters
  supported by the business application. The names of the parameters are case
  sensitive.</p>
 
- <h5>Opaque input data</h5>
+ <h4>Opaque input data</h4>
 
  <p>For opaque input data (e.g. JPEG image, ESRI Shapefile) the requests can be
  specified as one or more inputData files or one or more inputDataUrl
@@ -156,18 +139,34 @@ td > ul {
  <p class="note">NOTE: The maximum size including all parameters and protocol overhead of a
  multi-part request is 20MB. Therefore inputDataUrl should be used instead
  of inputData where possible.</p>
-<h4>HTTP Request Methods</h4>
+<div class="panel panel-info">
+<div class="panel-heading">
+<h4 class="panel-title">HTTP Request Methods</h4>
+</div>
+<div class="panel-body">
 <p>The resource can be accessed using the following HTTP request methods.</p>
 <ul>
 <li>POST</li>
 </ul>
-<h4>URI Templates</h4>
+</div>
+</div>
+<div class="panel panel-info">
+<div class="panel-heading">
+<h4 class="panel-title">URI Templates</h4>
+</div>
+<div class="panel-body">
 <p>The URI templates define the paths that can be appended to the base URL of the service to access this resource.</p>
 <pre>/ws/apps/{businessApplicationName}/multiple</pre>
-<h4>URI Template Parameters</h4>
+</div>
+</div>
+<div class="panel panel-info">
+<div class="panel-heading">
+<h4 class="panel-title">URI Template Parameters</h4>
+</div>
+<div class="panel-body">
 <p>The URI templates support the following parameters which must be replaced with values as described below.</p>
-<div class="simpleDataTable">
-<table class="data">
+<div class="table-responsive">
+<table class="table table-striped table-bordered">
 <thead>
 <tr>
 <th>Parameter</th>
@@ -185,10 +184,16 @@ td > ul {
 </tbody>
 </table>
 </div>
-<h4>Parameters</h4>
+</div>
+</div>
+<div class="panel panel-info">
+<div class="panel-heading">
+<h4 class="panel-title">Parameters</h4>
+</div>
+<div class="panel-body">
 <p>The resource supports the following parameters. For HTTP get requests these must be specified using query string parameters. For HTTP POST requests these can be specified using query string, application/x-www-form-urlencoded parameters or multipart/form-data unless otherwise specified. Array values [] can be specified by including the parameter multiple times in the request.</p>
-<div class="simpleDataTable">
-<table class="data">
+<div class="table-responsive">
+<table class="table table-striped table-bordered">
 <thead>
 <tr>
 <th>Parameter</th>
@@ -346,10 +351,16 @@ td > ul {
 </tbody>
 </table>
 </div>
-<h4>HTTP Status Codes</h4>
+</div>
+</div>
+<div class="panel panel-info">
+<div class="panel-heading">
+<h4 class="panel-title">HTTP Status Codes</h4>
+</div>
+<div class="panel-body">
 <p>The resource will return one of the following status codes. The HTML error page may include an error message. The descriptions of the messages and the cause are described below.</p>
-<div class="simpleDataTable">
-<table class="data">
+<div class="table-responsive">
+<table class="table table-striped table-bordered">
 <thead>
 <tr>
 <th>HTTP Status Code</th>
@@ -374,9 +385,13 @@ td > ul {
 </div>
 </div>
 </div>
-<div class="javaMethod">
-<h3 id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.createJobWithSingleRequest">Create Job With Single Request</h3>
-<div class="content"><p>Create a new job containing multiple requests to be processed by the
+</div>
+</div>
+<div class="panel panel-primary">
+<div class="panel-heading">
+<h3 id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.createJobWithSingleRequest" class="panel-title">Create Job With Single Request</h3>
+</div>
+<div class="panel-body"><p>Create a new job containing multiple requests to be processed by the
  business application.</p>
 
  <p>The job and request parameters for the business application must be passed
@@ -387,12 +402,12 @@ td > ul {
  <a href= "#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplicationsSingle">Get Business Applications Single</a>
  resource should be consulted to get the full list of supported parameters. </p>
 
- <h5>Structured Input Data</h5>
+ <h4>Structured Input Data</h4>
 
  <p>For structured input data business applications the request parameters are specified
  in the HTTP POST form.</p>
 
- <h5>Opaque input data</h5>
+ <h4>Opaque input data</h4>
 
  <p>For opaque input data (e.g. JPEG image, ESRI Shapefile) the requests can be
  specified as one inputData files or one inputDataUrl
@@ -402,18 +417,34 @@ td > ul {
  <p class="note">NOTE: The maximum size including all parameters and protocol overhead of a
  multi-part request is 20MB. Therefore inputDataUrl should be used instead
  of inputData where possible for opaque data.</p>
-<h4>HTTP Request Methods</h4>
+<div class="panel panel-info">
+<div class="panel-heading">
+<h4 class="panel-title">HTTP Request Methods</h4>
+</div>
+<div class="panel-body">
 <p>The resource can be accessed using the following HTTP request methods.</p>
 <ul>
 <li>POST</li>
 </ul>
-<h4>URI Templates</h4>
+</div>
+</div>
+<div class="panel panel-info">
+<div class="panel-heading">
+<h4 class="panel-title">URI Templates</h4>
+</div>
+<div class="panel-body">
 <p>The URI templates define the paths that can be appended to the base URL of the service to access this resource.</p>
 <pre>/ws/apps/{businessApplicationName}/single</pre>
-<h4>URI Template Parameters</h4>
+</div>
+</div>
+<div class="panel panel-info">
+<div class="panel-heading">
+<h4 class="panel-title">URI Template Parameters</h4>
+</div>
+<div class="panel-body">
 <p>The URI templates support the following parameters which must be replaced with values as described below.</p>
-<div class="simpleDataTable">
-<table class="data">
+<div class="table-responsive">
+<table class="table table-striped table-bordered">
 <thead>
 <tr>
 <th>Parameter</th>
@@ -431,10 +462,16 @@ td > ul {
 </tbody>
 </table>
 </div>
-<h4>Parameters</h4>
+</div>
+</div>
+<div class="panel panel-info">
+<div class="panel-heading">
+<h4 class="panel-title">Parameters</h4>
+</div>
+<div class="panel-body">
 <p>The resource supports the following parameters. For HTTP get requests these must be specified using query string parameters. For HTTP POST requests these can be specified using query string, application/x-www-form-urlencoded parameters or multipart/form-data unless otherwise specified. Array values [] can be specified by including the parameter multiple times in the request.</p>
-<div class="simpleDataTable">
-<table class="data">
+<div class="table-responsive">
+<table class="table table-striped table-bordered">
 <thead>
 <tr>
 <th>Parameter</th>
@@ -592,10 +629,16 @@ td > ul {
 </tbody>
 </table>
 </div>
-<h4>HTTP Status Codes</h4>
+</div>
+</div>
+<div class="panel panel-info">
+<div class="panel-heading">
+<h4 class="panel-title">HTTP Status Codes</h4>
+</div>
+<div class="panel-body">
 <p>The resource will return one of the following status codes. The HTML error page may include an error message. The descriptions of the messages and the cause are described below.</p>
-<div class="simpleDataTable">
-<table class="data">
+<div class="table-responsive">
+<table class="table table-striped table-bordered">
 <thead>
 <tr>
 <th>HTTP Status Code</th>
@@ -620,9 +663,13 @@ td > ul {
 </div>
 </div>
 </div>
-<div class="javaMethod">
-<h3 id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.deleteJob">Delete Job</h3>
-<div class="content"><p>
+</div>
+</div>
+<div class="panel panel-primary">
+<div class="panel-heading">
+<h3 id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.deleteJob" class="panel-title">Delete Job</h3>
+</div>
+<div class="panel-body"><p>
  Cancel the user's job. This will mark the job as cancelled and remove all requests
  and results from the job. The job will be removed after a few days.
  </p>
@@ -637,18 +684,34 @@ td > ul {
  to cancel the job to help free resources on the system to process
  other jobs.
  </p>
-<h4>HTTP Request Methods</h4>
+<div class="panel panel-info">
+<div class="panel-heading">
+<h4 class="panel-title">HTTP Request Methods</h4>
+</div>
+<div class="panel-body">
 <p>The resource can be accessed using the following HTTP request methods.</p>
 <ul>
 <li>DELETE</li>
 </ul>
-<h4>URI Templates</h4>
+</div>
+</div>
+<div class="panel panel-info">
+<div class="panel-heading">
+<h4 class="panel-title">URI Templates</h4>
+</div>
+<div class="panel-body">
 <p>The URI templates define the paths that can be appended to the base URL of the service to access this resource.</p>
 <pre>/ws/jobs/{batchJobId}</pre>
-<h4>URI Template Parameters</h4>
+</div>
+</div>
+<div class="panel panel-info">
+<div class="panel-heading">
+<h4 class="panel-title">URI Template Parameters</h4>
+</div>
+<div class="panel-body">
 <p>The URI templates support the following parameters which must be replaced with values as described below.</p>
-<div class="simpleDataTable">
-<table class="data">
+<div class="table-responsive">
+<table class="table table-striped table-bordered">
 <thead>
 <tr>
 <th>Parameter</th>
@@ -666,10 +729,16 @@ td > ul {
 </tbody>
 </table>
 </div>
-<h4>HTTP Status Codes</h4>
+</div>
+</div>
+<div class="panel panel-info">
+<div class="panel-heading">
+<h4 class="panel-title">HTTP Status Codes</h4>
+</div>
+<div class="panel-body">
 <p>The resource will return one of the following status codes. The HTML error page may include an error message. The descriptions of the messages and the cause are described below.</p>
-<div class="simpleDataTable">
-<table class="data">
+<div class="table-responsive">
+<table class="table table-striped table-bordered">
 <thead>
 <tr>
 <th>HTTP Status Code</th>
@@ -707,24 +776,44 @@ td > ul {
 </div>
 </div>
 </div>
-<div class="javaMethod">
-<h3 id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getAuthenticated">Get Authenticated</h3>
-<div class="content"><p>Check that a user is authenticated. This can be used by JavaScript applications to force
+</div>
+</div>
+<div class="panel panel-primary">
+<div class="panel-heading">
+<h3 id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getAuthenticated" class="panel-title">Get Authenticated</h3>
+</div>
+<div class="panel-body"><p>Check that a user is authenticated. This can be used by JavaScript applications to force
  a login page to be displayed. Returns a map with authenticated=true if the user
  is authenticated. Response is undefined if the user is not authenticated as the authentication
  mechanism will not allow access to the resource.</p>
-<h4>HTTP Request Methods</h4>
+<div class="panel panel-info">
+<div class="panel-heading">
+<h4 class="panel-title">HTTP Request Methods</h4>
+</div>
+<div class="panel-body">
 <p>The resource can be accessed using the following HTTP request methods.</p>
 <ul>
 <li>GET</li>
 </ul>
-<h4>URI Templates</h4>
+</div>
+</div>
+<div class="panel panel-info">
+<div class="panel-heading">
+<h4 class="panel-title">URI Templates</h4>
+</div>
+<div class="panel-body">
 <p>The URI templates define the paths that can be appended to the base URL of the service to access this resource.</p>
 <pre>/ws/authenticated</pre>
-<h4>HTTP Status Codes</h4>
+</div>
+</div>
+<div class="panel panel-info">
+<div class="panel-heading">
+<h4 class="panel-title">HTTP Status Codes</h4>
+</div>
+<div class="panel-body">
 <p>The resource will return one of the following status codes. The HTML error page may include an error message. The descriptions of the messages and the cause are described below.</p>
-<div class="simpleDataTable">
-<table class="data">
+<div class="table-responsive">
+<table class="table table-striped table-bordered">
 <thead>
 <tr>
 <th>HTTP Status Code</th>
@@ -745,16 +834,20 @@ td > ul {
 </div>
 </div>
 </div>
-<div class="javaMethod">
-<h3 id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplications">Get Business Applications</h3>
-<div class="content"><p>Get the list of links to the
+</div>
+</div>
+<div class="panel panel-primary">
+<div class="panel-heading">
+<h3 id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplications" class="panel-title">Get Business Applications</h3>
+</div>
+<div class="panel-body"><p>Get the list of links to the
  <a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplicationsResources">Get Business Applications Resources</a>
  resource for each business application the user is authorized to access.</p>
 
  <p>The method returns a <a href="../../resourceDescription.html">Resource Description</a> document. Each child resource supports following custom attributes.</a>
 
- <div class="simpleDataTable">
-   <table class="data">
+ <div class="table-responsive">
+   <table class="table table-striped table-bordered">
      <thead>
        <tr>
          <th>Attribute</th>
@@ -769,18 +862,34 @@ td > ul {
      </tbody>
    </table>
  </div>
-<h4>HTTP Request Methods</h4>
+<div class="panel panel-info">
+<div class="panel-heading">
+<h4 class="panel-title">HTTP Request Methods</h4>
+</div>
+<div class="panel-body">
 <p>The resource can be accessed using the following HTTP request methods.</p>
 <ul>
 <li>GET</li>
 </ul>
-<h4>URI Templates</h4>
+</div>
+</div>
+<div class="panel panel-info">
+<div class="panel-heading">
+<h4 class="panel-title">URI Templates</h4>
+</div>
+<div class="panel-body">
 <p>The URI templates define the paths that can be appended to the base URL of the service to access this resource.</p>
 <pre>/ws/apps</pre>
-<h4>HTTP Status Codes</h4>
+</div>
+</div>
+<div class="panel panel-info">
+<div class="panel-heading">
+<h4 class="panel-title">HTTP Status Codes</h4>
+</div>
+<div class="panel-body">
 <p>The resource will return one of the following status codes. The HTML error page may include an error message. The descriptions of the messages and the cause are described below.</p>
-<div class="simpleDataTable">
-<table class="data">
+<div class="table-responsive">
+<table class="table table-striped table-bordered">
 <thead>
 <tr>
 <th>HTTP Status Code</th>
@@ -801,22 +910,26 @@ td > ul {
 </div>
 </div>
 </div>
-<div class="javaMethod">
-<h3 id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplicationsInstant">Get Business Applications Instant</h3>
-<div class="content"><p>The instant resource has the two modes described below, the specification mode and the
+</div>
+</div>
+<div class="panel panel-primary">
+<div class="panel-heading">
+<h3 id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplicationsInstant" class="panel-title">Get Business Applications Instant</h3>
+</div>
+<div class="panel-body"><p>The instant resource has the two modes described below, the specification mode and the
  execute instant request mode. If the <code>format</code> parameter is not included or the
  <code>specification</code> parameter equals <code>true</code> then the specification mode
  is enabled, otherwise the execute instant request mode is enabled.</p>
 
- <h5>Specification</h5>
+ <h4>Specification</h4>
 
  <p>Get the specification of the execute instant request mode of this service.</p>
 
  <p>The method returns a <a href="../../resourceDescription.html">Resource Description</a> document with the following additional fields
  which are the parameters to the execute instant request mode.</a>.</p>
 
- <div class="simpleDataTable">
-   <table class="data">
+ <div class="table-responsive">
+   <table class="table table-striped table-bordered">
      <thead>
        <tr>
          <th>Attribute</th>
@@ -848,8 +961,8 @@ td > ul {
          <td>parameters</td>
          <td><p>The array of parameters that can be passed to the service. Each parameter is an object
          containing the following fields.</p>
-           <div class="simpleDataTable">
-             <table class="data">
+           <div class="table-responsive">
+             <table class="table table-striped table-bordered">
                <thead>
                  <tr>
                    <th>Attribute</th>
@@ -892,7 +1005,7 @@ td > ul {
        </tr>
        <tr>
          <td>perRequestInputData</td>
-         <td>Boolean flag indicating that the business application accepts <a href="../../opaqueData.html">opaque data</a> (true) or <a href="../../structuredData.html">structured data</a> (false).</td>
+         <td>Boolean flag indicating that the business application accepts <a href="../../reference/opaqueData.html">opaque data</a> (true) or <a href="../../reference/structuredData.html">structured data</a> (false).</td>
        </tr>
        <tr>
          <td>resultDataContentTypes</td>
@@ -900,13 +1013,13 @@ td > ul {
        </tr>
        <tr>
          <td>perRequestResultData</td>
-         <td>Boolean flag indicating that the business application returns <a href="../../opaqueData.html">opaque data</a> (true) or <a href="../../structuredData.html">structured data</a> (false).</td>
+         <td>Boolean flag indicating that the business application returns <a href="../../reference/opaqueData.html">opaque data</a> (true) or <a href="../../reference/structuredData.html">structured data</a> (false).</td>
        </tr>
      </tbody>
    </table>
  </div>
 
- <h5>Execute Instant Request</h5>
+ <h4>Execute Instant Request</h4>
 
  <p>Execute a single instant request using the business application with the results
  returned in the request.</p>
@@ -920,19 +1033,35 @@ td > ul {
  resource should be consulted to get the full list of supported parameters. </p>
 
  <p class="note">NOTE: The instant resource does not support opaque input data.</p>
-<h4>HTTP Request Methods</h4>
+<div class="panel panel-info">
+<div class="panel-heading">
+<h4 class="panel-title">HTTP Request Methods</h4>
+</div>
+<div class="panel-body">
 <p>The resource can be accessed using the following HTTP request methods.</p>
 <ul>
 <li>GET</li>
 <li>POST</li>
 </ul>
-<h4>URI Templates</h4>
+</div>
+</div>
+<div class="panel panel-info">
+<div class="panel-heading">
+<h4 class="panel-title">URI Templates</h4>
+</div>
+<div class="panel-body">
 <p>The URI templates define the paths that can be appended to the base URL of the service to access this resource.</p>
 <pre>/ws/apps/{businessApplicationName}/instant</pre>
-<h4>URI Template Parameters</h4>
+</div>
+</div>
+<div class="panel panel-info">
+<div class="panel-heading">
+<h4 class="panel-title">URI Template Parameters</h4>
+</div>
+<div class="panel-body">
 <p>The URI templates support the following parameters which must be replaced with values as described below.</p>
-<div class="simpleDataTable">
-<table class="data">
+<div class="table-responsive">
+<table class="table table-striped table-bordered">
 <thead>
 <tr>
 <th>Parameter</th>
@@ -950,10 +1079,16 @@ td > ul {
 </tbody>
 </table>
 </div>
-<h4>Parameters</h4>
+</div>
+</div>
+<div class="panel panel-info">
+<div class="panel-heading">
+<h4 class="panel-title">Parameters</h4>
+</div>
+<div class="panel-body">
 <p>The resource supports the following parameters. For HTTP get requests these must be specified using query string parameters. For HTTP POST requests these can be specified using query string, application/x-www-form-urlencoded parameters or multipart/form-data unless otherwise specified. Array values [] can be specified by including the parameter multiple times in the request.</p>
-<div class="simpleDataTable">
-<table class="data">
+<div class="table-responsive">
+<table class="table table-striped table-bordered">
 <thead>
 <tr>
 <th>Parameter</th>
@@ -1058,10 +1193,16 @@ td > ul {
 </tbody>
 </table>
 </div>
-<h4>HTTP Status Codes</h4>
+</div>
+</div>
+<div class="panel panel-info">
+<div class="panel-heading">
+<h4 class="panel-title">HTTP Status Codes</h4>
+</div>
+<div class="panel-body">
 <p>The resource will return one of the following status codes. The HTML error page may include an error message. The descriptions of the messages and the cause are described below.</p>
-<div class="simpleDataTable">
-<table class="data">
+<div class="table-responsive">
+<table class="table table-striped table-bordered">
 <thead>
 <tr>
 <th>HTTP Status Code</th>
@@ -1090,16 +1231,20 @@ td > ul {
 </div>
 </div>
 </div>
-<div class="javaMethod">
-<h3 id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplicationsJobs">Get Business Applications Jobs</h3>
-<div class="content"><p>Get the list of links to the
+</div>
+</div>
+<div class="panel panel-primary">
+<div class="panel-heading">
+<h3 id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplicationsJobs" class="panel-title">Get Business Applications Jobs</h3>
+</div>
+<div class="panel-body"><p>Get the list of links to the
  <a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getJobsInfo">Get Jobs Info</a>
  resource for each of the user's jobs for the business application.</p>
 
  <p>The method returns a <a href="../../resourceDescription.html">Resource Description</a> document. Each child resource supports following custom attributes.</a>
 
- <div class="simpleDataTable">
-   <table class="data">
+ <div class="table-responsive">
+   <table class="table table-striped table-bordered">
      <thead>
        <tr>
          <th>Attribute</th>
@@ -1126,18 +1271,34 @@ td > ul {
      </tbody>
    </table>
  </div>
-<h4>HTTP Request Methods</h4>
+<div class="panel panel-info">
+<div class="panel-heading">
+<h4 class="panel-title">HTTP Request Methods</h4>
+</div>
+<div class="panel-body">
 <p>The resource can be accessed using the following HTTP request methods.</p>
 <ul>
 <li>GET</li>
 </ul>
-<h4>URI Templates</h4>
+</div>
+</div>
+<div class="panel panel-info">
+<div class="panel-heading">
+<h4 class="panel-title">URI Templates</h4>
+</div>
+<div class="panel-body">
 <p>The URI templates define the paths that can be appended to the base URL of the service to access this resource.</p>
 <pre>/ws/apps/{businessApplicationName}/jobs</pre>
-<h4>URI Template Parameters</h4>
+</div>
+</div>
+<div class="panel panel-info">
+<div class="panel-heading">
+<h4 class="panel-title">URI Template Parameters</h4>
+</div>
+<div class="panel-body">
 <p>The URI templates support the following parameters which must be replaced with values as described below.</p>
-<div class="simpleDataTable">
-<table class="data">
+<div class="table-responsive">
+<table class="table table-striped table-bordered">
 <thead>
 <tr>
 <th>Parameter</th>
@@ -1155,10 +1316,16 @@ td > ul {
 </tbody>
 </table>
 </div>
-<h4>HTTP Status Codes</h4>
+</div>
+</div>
+<div class="panel panel-info">
+<div class="panel-heading">
+<h4 class="panel-title">HTTP Status Codes</h4>
+</div>
+<div class="panel-body">
 <p>The resource will return one of the following status codes. The HTML error page may include an error message. The descriptions of the messages and the cause are described below.</p>
-<div class="simpleDataTable">
-<table class="data">
+<div class="table-responsive">
+<table class="table table-striped table-bordered">
 <thead>
 <tr>
 <th>HTTP Status Code</th>
@@ -1179,9 +1346,13 @@ td > ul {
 </div>
 </div>
 </div>
-<div class="javaMethod">
-<h3 id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplicationsMultiple">Get Business Applications Multiple</h3>
-<div class="content"><p>Get the specification of the
+</div>
+</div>
+<div class="panel panel-primary">
+<div class="panel-heading">
+<h3 id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplicationsMultiple" class="panel-title">Get Business Applications Multiple</h3>
+</div>
+<div class="panel-body"><p>Get the specification of the
  <a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.createJobWithMultipleRequests">Create Job With Multiple Requests</a> service.</p>
 
  <p>The method returns a <a href="../../resourceDescription.html">Resource Description</a> document with the following additional fields
@@ -1189,8 +1360,8 @@ td > ul {
  <a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.createJobWithMultipleRequests">Create Job With Multiple Requests</a>
  service.</a>.</p>
 
- <div class="simpleDataTable">
-   <table class="data">
+ <div class="table-responsive">
+   <table class="table table-striped table-bordered">
      <thead>
        <tr>
          <th>Attribute</th>
@@ -1222,8 +1393,8 @@ td > ul {
          <td>parameters</td>
          <td><p>The array of parameters that can be passed to the service. Each parameter is an object
          containing the following fields.</p>
-           <div class="simpleDataTable">
-             <table class="data">
+           <div class="table-responsive">
+             <table class="table table-striped table-bordered">
                <thead>
                  <tr>
                    <th>Attribute</th>
@@ -1266,7 +1437,7 @@ td > ul {
        </tr>
        <tr>
          <td>perRequestInputData</td>
-         <td>Boolean flag indicating that the business application accepts <a href="../../opaqueData.html">opaque data</a> (true) or <a href="../../structuredData.html">structured data</a> (false).</td>
+         <td>Boolean flag indicating that the business application accepts <a href="../../reference/opaqueData.html">opaque data</a> (true) or <a href="../../reference/structuredData.html">structured data</a> (false).</td>
        </tr>
        <tr>
          <td>resultDataContentTypes</td>
@@ -1274,23 +1445,39 @@ td > ul {
        </tr>
        <tr>
          <td>perRequestResultData</td>
-         <td>Boolean flag indicating that the business application returns <a href="../../opaqueData.html">opaque data</a> (true) or <a href="../../structuredData.html">structured data</a> (false).</td>
+         <td>Boolean flag indicating that the business application returns <a href="../../reference/opaqueData.html">opaque data</a> (true) or <a href="../../reference/structuredData.html">structured data</a> (false).</td>
        </tr>
      </tbody>
    </table>
  </div>
-<h4>HTTP Request Methods</h4>
+<div class="panel panel-info">
+<div class="panel-heading">
+<h4 class="panel-title">HTTP Request Methods</h4>
+</div>
+<div class="panel-body">
 <p>The resource can be accessed using the following HTTP request methods.</p>
 <ul>
 <li>GET</li>
 </ul>
-<h4>URI Templates</h4>
+</div>
+</div>
+<div class="panel panel-info">
+<div class="panel-heading">
+<h4 class="panel-title">URI Templates</h4>
+</div>
+<div class="panel-body">
 <p>The URI templates define the paths that can be appended to the base URL of the service to access this resource.</p>
 <pre>/ws/apps/{businessApplicationName}/multiple</pre>
-<h4>URI Template Parameters</h4>
+</div>
+</div>
+<div class="panel panel-info">
+<div class="panel-heading">
+<h4 class="panel-title">URI Template Parameters</h4>
+</div>
+<div class="panel-body">
 <p>The URI templates support the following parameters which must be replaced with values as described below.</p>
-<div class="simpleDataTable">
-<table class="data">
+<div class="table-responsive">
+<table class="table table-striped table-bordered">
 <thead>
 <tr>
 <th>Parameter</th>
@@ -1308,10 +1495,16 @@ td > ul {
 </tbody>
 </table>
 </div>
-<h4>HTTP Status Codes</h4>
+</div>
+</div>
+<div class="panel panel-info">
+<div class="panel-heading">
+<h4 class="panel-title">HTTP Status Codes</h4>
+</div>
+<div class="panel-body">
 <p>The resource will return one of the following status codes. The HTML error page may include an error message. The descriptions of the messages and the cause are described below.</p>
-<div class="simpleDataTable">
-<table class="data">
+<div class="table-responsive">
+<table class="table table-striped table-bordered">
 <thead>
 <tr>
 <th>HTTP Status Code</th>
@@ -1340,27 +1533,47 @@ td > ul {
 </div>
 </div>
 </div>
-<div class="javaMethod">
-<h3 id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplicationsResources">Get Business Applications Resources</h3>
-<div class="content"><p>Get the resources for a business application. The resource contains links to the
+</div>
+</div>
+<div class="panel panel-primary">
+<div class="panel-heading">
+<h3 id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplicationsResources" class="panel-title">Get Business Applications Resources</h3>
+</div>
+<div class="panel-body"><p>Get the resources for a business application. The resource contains links to the
  <a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplicationsInstant">instant</a>,
  <a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplicationsSingle">create single request job</a>, and
  <a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplicationsMultiple">create multi request jobs</a>
  resources.</p>
 
  <p>The method returns a <a href="../../resourceDescription.html">Resource Description</a> document.</p>
-<h4>HTTP Request Methods</h4>
+<div class="panel panel-info">
+<div class="panel-heading">
+<h4 class="panel-title">HTTP Request Methods</h4>
+</div>
+<div class="panel-body">
 <p>The resource can be accessed using the following HTTP request methods.</p>
 <ul>
 <li>GET</li>
 </ul>
-<h4>URI Templates</h4>
+</div>
+</div>
+<div class="panel panel-info">
+<div class="panel-heading">
+<h4 class="panel-title">URI Templates</h4>
+</div>
+<div class="panel-body">
 <p>The URI templates define the paths that can be appended to the base URL of the service to access this resource.</p>
 <pre>/ws/apps/{businessApplicationName}</pre>
-<h4>URI Template Parameters</h4>
+</div>
+</div>
+<div class="panel panel-info">
+<div class="panel-heading">
+<h4 class="panel-title">URI Template Parameters</h4>
+</div>
+<div class="panel-body">
 <p>The URI templates support the following parameters which must be replaced with values as described below.</p>
-<div class="simpleDataTable">
-<table class="data">
+<div class="table-responsive">
+<table class="table table-striped table-bordered">
 <thead>
 <tr>
 <th>Parameter</th>
@@ -1378,10 +1591,16 @@ td > ul {
 </tbody>
 </table>
 </div>
-<h4>HTTP Status Codes</h4>
+</div>
+</div>
+<div class="panel panel-info">
+<div class="panel-heading">
+<h4 class="panel-title">HTTP Status Codes</h4>
+</div>
+<div class="panel-body">
 <p>The resource will return one of the following status codes. The HTML error page may include an error message. The descriptions of the messages and the cause are described below.</p>
-<div class="simpleDataTable">
-<table class="data">
+<div class="table-responsive">
+<table class="table table-striped table-bordered">
 <thead>
 <tr>
 <th>HTTP Status Code</th>
@@ -1410,16 +1629,20 @@ td > ul {
 </div>
 </div>
 </div>
-<div class="javaMethod">
-<h3 id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplicationsSingle">Get Business Applications Single</h3>
-<div class="content"><p>Get the specification of the
+</div>
+</div>
+<div class="panel panel-primary">
+<div class="panel-heading">
+<h3 id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplicationsSingle" class="panel-title">Get Business Applications Single</h3>
+</div>
+<div class="panel-body"><p>Get the specification of the
  <a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.createJobWithSingleRequest">Create Job With Single Request</a> service.</p>
 
  <p>The method returns a <a href="../../resourceDescription.html">Resource Description</a> document with the following additional fields
  which are the parameters to the <a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.createJobWithSingleRequest">Create Job With Single Request</a> service.</a>.</p>
 
- <div class="simpleDataTable">
-   <table class="data">
+ <div class="table-responsive">
+   <table class="table table-striped table-bordered">
      <thead>
        <tr>
          <th>Attribute</th>
@@ -1451,8 +1674,8 @@ td > ul {
          <td>parameters</td>
          <td><p>The array of parameters that can be passed to the service. Each parameter is an object
          containing the following fields.</p>
-           <div class="simpleDataTable">
-             <table class="data">
+           <div class="table-responsive">
+             <table class="table table-striped table-bordered">
                <thead>
                  <tr>
                    <th>Attribute</th>
@@ -1495,7 +1718,7 @@ td > ul {
        </tr>
        <tr>
          <td>perRequestInputData</td>
-         <td>Boolean flag indicating that the business application accepts <a href="../../opaqueData.html">opaque data</a> (true) or <a href="../../structuredData.html">structured data</a> (false).</td>
+         <td>Boolean flag indicating that the business application accepts <a href="../../reference/opaqueData.html">opaque data</a> (true) or <a href="../../reference/structuredData.html">structured data</a> (false).</td>
        </tr>
        <tr>
          <td>resultDataContentTypes</td>
@@ -1503,23 +1726,39 @@ td > ul {
        </tr>
        <tr>
          <td>perRequestResultData</td>
-         <td>Boolean flag indicating that the business application returns <a href="../../opaqueData.html">opaque data</a> (true) or <a href="../../structuredData.html">structured data</a> (false).</td>
+         <td>Boolean flag indicating that the business application returns <a href="../../reference/opaqueData.html">opaque data</a> (true) or <a href="../../reference/structuredData.html">structured data</a> (false).</td>
        </tr>
      </tbody>
    </table>
  </div>
-<h4>HTTP Request Methods</h4>
+<div class="panel panel-info">
+<div class="panel-heading">
+<h4 class="panel-title">HTTP Request Methods</h4>
+</div>
+<div class="panel-body">
 <p>The resource can be accessed using the following HTTP request methods.</p>
 <ul>
 <li>GET</li>
 </ul>
-<h4>URI Templates</h4>
+</div>
+</div>
+<div class="panel panel-info">
+<div class="panel-heading">
+<h4 class="panel-title">URI Templates</h4>
+</div>
+<div class="panel-body">
 <p>The URI templates define the paths that can be appended to the base URL of the service to access this resource.</p>
 <pre>/ws/apps/{businessApplicationName}/single</pre>
-<h4>URI Template Parameters</h4>
+</div>
+</div>
+<div class="panel panel-info">
+<div class="panel-heading">
+<h4 class="panel-title">URI Template Parameters</h4>
+</div>
+<div class="panel-body">
 <p>The URI templates support the following parameters which must be replaced with values as described below.</p>
-<div class="simpleDataTable">
-<table class="data">
+<div class="table-responsive">
+<table class="table table-striped table-bordered">
 <thead>
 <tr>
 <th>Parameter</th>
@@ -1537,10 +1776,16 @@ td > ul {
 </tbody>
 </table>
 </div>
-<h4>HTTP Status Codes</h4>
+</div>
+</div>
+<div class="panel panel-info">
+<div class="panel-heading">
+<h4 class="panel-title">HTTP Status Codes</h4>
+</div>
+<div class="panel-body">
 <p>The resource will return one of the following status codes. The HTML error page may include an error message. The descriptions of the messages and the cause are described below.</p>
-<div class="simpleDataTable">
-<table class="data">
+<div class="table-responsive">
+<table class="table table-striped table-bordered">
 <thead>
 <tr>
 <th>HTTP Status Code</th>
@@ -1569,16 +1814,20 @@ td > ul {
 </div>
 </div>
 </div>
-<div class="javaMethod">
-<h3 id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getJobs">Get Jobs</h3>
-<div class="content"><p>Get the list of links to the
+</div>
+</div>
+<div class="panel panel-primary">
+<div class="panel-heading">
+<h3 id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getJobs" class="panel-title">Get Jobs</h3>
+</div>
+<div class="panel-body"><p>Get the list of links to the
  <a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getJobsInfo">Get Jobs Info</a>
  resource for each of the user's jobs.</p>
 
  <p>The method returns a <a href="../../resourceDescription.html">Resource Description</a> document. Each child resource supports following custom attributes.</a>
 
- <div class="simpleDataTable">
-   <table class="data">
+ <div class="table-responsive">
+   <table class="table table-striped table-bordered">
      <thead>
        <tr>
          <th>Attribute</th>
@@ -1605,18 +1854,34 @@ td > ul {
      </tbody>
    </table>
  </div>
-<h4>HTTP Request Methods</h4>
+<div class="panel panel-info">
+<div class="panel-heading">
+<h4 class="panel-title">HTTP Request Methods</h4>
+</div>
+<div class="panel-body">
 <p>The resource can be accessed using the following HTTP request methods.</p>
 <ul>
 <li>GET</li>
 </ul>
-<h4>URI Templates</h4>
+</div>
+</div>
+<div class="panel panel-info">
+<div class="panel-heading">
+<h4 class="panel-title">URI Templates</h4>
+</div>
+<div class="panel-body">
 <p>The URI templates define the paths that can be appended to the base URL of the service to access this resource.</p>
 <pre>/ws/jobs</pre>
-<h4>HTTP Status Codes</h4>
+</div>
+</div>
+<div class="panel panel-info">
+<div class="panel-heading">
+<h4 class="panel-title">HTTP Status Codes</h4>
+</div>
+<div class="panel-body">
 <p>The resource will return one of the following status codes. The HTML error page may include an error message. The descriptions of the messages and the cause are described below.</p>
-<div class="simpleDataTable">
-<table class="data">
+<div class="table-responsive">
+<table class="table table-striped table-bordered">
 <thead>
 <tr>
 <th>HTTP Status Code</th>
@@ -1637,15 +1902,19 @@ td > ul {
 </div>
 </div>
 </div>
-<div class="javaMethod">
-<h3 id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getJobsInfo">Get Jobs Info</h3>
-<div class="content"><p>Get the details of a job.</p>
+</div>
+</div>
+<div class="panel panel-primary">
+<div class="panel-heading">
+<h3 id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getJobsInfo" class="panel-title">Get Jobs Info</h3>
+</div>
+<div class="panel-body"><p>Get the details of a job.</p>
 
 
  <p>The method returns a BatchJob object with the following attributes.</a>
 
- <div class="simpleDataTable">
-   <table class="data">
+ <div class="table-responsive">
+   <table class="table table-striped table-bordered">
      <thead>
        <tr>
          <th>Attribute</th>
@@ -1712,18 +1981,34 @@ td > ul {
      </tbody>
    </table>
  </div>
-<h4>HTTP Request Methods</h4>
+<div class="panel panel-info">
+<div class="panel-heading">
+<h4 class="panel-title">HTTP Request Methods</h4>
+</div>
+<div class="panel-body">
 <p>The resource can be accessed using the following HTTP request methods.</p>
 <ul>
 <li>GET</li>
 </ul>
-<h4>URI Templates</h4>
+</div>
+</div>
+<div class="panel panel-info">
+<div class="panel-heading">
+<h4 class="panel-title">URI Templates</h4>
+</div>
+<div class="panel-body">
 <p>The URI templates define the paths that can be appended to the base URL of the service to access this resource.</p>
 <pre>/ws/jobs/{batchJobId}</pre>
-<h4>URI Template Parameters</h4>
+</div>
+</div>
+<div class="panel panel-info">
+<div class="panel-heading">
+<h4 class="panel-title">URI Template Parameters</h4>
+</div>
+<div class="panel-body">
 <p>The URI templates support the following parameters which must be replaced with values as described below.</p>
-<div class="simpleDataTable">
-<table class="data">
+<div class="table-responsive">
+<table class="table table-striped table-bordered">
 <thead>
 <tr>
 <th>Parameter</th>
@@ -1741,10 +2026,16 @@ td > ul {
 </tbody>
 </table>
 </div>
-<h4>HTTP Status Codes</h4>
+</div>
+</div>
+<div class="panel panel-info">
+<div class="panel-heading">
+<h4 class="panel-title">HTTP Status Codes</h4>
+</div>
+<div class="panel-body">
 <p>The resource will return one of the following status codes. The HTML error page may include an error message. The descriptions of the messages and the cause are described below.</p>
-<div class="simpleDataTable">
-<table class="data">
+<div class="table-responsive">
+<table class="table table-striped table-bordered">
 <thead>
 <tr>
 <th>HTTP Status Code</th>
@@ -1765,23 +2056,43 @@ td > ul {
 </div>
 </div>
 </div>
-<div class="javaMethod">
-<h3 id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getJobsResult">Get Jobs Result</h3>
-<div class="content"><p>Get the contents of a user's job result file. The content type will be the content type
+</div>
+</div>
+<div class="panel panel-primary">
+<div class="panel-heading">
+<h3 id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getJobsResult" class="panel-title">Get Jobs Result</h3>
+</div>
+<div class="panel-body"><p>Get the contents of a user's job result file. The content type will be the content type
  requested in the job.</p>
-<h4>HTTP Request Methods</h4>
+<div class="panel panel-info">
+<div class="panel-heading">
+<h4 class="panel-title">HTTP Request Methods</h4>
+</div>
+<div class="panel-body">
 <p>The resource can be accessed using the following HTTP request methods.</p>
 <ul>
 <li>GET</li>
 <li>POST</li>
 </ul>
-<h4>URI Templates</h4>
+</div>
+</div>
+<div class="panel panel-info">
+<div class="panel-heading">
+<h4 class="panel-title">URI Templates</h4>
+</div>
+<div class="panel-body">
 <p>The URI templates define the paths that can be appended to the base URL of the service to access this resource.</p>
 <pre>/ws/jobs/{batchJobId}/results/{resultId}</pre>
-<h4>URI Template Parameters</h4>
+</div>
+</div>
+<div class="panel panel-info">
+<div class="panel-heading">
+<h4 class="panel-title">URI Template Parameters</h4>
+</div>
+<div class="panel-body">
 <p>The URI templates support the following parameters which must be replaced with values as described below.</p>
-<div class="simpleDataTable">
-<table class="data">
+<div class="table-responsive">
+<table class="table table-striped table-bordered">
 <thead>
 <tr>
 <th>Parameter</th>
@@ -1805,10 +2116,16 @@ td > ul {
 </tbody>
 </table>
 </div>
-<h4>HTTP Status Codes</h4>
+</div>
+</div>
+<div class="panel panel-info">
+<div class="panel-heading">
+<h4 class="panel-title">HTTP Status Codes</h4>
+</div>
+<div class="panel-body">
 <p>The resource will return one of the following status codes. The HTML error page may include an error message. The descriptions of the messages and the cause are described below.</p>
-<div class="simpleDataTable">
-<table class="data">
+<div class="table-responsive">
+<table class="table table-striped table-bordered">
 <thead>
 <tr>
 <th>HTTP Status Code</th>
@@ -1829,16 +2146,20 @@ td > ul {
 </div>
 </div>
 </div>
-<div class="javaMethod">
-<h3 id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getJobsResults">Get Jobs Results</h3>
-<div class="content"><p>Get the list of links to the
+</div>
+</div>
+<div class="panel panel-primary">
+<div class="panel-heading">
+<h3 id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getJobsResults" class="panel-title">Get Jobs Results</h3>
+</div>
+<div class="panel-body"><p>Get the list of links to the
  <a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getJobsResult">Get Jobs Result</a>
  resource for each of the results for a user's job.</p>
 
  <p>The method returns a <a href="../../resourceDescription.html">Resource Description</a> document. Each child resource supports following custom attributes.</a>
 
- <div class="simpleDataTable">
-   <table class="data">
+ <div class="table-responsive">
+   <table class="table table-striped table-bordered">
      <thead>
        <tr>
          <th>Attribute</th>
@@ -1857,18 +2178,34 @@ td > ul {
      </tbody>
    </table>
  </div>
-<h4>HTTP Request Methods</h4>
+<div class="panel panel-info">
+<div class="panel-heading">
+<h4 class="panel-title">HTTP Request Methods</h4>
+</div>
+<div class="panel-body">
 <p>The resource can be accessed using the following HTTP request methods.</p>
 <ul>
 <li>GET</li>
 </ul>
-<h4>URI Templates</h4>
+</div>
+</div>
+<div class="panel panel-info">
+<div class="panel-heading">
+<h4 class="panel-title">URI Templates</h4>
+</div>
+<div class="panel-body">
 <p>The URI templates define the paths that can be appended to the base URL of the service to access this resource.</p>
 <pre>/ws/jobs/{batchJobId}/results</pre>
-<h4>URI Template Parameters</h4>
+</div>
+</div>
+<div class="panel panel-info">
+<div class="panel-heading">
+<h4 class="panel-title">URI Template Parameters</h4>
+</div>
+<div class="panel-body">
 <p>The URI templates support the following parameters which must be replaced with values as described below.</p>
-<div class="simpleDataTable">
-<table class="data">
+<div class="table-responsive">
+<table class="table table-striped table-bordered">
 <thead>
 <tr>
 <th>Parameter</th>
@@ -1886,10 +2223,16 @@ td > ul {
 </tbody>
 </table>
 </div>
-<h4>HTTP Status Codes</h4>
+</div>
+</div>
+<div class="panel panel-info">
+<div class="panel-heading">
+<h4 class="panel-title">HTTP Status Codes</h4>
+</div>
+<div class="panel-body">
 <p>The resource will return one of the following status codes. The HTML error page may include an error message. The descriptions of the messages and the cause are described below.</p>
-<div class="simpleDataTable">
-<table class="data">
+<div class="table-responsive">
+<table class="table table-striped table-bordered">
 <thead>
 <tr>
 <th>HTTP Status Code</th>
@@ -1910,26 +2253,46 @@ td > ul {
 </div>
 </div>
 </div>
-<div class="javaMethod">
-<h3 id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getRoot">Get Root</h3>
-<div class="content"><p>Get the root resource of the CPF web services. The resource contains links to the
+</div>
+</div>
+<div class="panel panel-primary">
+<div class="panel-heading">
+<h3 id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getRoot" class="panel-title">Get Root</h3>
+</div>
+<div class="panel-body"><p>Get the root resource of the CPF web services. The resource contains links to the
  <a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getJobs">Get Jobs</a> and
  <a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplications">Get Business Applications</a>
  resources.</p>
 
  <p>The method returns a <a href="../../resourceDescription.html">Resource Description</a> document.</a>
-<h4>HTTP Request Methods</h4>
+<div class="panel panel-info">
+<div class="panel-heading">
+<h4 class="panel-title">HTTP Request Methods</h4>
+</div>
+<div class="panel-body">
 <p>The resource can be accessed using the following HTTP request methods.</p>
 <ul>
 <li>GET</li>
 </ul>
-<h4>URI Templates</h4>
+</div>
+</div>
+<div class="panel panel-info">
+<div class="panel-heading">
+<h4 class="panel-title">URI Templates</h4>
+</div>
+<div class="panel-body">
 <p>The URI templates define the paths that can be appended to the base URL of the service to access this resource.</p>
 <pre>/ws</pre>
-<h4>HTTP Status Codes</h4>
+</div>
+</div>
+<div class="panel panel-info">
+<div class="panel-heading">
+<h4 class="panel-title">HTTP Status Codes</h4>
+</div>
+<div class="panel-body">
 <p>The resource will return one of the following status codes. The HTML error page may include an error message. The descriptions of the messages and the cause are described below.</p>
-<div class="simpleDataTable">
-<table class="data">
+<div class="table-responsive">
+<table class="table table-striped table-bordered">
 <thead>
 <tr>
 <th>HTTP Status Code</th>
@@ -1953,24 +2316,9 @@ td > ul {
 </div>
 </div>
 </div>
-</div>                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="footer">
-        <div class="title">Concurrent Processing Framework</div>
-        <div class="footerMenu">
-          <ul>
-            <li><a href="http://www2.gov.bc.ca/gov/admin/copyright.page" title="COPYRIGHT">COPYRIGHT</a></li>
-            <li><a href="http://www2.gov.bc.ca/gov/admin/disclaimer.page" title="DISCLAIMER">DISCLAIMER</a></li>
-            <li><a href="http://www2.gov.bc.ca/gov/admin/privacy.page" title="PRIVACY">PRIVACY</a></li>
-            <li><a href="http://www2.gov.bc.ca/gov/admin/accessibility.page" title="ACCESSIBILITY">ACCESSIBILITY</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </body>
+</div>
+</div>
+</div>
+</div>
+</body>
 </html>
