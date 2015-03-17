@@ -6,17 +6,15 @@
 <title>CPF Client REST API</title>
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.2/flatly/bootstrap.min.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <style type="text/css">body{padding-top:60px}
 *[id]:before {display:block;content:' ';margin-top:-75px;height:75px;visibility:hidden;}</style>
 </head>
 
-<body>
-<nav id="navbar" class="navbar navbar-default navbar-fixed-top">
+<body data-spy="scroll" data-target="#navMain" data-offset="60">
+<nav id="navMain" class="navbar navbar-default navbar-fixed-top">
 <div class="container">
 <div class="navbar-header">
-<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarMenu" aria-expanded="false" aria-controls="navbarMenu">
+<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
 <span class="sr-only">Toggle navigation</span>
 <span class="icon-bar"></span>
 <span class="icon-bar"></span>
@@ -24,57 +22,61 @@
 </button>
 <a class="navbar-brand" href="#">CPF Client REST API</a>
 </div>
-<div id="navbarMenu" class="navbar-collapse">
+<div id="navbar" class="navbar-collapse collapse" aria-expanded="false">
 <ul class="nav navbar-nav">
 <li class="dropdown">
-<a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Concurrent Processing Framework
+<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Concurrent Processing Framework
 <span class="caret"></span>
 </a>
 <ul class="dropdown-menu" role="menu">
 <li>
-<a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.createJobWithMultipleRequests">Create Job With Multiple Requests</a>
+<a href="#ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework">Concurrent Processing Framework</a>
+</li>
+<li class="divider" />
+<li>
+<a href="#ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_createJobWithMultipleRequests">Create Job With Multiple Requests</a>
 </li>
 <li>
-<a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.createJobWithSingleRequest">Create Job With Single Request</a>
+<a href="#ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_createJobWithSingleRequest">Create Job With Single Request</a>
 </li>
 <li>
-<a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.deleteJob">Delete Job</a>
+<a href="#ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_deleteJob">Delete Job</a>
 </li>
 <li>
-<a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getAuthenticated">Get Authenticated</a>
+<a href="#ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getAuthenticated">Get Authenticated</a>
 </li>
 <li>
-<a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplications">Get Business Applications</a>
+<a href="#ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getBusinessApplications">Get Business Applications</a>
 </li>
 <li>
-<a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplicationsInstant">Get Business Applications Instant</a>
+<a href="#ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getBusinessApplicationsInstant">Get Business Applications Instant</a>
 </li>
 <li>
-<a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplicationsJobs">Get Business Applications Jobs</a>
+<a href="#ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getBusinessApplicationsJobs">Get Business Applications Jobs</a>
 </li>
 <li>
-<a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplicationsMultiple">Get Business Applications Multiple</a>
+<a href="#ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getBusinessApplicationsMultiple">Get Business Applications Multiple</a>
 </li>
 <li>
-<a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplicationsResources">Get Business Applications Resources</a>
+<a href="#ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getBusinessApplicationsResources">Get Business Applications Resources</a>
 </li>
 <li>
-<a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplicationsSingle">Get Business Applications Single</a>
+<a href="#ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getBusinessApplicationsSingle">Get Business Applications Single</a>
 </li>
 <li>
-<a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getJobs">Get Jobs</a>
+<a href="#ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getJobs">Get Jobs</a>
 </li>
 <li>
-<a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getJobsInfo">Get Jobs Info</a>
+<a href="#ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getJobsInfo">Get Jobs Info</a>
 </li>
 <li>
-<a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getJobsResult">Get Jobs Result</a>
+<a href="#ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getJobsResult">Get Jobs Result</a>
 </li>
 <li>
-<a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getJobsResults">Get Jobs Results</a>
+<a href="#ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getJobsResults">Get Jobs Results</a>
 </li>
 <li>
-<a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getRoot">Get Root</a>
+<a href="#ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getRoot">Get Root</a>
 </li>
 </ul>
 </li>
@@ -88,7 +90,8 @@
 <h1>CPF Client REST API</h1>
 <div class="panel panel-default">
 <div class="panel-heading">
-<h2 id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework" class="panel-title">Concurrent Processing Framework</h2>
+<a id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework"></a>
+<h2 class="panel-title" id="ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework">Concurrent Processing Framework</h2>
 </div>
 <div class="panel-body"><p>The Concurrent Processing Framework REST API allows client applications in Java, JavaScript or other
  programming languages to query the available business applications, create jobs and download
@@ -107,7 +110,8 @@
  described in this API.</p>
 <div class="panel panel-primary">
 <div class="panel-heading">
-<h3 id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.createJobWithMultipleRequests" class="panel-title">Create Job With Multiple Requests</h3>
+<a id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.createJobWithMultipleRequests"></a>
+<h3 class="panel-title" id="ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_createJobWithMultipleRequests">Create Job With Multiple Requests</h3>
 </div>
 <div class="panel-body"><p>Create a new job containing multiple requests to be processed by the
  business application.</p>
@@ -394,7 +398,8 @@
 </div>
 <div class="panel panel-primary">
 <div class="panel-heading">
-<h3 id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.createJobWithSingleRequest" class="panel-title">Create Job With Single Request</h3>
+<a id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.createJobWithSingleRequest"></a>
+<h3 class="panel-title" id="ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_createJobWithSingleRequest">Create Job With Single Request</h3>
 </div>
 <div class="panel-body"><p>Create a new job containing multiple requests to be processed by the
  business application.</p>
@@ -672,7 +677,8 @@
 </div>
 <div class="panel panel-primary">
 <div class="panel-heading">
-<h3 id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.deleteJob" class="panel-title">Delete Job</h3>
+<a id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.deleteJob"></a>
+<h3 class="panel-title" id="ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_deleteJob">Delete Job</h3>
 </div>
 <div class="panel-body"><p>
  Cancel the user's job. This will mark the job as cancelled and remove all requests
@@ -785,7 +791,8 @@
 </div>
 <div class="panel panel-primary">
 <div class="panel-heading">
-<h3 id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getAuthenticated" class="panel-title">Get Authenticated</h3>
+<a id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getAuthenticated"></a>
+<h3 class="panel-title" id="ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getAuthenticated">Get Authenticated</h3>
 </div>
 <div class="panel-body"><p>Check that a user is authenticated. This can be used by JavaScript applications to force
  a login page to be displayed. Returns a map with authenticated=true if the user
@@ -843,7 +850,8 @@
 </div>
 <div class="panel panel-primary">
 <div class="panel-heading">
-<h3 id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplications" class="panel-title">Get Business Applications</h3>
+<a id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplications"></a>
+<h3 class="panel-title" id="ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getBusinessApplications">Get Business Applications</h3>
 </div>
 <div class="panel-body"><p>Get the list of links to the
  <a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplicationsResources">Get Business Applications Resources</a>
@@ -919,7 +927,8 @@
 </div>
 <div class="panel panel-primary">
 <div class="panel-heading">
-<h3 id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplicationsInstant" class="panel-title">Get Business Applications Instant</h3>
+<a id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplicationsInstant"></a>
+<h3 class="panel-title" id="ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getBusinessApplicationsInstant">Get Business Applications Instant</h3>
 </div>
 <div class="panel-body"><p>The instant resource has the two modes described below, the specification mode and the
  execute instant request mode. If the <code>format</code> parameter is not included or the
@@ -1240,7 +1249,8 @@
 </div>
 <div class="panel panel-primary">
 <div class="panel-heading">
-<h3 id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplicationsJobs" class="panel-title">Get Business Applications Jobs</h3>
+<a id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplicationsJobs"></a>
+<h3 class="panel-title" id="ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getBusinessApplicationsJobs">Get Business Applications Jobs</h3>
 </div>
 <div class="panel-body"><p>Get the list of links to the
  <a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getJobsInfo">Get Jobs Info</a>
@@ -1355,7 +1365,8 @@
 </div>
 <div class="panel panel-primary">
 <div class="panel-heading">
-<h3 id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplicationsMultiple" class="panel-title">Get Business Applications Multiple</h3>
+<a id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplicationsMultiple"></a>
+<h3 class="panel-title" id="ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getBusinessApplicationsMultiple">Get Business Applications Multiple</h3>
 </div>
 <div class="panel-body"><p>Get the specification of the
  <a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.createJobWithMultipleRequests">Create Job With Multiple Requests</a> service.</p>
@@ -1542,7 +1553,8 @@
 </div>
 <div class="panel panel-primary">
 <div class="panel-heading">
-<h3 id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplicationsResources" class="panel-title">Get Business Applications Resources</h3>
+<a id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplicationsResources"></a>
+<h3 class="panel-title" id="ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getBusinessApplicationsResources">Get Business Applications Resources</h3>
 </div>
 <div class="panel-body"><p>Get the resources for a business application. The resource contains links to the
  <a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplicationsInstant">instant</a>,
@@ -1638,7 +1650,8 @@
 </div>
 <div class="panel panel-primary">
 <div class="panel-heading">
-<h3 id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplicationsSingle" class="panel-title">Get Business Applications Single</h3>
+<a id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplicationsSingle"></a>
+<h3 class="panel-title" id="ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getBusinessApplicationsSingle">Get Business Applications Single</h3>
 </div>
 <div class="panel-body"><p>Get the specification of the
  <a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.createJobWithSingleRequest">Create Job With Single Request</a> service.</p>
@@ -1823,7 +1836,8 @@
 </div>
 <div class="panel panel-primary">
 <div class="panel-heading">
-<h3 id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getJobs" class="panel-title">Get Jobs</h3>
+<a id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getJobs"></a>
+<h3 class="panel-title" id="ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getJobs">Get Jobs</h3>
 </div>
 <div class="panel-body"><p>Get the list of links to the
  <a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getJobsInfo">Get Jobs Info</a>
@@ -1911,7 +1925,8 @@
 </div>
 <div class="panel panel-primary">
 <div class="panel-heading">
-<h3 id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getJobsInfo" class="panel-title">Get Jobs Info</h3>
+<a id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getJobsInfo"></a>
+<h3 class="panel-title" id="ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getJobsInfo">Get Jobs Info</h3>
 </div>
 <div class="panel-body"><p>Get the details of a job.</p>
 
@@ -2065,7 +2080,8 @@
 </div>
 <div class="panel panel-primary">
 <div class="panel-heading">
-<h3 id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getJobsResult" class="panel-title">Get Jobs Result</h3>
+<a id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getJobsResult"></a>
+<h3 class="panel-title" id="ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getJobsResult">Get Jobs Result</h3>
 </div>
 <div class="panel-body"><p>Get the contents of a user's job result file. The content type will be the content type
  requested in the job.</p>
@@ -2155,7 +2171,8 @@
 </div>
 <div class="panel panel-primary">
 <div class="panel-heading">
-<h3 id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getJobsResults" class="panel-title">Get Jobs Results</h3>
+<a id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getJobsResults"></a>
+<h3 class="panel-title" id="ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getJobsResults">Get Jobs Results</h3>
 </div>
 <div class="panel-body"><p>Get the list of links to the
  <a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getJobsResult">Get Jobs Result</a>
@@ -2262,7 +2279,8 @@
 </div>
 <div class="panel panel-primary">
 <div class="panel-heading">
-<h3 id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getRoot" class="panel-title">Get Root</h3>
+<a id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getRoot"></a>
+<h3 class="panel-title" id="ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getRoot">Get Root</h3>
 </div>
 <div class="panel-body"><p>Get the root resource of the CPF web services. The resource contains links to the
  <a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getJobs">Get Jobs</a> and
@@ -2325,5 +2343,7 @@
 </div>
 </div>
 </div>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </body>
 </html>
