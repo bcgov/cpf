@@ -1,21 +1,37 @@
 /* You can override this file with your own styles */
-.navbar {
+body {
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+.navbar-fixed-top {
   background-color: #003366;
 }
-.navbar .brand {
+.navbar-fixed-top .brand {
   color: white;
+  text-shadow: none;
 }
 
-.navbar .brand:focus,
-.navbar .brand:hover {
+.navbar-fixed-top .brand:focus,
+.navbar-fixed-top .brand:hover {
     color: #dddddd;
 }
 
-.navbar .nav>li>a {
+.navbar-fixed-top .nav>li>a {
   color: white;
 }
 
-.navbar .nav > li > a:focus,
-.navbar .nav > li > a:hover {
+.navbar-fixed-top .nav > li > a {
+  text-shadow: none;
+}
+
+.navbar-fixed-top .nav > li > a:focus,
+.navbar-fixed-top .nav > li > a:hover {
   color: #dddddd;
+}
+.navbar-fixed-top .navbar-inner {
+  background-color: #003366;
+  background-image:none;
+}
+
+.jumbotron h1 {
+  font-size: 40px;
 }
