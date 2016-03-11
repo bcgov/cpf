@@ -101,13 +101,13 @@
 											<li ><a href="dependency-management.html" title="Dependency Management">Dependency Management</a></li>
 											<li ><a href="distribution-management.html" title="Distribution Management">Distribution Management</a></li>
 											<li ><a href="index.html" title="About">About</a></li>
-											<li ><a href="issue-tracking.html" title="Issue Tracking">Issue Tracking</a></li>
-											<li ><a href="license.html" title="Project License">Project License</a></li>
+											<li ><a href="issue-tracking.html" title="Issue Management">Issue Management</a></li>
+											<li ><a href="license.html" title="Licenses">Licenses</a></li>
 											<li ><a href="plugin-management.html" title="Plugin Management">Plugin Management</a></li>
-											<li ><a href="plugins.html" title="Project Plugins">Project Plugins</a></li>
-											<li ><a href="team-list.html" title="Project Team">Project Team</a></li>
-											<li ><a href="source-repository.html" title="Source Repository">Source Repository</a></li>
-											<li ><a href="project-summary.html" title="Project Summary">Project Summary</a></li>
+											<li ><a href="plugins.html" title="Plugins">Plugins</a></li>
+											<li ><a href="team-list.html" title="Team">Team</a></li>
+											<li ><a href="source-repository.html" title="Source Code Management">Source Code Management</a></li>
+											<li ><a href="project-summary.html" title="Summary">Summary</a></li>
 										</ul>
 									</li>
 								</ul>
@@ -226,7 +226,7 @@
      <th>ArtifactId</th> 
      <th>Version</th> 
      <th>Type</th> 
-     <th>License</th> 
+     <th>Licenses</th> 
     </tr> 
    </thead> 
    <tbody> 
@@ -284,7 +284,7 @@
      <th>ArtifactId</th> 
      <th>Version</th> 
      <th>Type</th> 
-     <th>License</th> 
+     <th>Licenses</th> 
     </tr> 
    </thead> 
    <tbody> 
@@ -687,7 +687,7 @@
      <th>ArtifactId</th> 
      <th>Version</th> 
      <th>Type</th> 
-     <th>License</th> 
+     <th>Licenses</th> 
     </tr> 
    </thead> 
    <tbody> 
@@ -706,7 +706,7 @@
 <div class="section"> 
  <h2 id="Project_Dependency_Graph">Project Dependency Graph</h2> 
  <script language="javascript" type="text/javascript">
-      function toggleDependencyDetail( divId, imgId )
+      function toggleDependencyDetails( divId, imgId )
       {
         var div = document.getElementById( divId );
         var img = document.getElementById( imgId );
@@ -714,11 +714,13 @@
         {
           div.style.display = 'none';
           img.src='./images/icon_info_sml.gif';
+          img.alt='[Information]';
         }
         else
         {
           div.style.display = '';
           img.src='./images/close.gif';
+          img.alt='[Close]';
         }
       }
 </script> 
@@ -736,7 +738,7 @@
       </thead> 
       <tbody> 
        <tr class="b"> 
-        <td> <p><b>Description: </b>There is currently no description associated with this project.</p> <p><b>URL: </b><a class="externalLink" href="https://bcgov.github.io/cpf/cpf-war-app/">https://bcgov.github.io/cpf/cpf-war-app/</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></p></td> 
+        <td> <p><b>Description: </b>There is currently no description associated with this project.</p> <p><b>URL: </b><a class="externalLink" href="https://bcgov.github.io/cpf/cpf-war-app/">https://bcgov.github.io/cpf/cpf-war-app/</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></p></td> 
        </tr> 
       </tbody> 
      </table> 
@@ -752,7 +754,7 @@
         </thead> 
         <tbody> 
          <tr class="b"> 
-          <td> <p><b>Description: </b>The parent module of the Revolution Systems Open Library.</p> <p><b>URL: </b><a class="externalLink" href="http://revolsys.github.com/com.revolsys.open/war-overlay/">http://revolsys.github.com/com.revolsys.open/war-overlay/</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></p></td> 
+          <td> <p><b>Description: </b>The parent module of the Revolution Systems Open Library.</p> <p><b>URL: </b><a class="externalLink" href="http://revolsys.github.com/com.revolsys.open/war-overlay/">http://revolsys.github.com/com.revolsys.open/war-overlay/</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></p></td> 
          </tr> 
         </tbody> 
        </table> 
@@ -767,7 +769,7 @@
         </thead> 
         <tbody> 
          <tr class="b"> 
-          <td> <p><b>Description: </b>There is currently no description associated with this project.</p> <p><b>URL: </b><a class="externalLink" href="https://bcgov.github.io/cpf/cpf-api-app/">https://bcgov.github.io/cpf/cpf-api-app/</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></p></td> 
+          <td> <p><b>Description: </b>There is currently no description associated with this project.</p> <p><b>URL: </b><a class="externalLink" href="https://bcgov.github.io/cpf/cpf-api-app/">https://bcgov.github.io/cpf/cpf-api-app/</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></p></td> 
          </tr> 
         </tbody> 
        </table> 
@@ -783,7 +785,7 @@
           </thead> 
           <tbody> 
            <tr class="b"> 
-            <td> <p><b>Description: </b>The parent module of the Revolution Systems Open Library.</p> <p><b>URL: </b><a class="externalLink" href="http://revolsys.github.com/com.revolsys.open/com.revolsys.open.web/">http://revolsys.github.com/com.revolsys.open/com.revolsys.open.web/</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></p></td> 
+            <td> <p><b>Description: </b>The parent module of the Revolution Systems Open Library.</p> <p><b>URL: </b><a class="externalLink" href="http://revolsys.github.com/com.revolsys.open/com.revolsys.open.web/">http://revolsys.github.com/com.revolsys.open/com.revolsys.open.web/</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></p></td> 
            </tr> 
           </tbody> 
          </table> 
@@ -799,7 +801,7 @@
             </thead> 
             <tbody> 
              <tr class="b"> 
-              <td> <p><b>Description: </b>The parent module of the Revolution Systems Open Library.</p> <p><b>URL: </b><a class="externalLink" href="http://revolsys.github.com/com.revolsys.open/com.revolsys.open.core/">http://revolsys.github.com/com.revolsys.open/com.revolsys.open.core/</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></p></td> 
+              <td> <p><b>Description: </b>The parent module of the Revolution Systems Open Library.</p> <p><b>URL: </b><a class="externalLink" href="http://revolsys.github.com/com.revolsys.open/com.revolsys.open.core/">http://revolsys.github.com/com.revolsys.open/com.revolsys.open.core/</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></p></td> 
              </tr> 
             </tbody> 
            </table> 
@@ -815,7 +817,7 @@
               </thead> 
               <tbody> 
                <tr class="b"> 
-                <td> <p><b>Description: </b>BeanUtils provides an easy-to-use but flexible wrapper around reflection and introspection.</p> <p><b>URL: </b><a class="externalLink" href="http://commons.apache.org/beanutils/">http://commons.apache.org/beanutils/</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
+                <td> <p><b>Description: </b>BeanUtils provides an easy-to-use but flexible wrapper around reflection and introspection.</p> <p><b>URL: </b><a class="externalLink" href="http://commons.apache.org/beanutils/">http://commons.apache.org/beanutils/</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
                </tr> 
               </tbody> 
              </table> 
@@ -830,7 +832,7 @@
               </thead> 
               <tbody> 
                <tr class="b"> 
-                <td> <p><b>Description: </b>Jexl is an implementation of the JSTL Expression Language with extensions.</p> <p><b>URL: </b><a class="externalLink" href="http://jakarta.apache.org/commons/jexl/">http://jakarta.apache.org/commons/jexl/</a></p> <p><b>Project License: </b><a href="/LICENSE.txt">The Apache Software License, Version 2.0</a></p></td> 
+                <td> <p><b>Description: </b>Jexl is an implementation of the JSTL Expression Language with extensions.</p> <p><b>URL: </b><a class="externalLink" href="http://jakarta.apache.org/commons/jexl/">http://jakarta.apache.org/commons/jexl/</a></p> <p><b>Project Licenses: </b><a href="/LICENSE.txt">The Apache Software License, Version 2.0</a></p></td> 
                </tr> 
               </tbody> 
              </table> 
@@ -845,7 +847,7 @@
               </thead> 
               <tbody> 
                <tr class="b"> 
-                <td> <p><b>Description: </b>Apache Commons DBCP software implements Database Connection Pooling</p> <p><b>URL: </b><a class="externalLink" href="http://commons.apache.org/proper/commons-dbcp/">http://commons.apache.org/proper/commons-dbcp/</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
+                <td> <p><b>Description: </b>Apache Commons DBCP software implements Database Connection Pooling</p> <p><b>URL: </b><a class="externalLink" href="http://commons.apache.org/proper/commons-dbcp/">http://commons.apache.org/proper/commons-dbcp/</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
                </tr> 
               </tbody> 
              </table> 
@@ -861,7 +863,7 @@
                 </thead> 
                 <tbody> 
                  <tr class="b"> 
-                  <td> <p><b>Description: </b>Apache Commons Object Pooling Library</p> <p><b>URL: </b><a class="externalLink" href="http://commons.apache.org/proper/commons-pool/">http://commons.apache.org/proper/commons-pool/</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
+                  <td> <p><b>Description: </b>Apache Commons Object Pooling Library</p> <p><b>URL: </b><a class="externalLink" href="http://commons.apache.org/proper/commons-pool/">http://commons.apache.org/proper/commons-pool/</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
                  </tr> 
                 </tbody> 
                </table> 
@@ -877,7 +879,7 @@
               </thead> 
               <tbody> 
                <tr class="b"> 
-                <td> <p><b>Description: </b>Woodstox is a high-performance XML processor that implements Stax (JSR-173) and SAX2 APIs</p> <p><b>URL: </b><a class="externalLink" href="http://woodstox.codehaus.org">http://woodstox.codehaus.org</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
+                <td> <p><b>Description: </b>Woodstox is a high-performance XML processor that implements Stax (JSR-173) and SAX2 APIs</p> <p><b>URL: </b><a class="externalLink" href="http://woodstox.codehaus.org">http://woodstox.codehaus.org</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
                </tr> 
               </tbody> 
              </table> 
@@ -893,7 +895,7 @@
                 </thead> 
                 <tbody> 
                  <tr class="b"> 
-                  <td> <p><b>Description: </b>StAX API is the standard java XML processing API defined by JSR-173</p> <p><b>URL: </b><a class="externalLink" href="http://stax.codehaus.org/">http://stax.codehaus.org/</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
+                  <td> <p><b>Description: </b>StAX API is the standard java XML processing API defined by JSR-173</p> <p><b>URL: </b><a class="externalLink" href="http://stax.codehaus.org/">http://stax.codehaus.org/</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
                  </tr> 
                 </tbody> 
                </table> 
@@ -908,7 +910,7 @@
                 </thead> 
                 <tbody> 
                  <tr class="b"> 
-                  <td> <p><b>Description: </b>Stax2 API is an extension to basic Stax 1.0 API that adds significant new functionality, such as full-featured bi-direction validation interface and high-performance Typed Access API.</p> <p><b>URL: </b><a class="externalLink" href="http://woodstox.codehaus.org/StAX2">http://woodstox.codehaus.org/StAX2</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.opensource.org/licenses/bsd-license.php">The BSD License</a></p></td> 
+                  <td> <p><b>Description: </b>Stax2 API is an extension to basic Stax 1.0 API that adds significant new functionality, such as full-featured bi-direction validation interface and high-performance Typed Access API.</p> <p><b>URL: </b><a class="externalLink" href="http://woodstox.codehaus.org/StAX2">http://woodstox.codehaus.org/StAX2</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.opensource.org/licenses/bsd-license.php">The BSD License</a></p></td> 
                  </tr> 
                 </tbody> 
                </table> 
@@ -924,7 +926,7 @@
               </thead> 
               <tbody> 
                <tr class="b"> 
-                <td> <p><b>Description: </b>SLF4J LOG4J-12 Binding</p> <p><b>URL: </b><a class="externalLink" href="http://www.slf4j.org">http://www.slf4j.org</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.opensource.org/licenses/mit-license.php">MIT License</a></p></td> 
+                <td> <p><b>Description: </b>SLF4J LOG4J-12 Binding</p> <p><b>URL: </b><a class="externalLink" href="http://www.slf4j.org">http://www.slf4j.org</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.opensource.org/licenses/mit-license.php">MIT License</a></p></td> 
                </tr> 
               </tbody> 
              </table> 
@@ -940,7 +942,7 @@
                 </thead> 
                 <tbody> 
                  <tr class="b"> 
-                  <td> <p><b>Description: </b>The slf4j API</p> <p><b>URL: </b><a class="externalLink" href="http://www.slf4j.org">http://www.slf4j.org</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.opensource.org/licenses/mit-license.php">MIT License</a></p></td> 
+                  <td> <p><b>Description: </b>The slf4j API</p> <p><b>URL: </b><a class="externalLink" href="http://www.slf4j.org">http://www.slf4j.org</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.opensource.org/licenses/mit-license.php">MIT License</a></p></td> 
                  </tr> 
                 </tbody> 
                </table> 
@@ -955,7 +957,7 @@
                 </thead> 
                 <tbody> 
                  <tr class="b"> 
-                  <td> <p><b>Description: </b>Apache Log4j 1.2</p> <p><b>URL: </b><a class="externalLink" href="http://logging.apache.org/log4j/1.2/">http://logging.apache.org/log4j/1.2/</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
+                  <td> <p><b>Description: </b>Apache Log4j 1.2</p> <p><b>URL: </b><a class="externalLink" href="http://logging.apache.org/log4j/1.2/">http://logging.apache.org/log4j/1.2/</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
                  </tr> 
                 </tbody> 
                </table> 
@@ -971,7 +973,7 @@
               </thead> 
               <tbody> 
                <tr class="b"> 
-                <td> <p><b>Description: </b>This companion provides additional appenders, filters and other capabilities for version 1.2 of Apache log4j™. Several of these were backported from the abandoned Apache log4j 1.3 development effort.</p> <p><b>URL: </b><a class="externalLink" href="http://logging.apache.org:80/log4j/companions/extras">http://logging.apache.org:80/log4j/companions/extras</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></p></td> 
+                <td> <p><b>Description: </b>This companion provides additional appenders, filters and other capabilities for version 1.2 of Apache log4j™. Several of these were backported from the abandoned Apache log4j 1.3 development effort.</p> <p><b>URL: </b><a class="externalLink" href="http://logging.apache.org:80/log4j/companions/extras">http://logging.apache.org:80/log4j/companions/extras</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></p></td> 
                </tr> 
               </tbody> 
              </table> 
@@ -986,7 +988,7 @@
               </thead> 
               <tbody> 
                <tr class="b"> 
-                <td> <p><b>Description: </b>JCL 1.1.1 implemented over SLF4J</p> <p><b>URL: </b><a class="externalLink" href="http://www.slf4j.org">http://www.slf4j.org</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.opensource.org/licenses/mit-license.php">MIT License</a></p></td> 
+                <td> <p><b>Description: </b>JCL 1.1.1 implemented over SLF4J</p> <p><b>URL: </b><a class="externalLink" href="http://www.slf4j.org">http://www.slf4j.org</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.opensource.org/licenses/mit-license.php">MIT License</a></p></td> 
                </tr> 
               </tbody> 
              </table> 
@@ -1001,7 +1003,7 @@
               </thead> 
               <tbody> 
                <tr class="b"> 
-                <td> <p><b>Description: </b>Spring Context Support</p> <p><b>URL: </b><a class="externalLink" href="https://github.com/spring-projects/spring-framework">https://github.com/spring-projects/spring-framework</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
+                <td> <p><b>Description: </b>Spring Context Support</p> <p><b>URL: </b><a class="externalLink" href="https://github.com/spring-projects/spring-framework">https://github.com/spring-projects/spring-framework</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
                </tr> 
               </tbody> 
              </table> 
@@ -1016,7 +1018,7 @@
               </thead> 
               <tbody> 
                <tr class="b"> 
-                <td> <p><b>Description: </b>Spring JDBC</p> <p><b>URL: </b><a class="externalLink" href="https://github.com/spring-projects/spring-framework">https://github.com/spring-projects/spring-framework</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
+                <td> <p><b>Description: </b>Spring JDBC</p> <p><b>URL: </b><a class="externalLink" href="https://github.com/spring-projects/spring-framework">https://github.com/spring-projects/spring-framework</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
                </tr> 
               </tbody> 
              </table> 
@@ -1032,7 +1034,7 @@
                 </thead> 
                 <tbody> 
                  <tr class="b"> 
-                  <td> <p><b>Description: </b>Spring Transaction</p> <p><b>URL: </b><a class="externalLink" href="https://github.com/spring-projects/spring-framework">https://github.com/spring-projects/spring-framework</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
+                  <td> <p><b>Description: </b>Spring Transaction</p> <p><b>URL: </b><a class="externalLink" href="https://github.com/spring-projects/spring-framework">https://github.com/spring-projects/spring-framework</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
                  </tr> 
                 </tbody> 
                </table> 
@@ -1048,7 +1050,7 @@
               </thead> 
               <tbody> 
                <tr class="b"> 
-                <td> <p><b>Description: </b>JSR-275 specifies Java packages for the programmatic handling of physical quantities and their expression as numbers of units.</p> <p><b>URL: </b><a class="externalLink" href="https://kenai.com/projects/jsr-275">https://kenai.com/projects/jsr-275</a></p> <p><b>Project License: </b><a href="LICENSE.txt">Specification License</a></p></td> 
+                <td> <p><b>Description: </b>JSR-275 specifies Java packages for the programmatic handling of physical quantities and their expression as numbers of units.</p> <p><b>URL: </b><a class="externalLink" href="https://kenai.com/projects/jsr-275">https://kenai.com/projects/jsr-275</a></p> <p><b>Project Licenses: </b><a href="LICENSE.txt">Specification License</a></p></td> 
                </tr> 
               </tbody> 
              </table> 
@@ -1063,7 +1065,7 @@
               </thead> 
               <tbody> 
                <tr class="b"> 
-                <td> <p><b>Description: </b>The Commons IO library contains utility classes, stream implementations, file filters, file comparators, endian transformation classes, and much more.</p> <p><b>URL: </b><a class="externalLink" href="http://commons.apache.org/io/">http://commons.apache.org/io/</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
+                <td> <p><b>Description: </b>The Commons IO library contains utility classes, stream implementations, file filters, file comparators, endian transformation classes, and much more.</p> <p><b>URL: </b><a class="externalLink" href="http://commons.apache.org/io/">http://commons.apache.org/io/</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
                </tr> 
               </tbody> 
              </table> 
@@ -1078,7 +1080,7 @@
               </thead> 
               <tbody> 
                <tr class="b"> 
-                <td> <p><b>Description: </b>The Apache Commons Collections package contains types that extend and augment the Java Collections Framework.</p> <p><b>URL: </b><a class="externalLink" href="http://commons.apache.org/proper/commons-collections/">http://commons.apache.org/proper/commons-collections/</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
+                <td> <p><b>Description: </b>The Apache Commons Collections package contains types that extend and augment the Java Collections Framework.</p> <p><b>URL: </b><a class="externalLink" href="http://commons.apache.org/proper/commons-collections/">http://commons.apache.org/proper/commons-collections/</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
                </tr> 
               </tbody> 
              </table> 
@@ -1094,7 +1096,7 @@
             </thead> 
             <tbody> 
              <tr class="b"> 
-              <td> <p><b>Description: </b>Spring Web MVC</p> <p><b>URL: </b><a class="externalLink" href="https://github.com/spring-projects/spring-framework">https://github.com/spring-projects/spring-framework</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
+              <td> <p><b>Description: </b>Spring Web MVC</p> <p><b>URL: </b><a class="externalLink" href="https://github.com/spring-projects/spring-framework">https://github.com/spring-projects/spring-framework</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
              </tr> 
             </tbody> 
            </table> 
@@ -1109,7 +1111,7 @@
             </thead> 
             <tbody> 
              <tr class="b"> 
-              <td> <p><b>Description: </b>XBean is a plugin based server architecture.</p> <p><b>URL: </b><a class="externalLink" href="http://geronimo.apache.org/xbean/xbean-spring">http://geronimo.apache.org/xbean/xbean-spring</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
+              <td> <p><b>Description: </b>XBean is a plugin based server architecture.</p> <p><b>URL: </b><a class="externalLink" href="http://geronimo.apache.org/xbean/xbean-spring">http://geronimo.apache.org/xbean/xbean-spring</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
              </tr> 
             </tbody> 
            </table> 
@@ -1124,7 +1126,7 @@
             </thead> 
             <tbody> 
              <tr class="b"> 
-              <td> <p><b>Description: </b>The FileUpload component provides a simple yet flexible means of adding support for multipart file upload functionality to servlets and web applications.</p> <p><b>URL: </b><a class="externalLink" href="http://commons.apache.org/fileupload/">http://commons.apache.org/fileupload/</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
+              <td> <p><b>Description: </b>The FileUpload component provides a simple yet flexible means of adding support for multipart file upload functionality to servlets and web applications.</p> <p><b>URL: </b><a class="externalLink" href="http://commons.apache.org/fileupload/">http://commons.apache.org/fileupload/</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
              </tr> 
             </tbody> 
            </table> 
@@ -1140,7 +1142,7 @@
           </thead> 
           <tbody> 
            <tr class="b"> 
-            <td> <p><b>Description: </b>The parent module of the Revolution Systems Open Library.</p> <p><b>URL: </b><a class="externalLink" href="http://revolsys.github.com/com.revolsys.open/com.revolsys.open.oracle/">http://revolsys.github.com/com.revolsys.open/com.revolsys.open.oracle/</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></p></td> 
+            <td> <p><b>Description: </b>The parent module of the Revolution Systems Open Library.</p> <p><b>URL: </b><a class="externalLink" href="http://revolsys.github.com/com.revolsys.open/com.revolsys.open.oracle/">http://revolsys.github.com/com.revolsys.open/com.revolsys.open.oracle/</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></p></td> 
            </tr> 
           </tbody> 
          </table> 
@@ -1156,7 +1158,7 @@
             </thead> 
             <tbody> 
              <tr class="b"> 
-              <td> <p><b>Description: </b>Oracle JDBC driver classes for use with JDK1.6</p> <p><b>URL: </b><a class="externalLink" href="http://www.oracle.com/technology/software/tech/java/sqlj_jdbc/index.html">http://www.oracle.com/technology/software/tech/java/sqlj_jdbc/index.html</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.oracle.com/technology/software/htdocs/distlic.html">Oracle Technology Network Development and Distribution License Terms</a></p></td> 
+              <td> <p><b>Description: </b>Oracle JDBC driver classes for use with JDK1.6</p> <p><b>URL: </b><a class="externalLink" href="http://www.oracle.com/technology/software/tech/java/sqlj_jdbc/index.html">http://www.oracle.com/technology/software/tech/java/sqlj_jdbc/index.html</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.oracle.com/technology/software/htdocs/distlic.html">Oracle Technology Network Development and Distribution License Terms</a></p></td> 
              </tr> 
             </tbody> 
            </table> 
@@ -1172,7 +1174,7 @@
           </thead> 
           <tbody> 
            <tr class="b"> 
-            <td> <p><b>Description: </b>The parent module of the Revolution Systems Open Library.</p> <p><b>URL: </b><a class="externalLink" href="http://www.revolsys.com">http://www.revolsys.com</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></p></td> 
+            <td> <p><b>Description: </b>The parent module of the Revolution Systems Open Library.</p> <p><b>URL: </b><a class="externalLink" href="http://www.revolsys.com">http://www.revolsys.com</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></p></td> 
            </tr> 
           </tbody> 
          </table> 
@@ -1188,7 +1190,7 @@
             </thead> 
             <tbody> 
              <tr class="b"> 
-              <td> <p><b>Description: </b>PostgreSQL JDBC Driver JDBC41</p> <p><b>URL: </b><a class="externalLink" href="http://jdbc.postgresql.org">http://jdbc.postgresql.org</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.postgresql.org/about/licence/">The PostgreSQL License</a></p></td> 
+              <td> <p><b>Description: </b>PostgreSQL JDBC Driver JDBC41</p> <p><b>URL: </b><a class="externalLink" href="http://jdbc.postgresql.org">http://jdbc.postgresql.org</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.postgresql.org/about/licence/">The PostgreSQL License</a></p></td> 
              </tr> 
             </tbody> 
            </table> 
@@ -1204,7 +1206,7 @@
           </thead> 
           <tbody> 
            <tr class="b"> 
-            <td> <p><b>Description: </b>Spring Aspects</p> <p><b>URL: </b><a class="externalLink" href="https://github.com/spring-projects/spring-framework">https://github.com/spring-projects/spring-framework</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
+            <td> <p><b>Description: </b>Spring Aspects</p> <p><b>URL: </b><a class="externalLink" href="https://github.com/spring-projects/spring-framework">https://github.com/spring-projects/spring-framework</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
            </tr> 
           </tbody> 
          </table> 
@@ -1220,7 +1222,7 @@
             </thead> 
             <tbody> 
              <tr class="b"> 
-              <td> <p><b>Description: </b>The AspectJ weaver introduces advices to java classes</p> <p><b>URL: </b><a class="externalLink" href="http://www.aspectj.org">http://www.aspectj.org</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License - v 1.0</a></p></td> 
+              <td> <p><b>Description: </b>The AspectJ weaver introduces advices to java classes</p> <p><b>URL: </b><a class="externalLink" href="http://www.aspectj.org">http://www.aspectj.org</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License - v 1.0</a></p></td> 
              </tr> 
             </tbody> 
            </table> 
@@ -1236,7 +1238,7 @@
           </thead> 
           <tbody> 
            <tr class="b"> 
-            <td> <p><b>Description: </b>spring-security-config</p> <p><b>URL: </b><a class="externalLink" href="http://spring.io/spring-security">http://spring.io/spring-security</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
+            <td> <p><b>Description: </b>spring-security-config</p> <p><b>URL: </b><a class="externalLink" href="http://spring.io/spring-security">http://spring.io/spring-security</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
            </tr> 
           </tbody> 
          </table> 
@@ -1252,7 +1254,7 @@
             </thead> 
             <tbody> 
              <tr class="b"> 
-              <td> <p><b>Description: </b>AOP Alliance</p> <p><b>URL: </b><a class="externalLink" href="http://aopalliance.sourceforge.net">http://aopalliance.sourceforge.net</a></p> <p><b>Project License: </b>Public Domain</p></td> 
+              <td> <p><b>Description: </b>AOP Alliance</p> <p><b>URL: </b><a class="externalLink" href="http://aopalliance.sourceforge.net">http://aopalliance.sourceforge.net</a></p> <p><b>Project Licenses: </b>Public Domain</p></td> 
              </tr> 
             </tbody> 
            </table> 
@@ -1267,7 +1269,7 @@
             </thead> 
             <tbody> 
              <tr class="b"> 
-              <td> <p><b>Description: </b>spring-security-core</p> <p><b>URL: </b><a class="externalLink" href="http://spring.io/spring-security">http://spring.io/spring-security</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
+              <td> <p><b>Description: </b>spring-security-core</p> <p><b>URL: </b><a class="externalLink" href="http://spring.io/spring-security">http://spring.io/spring-security</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
              </tr> 
             </tbody> 
            </table> 
@@ -1282,7 +1284,7 @@
             </thead> 
             <tbody> 
              <tr class="b"> 
-              <td> <p><b>Description: </b>Spring AOP</p> <p><b>URL: </b><a class="externalLink" href="https://github.com/spring-projects/spring-framework">https://github.com/spring-projects/spring-framework</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
+              <td> <p><b>Description: </b>Spring AOP</p> <p><b>URL: </b><a class="externalLink" href="https://github.com/spring-projects/spring-framework">https://github.com/spring-projects/spring-framework</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
              </tr> 
             </tbody> 
            </table> 
@@ -1298,7 +1300,7 @@
           </thead> 
           <tbody> 
            <tr class="b"> 
-            <td> <p><b>Description: </b>spring-security-web</p> <p><b>URL: </b><a class="externalLink" href="http://spring.io/spring-security">http://spring.io/spring-security</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
+            <td> <p><b>Description: </b>spring-security-web</p> <p><b>URL: </b><a class="externalLink" href="http://spring.io/spring-security">http://spring.io/spring-security</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
            </tr> 
           </tbody> 
          </table> 
@@ -1314,7 +1316,7 @@
             </thead> 
             <tbody> 
              <tr class="b"> 
-              <td> <p><b>Description: </b>Spring Expression Language (SpEL)</p> <p><b>URL: </b><a class="externalLink" href="https://github.com/spring-projects/spring-framework">https://github.com/spring-projects/spring-framework</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
+              <td> <p><b>Description: </b>Spring Expression Language (SpEL)</p> <p><b>URL: </b><a class="externalLink" href="https://github.com/spring-projects/spring-framework">https://github.com/spring-projects/spring-framework</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
              </tr> 
             </tbody> 
            </table> 
@@ -1330,7 +1332,7 @@
           </thead> 
           <tbody> 
            <tr class="b"> 
-            <td> <p><b>Description: </b>There is currently no description associated with this project.</p> <p><b>URL: </b><a class="externalLink" href="https://bcgov.github.io/cpf/cpf-api-client/">https://bcgov.github.io/cpf/cpf-api-client/</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></p></td> 
+            <td> <p><b>Description: </b>There is currently no description associated with this project.</p> <p><b>URL: </b><a class="externalLink" href="https://bcgov.github.io/cpf/cpf-api-client/">https://bcgov.github.io/cpf/cpf-api-client/</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></p></td> 
            </tr> 
           </tbody> 
          </table> 
@@ -1346,7 +1348,7 @@
             </thead> 
             <tbody> 
              <tr class="b"> 
-              <td> <p><b>Description: </b>Apache HttpComponents HttpClient - MIME coded entities</p> <p><b>URL: </b><a class="externalLink" href="http://hc.apache.org/httpcomponents-client">http://hc.apache.org/httpcomponents-client</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></p></td> 
+              <td> <p><b>Description: </b>Apache HttpComponents HttpClient - MIME coded entities</p> <p><b>URL: </b><a class="externalLink" href="http://hc.apache.org/httpcomponents-client">http://hc.apache.org/httpcomponents-client</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></p></td> 
              </tr> 
             </tbody> 
            </table> 
@@ -1362,7 +1364,7 @@
               </thead> 
               <tbody> 
                <tr class="b"> 
-                <td> <p><b>Description: </b>Apache HttpComponents Client</p> <p><b>URL: </b><a class="externalLink" href="http://hc.apache.org/httpcomponents-client">http://hc.apache.org/httpcomponents-client</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></p></td> 
+                <td> <p><b>Description: </b>Apache HttpComponents Client</p> <p><b>URL: </b><a class="externalLink" href="http://hc.apache.org/httpcomponents-client">http://hc.apache.org/httpcomponents-client</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></p></td> 
                </tr> 
               </tbody> 
              </table> 
@@ -1378,7 +1380,7 @@
                 </thead> 
                 <tbody> 
                  <tr class="b"> 
-                  <td> <p><b>Description: </b>Apache HttpComponents Core (blocking I/O)</p> <p><b>URL: </b><a class="externalLink" href="http://hc.apache.org/httpcomponents-core-ga">http://hc.apache.org/httpcomponents-core-ga</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></p></td> 
+                  <td> <p><b>Description: </b>Apache HttpComponents Core (blocking I/O)</p> <p><b>URL: </b><a class="externalLink" href="http://hc.apache.org/httpcomponents-core-ga">http://hc.apache.org/httpcomponents-core-ga</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></p></td> 
                  </tr> 
                 </tbody> 
                </table> 
@@ -1393,7 +1395,7 @@
                 </thead> 
                 <tbody> 
                  <tr class="b"> 
-                  <td> <p><b>Description: </b>The Apache Commons Codec package contains simple encoder and decoders for various formats such as Base64 and Hexadecimal. In addition to these widely used encoders and decoders, the codec package also maintains a collection of phonetic encoding utilities.</p> <p><b>URL: </b><a class="externalLink" href="http://commons.apache.org/proper/commons-codec/">http://commons.apache.org/proper/commons-codec/</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
+                  <td> <p><b>Description: </b>The Apache Commons Codec package contains simple encoder and decoders for various formats such as Base64 and Hexadecimal. In addition to these widely used encoders and decoders, the codec package also maintains a collection of phonetic encoding utilities.</p> <p><b>URL: </b><a class="externalLink" href="http://commons.apache.org/proper/commons-codec/">http://commons.apache.org/proper/commons-codec/</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
                  </tr> 
                 </tbody> 
                </table> 
@@ -1411,7 +1413,7 @@
           </thead> 
           <tbody> 
            <tr class="b"> 
-            <td> <p><b>Description: </b>JSR-250 Reference Implementation by Glassfish</p> <p><b>URL: </b><a class="externalLink" href="http://jcp.org/aboutJava/communityprocess/final/jsr250/index.html">http://jcp.org/aboutJava/communityprocess/final/jsr250/index.html</a></p> <p><b>Project License: </b><a class="externalLink" href="https://glassfish.dev.java.net/public/CDDLv1.0.html">COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) Version 1.0</a></p></td> 
+            <td> <p><b>Description: </b>JSR-250 Reference Implementation by Glassfish</p> <p><b>URL: </b><a class="externalLink" href="http://jcp.org/aboutJava/communityprocess/final/jsr250/index.html">http://jcp.org/aboutJava/communityprocess/final/jsr250/index.html</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="https://glassfish.dev.java.net/public/CDDLv1.0.html">COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) Version 1.0</a></p></td> 
            </tr> 
           </tbody> 
          </table> 
@@ -1426,7 +1428,7 @@
           </thead> 
           <tbody> 
            <tr class="b"> 
-            <td> <p><b>Description: </b>There is currently no description associated with this project.</p> <p><b>URL: </b><a class="externalLink" href="https://bcgov.github.io/cpf/cpf-api-plugin/">https://bcgov.github.io/cpf/cpf-api-plugin/</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></p></td> 
+            <td> <p><b>Description: </b>There is currently no description associated with this project.</p> <p><b>URL: </b><a class="externalLink" href="https://bcgov.github.io/cpf/cpf-api-plugin/">https://bcgov.github.io/cpf/cpf-api-plugin/</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></p></td> 
            </tr> 
           </tbody> 
          </table> 
@@ -1442,7 +1444,7 @@
             </thead> 
             <tbody> 
              <tr class="b"> 
-              <td> <p><b>Description: </b>The JTS Topology Suite is an API for modelling and manipulating 2-dimensional linear geometry. It provides numerous geometric predicates and functions. JTS conforms to the Simple Features Specification for SQL published by the Open GIS Consortium.</p> <p><b>URL: </b><a class="externalLink" href="http://sourceforge.net/projects/jts-topo-suite">http://sourceforge.net/projects/jts-topo-suite</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.gnu.org/copyleft/lesser.txt">Lesser General Public License (LGPL)</a></p></td> 
+              <td> <p><b>Description: </b>The JTS Topology Suite is an API for modelling and manipulating 2-dimensional linear geometry. It provides numerous geometric predicates and functions. JTS conforms to the Simple Features Specification for SQL published by the Open GIS Consortium.</p> <p><b>URL: </b><a class="externalLink" href="http://sourceforge.net/projects/jts-topo-suite">http://sourceforge.net/projects/jts-topo-suite</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.gnu.org/copyleft/lesser.txt">Lesser General Public License (LGPL)</a></p></td> 
              </tr> 
             </tbody> 
            </table> 
@@ -1458,7 +1460,7 @@
           </thead> 
           <tbody> 
            <tr class="b"> 
-            <td> <p><b>Description: </b>Javassist (JAVA programming ASSISTant) makes Java bytecode manipulation simple. It is a class library for editing bytecodes in Java.</p> <p><b>URL: </b><a class="externalLink" href="http://www.javassist.org/">http://www.javassist.org/</a></p> <p><b>Project License: </b>No license is defined for this project.</p></td> 
+            <td> <p><b>Description: </b>Javassist (JAVA programming ASSISTant) makes Java bytecode manipulation simple. It is a class library for editing bytecodes in Java.</p> <p><b>URL: </b><a class="externalLink" href="http://www.javassist.org/">http://www.javassist.org/</a></p> <p><b>Project Licenses: </b>No licenses are defined for this project.</p></td> 
            </tr> 
           </tbody> 
          </table> 
@@ -1473,7 +1475,7 @@
           </thead> 
           <tbody> 
            <tr class="b"> 
-            <td> <p><b>Description: </b>The JavaMail API provides a platform-independent and protocol-independent framework to build mail and messaging applications.</p> <p><b>URL: </b><a class="externalLink" href="https://glassfish.dev.java.net/javaee5/mail/">https://glassfish.dev.java.net/javaee5/mail/</a></p> <p><b>Project License: </b><a class="externalLink" href="https://glassfish.dev.java.net/public/CDDLv1.0.html">Common Development and Distribution License (CDDL) v1.0</a></p></td> 
+            <td> <p><b>Description: </b>The JavaMail API provides a platform-independent and protocol-independent framework to build mail and messaging applications.</p> <p><b>URL: </b><a class="externalLink" href="https://glassfish.dev.java.net/javaee5/mail/">https://glassfish.dev.java.net/javaee5/mail/</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="https://glassfish.dev.java.net/public/CDDLv1.0.html">Common Development and Distribution License (CDDL) v1.0</a></p></td> 
            </tr> 
           </tbody> 
          </table> 
@@ -1489,7 +1491,7 @@
             </thead> 
             <tbody> 
              <tr class="b"> 
-              <td> <p><b>Description: </b>JavaBeans Activation Framework (JAF) is a standard extension to the Java platform that lets you take advantage of standard services to: determine the type of an arbitrary piece of data; encapsulate access to it; discover the operations available on it; and instantiate the appropriate bean to perform the operation(s).</p> <p><b>URL: </b><a class="externalLink" href="http://java.sun.com/products/javabeans/jaf/index.jsp">http://java.sun.com/products/javabeans/jaf/index.jsp</a></p> <p><b>Project License: </b><a class="externalLink" href="https://glassfish.dev.java.net/public/CDDLv1.0.html">Common Development and Distribution License (CDDL) v1.0</a></p></td> 
+              <td> <p><b>Description: </b>JavaBeans Activation Framework (JAF) is a standard extension to the Java platform that lets you take advantage of standard services to: determine the type of an arbitrary piece of data; encapsulate access to it; discover the operations available on it; and instantiate the appropriate bean to perform the operation(s).</p> <p><b>URL: </b><a class="externalLink" href="http://java.sun.com/products/javabeans/jaf/index.jsp">http://java.sun.com/products/javabeans/jaf/index.jsp</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="https://glassfish.dev.java.net/public/CDDLv1.0.html">Common Development and Distribution License (CDDL) v1.0</a></p></td> 
              </tr> 
             </tbody> 
            </table> 
@@ -1505,7 +1507,7 @@
           </thead> 
           <tbody> 
            <tr class="b"> 
-            <td> <p><b>Description: </b>Spring Web</p> <p><b>URL: </b><a class="externalLink" href="https://github.com/spring-projects/spring-framework">https://github.com/spring-projects/spring-framework</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
+            <td> <p><b>Description: </b>Spring Web</p> <p><b>URL: </b><a class="externalLink" href="https://github.com/spring-projects/spring-framework">https://github.com/spring-projects/spring-framework</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
            </tr> 
           </tbody> 
          </table> 
@@ -1521,7 +1523,7 @@
             </thead> 
             <tbody> 
              <tr class="b"> 
-              <td> <p><b>Description: </b>Spring Beans</p> <p><b>URL: </b><a class="externalLink" href="https://github.com/spring-projects/spring-framework">https://github.com/spring-projects/spring-framework</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
+              <td> <p><b>Description: </b>Spring Beans</p> <p><b>URL: </b><a class="externalLink" href="https://github.com/spring-projects/spring-framework">https://github.com/spring-projects/spring-framework</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
              </tr> 
             </tbody> 
            </table> 
@@ -1536,7 +1538,7 @@
             </thead> 
             <tbody> 
              <tr class="b"> 
-              <td> <p><b>Description: </b>Spring Context</p> <p><b>URL: </b><a class="externalLink" href="https://github.com/spring-projects/spring-framework">https://github.com/spring-projects/spring-framework</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
+              <td> <p><b>Description: </b>Spring Context</p> <p><b>URL: </b><a class="externalLink" href="https://github.com/spring-projects/spring-framework">https://github.com/spring-projects/spring-framework</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
              </tr> 
             </tbody> 
            </table> 
@@ -1551,7 +1553,7 @@
             </thead> 
             <tbody> 
              <tr class="b"> 
-              <td> <p><b>Description: </b>Spring Core</p> <p><b>URL: </b><a class="externalLink" href="https://github.com/spring-projects/spring-framework">https://github.com/spring-projects/spring-framework</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
+              <td> <p><b>Description: </b>Spring Core</p> <p><b>URL: </b><a class="externalLink" href="https://github.com/spring-projects/spring-framework">https://github.com/spring-projects/spring-framework</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
              </tr> 
             </tbody> 
            </table> 
@@ -1568,7 +1570,7 @@
         </thead> 
         <tbody> 
          <tr class="b"> 
-          <td> <p><b>Description: </b>Xerces2 is the next generation of high performance, fully compliant XML parsers in the Apache Xerces family. This new version of Xerces introduces the Xerces Native Interface (XNI), a complete framework for building parser components and configurations that is extremely modular and easy to program. The Apache Xerces2 parser is the reference implementation of XNI but other parser components, configurations, and parsers can be written using the Xerces Native Interface. For complete design and implementation documents, refer to the XNI Manual. Xerces2 is a fully conforming XML Schema 1.0 processor. A partial experimental implementation of the XML Schema 1.1 Structures and Datatypes Working Drafts (December 2009) and an experimental implementation of the XML Schema Definition Language (XSD): Component Designators (SCD) Candidate Recommendation (January 2010) are provided for evaluation. For more information, refer to the XML Schema page. Xerces2 also provides a complete implementation of the Document Object Model Level 3 Core and Load/Save W3C Recommendations and provides a complete implementation of the XML Inclusions (XInclude) W3C Recommendation. It also provides support for OASIS XML Catalogs v1.1. Xerces2 is able to parse documents written according to the XML 1.1 Recommendation, except that it does not yet provide an option to enable normalization checking as described in section 2.13 of this specification. It also handles namespaces according to the XML Namespaces 1.1 Recommendation, and will correctly serialize XML 1.1 documents if the DOM level 3 load/save APIs are in use.</p> <p><b>URL: </b><a class="externalLink" href="https://xerces.apache.org/xerces2-j/">https://xerces.apache.org/xerces2-j/</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
+          <td> <p><b>Description: </b>Xerces2 is the next generation of high performance, fully compliant XML parsers in the Apache Xerces family. This new version of Xerces introduces the Xerces Native Interface (XNI), a complete framework for building parser components and configurations that is extremely modular and easy to program. The Apache Xerces2 parser is the reference implementation of XNI but other parser components, configurations, and parsers can be written using the Xerces Native Interface. For complete design and implementation documents, refer to the XNI Manual. Xerces2 is a fully conforming XML Schema 1.0 processor. A partial experimental implementation of the XML Schema 1.1 Structures and Datatypes Working Drafts (December 2009) and an experimental implementation of the XML Schema Definition Language (XSD): Component Designators (SCD) Candidate Recommendation (January 2010) are provided for evaluation. For more information, refer to the XML Schema page. Xerces2 also provides a complete implementation of the Document Object Model Level 3 Core and Load/Save W3C Recommendations and provides a complete implementation of the XML Inclusions (XInclude) W3C Recommendation. It also provides support for OASIS XML Catalogs v1.1. Xerces2 is able to parse documents written according to the XML 1.1 Recommendation, except that it does not yet provide an option to enable normalization checking as described in section 2.13 of this specification. It also handles namespaces according to the XML Namespaces 1.1 Recommendation, and will correctly serialize XML 1.1 documents if the DOM level 3 load/save APIs are in use.</p> <p><b>URL: </b><a class="externalLink" href="https://xerces.apache.org/xerces2-j/">https://xerces.apache.org/xerces2-j/</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
          </tr> 
         </tbody> 
        </table> 
@@ -1584,7 +1586,7 @@
           </thead> 
           <tbody> 
            <tr class="b"> 
-            <td> <p><b>Description: </b>xml-commons provides an Apache-hosted set of DOM, SAX, and JAXP interfaces for use in other xml-based projects. Our hope is that we can standardize on both a common version and packaging scheme for these critical XML standards interfaces to make the lives of both our developers and users easier. The External Components portion of xml-commons contains interfaces that are defined by external standards organizations. For DOM, that's the W3C; for SAX it's David Megginson and sax.sourceforge.net; for JAXP it's Sun.</p> <p><b>URL: </b><a class="externalLink" href="http://xml.apache.org/commons/components/external/">http://xml.apache.org/commons/components/external/</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a>, <a class="externalLink" href="http://www.saxproject.org/copying.html">The SAX License</a>, <a class="externalLink" href="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/java-binding.zip">The W3C License</a></p></td> 
+            <td> <p><b>Description: </b>xml-commons provides an Apache-hosted set of DOM, SAX, and JAXP interfaces for use in other xml-based projects. Our hope is that we can standardize on both a common version and packaging scheme for these critical XML standards interfaces to make the lives of both our developers and users easier. The External Components portion of xml-commons contains interfaces that are defined by external standards organizations. For DOM, that's the W3C; for SAX it's David Megginson and sax.sourceforge.net; for JAXP it's Sun.</p> <p><b>URL: </b><a class="externalLink" href="http://xml.apache.org/commons/components/external/">http://xml.apache.org/commons/components/external/</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a>, <a class="externalLink" href="http://www.saxproject.org/copying.html">The SAX License</a>, <a class="externalLink" href="http://www.w3.org/TR/2004/REC-DOM-Level-3-Core-20040407/java-binding.zip">The W3C License</a></p></td> 
            </tr> 
           </tbody> 
          </table> 
@@ -1600,7 +1602,7 @@
         </thead> 
         <tbody> 
          <tr class="b"> 
-          <td> <p><b>Description: </b>Tiles JSP support: Classes and tag libraries to use Tiles in a JSP environment.</p> <p><b>URL: </b><a class="externalLink" href="http://tiles.apache.org/2.1/framework/tiles-jsp/">http://tiles.apache.org/2.1/framework/tiles-jsp/</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
+          <td> <p><b>Description: </b>Tiles JSP support: Classes and tag libraries to use Tiles in a JSP environment.</p> <p><b>URL: </b><a class="externalLink" href="http://tiles.apache.org/2.1/framework/tiles-jsp/">http://tiles.apache.org/2.1/framework/tiles-jsp/</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
          </tr> 
         </tbody> 
        </table> 
@@ -1616,7 +1618,7 @@
           </thead> 
           <tbody> 
            <tr class="b"> 
-            <td> <p><b>Description: </b>Tiles servlet support, to enable use of Tiles inside a Servlet environment.</p> <p><b>URL: </b><a class="externalLink" href="http://tiles.apache.org/2.1/framework/tiles-servlet/">http://tiles.apache.org/2.1/framework/tiles-servlet/</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
+            <td> <p><b>Description: </b>Tiles servlet support, to enable use of Tiles inside a Servlet environment.</p> <p><b>URL: </b><a class="externalLink" href="http://tiles.apache.org/2.1/framework/tiles-servlet/">http://tiles.apache.org/2.1/framework/tiles-servlet/</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
            </tr> 
           </tbody> 
          </table> 
@@ -1632,7 +1634,7 @@
             </thead> 
             <tbody> 
              <tr class="b"> 
-              <td> <p><b>Description: </b>Tiles Core Library, including basic implementation of the APIs.</p> <p><b>URL: </b><a class="externalLink" href="http://tiles.apache.org/2.1/framework/tiles-core/">http://tiles.apache.org/2.1/framework/tiles-core/</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
+              <td> <p><b>Description: </b>Tiles Core Library, including basic implementation of the APIs.</p> <p><b>URL: </b><a class="externalLink" href="http://tiles.apache.org/2.1/framework/tiles-core/">http://tiles.apache.org/2.1/framework/tiles-core/</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
              </tr> 
             </tbody> 
            </table> 
@@ -1648,7 +1650,7 @@
               </thead> 
               <tbody> 
                <tr class="b"> 
-                <td> <p><b>Description: </b>Tiles APIs, containing interfaces and classes to interact with Tiles.</p> <p><b>URL: </b><a class="externalLink" href="http://tiles.apache.org/2.1/framework/tiles-api/">http://tiles.apache.org/2.1/framework/tiles-api/</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
+                <td> <p><b>Description: </b>Tiles APIs, containing interfaces and classes to interact with Tiles.</p> <p><b>URL: </b><a class="externalLink" href="http://tiles.apache.org/2.1/framework/tiles-api/">http://tiles.apache.org/2.1/framework/tiles-api/</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
                </tr> 
               </tbody> 
              </table> 
@@ -1663,7 +1665,7 @@
               </thead> 
               <tbody> 
                <tr class="b"> 
-                <td> <p><b>Description: </b>The Digester package lets you configure an XML to Java object mapping module which triggers certain actions called rules whenever a particular pattern of nested XML elements is recognized.</p> <p><b>URL: </b><a class="externalLink" href="http://commons.apache.org/digester/">http://commons.apache.org/digester/</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
+                <td> <p><b>Description: </b>The Digester package lets you configure an XML to Java object mapping module which triggers certain actions called rules whenever a particular pattern of nested XML elements is recognized.</p> <p><b>URL: </b><a class="externalLink" href="http://commons.apache.org/digester/">http://commons.apache.org/digester/</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
                </tr> 
               </tbody> 
              </table> 
@@ -1681,7 +1683,7 @@
         </thead> 
         <tbody> 
          <tr class="b"> 
-          <td> <p><b>Description: </b>Xalan-Java is an XSLT processor for transforming XML documents into HTML, text, or other XML document types. It implements XSL Transformations (XSLT) Version 1.0 and XML Path Language (XPath) Version 1.0 and can be used from the command line, in an applet or a servlet, or as a module in other program.</p> <p><b>URL: </b><a class="externalLink" href="http://xml.apache.org/xalan-j/">http://xml.apache.org/xalan-j/</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
+          <td> <p><b>Description: </b>Xalan-Java is an XSLT processor for transforming XML documents into HTML, text, or other XML document types. It implements XSL Transformations (XSLT) Version 1.0 and XML Path Language (XPath) Version 1.0 and can be used from the command line, in an applet or a servlet, or as a module in other program.</p> <p><b>URL: </b><a class="externalLink" href="http://xml.apache.org/xalan-j/">http://xml.apache.org/xalan-j/</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
          </tr> 
         </tbody> 
        </table> 
@@ -1697,7 +1699,7 @@
           </thead> 
           <tbody> 
            <tr class="b"> 
-            <td> <p><b>Description: </b>Serializer to write out XML, HTML etc. as a stream of characters from an input DOM or from input SAX events.</p> <p><b>URL: </b><a class="externalLink" href="http://xml.apache.org/xalan-j/">http://xml.apache.org/xalan-j/</a></p> <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
+            <td> <p><b>Description: </b>Serializer to write out XML, HTML etc. as a stream of characters from an input DOM or from input SAX events.</p> <p><b>URL: </b><a class="externalLink" href="http://xml.apache.org/xalan-j/">http://xml.apache.org/xalan-j/</a></p> <p><b>Project Licenses: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td> 
            </tr> 
           </tbody> 
          </table> 
@@ -1757,77 +1759,637 @@
   <tbody> 
    <tr class="b"> 
     <td>aopalliance-1.0.jar</td> 
-    <td>4.47 kB</td> 
+    <td>4.5 kB</td> 
     <td>15</td> 
     <td>9</td> 
     <td>2</td> 
     <td>1.3</td> 
     <td>Yes</td> 
-    <td>-</td> 
+    <td>No</td> 
    </tr> 
    <tr class="a"> 
     <td>cpf-api-app-5.0.0-SNAPSHOT.jar</td> 
-    <td>315.92 kB</td> 
+    <td>315.9 kB</td> 
     <td>142</td> 
-    <td>66</td> 
-    <td>13</td> 
-    <td>1.6</td> 
+    <td>75</td> 
+    <td>14</td> 
+    <td>1.8</td> 
     <td>Yes</td> 
-    <td>-</td> 
+    <td>No</td> 
    </tr> 
    <tr class="b"> 
     <td>cpf-api-client-5.0.0-SNAPSHOT.jar</td> 
-    <td>91.05 kB</td> 
+    <td>91 kB</td> 
     <td>61</td> 
-    <td>38</td> 
+    <td>40</td> 
     <td>6</td> 
-    <td>1.6</td> 
+    <td>1.8</td> 
     <td>Yes</td> 
-    <td>-</td> 
+    <td>No</td> 
    </tr> 
    <tr class="a"> 
     <td>cpf-api-plugin-5.0.0-SNAPSHOT.jar</td> 
-    <td>98.63 kB</td> 
+    <td>98.6 kB</td> 
     <td>55</td> 
-    <td>33</td> 
-    <td>7</td> 
-    <td>1.6</td> 
+    <td>34</td> 
+    <td>8</td> 
+    <td>1.8</td> 
     <td>Yes</td> 
-    <td>-</td> 
+    <td>No</td> 
    </tr> 
    <tr class="b"> 
     <td>ojdbc6-11.2.0.3.jar</td> 
-    <td>2.71 MB</td> 
+    <td>2.7 MB</td> 
     <td>1008</td> 
     <td>927</td> 
     <td>35</td> 
     <td>1.6</td> 
     <td>Yes</td> 
-    <td>sealed</td> 
+    <td>Yes</td> 
+   </tr> 
+   <tr class="a"> 
+    <td>com.revolsys.open.core-TRUNK-SNAPSHOT.jar</td> 
+    <td>3.6 MB</td> 
+    <td>2016</td> 
+    <td>1751</td> 
+    <td>196</td> 
+    <td>1.8</td> 
+    <td>Yes</td> 
+    <td>No</td> 
    </tr> 
    <tr class="b"> 
-    <td>5</td> 
-    <td>3.22 MB</td> 
-    <td>1281</td> 
-    <td>1073</td> 
-    <td>63</td> 
+    <td>com.revolsys.open.oracle-TRUNK-SNAPSHOT.jar</td> 
+    <td>78.5 kB</td> 
+    <td>38</td> 
+    <td>23</td> 
+    <td>3</td> 
+    <td>1.8</td> 
+    <td>Yes</td> 
+    <td>No</td> 
+   </tr> 
+   <tr class="a"> 
+    <td>com.revolsys.open.postgresql-TRUNK-SNAPSHOT.jar</td> 
+    <td>41.4 kB</td> 
+    <td>30</td> 
+    <td>16</td> 
+    <td>2</td> 
+    <td>1.8</td> 
+    <td>Yes</td> 
+    <td>No</td> 
+   </tr> 
+   <tr class="b"> 
+    <td>com.revolsys.open.web-TRUNK-SNAPSHOT.jar</td> 
+    <td>519.5 kB</td> 
+    <td>365</td> 
+    <td>303</td> 
+    <td>35</td> 
+    <td>1.8</td> 
+    <td>Yes</td> 
+    <td>No</td> 
+   </tr> 
+   <tr class="a"> 
+    <td>war-overlay-TRUNK-SNAPSHOT.war</td> 
+    <td>20.1 MB</td> 
+    <td>68</td> 
+    <td>0</td> 
+    <td>0</td> 
+    <td>-</td> 
+    <td>No</td> 
+    <td>No</td> 
+   </tr> 
+   <tr class="b"> 
+    <td>jts-1.13.jar</td> 
+    <td>795 kB</td> 
+    <td>611</td> 
+    <td>539</td> 
+    <td>60</td> 
+    <td>1.5</td> 
+    <td>Yes</td> 
+    <td>No</td> 
+   </tr> 
+   <tr class="a"> 
+    <td>commons-beanutils-1.8.3.jar</td> 
+    <td>232 kB</td> 
+    <td>155</td> 
+    <td>137</td> 
+    <td>6</td> 
+    <td>1.3</td> 
+    <td>Yes</td> 
+    <td>No</td> 
+   </tr> 
+   <tr class="b"> 
+    <td>commons-codec-1.9.jar</td> 
+    <td>264 kB</td> 
+    <td>227</td> 
+    <td>85</td> 
+    <td>6</td> 
     <td>1.6</td> 
+    <td>Yes</td> 
+    <td>No</td> 
+   </tr> 
+   <tr class="a"> 
+    <td>commons-digester-1.8.1.jar</td> 
+    <td>146.1 kB</td> 
+    <td>119</td> 
+    <td>100</td> 
+    <td>6</td> 
+    <td>1.2</td> 
+    <td>Yes</td> 
+    <td>No</td> 
+   </tr> 
+   <tr class="b"> 
+    <td>commons-fileupload-1.2.2.jar</td> 
+    <td>59.6 kB</td> 
+    <td>61</td> 
+    <td>44</td> 
     <td>5</td> 
+    <td>1.3</td> 
+    <td>Yes</td> 
+    <td>No</td> 
+   </tr> 
+   <tr class="a"> 
+    <td>commons-io-2.3.jar</td> 
+    <td>182.6 kB</td> 
+    <td>127</td> 
+    <td>109</td> 
+    <td>6</td> 
+    <td>1.6</td> 
+    <td>Yes</td> 
+    <td>No</td> 
+   </tr> 
+   <tr class="b"> 
+    <td>commons-jexl-1.1.jar</td> 
+    <td>132.2 kB</td> 
+    <td>107</td> 
+    <td>93</td> 
+    <td>7</td> 
+    <td>1.2</td> 
+    <td>Yes</td> 
+    <td>No</td> 
+   </tr> 
+   <tr class="a"> 
+    <td>javassist-3.8.0.GA.jar</td> 
+    <td>594 kB</td> 
+    <td>352</td> 
+    <td>333</td> 
+    <td>17</td> 
+    <td>1.2</td> 
+    <td>Yes</td> 
+    <td>No</td> 
+   </tr> 
+   <tr class="b"> 
+    <td>activation-1.1.jar</td> 
+    <td>63 kB</td> 
+    <td>50</td> 
+    <td>38</td> 
+    <td>3</td> 
+    <td>1.4</td> 
+    <td>Yes</td> 
+    <td>No</td> 
+   </tr> 
+   <tr class="a"> 
+    <td>jsr250-api-1.0.jar</td> 
+    <td>5.8 kB</td> 
+    <td>16</td> 
+    <td>11</td> 
+    <td>2</td> 
+    <td>1.5</td> 
+    <td>Yes</td> 
+    <td>No</td> 
+   </tr> 
+   <tr class="b"> 
+    <td>mail-1.4.jar</td> 
+    <td>388.9 kB</td> 
+    <td>273</td> 
+    <td>250</td> 
+    <td>12</td> 
+    <td>1.4</td> 
+    <td>Yes</td> 
+    <td>No</td> 
+   </tr> 
+   <tr class="a"> 
+    <td>jsr-275-0.9.4.jar</td> 
+    <td>186.7 kB</td> 
+    <td>139</td> 
+    <td>120</td> 
+    <td>5</td> 
+    <td>1.5</td> 
+    <td>Yes</td> 
+    <td>No</td> 
+   </tr> 
+   <tr class="b"> 
+    <td>apache-log4j-extras-1.1.jar</td> 
+    <td>346.7 kB</td> 
+    <td>253</td> 
+    <td>228</td> 
+    <td>11</td> 
+    <td>1.4</td> 
+    <td>Yes</td> 
+    <td>No</td> 
+   </tr> 
+   <tr class="a"> 
+    <td>log4j-1.2.17.jar</td> 
+    <td>489.9 kB</td> 
+    <td>353</td> 
+    <td>314</td> 
+    <td>21</td> 
+    <td>1.4</td> 
+    <td>Yes</td> 
+    <td>No</td> 
+   </tr> 
+   <tr class="b"> 
+    <td>commons-collections4-4.0.jar</td> 
+    <td>610.3 kB</td> 
+    <td>459</td> 
+    <td>431</td> 
+    <td>16</td> 
+    <td>1.5</td> 
+    <td>Yes</td> 
+    <td>No</td> 
+   </tr> 
+   <tr class="a"> 
+    <td>commons-dbcp2-2.0.1.jar</td> 
+    <td>168 kB</td> 
+    <td>79</td> 
+    <td>62</td> 
+    <td>4</td> 
+    <td>1.7</td> 
+    <td>Yes</td> 
+    <td>No</td> 
+   </tr> 
+   <tr class="b"> 
+    <td>commons-pool2-2.2.jar</td> 
+    <td>108 kB</td> 
+    <td>80</td> 
+    <td>65</td> 
+    <td>3</td> 
+    <td>1.6</td> 
+    <td>Yes</td> 
+    <td>No</td> 
+   </tr> 
+   <tr class="a"> 
+    <td>httpclient-4.4.jar</td> 
+    <td>719.3 kB</td> 
+    <td>499</td> 
+    <td>458</td> 
+    <td>24</td> 
+    <td>1.6</td> 
+    <td>Yes</td> 
+    <td>No</td> 
+   </tr> 
+   <tr class="b"> 
+    <td>httpcore-4.4.jar</td> 
+    <td>321.6 kB</td> 
+    <td>284</td> 
+    <td>254</td> 
+    <td>17</td> 
+    <td>1.6</td> 
+    <td>Yes</td> 
+    <td>No</td> 
+   </tr> 
+   <tr class="a"> 
+    <td>httpmime-4.4.jar</td> 
+    <td>40.6 kB</td> 
+    <td>40</td> 
+    <td>23</td> 
+    <td>2</td> 
+    <td>1.6</td> 
+    <td>Yes</td> 
+    <td>No</td> 
+   </tr> 
+   <tr class="b"> 
+    <td>tiles-api-2.1.4.jar</td> 
+    <td>26.7 kB</td> 
+    <td>31</td> 
+    <td>16</td> 
+    <td>4</td> 
+    <td>1.5</td> 
+    <td>Yes</td> 
+    <td>No</td> 
+   </tr> 
+   <tr class="a"> 
+    <td>tiles-core-2.1.4.jar</td> 
+    <td>136.4 kB</td> 
+    <td>138</td> 
+    <td>102</td> 
+    <td>21</td> 
+    <td>1.5</td> 
+    <td>Yes</td> 
+    <td>No</td> 
+   </tr> 
+   <tr class="b"> 
+    <td>tiles-jsp-2.1.4.jar</td> 
+    <td>55.1 kB</td> 
+    <td>57</td> 
+    <td>37</td> 
+    <td>4</td> 
+    <td>1.5</td> 
+    <td>Yes</td> 
+    <td>No</td> 
+   </tr> 
+   <tr class="a"> 
+    <td>tiles-servlet-2.1.4.jar</td> 
+    <td>53 kB</td> 
+    <td>45</td> 
+    <td>27</td> 
+    <td>4</td> 
+    <td>1.5</td> 
+    <td>Yes</td> 
+    <td>No</td> 
+   </tr> 
+   <tr class="b"> 
+    <td>xbean-spring-3.5.jar</td> 
+    <td>130.2 kB</td> 
+    <td>85</td> 
+    <td>63</td> 
+    <td>7</td> 
+    <td>1.5</td> 
+    <td>Yes</td> 
+    <td>No</td> 
+   </tr> 
+   <tr class="a"> 
+    <td>aspectjweaver-1.8.7.jar</td> 
+    <td>1.9 MB</td> 
+    <td>987</td> 
+    <td>932</td> 
+    <td>36</td> 
+    <td>1.5</td> 
+    <td>Yes</td> 
+    <td>No</td> 
+   </tr> 
+   <tr class="b"> 
+    <td>stax2-api-3.0.1.jar</td> 
+    <td>180 kB</td> 
+    <td>137</td> 
+    <td>123</td> 
+    <td>11</td> 
+    <td>1.4</td> 
+    <td>Yes</td> 
+    <td>No</td> 
+   </tr> 
+   <tr class="a"> 
+    <td>woodstox-core-asl-4.0.7.jar</td> 
+    <td>482.4 kB</td> 
+    <td>233</td> 
+    <td>202</td> 
+    <td>16</td> 
+    <td>1.4</td> 
+    <td>Yes</td> 
+    <td>No</td> 
+   </tr> 
+   <tr class="b"> 
+    <td>postgresql-9.4-1201-jdbc41.jar</td> 
+    <td>648.5 kB</td> 
+    <td>293</td> 
+    <td>258</td> 
+    <td>30</td> 
+    <td>1.7</td> 
+    <td>Yes</td> 
+    <td>No</td> 
+   </tr> 
+   <tr class="a"> 
+    <td>jcl-over-slf4j-1.7.7.jar</td> 
+    <td>16.5 kB</td> 
+    <td>23</td> 
+    <td>9</td> 
+    <td>2</td> 
+    <td>1.5</td> 
+    <td>Yes</td> 
+    <td>No</td> 
+   </tr> 
+   <tr class="b"> 
+    <td>slf4j-api-1.7.7.jar</td> 
+    <td>29.3 kB</td> 
+    <td>35</td> 
+    <td>24</td> 
+    <td>3</td> 
+    <td>1.5</td> 
+    <td>Yes</td> 
+    <td>No</td> 
+   </tr> 
+   <tr class="a"> 
+    <td>slf4j-log4j12-1.7.7.jar</td> 
+    <td>8.9 kB</td> 
+    <td>16</td> 
+    <td>6</td> 
+    <td>1</td> 
+    <td>1.5</td> 
+    <td>Yes</td> 
+    <td>No</td> 
+   </tr> 
+   <tr class="b"> 
+    <td>spring-aop-4.1.6.RELEASE.jar</td> 
+    <td>359 kB</td> 
+    <td>287</td> 
+    <td>255</td> 
+    <td>15</td> 
+    <td>1.6</td> 
+    <td>Yes</td> 
+    <td>No</td> 
+   </tr> 
+   <tr class="a"> 
+    <td>spring-aspects-4.1.9.RELEASE.jar</td> 
+    <td>56.9 kB</td> 
+    <td>58</td> 
+    <td>33</td> 
+    <td>7</td> 
+    <td>1.6</td> 
+    <td>Yes</td> 
+    <td>No</td> 
+   </tr> 
+   <tr class="b"> 
+    <td>spring-beans-4.1.9.RELEASE.jar</td> 
+    <td>712.4 kB</td> 
+    <td>440</td> 
+    <td>391</td> 
+    <td>15</td> 
+    <td>1.6</td> 
+    <td>Yes</td> 
+    <td>No</td> 
+   </tr> 
+   <tr class="a"> 
+    <td>spring-context-4.1.9.RELEASE.jar</td> 
+    <td>1 MB</td> 
+    <td>833</td> 
+    <td>721</td> 
+    <td>65</td> 
+    <td>1.6</td> 
+    <td>Yes</td> 
+    <td>No</td> 
+   </tr> 
+   <tr class="b"> 
+    <td>spring-context-support-4.1.9.RELEASE.jar</td> 
+    <td>179.3 kB</td> 
+    <td>138</td> 
+    <td>114</td> 
+    <td>13</td> 
+    <td>1.6</td> 
+    <td>Yes</td> 
+    <td>No</td> 
+   </tr> 
+   <tr class="a"> 
+    <td>spring-core-4.1.9.RELEASE.jar</td> 
+    <td>1 MB</td> 
+    <td>769</td> 
+    <td>723</td> 
+    <td>40</td> 
+    <td>1.6</td> 
+    <td>Yes</td> 
+    <td>No</td> 
+   </tr> 
+   <tr class="b"> 
+    <td>spring-expression-4.1.6.RELEASE.jar</td> 
+    <td>259 kB</td> 
+    <td>153</td> 
+    <td>141</td> 
+    <td>6</td> 
+    <td>1.6</td> 
+    <td>Yes</td> 
+    <td>No</td> 
+   </tr> 
+   <tr class="a"> 
+    <td>spring-jdbc-4.1.9.RELEASE.jar</td> 
+    <td>427.2 kB</td> 
+    <td>335</td> 
+    <td>301</td> 
+    <td>18</td> 
+    <td>1.6</td> 
+    <td>Yes</td> 
+    <td>No</td> 
+   </tr> 
+   <tr class="b"> 
+    <td>spring-tx-4.1.9.RELEASE.jar</td> 
+    <td>252.9 kB</td> 
+    <td>234</td> 
+    <td>196</td> 
+    <td>20</td> 
+    <td>1.6</td> 
+    <td>Yes</td> 
+    <td>No</td> 
+   </tr> 
+   <tr class="a"> 
+    <td>spring-web-4.1.9.RELEASE.jar</td> 
+    <td>722.3 kB</td> 
+    <td>544</td> 
+    <td>496</td> 
+    <td>35</td> 
+    <td>1.6</td> 
+    <td>Yes</td> 
+    <td>No</td> 
+   </tr> 
+   <tr class="b"> 
+    <td>spring-webmvc-4.1.9.RELEASE.jar</td> 
+    <td>786.5 kB</td> 
+    <td>487</td> 
+    <td>436</td> 
+    <td>29</td> 
+    <td>1.6</td> 
+    <td>Yes</td> 
+    <td>No</td> 
+   </tr> 
+   <tr class="a"> 
+    <td>spring-security-config-4.0.2.RELEASE.jar</td> 
+    <td>474 kB</td> 
+    <td>231</td> 
+    <td>183</td> 
+    <td>25</td> 
+    <td>1.5</td> 
+    <td>Yes</td> 
+    <td>No</td> 
+   </tr> 
+   <tr class="b"> 
+    <td>spring-security-core-4.0.2.RELEASE.jar</td> 
+    <td>358 kB</td> 
+    <td>362</td> 
+    <td>297</td> 
+    <td>44</td> 
+    <td>1.5</td> 
+    <td>Yes</td> 
+    <td>No</td> 
+   </tr> 
+   <tr class="a"> 
+    <td>spring-security-web-4.0.2.RELEASE.jar</td> 
+    <td>326 kB</td> 
+    <td>284</td> 
+    <td>240</td> 
+    <td>34</td> 
+    <td>1.5</td> 
+    <td>Yes</td> 
+    <td>No</td> 
+   </tr> 
+   <tr class="b"> 
+    <td>stax-api-1.0.1.jar</td> 
+    <td>26.5 kB</td> 
+    <td>48</td> 
+    <td>40</td> 
+    <td>5</td> 
+    <td>1.2</td> 
+    <td>Yes</td> 
+    <td>No</td> 
+   </tr> 
+   <tr class="a"> 
+    <td>serializer-2.7.2.jar</td> 
+    <td>276.4 kB</td> 
+    <td>123</td> 
+    <td>108</td> 
+    <td>3</td> 
+    <td>1.3</td> 
+    <td>Yes</td> 
+    <td>No</td> 
+   </tr> 
+   <tr class="b"> 
+    <td>xalan-2.7.2.jar</td> 
+    <td>3.2 MB</td> 
+    <td>1565</td> 
+    <td>1501</td> 
+    <td>49</td> 
+    <td>1.3</td> 
+    <td>Yes</td> 
+    <td>No</td> 
+   </tr> 
+   <tr class="a"> 
+    <td>xercesImpl-2.10.0.jar</td> 
+    <td>1.4 MB</td> 
+    <td>1031</td> 
+    <td>948</td> 
+    <td>40</td> 
+    <td>1.3</td> 
+    <td>No</td> 
+    <td>No</td> 
+   </tr> 
+   <tr class="b"> 
+    <td>xml-apis-1.4.01.jar</td> 
+    <td>220.5 kB</td> 
+    <td>391</td> 
+    <td>346</td> 
+    <td>29</td> 
+    <td>1.1</td> 
+    <td>No</td> 
+    <td>No</td> 
+   </tr> 
+   <tr class="b"> 
+    <td>61</td> 
+    <td>49 MB</td> 
+    <td>18475</td> 
+    <td>16141</td> 
+    <td>1165</td> 
+    <td>1.8</td> 
+    <td>58</td> 
     <td>1</td> 
    </tr> 
    <tr class="a"> 
-    <td>compile: 4</td> 
-    <td>compile: 510.07 kB</td> 
-    <td>compile: 273</td> 
-    <td>compile: 146</td> 
-    <td>compile: 28</td> 
+    <td>compile: 60</td> 
+    <td>compile: 46.3 MB</td> 
+    <td>compile: 17467</td> 
+    <td>compile: 15214</td> 
+    <td>compile: 1130</td> 
     <td>-</td> 
-    <td>compile: 4</td> 
+    <td>compile: 57</td> 
     <td>-</td> 
    </tr> 
    <tr class="b"> 
     <td>runtime: 1</td> 
-    <td>runtime: 2.71 MB</td> 
+    <td>runtime: 2.7 MB</td> 
     <td>runtime: 1008</td> 
     <td>runtime: 927</td> 
     <td>runtime: 35</td> 
