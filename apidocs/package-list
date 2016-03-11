@@ -13,7 +13,6 @@ ca.bc.gov.open.cpf.api.web.controller
 ca.bc.gov.open.cpf.api.web.rest
 ca.bc.gov.open.cpf.api.web.service
 ca.bc.gov.open.cpf.api.worker
-ca.bc.gov.open.cpf.api.worker.security
 ca.bc.gov.open.cpf.client.api
 ca.bc.gov.open.cpf.client.httpclient
 ca.bc.gov.open.cpf.openid
@@ -21,6 +20,7 @@ ca.bc.gov.open.cpf.plugin.api
 ca.bc.gov.open.cpf.plugin.api.log
 ca.bc.gov.open.cpf.plugin.api.security
 ca.bc.gov.open.cpf.plugin.impl
+ca.bc.gov.open.cpf.plugin.impl.geometry
 ca.bc.gov.open.cpf.plugin.impl.log
 ca.bc.gov.open.cpf.plugin.impl.module
 ca.bc.gov.open.cpf.plugin.impl.security
