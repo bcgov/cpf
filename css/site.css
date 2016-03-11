@@ -1,19 +1,21 @@
 /* You can override this file with your own styles */
-.navbar-default {
+.navbar {
   background-color: #003366;
 }
-.navbar-default .navbar-brand {
+.navbar .brand {
   color: white;
 }
 
-.navbar-default .navbar-brand:focus, .navbar-default .navbar-brand:hover {
+.navbar .brand:focus,
+.navbar .brand:hover {
     color: #dddddd;
 }
 
-.navbar-default .navbar-nav>li>a {
+.navbar .nav>li>a {
   color: white;
 }
 
-.navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > li > a:hover {
+.navbar .nav > li > a:focus,
+.navbar .nav > li > a:hover {
   color: #dddddd;
 }
