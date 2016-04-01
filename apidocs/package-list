@@ -24,7 +24,10 @@ ca.bc.gov.open.cpf.plugin.impl.geometry
 ca.bc.gov.open.cpf.plugin.impl.log
 ca.bc.gov.open.cpf.plugin.impl.module
 ca.bc.gov.open.cpf.plugin.impl.security
-ca.bc.gov.open.cpf.test.plugin
+ca.bc.gov.open.cpf.plugins.digest
+ca.bc.gov.open.cpf.plugins.geometryvalidation
+ca.bc.gov.open.cpf.plugins.maptile
+ca.bc.gov.open.cpf.plugins.test
 net.oauth
 net.oauth.client.httpclient4
 net.oauth.signature
