@@ -316,7 +316,7 @@ cd sql
      <tr class="a"> 
       <td><tt>TABLESPACE_DIR</tt></td> 
       <td><tt>/data/postgres/cpf c:\data\postgres\cpf</tt></td> 
-      <td>The directory to create the database tablespace in. The directory must exist on the **server** and the PostgreSQL or Oracle process must have write permissions on this directory.</td> 
+      <td>The directory to create the database tablespace in. The directory must exist on the server and the PostgreSQL or Oracle process must have write permissions on this directory.</td> 
      </tr> 
     </tbody> 
    </table> 
@@ -413,12 +413,12 @@ localhost:5432:*:cpf:cpf_0wn3r
  <div class="section"> 
   <h3 id="Create_a_CPF_web_application_project">Create a CPF web application project</h3> 
   <p>The CPF application can be configured to connect to different types of database and be configured or extended in other ways. Therefore instead of delivering a pre-packaged war file a maven project is created for each installation that contains the configuration for that environment.</p> 
-  <p>Create the maven project using the following maven archetype commands. Replace any values in <b>bold</b> with the correct values for your environment.</p> 
+  <p>Create the maven project using the following maven archetype commands. Replace any parameters with the correct values for your environment.</p> 
   <blockquote> 
    <p><b>NOTE:</b> Java 1.8.0 and Maven 3.3+ must be install. JAVA_HOME and M2_HOME must be set and the bin directories from both must be in the PATH.</p> 
   </blockquote> 
-  <p><b>UNIX/Mac</b> <tt>bash CPF_VERSION=**5.0.0-SNAPSHOT** cd **~/projects** mvn archetype:generate -DinteractiveMode=false -DarchetypeGroupId=ca.bc.gov.open.cpf -DarchetypeArtifactId=cpf-archetype-web-DarchetypeVersion=${CPF_VERSION} -DgroupId=**com.mycompany** -DartifactId=**cpf* -Dversion=**1.0.0-SNAPSHOT** -DmodulePrefix=**cpf** -DdatabaseVendor=**postgresql** -DdatabasePassword=**c0ncurr3n7** -DworkerPassword=**cpf_w0rk3r** -DcpfLogDirectory=**/apps/cpf/log** -DcpfDirectoryUrl=**file:///apps/cpf** -DmavenCacheDirectoryUrl=**file:///home/$USER/.m2/repository**</tt></p> 
-  <p><b>Windows</b> <tt>winbatch set CPF_VERSION=**5.0.0-SNAPSHOT** cd **%HOMEDRIVE%%HOMEPATH%\projects** mvn archetype:generate -DinteractiveMode=false -DarchetypeGroupId=ca.bc.gov.open.cpf -DarchetypeArtifactId=cpf-archetype-web -DarchetypeVersion=%CPF_VERSION% -DgroupId=**com.mycompany** -DartifactId=**cpf** -Dversion=**1.0.0-SNAPSHOT** -DmodulePrefix=**cpf** -DdatabaseVendor=**postgresql** -DdatabasePassword=**c0ncurr3n7** -DworkerPassword=**cpf_w0rk3r** -DcpfLogDirectory=**C:/apps/cpf/log** -DcpfDirectoryUrl=**file:/C:/apps/cpf** -DmavenCacheDirectoryUrl=**file:/C:/apps/cpf/repository** </tt></p> 
+  <p><b>UNIX/Mac</b> <tt>bash CPF_VERSION=5.0.0-SNAPSHOT cd ~/projects mvn archetype:generate -DinteractiveMode=false -DarchetypeGroupId=ca.bc.gov.open.cpf -DarchetypeArtifactId=cpf-archetype-web-DarchetypeVersion=${CPF_VERSION} -DgroupId=com.mycompany -DartifactId=cpf* -Dversion=1.0.0-SNAPSHOT -DmodulePrefix=cpf -DdatabaseVendor=postgresql -DdatabasePassword=c0ncurr3n7 -DworkerPassword=cpf_w0rk3r -DcpfLogDirectory=/apps/cpf/log -DcpfDirectoryUrl=file:///apps/cpf -DmavenCacheDirectoryUrl=file:///home/$USER/.m2/repository</tt></p> 
+  <p><b>Windows</b> <tt>winbatch set CPF_VERSION=5.0.0-SNAPSHOT cd %HOMEDRIVE%%HOMEPATH%\projects mvn archetype:generate -DinteractiveMode=false -DarchetypeGroupId=ca.bc.gov.open.cpf -DarchetypeArtifactId=cpf-archetype-web -DarchetypeVersion=%CPF_VERSION% -DgroupId=com.mycompany -DartifactId=cpf -Dversion=1.0.0-SNAPSHOT -DmodulePrefix=cpf -DdatabaseVendor=postgresql -DdatabasePassword=c0ncurr3n7 -DworkerPassword=cpf_w0rk3r -DcpfLogDirectory=C:/apps/cpf/log -DcpfDirectoryUrl=file:/C:/apps/cpf -DmavenCacheDirectoryUrl=file:/C:/apps/cpf/repository </tt></p> 
   <blockquote> 
    <p><b>NOTE:</b> Windows and Unix require commands to be entered on a single line. The \ or ^ character are line continuation character that treats multiple lines as a single line. Therefore you can cut and paste the above text into a command window.</p> 
   </blockquote> 
@@ -563,12 +563,12 @@ localhost:5432:*:cpf:cpf_0wn3r
    <div class="source"> 
     <pre>&lt;settings&gt;
 &nbsp; &lt;profile&gt;
-&nbsp; &nbsp;&nbsp;&lt;id&gt;&lt;b&gt;localhost&lt;/b&gt;&lt;/id&gt;
+&nbsp; &nbsp;&nbsp;&lt;id&gt;localhost&lt;/id&gt;
 &nbsp;&nbsp; &nbsp;&lt;properties&gt;
 &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&lt;!-- Include the following for Tomcat deployment --&gt;
-&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&lt;tomcatManagerUrl&gt;&lt;b&gt;http://localhost:8080/manager/text&lt;/b&gt;&lt;/tomcatManagerUrl&gt;
-&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&lt;tomcatManagerUsername&gt;&lt;b&gt;admin&lt;/b&gt;&lt;/tomcatManagerUsername&gt;
-&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&lt;tomcatManagerPassword&gt;&lt;b&gt;********&lt;/b&gt;&lt;/tomcatManagerPassword&gt;
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&lt;tomcatManagerUrl&gt;http://localhost:8080/manager/text&lt;/tomcatManagerUrl&gt;
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&lt;tomcatManagerUsername&gt;admin&lt;/tomcatManagerUsername&gt;
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&lt;tomcatManagerPassword&gt;********&lt;/tomcatManagerPassword&gt;
 &nbsp;&nbsp;&nbsp; &lt;/properties&gt;
 &nbsp; &lt;/profile&gt;
 &lt;/settings&gt;
@@ -646,7 +646,7 @@ localhost:5432:*:cpf:cpf_0wn3r
   <p>Use the following command to compile and deploy to Tomcat.</p> 
   <div class="source"> 
    <div class="source"> 
-    <pre>mvn -P tomcat8Deploy,**localhost** clean install
+    <pre>mvn -P tomcat8Deploy,localhost clean install
 </pre> 
    </div> 
   </div> 
