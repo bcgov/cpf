@@ -245,7 +245,7 @@
   <h3 id="Download_SQL_Scripts">Download SQL Scripts</h3> 
   <p>The SQL scripts to install the database can be downloaded from the <a class="externalLink" href="https://github.com/bcgov/cpf">https://github.com/bcgov/cpf</a> repository.</p> 
   <p>Use the following scripts will download the CPF Oracle and PostgreSQL scripts.</p> 
-  <p><b>UNIX/Mac</b></p> 
+  <p>** UNIX/Mac**</p> 
   <div class="source"> 
    <div class="source"> 
     <pre>svn co https://github.com/bcgov/cpf/trunk/sql
@@ -278,49 +278,47 @@ cd sql
    <p><b>NOTE:</b> Change permissions on the <tt>db.properties</tt> so that only you have read/write permissions on the file to keep the passwords secret.</p> 
   </blockquote> 
   <p>Edit the <tt>db.properties</tt> file.</p> 
-  <div class="table-responsive"> 
-   <table border="0" class="table table-condensed table-striped tabled-bordered"> 
-    <thead> 
-     <tr class="a"> 
-      <th>Property</th> 
-      <th>Example Value</th> 
-      <th>Description</th> 
-     </tr> 
-    </thead> 
-    <tbody> 
-     <tr class="b"> 
-      <td><tt>DB_HOSTNAME</tt></td> 
-      <td><tt>localhost</tt></td> 
-      <td>The hostname of the PostgreSQL sever. Not used for Oracle.</td> 
-     </tr> 
-     <tr class="a"> 
-      <td><tt>DB_PORT</tt></td> 
-      <td><tt>5432</tt></td> 
-      <td>The port of the PostgreSQL sever. Not used for Oracle.</td> 
-     </tr> 
-     <tr class="b"> 
-      <td><tt>DB_NAME</tt></td> 
-      <td><tt>cpf</tt></td> 
-      <td>The PostgreSQL database name or Oracle TNSNAME, tnsnames.ora must be configured.</td> 
-     </tr> 
-     <tr class="a"> 
-      <td><tt>CPF_PASSWORD</tt></td> 
-      <td><tt>cpf_0wn3r</tt></td> 
-      <td>The password to create the CPF database account with.</td> 
-     </tr> 
-     <tr class="b"> 
-      <td><tt>PROXY_CPF_WEB_PASSWORD</tt></td> 
-      <td><tt>c0ncurr3n7</tt></td> 
-      <td>The password to create the PROXY_CPF_WEB database account with.</td> 
-     </tr> 
-     <tr class="a"> 
-      <td><tt>TABLESPACE_DIR</tt></td> 
-      <td><tt>/data/postgres/cpf c:\data\postgres\cpf</tt></td> 
-      <td>The directory to create the database tablespace in. The directory must exist on the server and the PostgreSQL or Oracle process must have write permissions on this directory.</td> 
-     </tr> 
-    </tbody> 
-   </table> 
-  </div> 
+  <table border="0" class="bodyTable table table-striped table-hover"> 
+   <thead> 
+    <tr class="a"> 
+     <th>Property </th> 
+     <th>Example Value</th> 
+     <th>Description</th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr class="b"> 
+     <td><tt>DB_HOSTNAME</tt> </td> 
+     <td><tt>localhost</tt> </td> 
+     <td>The hostname of the PostgreSQL sever. Not used for Oracle.</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><tt>DB_PORT</tt> </td> 
+     <td><tt>5432</tt> </td> 
+     <td>The port of the PostgreSQL sever. Not used for Oracle.</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><tt>DB_NAME</tt> </td> 
+     <td><tt>cpf</tt> </td> 
+     <td>The PostgreSQL database name or Oracle TNSNAME, tnsnames.ora must be configured.</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><tt>CPF_PASSWORD</tt> </td> 
+     <td><tt>cpf_0wn3r</tt> </td> 
+     <td>The password to create the CPF database account with.</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><tt>PROXY_CPF_WEB_PASSWORD</tt></td> 
+     <td><tt>c0ncurr3n7</tt> </td> 
+     <td>The password to create the PROXY_CPF_WEB database account with.</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><tt>TABLESPACE_DIR</tt> </td> 
+     <td><tt> /data/postgres/cpf c:\data\postgres\cpf </tt></td> 
+     <td>The directory to create the database tablespace in. The directory must exist on the server and the PostgreSQL or Oracle process must have write permissions on this directory.</td> 
+    </tr> 
+   </tbody> 
+  </table> 
   <p>For PostgreSQL, to avoid needing to enter in the passwords for each SQL command create a <tt>~/.pgpass</tt> on UNIX or <tt>%APPDATA%\postgresql\pgpass.conf</tt> file on Windows. Set the permissions so that only you can read/write the <tt>pgpass.conf</tt> file. The file can be deleted after installation if required. The file should look something like this.</p> 
   <div class="source"> 
    <div class="source"> 
@@ -343,8 +341,24 @@ localhost:5432:*:cpf:cpf_0wn3r
    <li>Create all the CPF tables, sequences and indexes and grant appropriate permissions for these tables.</li> 
   </ul> 
   <p>NOTE: For Oracle you will need to know the password for the SYSTEM database account, you will be prompted to enter this in the script.</p> 
-  <p><b>Unix/Mac</b> <tt> DB_VENDOR={postgresql|oracle} cd cpf/sql/${DB_VENDOR} ./install.sh </tt></p> 
-  <p><b>Windows</b> <tt> set DB_VENDOR={postgresql|oracle} cd cpf\sql\%DB_VENDOR% install.cmd </tt></p> 
+  <p><b>Unix/Mac</b></p> 
+  <div class="source"> 
+   <div class="source"> 
+    <pre>DB_VENDOR={postgresql|oracle}
+cd cpf/sql/${DB_VENDOR}
+./install.sh
+</pre> 
+   </div> 
+  </div> 
+  <p><b>Windows</b></p> 
+  <div class="source"> 
+   <div class="source"> 
+    <pre>set DB_VENDOR={postgresql|oracle}
+cd  cpf\sql\%DB_VENDOR%
+install.cmd
+</pre> 
+   </div> 
+  </div> 
   <p>During the installation script you may be prompted for the following information.</p> 
   <ul> 
    <li>Passwords for the <tt>SYSTEM</tt> or <tt>postgres</tt> user accounts.</li> 
@@ -364,7 +378,7 @@ localhost:5432:*:cpf:cpf_0wn3r
  <div class="source"> 
   <div class="source"> 
    <pre>&lt;role rolename=&quot;manager-script&quot;/&gt;
-&lt;user username=&quot;admin&quot; password=&quot;*****&quot; roles=&quot;manager-script&quot;/&gt;
+&lt;user username=&quot;admin&quot; password=&quot;...&quot; roles=&quot;manager-script&quot;/&gt;
 </pre> 
   </div> 
  </div> 
@@ -374,41 +388,57 @@ localhost:5432:*:cpf:cpf_0wn3r
   <blockquote> 
    <p><b>NOTE</b>: This assumes the CPF home directory is /apps/cpf. Modify the commands and configuration below if a different directory is used.</p> 
   </blockquote> 
-  <div class="table-responsive"> 
-   <table border="0" class="table table-condensed table-striped tabled-bordered"> 
-    <thead> 
-     <tr class="a"> 
-      <th>Directory</th> 
-      <th>User Perms</th> 
-      <th>J2EE Server Perms</th> 
-      <th>Description</th> 
-     </tr> 
-    </thead> 
-    <tbody> 
-     <tr class="b"> 
-      <td><tt>/apps/cpf/config</tt></td> 
-      <td><tt>rw</tt></td> 
-      <td><tt>r</tt></td> 
-      <td>The directory containing the CPF configuration file for the database URL, username and password.</td> 
-     </tr> 
-     <tr class="a"> 
-      <td><tt>/apps/cpf/log</tt></td> 
-      <td><tt>r</tt></td> 
-      <td><tt>rw</tt></td> 
-      <td>The directory to store the CPF logs.</td> 
-     </tr> 
-     <tr class="b"> 
-      <td><tt>/apps/cpf/repository` or `/home/{username}/.m2/repository</tt></td> 
-      <td><tt>rw</tt></td> 
-      <td><tt>rw</tt></td> 
-      <td>The local Maven repository cache. If the J2EE server is on the developers workstation use the user's local maven repository cache.</td> 
-     </tr> 
-    </tbody> 
-   </table> 
-  </div> 
+  <table border="0" class="bodyTable table table-striped table-hover"> 
+   <thead> 
+    <tr class="a"> 
+     <th>Directory </th> 
+     <th>User Perms</th> 
+     <th>J2EE Server Perms</th> 
+     <th>Description</th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr class="b"> 
+     <td><tt>/apps/cpf/config</tt> </td> 
+     <td><tt>rw</tt> </td> 
+     <td><tt>r</tt> </td> 
+     <td>The directory containing the CPF configuration file for the database URL, username and password.</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><tt>/apps/cpf/log</tt> </td> 
+     <td><tt>r</tt> </td> 
+     <td><tt>rw</tt> </td> 
+     <td>The directory to store the CPF logs.</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><tt> /apps/cpf/repository /home/{username}/.m2/repository </tt> </td> 
+     <td><tt>rw</tt> </td> 
+     <td><tt>rw</tt> </td> 
+     <td>The local Maven repository cache. If the J2EE server is on the developers workstation use the user’s local maven repository cache.</td> 
+    </tr> 
+   </tbody> 
+  </table> 
   <p>Create the directories using the following commands. Make sure the directory permissions are set as shown in the table above.</p> 
-  <p><b>UNIX/Mac</b> <tt>bash mkdir -p /apps/cpf mkdir -p /apps/cpf/config mkdir -p /apps/cpf/log mkdir -p /apps/cpf/repository </tt></p> 
-  <p><b>Windows</b> <tt>winbatch md \apps\cpf md \apps\cpf\config md \apps\cpf\log md \apps\cpf\repository </tt></p> 
+  <p><b>UNIX/Mac</b></p> 
+  <div class="source"> 
+   <div class="source"> 
+    <pre>mkdir -p /apps/cpf
+mkdir -p /apps/cpf/config
+mkdir -p /apps/cpf/log
+mkdir -p /apps/cpf/repository
+</pre> 
+   </div> 
+  </div> 
+  <p><b>Windows</b></p> 
+  <div class="source"> 
+   <div class="source"> 
+    <pre>md \apps\cpf
+md \apps\cpf\config
+md \apps\cpf\log
+md \apps\cpf\repository
+</pre> 
+   </div> 
+  </div> 
  </div> 
  <div class="section"> 
   <h3 id="Create_a_CPF_web_application_project">Create a CPF web application project</h3> 
@@ -417,140 +447,182 @@ localhost:5432:*:cpf:cpf_0wn3r
   <blockquote> 
    <p><b>NOTE:</b> Java 1.8.0 and Maven 3.3+ must be install. JAVA_HOME and M2_HOME must be set and the bin directories from both must be in the PATH.</p> 
   </blockquote> 
-  <p><b>UNIX/Mac</b> <tt>bash CPF_VERSION=5.0.0-SNAPSHOT cd ~/projects mvn archetype:generate -DinteractiveMode=false -DarchetypeGroupId=ca.bc.gov.open.cpf -DarchetypeArtifactId=cpf-archetype-web-DarchetypeVersion=${CPF_VERSION} -DgroupId=com.mycompany -DartifactId=cpf* -Dversion=1.0.0-SNAPSHOT -DmodulePrefix=cpf -DdatabaseVendor=postgresql -DdatabasePassword=c0ncurr3n7 -DworkerPassword=cpf_w0rk3r -DcpfLogDirectory=/apps/cpf/log -DcpfDirectoryUrl=file:///apps/cpf -DmavenCacheDirectoryUrl=file:///home/$USER/.m2/repository</tt></p> 
-  <p><b>Windows</b> <tt>winbatch set CPF_VERSION=5.0.0-SNAPSHOT cd %HOMEDRIVE%%HOMEPATH%\projects mvn archetype:generate -DinteractiveMode=false -DarchetypeGroupId=ca.bc.gov.open.cpf -DarchetypeArtifactId=cpf-archetype-web -DarchetypeVersion=%CPF_VERSION% -DgroupId=com.mycompany -DartifactId=cpf -Dversion=1.0.0-SNAPSHOT -DmodulePrefix=cpf -DdatabaseVendor=postgresql -DdatabasePassword=c0ncurr3n7 -DworkerPassword=cpf_w0rk3r -DcpfLogDirectory=C:/apps/cpf/log -DcpfDirectoryUrl=file:/C:/apps/cpf -DmavenCacheDirectoryUrl=file:/C:/apps/cpf/repository </tt></p> 
+  <p><b>UNIX/Mac</b></p> 
+  <div class="source"> 
+   <div class="source"> 
+    <pre>CPF_VERSION=5.0.0-SNAPSHOT
+cd ~/projects
+mvn \
+  archetype:generate \
+  -DinteractiveMode=false \
+  -DarchetypeGroupId=ca.bc.gov.open.cpf \
+  -DarchetypeArtifactId=cpf-archetype-web \
+  -DarchetypeVersion=${CPF_VERSION} \
+  -DgroupId=com.mycompany \
+  -DartifactId=cpf* \
+  -Dversion=1.0.0-SNAPSHOT \
+  -DmodulePrefix=cpf \
+  -DdatabaseVendor=postgresql \
+  -DdatabasePassword=c0ncurr3n7 \
+  -DworkerPassword=cpf_w0rk3r \
+  -DcpfLogDirectory=/apps/cpf/log \
+  -DcpfDirectoryUrl=file:///apps/cpf \
+  -DmavenCacheDirectoryUrl=file:///apps/cpf/repository
+</pre> 
+   </div> 
+  </div> 
+  <p><b>Windows</b></p> 
+  <div class="source"> 
+   <div class="source"> 
+    <pre>set CPF_VERSION=5.0.0-SNAPSHOT
+cd %HOMEDRIVE%%HOMEPATH%\projects
+mvn ^
+  archetype:generate ^
+  -DinteractiveMode=false ^
+  -DarchetypeGroupId=ca.bc.gov.open.cpf ^
+  -DarchetypeArtifactId=cpf-archetype-web ^
+  -DarchetypeVersion=%CPF_VERSION% ^
+  -DgroupId=com.mycompany ^
+  -DartifactId=cpf ^
+  -Dversion=1.0.0-SNAPSHOT ^
+  -DmodulePrefix=cpf ^
+  -DdatabaseVendor=postgresql ^
+  -DdatabasePassword=c0ncurr3n7 ^
+  -DworkerPassword=cpf_w0rk3r ^
+  -DcpfLogDirectory=C:/apps/cpf/log ^
+  -DcpfDirectoryUrl=file:/C:/apps/cpf ^
+  -DmavenCacheDirectoryUrl=file:/C:/apps/cpf/repository
+</pre> 
+   </div> 
+  </div> 
   <blockquote> 
    <p><b>NOTE:</b> Windows and Unix require commands to be entered on a single line. The \ or ^ character are line continuation character that treats multiple lines as a single line. Therefore you can cut and paste the above text into a command window.</p> 
   </blockquote> 
-  <div class="table-responsive"> 
-   <table border="0" class="table table-condensed table-striped tabled-bordered"> 
-    <thead> 
-     <tr class="a"> 
-      <th>Parameter</th> 
-      <th>Description</th> 
-     </tr> 
-    </thead> 
-    <tbody> 
-     <tr class="b"> 
-      <td><tt>archetypeVersion</tt></td> 
-      <td>The most recent version of the CPF framework.</td> 
-     </tr> 
-     <tr class="a"> 
-      <td><tt>groupId</tt></td> 
-      <td>The maven group identifier. This should be your company name if deploying within your development environment.</td> 
-     </tr> 
-     <tr class="b"> 
-      <td><tt>artifactId</tt></td> 
-      <td>The base maven artifact identifier used for the maven modules created in the project.</td> 
-     </tr> 
-     <tr class="a"> 
-      <td><tt>version</tt></td> 
-      <td>The version identifier you’d like to give to your plug-in.</td> 
-     </tr> 
-     <tr class="b"> 
-      <td><tt>modulePrefix</tt></td> 
-      <td>The prefix to use on the web applications.</td> 
-     </tr> 
-     <tr class="a"> 
-      <td><tt>databaseVendor</tt></td> 
-      <td>The database type that the CPF uses for its data. Supported values include postgresql and oracle.</td> 
-     </tr> 
-     <tr class="b"> 
-      <td><tt>databasePassword</tt></td> 
-      <td>The password for the PROXY_CPF_WEB user (PROXY_CPF_WEB_PASSWORD from db.properties). </td> 
-     </tr> 
-     <tr class="a"> 
-      <td><tt>workerPassword</tt></td> 
-      <td>The password for the cpf_worker CPF user account. Default is cpf_w0rk3r. Change if required using the CPF admin application.</td> 
-     </tr> 
-     <tr class="b"> 
-      <td><tt>cpfLogDirectory</tt></td> 
-      <td>The directory for the CPF log files will be stored in (e.g. `/apps/cpf/log` or `C:\apps\cpf\log`).</td> 
-     </tr> 
-     <tr class="a"> 
-      <td><tt>cpfDirectoryUrl</tt></td> 
-      <td>The root directory the CPF configuration file and log files will be stored in (e.g. `file:///apps/cpf` or `file:/C:\apps\cpf`).</td> 
-     </tr> 
-     <tr class="b"> 
-      <td><tt>mavenCacheDirectoryUrl</tt></td> 
-      <td>The file URL to local Maven repository cache. <b>NOTE:</b> Must start with file:/// or file:/ and use web slashes / instead of windows slashes \. If the J2EE server is on the developers workstation use the user's local maven repository cache. Otherwise use the repository directory below the `cpfDirectory` defined above (e.g. `file:///apps/cpf/repository` or `file:///C:/apps/cpf/repository`).</td> 
-     </tr> 
-    </tbody> 
-   </table> 
-  </div> 
+  <table border="0" class="bodyTable table table-striped table-hover"> 
+   <thead> 
+    <tr class="a"> 
+     <th>Parameter </th> 
+     <th>Description</th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr class="b"> 
+     <td><tt>archetypeVersion</tt> </td> 
+     <td>The most recent version of the CPF framework.</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><tt>groupId</tt> </td> 
+     <td>The maven group identifier. This should be your company name if deploying within your development environment.</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><tt>artifactId</tt> </td> 
+     <td>The base maven artifact identifier used for the maven modules created in the project.</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><tt>version</tt> </td> 
+     <td>The version identifier you’d like to give to your plug-in.</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><tt>modulePrefix</tt> </td> 
+     <td>The prefix to use on the web applications.</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><tt>databaseVendor</tt> </td> 
+     <td>The database type that the CPF uses for its data. Supported values include postgresql and oracle.</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><tt>databasePassword</tt> </td> 
+     <td>The password for the PROXY_CPF_WEB user (PROXY_CPF_WEB_PASSWORD from db.properties). </td> 
+    </tr> 
+    <tr class="a"> 
+     <td><tt>workerPassword</tt> </td> 
+     <td>The password for the cpf_worker CPF user account. Default is cpf_w0rk3r. Change if required using the CPF admin application.</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><tt>cpfLogDirectory</tt> </td> 
+     <td>The directory for the CPF log files will be stored in (e.g. <tt>/apps/cpf/log</tt> or <tt>C:\apps\cpf\log</tt>).</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><tt>cpfDirectoryUrl</tt> </td> 
+     <td>The root directory the CPF configuration file and log files will be stored in (e.g. <tt>file:///apps/cpf</tt> or <tt>file:/C:\apps\cpf</tt>).</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><tt>mavenCacheDirectoryUrl</tt></td> 
+     <td>The file URL to local Maven repository cache. <b>NOTE:</b> Must start with <a class="externalLink" href="file:///">file:///</a> or file:/ and use web slashes / instead of windows slashes . If the J2EE server is on the developers workstation use the user’s local maven repository cache. Otherwise use the repository directory below the <tt>cpfDirectory</tt> defined above (e.g. <tt>file:///apps/cpf/repository</tt> or <tt>file:///C:/apps/cpf/repository</tt>).</td> 
+    </tr> 
+   </tbody> 
+  </table> 
   <p>The following directory structure would be created if the command were run using the parameters above.</p> 
-  <div class="table-responsive"> 
-   <table border="0" class="table table-condensed table-striped tabled-bordered"> 
-    <thead> 
-     <tr class="a"> 
-      <th>File/Directory</th> 
-      <th>Description</th> 
-     </tr> 
-    </thead> 
-    <tbody> 
-     <tr class="b"> 
-      <td><tt>cpf</tt></td> 
-      <td>The root directory of the web project.</td> 
-     </tr> 
-     <tr class="a"> 
-      <td><tt>&nbsp;&nbsp;cpf.app</tt></td> 
-      <td>The maven module for the web application containing the web services and scheduler.</td> 
-     </tr> 
-     <tr class="b"> 
-      <td><tt>&nbsp;&nbsp;&nbsp;&nbsp;pom.xml</tt></td> 
-      <td>The maven build file for the web services and scheduler.</td> 
-     </tr> 
-     <tr class="a"> 
-      <td><tt>&nbsp;&nbsp;&nbsp;&nbsp;src/main/resources</tt></td> 
-      <td>The resources to be included in the web application jar file.</td> 
-     </tr> 
-     <tr class="b"> 
-      <td><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cpf-api-properties.sf.xml</tt></td> 
-      <td>The configuration file for the CPF API components.</td> 
-     </tr> 
-     <tr class="a"> 
-      <td><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cpf-web-properties.sf.xml</tt></td> 
-      <td>The configuration file for the CPF web components.</td> 
-     </tr> 
-     <tr class="b"> 
-      <td><tt>&nbsp;&nbsp;&nbsp;&nbsp;src/main/webapp/META-INF/context.xml</tt></td> 
-      <td>Tomcat context configuration.</td> 
-     </tr> 
-     <tr class="a"> 
-      <td><tt>&nbsp;&nbsp;&nbsp;&nbsp;src/main/webapp/web.xml</tt></td> 
-      <td>The web.xml file.</td> 
-     </tr> 
-     <tr class="b"> 
-      <td><tt>&nbsp;&nbsp;cpf.worker</tt></td> 
-      <td>The maven module for the web application containing the worker.</td> 
-     </tr> 
-     <tr class="a"> 
-      <td><tt>&nbsp;&nbsp;&nbsp;&nbsp;pom.xml</tt></td> 
-      <td>The maven build file for the worker.</td> 
-     </tr> 
-     <tr class="b"> 
-      <td><tt>&nbsp;&nbsp;&nbsp;&nbsp;src/main/resources</tt></td> 
-      <td>The resources to be included in the web applications jar file.</td> 
-     </tr> 
-     <tr class="a"> 
-      <td><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cpfWorker.json</tt></td> 
-      <td>The configuration file for the worker.</td> 
-     </tr> 
-     <tr class="b"> 
-      <td><tt>&nbsp;&nbsp;&nbsp;&nbsp;src/main/webapp/META-INF/context.xml</tt></td> 
-      <td>Tomcat context configuration.</td> 
-     </tr> 
-     <tr class="a"> 
-      <td><tt>&nbsp;&nbsp;pom.xml</tt></td> 
-      <td>The parent maven build file that builds all modules.</td> 
-     </tr> 
-     <tr class="b"> 
-      <td><tt>&nbsp;&nbsp;sample-config/cpf.properties</tt></td> 
-      <td>A sample config file to copy to `/apps/cpf/conf/`.</td> 
-     </tr> 
-    </tbody> 
-   </table> 
-  </div> 
+  <table border="0" class="bodyTable table table-striped table-hover"> 
+   <thead> 
+    <tr class="a"> 
+     <th>File/Directory </th> 
+     <th>Description</th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr class="b"> 
+     <td><tt>cpf</tt> </td> 
+     <td>The root directory of the web project.</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><tt>cpf.app</tt> </td> 
+     <td>The maven module for the web application containing the web services and scheduler.</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><tt>pom.xml</tt> </td> 
+     <td>The maven build file for the web services and scheduler.</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><tt>src/main/resources</tt> </td> 
+     <td>The resources to be included in the web application jar file.</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><tt>cpf-api-properties.sf.xml</tt> </td> 
+     <td>The configuration file for the CPF API components.</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><tt>cpf-web-properties.sf.xml</tt> </td> 
+     <td>The configuration file for the CPF web components.</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><tt>src/main/webapp/META-INF/context.xml</tt></td> 
+     <td>Tomcat context configuration.</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><tt>src/main/webapp/WEB-INF/web.xml</tt> </td> 
+     <td>The web.xml file.</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><tt>cpf.worker</tt> </td> 
+     <td>The maven module for the web application containing the worker.</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><tt>pom.xml</tt> </td> 
+     <td>The maven build file for the worker.</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><tt>src/main/resources</tt> </td> 
+     <td>The resources to be included in the web applications jar file.</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><tt>cpfWorker.json</tt> </td> 
+     <td>The configuration file for the worker.</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><tt>src/main/webapp/META-INF/context.xml</tt></td> 
+     <td>Tomcat context configuration.</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><tt>pom.xml</tt> </td> 
+     <td>The parent maven build file that builds all modules.</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><tt>sample-config/cpf.properties</tt> </td> 
+     <td>A sample config file to copy to <tt>/apps/cpf/conf/</tt>.</td> 
+    </tr> 
+   </tbody> 
+  </table> 
   <blockquote> 
    <p><b>NOTE:</b> Developers shouldn’t need to edit any of these configuration files. They are populated using the parameters specified in the maven archetype. If you need to change the cpf directory location or the database vendor it’s probably easier to delete the project and create a new project using the maven archetype. All database configurations are done using runtime configuration files and plug-in configuration is stored in the database.</p> 
   </blockquote> 
@@ -568,7 +640,7 @@ localhost:5432:*:cpf:cpf_0wn3r
 &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&lt;!-- Include the following for Tomcat deployment --&gt;
 &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&lt;tomcatManagerUrl&gt;http://localhost:8080/manager/text&lt;/tomcatManagerUrl&gt;
 &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&lt;tomcatManagerUsername&gt;admin&lt;/tomcatManagerUsername&gt;
-&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&lt;tomcatManagerPassword&gt;********&lt;/tomcatManagerPassword&gt;
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&lt;tomcatManagerPassword&gt;...&lt;/tomcatManagerPassword&gt;
 &nbsp;&nbsp;&nbsp; &lt;/properties&gt;
 &nbsp; &lt;/profile&gt;
 &lt;/settings&gt;
@@ -580,38 +652,36 @@ localhost:5432:*:cpf:cpf_0wn3r
   <h3 id="CPF_Runtime_Configuration">CPF Runtime Configuration</h3> 
   <p>Any configuration that changes from one server to another is included in a runtime configuration file in the <tt>/apps/cpf/config</tt> directory on the server. No environment specific configuration is included in the compiled WAR files, i.e. the same war could be deployed to delivery, test and production environments.</p> 
   <p>Copy the <tt>sample-config/cpf.properties</tt> file to the <tt>/apps/cpf/config/cpf.properties</tt> directory on the server.</p> 
-  <div class="table-responsive"> 
-   <table border="0" class="table table-condensed table-striped tabled-bordered"> 
-    <thead> 
-     <tr class="a"> 
-      <th>Property</th> 
-      <th>Description</th> 
-     </tr> 
-    </thead> 
-    <tbody> 
-     <tr class="b"> 
-      <td><tt>cpfConfig.baseUrl</tt></td> 
-      <td>The base URL to the CPF apps web application (e.g. `http://localhost/pub/cpf`).</td> 
-     </tr> 
-     <tr class="a"> 
-      <td><tt>cpfDataSource.url</tt></td> 
-      <td>The full JDBC URL to the CPF database server (e.g. jdbc:postgresql:cpf).</td> 
-     </tr> 
-     <tr class="b"> 
-      <td><tt>cpfDataSource.password</tt></td> 
-      <td>The password for the CPF database (e.g. c0ncurr3n7).</td> 
-     </tr> 
-     <tr class="a"> 
-      <td><tt>cpfWorker.webServiceUrl</tt></td> 
-      <td>The base url to the internal web services (e.g. `http://localhost:8080/pub/cpf`). Must be the direct tomcat HTTP port and not behind an Apache reverse proxy.</td> 
-     </tr> 
-     <tr class="b"> 
-      <td><tt>cpfWorker.password</tt></td> 
-      <td>The password used in the internal web services (e.g. cpf_w0rk3r). Must be an `http://open.gov.bc.ca/cpf/SystemUser` user in the cpf.cpf_user_accounts table.</td> 
-     </tr> 
-    </tbody> 
-   </table> 
-  </div> 
+  <table border="0" class="bodyTable table table-striped table-hover"> 
+   <thead> 
+    <tr class="a"> 
+     <th>Property </th> 
+     <th>Description</th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr class="b"> 
+     <td><tt>cpfConfig.baseUrl</tt> </td> 
+     <td>The base URL to the CPF apps web application (e.g. <tt>http://localhost/pub/cpf</tt>).</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><tt>cpfDataSource.url</tt> </td> 
+     <td>The full JDBC URL to the CPF database server (e.g. jdbc:postgresql:cpf).</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><tt>cpfDataSource.password</tt> </td> 
+     <td>The password for the CPF database (e.g. c0ncurr3n7).</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><tt>cpfWorker.webServiceUrl</tt></td> 
+     <td>The base url to the internal web services (e.g. <tt>http://localhost:8080/pub/cpf</tt>). Must be the direct tomcat HTTP port and not behind an Apache reverse proxy.</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><tt>cpfWorker.password</tt> </td> 
+     <td>The password used in the internal web services (e.g. cpf_w0rk3r). Must be an <tt>http://open.gov.bc.ca/cpf/SystemUser</tt> user in the cpf.cpf_user_accounts table.</td> 
+    </tr> 
+   </tbody> 
+  </table> 
  </div> 
  <div class="section"> 
   <h3 id="External_Maven_Repository_Configuration">External Maven Repository Configuration</h3> 
@@ -628,7 +698,7 @@ localhost:5432:*:cpf:cpf_0wn3r
    <div class="source"> 
     <pre>&lt;entry
 &nbsp;&nbsp;key=&quot;mavenRepository.root&quot;
-&nbsp;&nbsp;value=&quot;&lt;b&gt;file:///apps/cpf/repository/&lt;/b&gt;&quot;
+&nbsp;&nbsp;value=&quot;file:///apps/cpf/repository/&quot;
 /&gt;
 
 &lt;entry key=&quot;mavenRepository.repositoryLocations&quot;&gt;
