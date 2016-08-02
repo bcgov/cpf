@@ -3,103 +3,58 @@
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>CPF Client REST API</title>
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-<link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.2/flatly/bootstrap.min.css" rel="stylesheet" type="text/css" />
-<style type="text/css">body{padding-top:60px}
+<title>Client REST API</title>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css" rel="stylesheet" type="text/css" />
+<link href="bootstrap-custom.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+body{padding-top:60px}
 *[id]:before {display:block;content:' ';margin-top:-75px;height:75px;visibility:hidden;}</style>
 </head>
-
 <body data-spy="scroll" data-target="#navMain" data-offset="60">
 <nav id="navMain" class="navbar navbar-default navbar-fixed-top">
 <div class="container">
 <div class="navbar-header">
 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-<span class="sr-only">Toggle navigation</span>
-<span class="icon-bar"></span>
-<span class="icon-bar"></span>
-<span class="icon-bar"></span>
-</button>
-<a class="navbar-brand" href="#">CPF Client REST API</a>
-</div>
+<span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+<div class="navbar-brand"><a href="#"><span class="navbar-brand-title">Client REST API</span></a></div></div>
 <div id="navbar" class="navbar-collapse collapse" aria-expanded="false">
-<ul class="nav navbar-nav">
-<li class="dropdown">
-<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Concurrent Processing Framework
-<span class="caret"></span>
-</a>
-<ul class="dropdown-menu" role="menu">
-<li>
-<a href="#ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework">Concurrent Processing Framework</a>
-</li>
+<ul class="nav navbar-nav"><li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Concurrent Processing Framework<span class="caret"></span></a><ul class="dropdown-menu" role="menu">
+<li><a href="#ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework">Concurrent Processing Framework</a></li>
 <li class="divider" />
-<li>
-<a href="#ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_createJobWithMultipleRequests">Create Job With Multiple Requests</a>
-</li>
-<li>
-<a href="#ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_createJobWithSingleRequest">Create Job With Single Request</a>
-</li>
-<li>
-<a href="#ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_deleteJob">Delete Job</a>
-</li>
-<li>
-<a href="#ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getAuthenticated">Get Authenticated</a>
-</li>
-<li>
-<a href="#ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getBusinessApplications">Get Business Applications</a>
-</li>
-<li>
-<a href="#ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getBusinessApplicationsInstant">Get Business Applications Instant</a>
-</li>
-<li>
-<a href="#ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getBusinessApplicationsJobs">Get Business Applications Jobs</a>
-</li>
-<li>
-<a href="#ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getBusinessApplicationsMultiple">Get Business Applications Multiple</a>
-</li>
-<li>
-<a href="#ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getBusinessApplicationsResources">Get Business Applications Resources</a>
-</li>
-<li>
-<a href="#ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getBusinessApplicationsSingle">Get Business Applications Single</a>
-</li>
-<li>
-<a href="#ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getJobs">Get Jobs</a>
-</li>
-<li>
-<a href="#ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getJobsInfo">Get Jobs Info</a>
-</li>
-<li>
-<a href="#ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getJobsResult">Get Jobs Result</a>
-</li>
-<li>
-<a href="#ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getJobsResults">Get Jobs Results</a>
-</li>
-<li>
-<a href="#ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getRoot">Get Root</a>
-</li>
+<li><a href="#ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_createJobWithMultipleRequests">Create Job With Multiple Requests</a></li>
+<li><a href="#ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_createJobWithSingleRequest">Create Job With Single Request</a></li>
+<li><a href="#ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_deleteJob">Delete Job</a></li>
+<li><a href="#ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getAuthenticated">Get Authenticated</a></li>
+<li><a href="#ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getBusinessApplications">Get Business Applications</a></li>
+<li><a href="#ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getBusinessApplicationsInstant">Get Business Applications Instant</a></li>
+<li><a href="#ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getBusinessApplicationsJobs">Get Business Applications Jobs</a></li>
+<li><a href="#ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getBusinessApplicationsMultiple">Get Business Applications Multiple</a></li>
+<li><a href="#ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getBusinessApplicationsResources">Get Business Applications Resources</a></li>
+<li><a href="#ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getBusinessApplicationsSingle">Get Business Applications Single</a></li>
+<li><a href="#ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getJobs">Get Jobs</a></li>
+<li><a href="#ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getJobsInfo">Get Jobs Info</a></li>
+<li><a href="#ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getJobsResult">Get Jobs Result</a></li>
+<li><a href="#ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getJobsResults">Get Jobs Results</a></li>
+<li><a href="#ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getRoot">Get Root</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 </nav>
-<div class="container-fluid">
-<div class="row">
-<div class="col-md-12">
-<h1>CPF Client REST API</h1>
-<div class="panel panel-default">
+<div class="container-fluid"><div class="row"><div class="col-md-12"><h1>Client REST API</h1><div class="panel panel-default">
 <div class="panel-heading">
-<a id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework"></a>
-<h2 class="panel-title" id="ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework">Concurrent Processing Framework</h2>
+<a id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework"></a><h2 class="panel-title" id="ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework">Concurrent Processing Framework</h2>
 </div>
-<div class="panel-body"><p>The Concurrent Processing Framework REST API allows client applications in Java, JavaScript or other
+<div class="panel-body">
+<p>The Concurrent Processing Framework REST API allows client applications in Java, JavaScript or other
  programming languages to query the available business applications, create jobs and download
  the results of jobs on behalf of their users.<p>
 
  <p>Most of the resources can return JSON or XML documents by appending the <code>.json</code> or <code>.xml</code>
  file format extension to the URI Templates before any query string parameters. JSON is the preferred
- format due to it's well defined mpa, list and value structure. Some resources that
+ format due to it's well defined map, list and value structure. Some resources that
  always return a specific data type will ignore the file format extension if specified.</p>
 
  <p>The CPF REST API can also be accessed directly using a web browser by not specifying a file format extension.
@@ -107,13 +62,12 @@
  is not included in the request then the HTML user interface will be displayed instead of the resources
  described in this API. The HTML user interface allows full access to the CPF without any programming
  experience required. The HTML user interface will be slightly different from the responses
- described in this API.</p>
-<div class="panel panel-primary">
+ described in this API.</p><div class="panel panel-primary">
 <div class="panel-heading">
-<a id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.createJobWithMultipleRequests"></a>
-<h3 class="panel-title" id="ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_createJobWithMultipleRequests">Create Job With Multiple Requests</h3>
+<a id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.createJobWithMultipleRequests"></a><h3 class="panel-title" id="ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_createJobWithMultipleRequests">Create Job With Multiple Requests</h3>
 </div>
-<div class="panel-body"><p>Create a new job containing multiple requests to be processed by the
+<div class="panel-body">
+<p>Construct a new new job containing multiple requests to be processed by the
  business application.</p>
 
  <p>The service parameters must be passed
@@ -128,7 +82,7 @@
 
  <p>For structured input data business applications the requests are specified
  using either a single inputData file or a single inputDataUrl can be
- specified. The file must be in the <a href="../../reference/fileFormats.html">file
+ specified. The file must be in the <a href="../../fileFormats.html">file
  format</a> specified by a single inputDataContentType. The contents of the
  file must contain one record for each request to be processed in the batch
  job. The fields of each record must contain the request parameters
@@ -147,261 +101,50 @@
 
  <p class="note">NOTE: The maximum size including all parameters and protocol overhead of a
  multi-part request is 20MB. Therefore inputDataUrl should be used instead
- of inputData where possible.</p>
-<div class="panel panel-info">
+ of inputData where possible.</p><div class="panel panel-info">
 <div class="panel-heading">
 <h4 class="panel-title">HTTP Request Methods</h4>
 </div>
 <div class="panel-body">
-<p>The resource can be accessed using the following HTTP request methods.</p>
-<ul>
-<li>POST</li>
-</ul>
-</div>
+<p>The resource can be accessed using the following HTTP request methods.</p><ul><li>POST</li></ul></div>
 </div>
 <div class="panel panel-info">
 <div class="panel-heading">
 <h4 class="panel-title">URI Templates</h4>
 </div>
 <div class="panel-body">
-<p>The URI templates define the paths that can be appended to the base URL of the service to access this resource.</p>
-<pre>/ws/apps/{businessApplicationName}/multiple</pre>
-</div>
+<p>The URI templates define the paths that can be appended to the base URL of the service to access this resource.</p><pre>/ws/apps/{businessApplicationName}/multiple</pre></div>
 </div>
 <div class="panel panel-info">
 <div class="panel-heading">
 <h4 class="panel-title">URI Template Parameters</h4>
 </div>
 <div class="panel-body">
-<p>The URI templates support the following parameters which must be replaced with values as described below.</p>
-<div class="table-responsive">
-<table class="table table-striped table-bordered">
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>{businessApplicationName}</td>
-<td>String</td>
-<td class="description">The name of the business application.</td>
-
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p>The URI templates support the following parameters which must be replaced with values as described below.</p><div class="table-responsive"><table class="table table-striped table-bordered table-condensed"><thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>{businessApplicationName}</td><td>String</td><td class="description">The name of the business application.</td>
+</tr></tbody></table></div></div>
 </div>
 <div class="panel panel-info">
 <div class="panel-heading">
 <h4 class="panel-title">Parameters</h4>
 </div>
 <div class="panel-body">
-<p>The resource supports the following parameters. For HTTP get requests these must be specified using query string parameters. For HTTP POST requests these can be specified using query string, application/x-www-form-urlencoded parameters or multipart/form-data unless otherwise specified. Array values [] can be specified by including the parameter multiple times in the request.</p>
-<div class="table-responsive">
-<table class="table table-striped table-bordered">
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Default</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>inputDataContentType</code>
-</td>
-<td>
-<code>String[]</code>
-</td>
-<td>-</td>
-<td>No</td>
-<td class="description">The MIME type of the input data specified by
- an inputData or inputDataUrl parameter.</td>
-
-</tr>
-<tr>
-<td>
-<code>inputData</code>
-</td>
-<td>
-<code>File[]</code>
-</td>
-<td>-</td>
-<td>No</td>
-<td class="description">The multi-part file containing the input data.</td>
-
-</tr>
-<tr>
-<td>
-<code>inputDataUrl</code>
-</td>
-<td>
-<code>String[]</code>
-</td>
-<td>-</td>
-<td>No</td>
-<td class="description">The http: URL to the file or resource containing input
- data.</td>
-
-</tr>
-<tr>
-<td>
-<code>srid</code>
-</td>
-<td>
-<code>String</code>
-</td>
-<td>-</td>
-<td>No</td>
-<td class="description">The coordinate system code of the projection for the input geometry.</td>
-
-</tr>
-<tr>
-<td>
-<code>resultDataContentType</code>
-</td>
-<td>
-<code>String</code>
-</td>
-<td>-</td>
-<td>No</td>
-<td class="description">The MIME type of the result data specified to
- be returned after running the request.</td>
-
-</tr>
-<tr>
-<td>
-<code>resultSrid</code>
-</td>
-<td>
-<code>int</code>
-</td>
-<td>3005</td>
-<td>No</td>
-<td class="description">The coordinate system code of the projection for the
- result geometry.</td>
-
-</tr>
-<tr>
-<td>
-<code>resultNumAxis</code>
-</td>
-<td>
-<code>int</code>
-</td>
-<td>2</td>
-<td>No</td>
-<td class="description">The number of coordinate axis in the result geometry
- (e.g. 2 for 2D or 3 for 3D).</td>
-
-</tr>
-<tr>
-<td>
-<code>resultScaleFactorXy</code>
-</td>
-<td>
-<code>int</code>
-</td>
-<td>-1</td>
-<td>No</td>
-<td class="description">The scale factor to apply the x, y coordinates.
- The scale factor is 1 / minimum unit. For example if the minimum unit was
- 1mm (0.001) the scale factor is 1000 (1 / 0.001).</td>
-
-</tr>
-<tr>
-<td>
-<code>resultScaleFactorZ</code>
-</td>
-<td>
-<code>int</code>
-</td>
-<td>-1</td>
-<td>No</td>
-<td class="description">The scale factor to apply the z coordinate. The
- scale factor is 1 / minimum unit. For example if the minimum unit was 1mm
- (0.001) the scale factor is 1000 (1 / 0.001).</td>
-
-</tr>
-<tr>
-<td>
-<code>notificationUrl</code>
-</td>
-<td>
-<code>String</code>
-</td>
-<td>-</td>
-<td>No</td>
-<td class="description">The http: URL to be notified when the job is
- completed. A copy of the Job status will be posted to process running at
- this URL.</td>
-
-</tr>
-<tr>
-<td>
-<code>notificationEmail</code>
-</td>
-<td>
-<code>String</code>
-</td>
-<td>-</td>
-<td>No</td>
-<td class="description">The email address to send the job status to when
- the job is completed.</td>
-
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p>The resource supports the following parameters. For HTTP get requests these must be specified using query string parameters. For HTTP POST requests these can be specified using query string, application/x-www-form-urlencoded parameters or multipart/form-data unless otherwise specified. Array values [] can be specified by including the parameter multiple times in the request.</p><div class="table-responsive"><table class="table table-striped table-bordered table-condensed"><thead><tr><th>Parameter</th><th>Type</th><th>Default</th><th>Required</th><th>Description</th></tr></thead><tbody /></table></div></div>
 </div>
 <div class="panel panel-info">
 <div class="panel-heading">
 <h4 class="panel-title">HTTP Status Codes</h4>
 </div>
 <div class="panel-body">
-<p>The resource will return one of the following status codes. The HTML error page may include an error message. The descriptions of the messages and the cause are described below.</p>
-<div class="table-responsive">
-<table class="table table-striped table-bordered">
-<thead>
-<tr>
-<th>HTTP Status Code</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>200</td>
-<td><p>In a client application the resource will be returned in the body of the HTTP response in the requested format. See  <a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getJobsInfo(long)"><code>getJobsInfo(long)</code></a> for the details returned.</p></td>
-</tr>
-<tr>
-<td>302</td>
-<td><p>In a web browser the user will be redirected to the <a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getJobsInfo(long)"><code>getJobsInfo(long)</code></a> page.</p></td>
-</tr>
-<tr>
-<td>500</td>
-<td><p><b>Internal Server Error</b></p><p>This error indicates that there was an unexpected error on the server. This is sometimes temporary so try again after a few minutes. The problem could also be caused by bad input data so verify all input parameters and files. If the problem persists contact the support desk with exact details of the parameters you were using.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p>The resource will return one of the following status codes. The HTML error page may include an error message. The descriptions of the messages and the cause are described below.</p><div class="table-responsive"><table class="table table-striped table-bordered table-condensed"><thead><tr><th>HTTP Status Code</th><th>Description</th></tr></thead><tbody><tr><td>200</td><td><p>In a client application the resource will be returned in the body of the HTTP response in the requested format. See  <a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework"><code>ConcurrentProcessingFramework</code></a> for the details returned.</p></td></tr><tr><td>302</td><td><p>In a web browser the user will be redirected to the <a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework"><code>ConcurrentProcessingFramework</code></a> page.</p></td></tr><tr><td>500</td><td><p><b>Internal Server Error</b></p><p>This error indicates that there was an unexpected error on the server. This is sometimes temporary so try again after a few minutes. The problem could also be caused by bad input data so verify all input parameters and files. If the problem persists contact the support desk with exact details of the parameters you were using.</p></td></tr></tbody></table></div></div>
 </div>
 </div>
 </div>
 <div class="panel panel-primary">
 <div class="panel-heading">
-<a id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.createJobWithSingleRequest"></a>
-<h3 class="panel-title" id="ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_createJobWithSingleRequest">Create Job With Single Request</h3>
+<a id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.createJobWithSingleRequest"></a><h3 class="panel-title" id="ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_createJobWithSingleRequest">Create Job With Single Request</h3>
 </div>
-<div class="panel-body"><p>Create a new job containing multiple requests to be processed by the
+<div class="panel-body">
+<p>Construct a new new job containing multiple requests to be processed by the
  business application.</p>
 
  <p>The job and request parameters for the business application must be passed
@@ -426,261 +169,50 @@
 
  <p class="note">NOTE: The maximum size including all parameters and protocol overhead of a
  multi-part request is 20MB. Therefore inputDataUrl should be used instead
- of inputData where possible for opaque data.</p>
-<div class="panel panel-info">
+ of inputData where possible for opaque data.</p><div class="panel panel-info">
 <div class="panel-heading">
 <h4 class="panel-title">HTTP Request Methods</h4>
 </div>
 <div class="panel-body">
-<p>The resource can be accessed using the following HTTP request methods.</p>
-<ul>
-<li>POST</li>
-</ul>
-</div>
+<p>The resource can be accessed using the following HTTP request methods.</p><ul><li>POST</li></ul></div>
 </div>
 <div class="panel panel-info">
 <div class="panel-heading">
 <h4 class="panel-title">URI Templates</h4>
 </div>
 <div class="panel-body">
-<p>The URI templates define the paths that can be appended to the base URL of the service to access this resource.</p>
-<pre>/ws/apps/{businessApplicationName}/single</pre>
-</div>
+<p>The URI templates define the paths that can be appended to the base URL of the service to access this resource.</p><pre>/ws/apps/{businessApplicationName}/single</pre></div>
 </div>
 <div class="panel panel-info">
 <div class="panel-heading">
 <h4 class="panel-title">URI Template Parameters</h4>
 </div>
 <div class="panel-body">
-<p>The URI templates support the following parameters which must be replaced with values as described below.</p>
-<div class="table-responsive">
-<table class="table table-striped table-bordered">
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>{businessApplicationName}</td>
-<td>String</td>
-<td class="description">The name of the business application.</td>
-
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p>The URI templates support the following parameters which must be replaced with values as described below.</p><div class="table-responsive"><table class="table table-striped table-bordered table-condensed"><thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>{businessApplicationName}</td><td>String</td><td class="description">The name of the business application.</td>
+</tr></tbody></table></div></div>
 </div>
 <div class="panel panel-info">
 <div class="panel-heading">
 <h4 class="panel-title">Parameters</h4>
 </div>
 <div class="panel-body">
-<p>The resource supports the following parameters. For HTTP get requests these must be specified using query string parameters. For HTTP POST requests these can be specified using query string, application/x-www-form-urlencoded parameters or multipart/form-data unless otherwise specified. Array values [] can be specified by including the parameter multiple times in the request.</p>
-<div class="table-responsive">
-<table class="table table-striped table-bordered">
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Default</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>inputDataContentType</code>
-</td>
-<td>
-<code>String</code>
-</td>
-<td>-</td>
-<td>No</td>
-<td class="description">The MIME type of the input data specified by
- an inputData or inputDataUrl parameter.</td>
-
-</tr>
-<tr>
-<td>
-<code>inputData</code>
-</td>
-<td>
-<code>Object</code>
-</td>
-<td>-</td>
-<td>No</td>
-<td class="description">The multi-part file containing the input data.</td>
-
-</tr>
-<tr>
-<td>
-<code>inputDataUrl</code>
-</td>
-<td>
-<code>String</code>
-</td>
-<td>-</td>
-<td>No</td>
-<td class="description">The http: URL to the file or resource containing input
- data.</td>
-
-</tr>
-<tr>
-<td>
-<code>srid</code>
-</td>
-<td>
-<code>String</code>
-</td>
-<td>-</td>
-<td>No</td>
-<td class="description">The coordinate system code of the projection for the input geometry.</td>
-
-</tr>
-<tr>
-<td>
-<code>resultDataContentType</code>
-</td>
-<td>
-<code>String</code>
-</td>
-<td>-</td>
-<td>No</td>
-<td class="description">The MIME type of the result data specified to
- be returned after running the request.</td>
-
-</tr>
-<tr>
-<td>
-<code>resultSrid</code>
-</td>
-<td>
-<code>int</code>
-</td>
-<td>3005</td>
-<td>No</td>
-<td class="description">The coordinate system code of the projection for the
- result geometry.</td>
-
-</tr>
-<tr>
-<td>
-<code>resultNumAxis</code>
-</td>
-<td>
-<code>int</code>
-</td>
-<td>2</td>
-<td>No</td>
-<td class="description">The number of coordinate axis in the result geometry
- (e.g. 2 for 2D or 3 for 3D).</td>
-
-</tr>
-<tr>
-<td>
-<code>resultScaleFactorXy</code>
-</td>
-<td>
-<code>int</code>
-</td>
-<td>-1</td>
-<td>No</td>
-<td class="description">The scale factor to apply the x, y coordinates.
- The scale factor is 1 / minimum unit. For example if the minimum unit was
- 1mm (0.001) the scale factor is 1000 (1 / 0.001).</td>
-
-</tr>
-<tr>
-<td>
-<code>resultScaleFactorZ</code>
-</td>
-<td>
-<code>int</code>
-</td>
-<td>-1</td>
-<td>No</td>
-<td class="description">The scale factor to apply the z coordinate. The
- scale factor is 1 / minimum unit. For example if the minimum unit was 1mm
- (0.001) the scale factor is 1000 (1 / 0.001).</td>
-
-</tr>
-<tr>
-<td>
-<code>notificationUrl</code>
-</td>
-<td>
-<code>String</code>
-</td>
-<td>-</td>
-<td>No</td>
-<td class="description">The http: URL to be notified when the job is
- completed. A copy of the Job status will be posted to process running at
- this URL.</td>
-
-</tr>
-<tr>
-<td>
-<code>notificationEmail</code>
-</td>
-<td>
-<code>String</code>
-</td>
-<td>-</td>
-<td>No</td>
-<td class="description">The email address to send the job status to when
- the job is completed.</td>
-
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p>The resource supports the following parameters. For HTTP get requests these must be specified using query string parameters. For HTTP POST requests these can be specified using query string, application/x-www-form-urlencoded parameters or multipart/form-data unless otherwise specified. Array values [] can be specified by including the parameter multiple times in the request.</p><div class="table-responsive"><table class="table table-striped table-bordered table-condensed"><thead><tr><th>Parameter</th><th>Type</th><th>Default</th><th>Required</th><th>Description</th></tr></thead><tbody /></table></div></div>
 </div>
 <div class="panel panel-info">
 <div class="panel-heading">
 <h4 class="panel-title">HTTP Status Codes</h4>
 </div>
 <div class="panel-body">
-<p>The resource will return one of the following status codes. The HTML error page may include an error message. The descriptions of the messages and the cause are described below.</p>
-<div class="table-responsive">
-<table class="table table-striped table-bordered">
-<thead>
-<tr>
-<th>HTTP Status Code</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>200</td>
-<td><p>In a client application the resource will be returned in the body of the HTTP response in the requested format. See  <a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getJobsInfo(long)"><code>getJobsInfo(long)</code></a> for the details returned.</p></td>
-</tr>
-<tr>
-<td>302</td>
-<td><p>In a web browser the user will be redirected to the <a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getJobsInfo(long)"><code>getJobsInfo(long)</code></a> page.</p></td>
-</tr>
-<tr>
-<td>500</td>
-<td><p><b>Internal Server Error</b></p><p>This error indicates that there was an unexpected error on the server. This is sometimes temporary so try again after a few minutes. The problem could also be caused by bad input data so verify all input parameters and files. If the problem persists contact the support desk with exact details of the parameters you were using.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p>The resource will return one of the following status codes. The HTML error page may include an error message. The descriptions of the messages and the cause are described below.</p><div class="table-responsive"><table class="table table-striped table-bordered table-condensed"><thead><tr><th>HTTP Status Code</th><th>Description</th></tr></thead><tbody><tr><td>200</td><td><p>In a client application the resource will be returned in the body of the HTTP response in the requested format. See  <a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework"><code>ConcurrentProcessingFramework</code></a> for the details returned.</p></td></tr><tr><td>302</td><td><p>In a web browser the user will be redirected to the <a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework"><code>ConcurrentProcessingFramework</code></a> page.</p></td></tr><tr><td>500</td><td><p><b>Internal Server Error</b></p><p>This error indicates that there was an unexpected error on the server. This is sometimes temporary so try again after a few minutes. The problem could also be caused by bad input data so verify all input parameters and files. If the problem persists contact the support desk with exact details of the parameters you were using.</p></td></tr></tbody></table></div></div>
 </div>
 </div>
 </div>
 <div class="panel panel-primary">
 <div class="panel-heading">
-<a id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.deleteJob"></a>
-<h3 class="panel-title" id="ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_deleteJob">Delete Job</h3>
+<a id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.deleteJob"></a><h3 class="panel-title" id="ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_deleteJob">Delete Job</h3>
 </div>
-<div class="panel-body"><p>
+<div class="panel-body">
+<p>
  Cancel the user's job. This will mark the job as cancelled and remove all requests
  and results from the job. The job will be removed after a few days.
  </p>
@@ -694,173 +226,95 @@
  If a job was submitted in error or no longer required use this method
  to cancel the job to help free resources on the system to process
  other jobs.
- </p>
-<div class="panel panel-info">
+ </p><div class="panel panel-info">
 <div class="panel-heading">
 <h4 class="panel-title">HTTP Request Methods</h4>
 </div>
 <div class="panel-body">
-<p>The resource can be accessed using the following HTTP request methods.</p>
-<ul>
-<li>DELETE</li>
-</ul>
-</div>
+<p>The resource can be accessed using the following HTTP request methods.</p><ul><li>DELETE</li></ul></div>
 </div>
 <div class="panel panel-info">
 <div class="panel-heading">
 <h4 class="panel-title">URI Templates</h4>
 </div>
 <div class="panel-body">
-<p>The URI templates define the paths that can be appended to the base URL of the service to access this resource.</p>
-<pre>/ws/jobs/{batchJobId}</pre>
-</div>
+<p>The URI templates define the paths that can be appended to the base URL of the service to access this resource.</p><pre>/ws/jobs/{batchJobId}</pre></div>
 </div>
 <div class="panel panel-info">
 <div class="panel-heading">
 <h4 class="panel-title">URI Template Parameters</h4>
 </div>
 <div class="panel-body">
-<p>The URI templates support the following parameters which must be replaced with values as described below.</p>
-<div class="table-responsive">
-<table class="table table-striped table-bordered">
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>{batchJobId}</td>
-<td>long</td>
-<td class="description">The job identifier.</td>
-
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p>The URI templates support the following parameters which must be replaced with values as described below.</p><div class="table-responsive"><table class="table table-striped table-bordered table-condensed"><thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>{batchJobId}</td><td>Long</td><td class="description">The job identifier.</td>
+</tr></tbody></table></div></div>
 </div>
 <div class="panel panel-info">
 <div class="panel-heading">
 <h4 class="panel-title">HTTP Status Codes</h4>
 </div>
 <div class="panel-body">
-<p>The resource will return one of the following status codes. The HTML error page may include an error message. The descriptions of the messages and the cause are described below.</p>
-<div class="table-responsive">
-<table class="table table-striped table-bordered">
-<thead>
-<tr>
-<th>HTTP Status Code</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>200
-</td>
-<td><p>
+<p>The resource will return one of the following status codes. The HTML error page may include an error message. The descriptions of the messages and the cause are described below.</p><div class="table-responsive"><table class="table table-striped table-bordered table-condensed"><thead><tr><th>HTTP Status Code</th><th>Description</th></tr></thead><tbody><tr><td>200
+</td><td><p>
  <b>OK</b>
  </p>
  <p>
  If the job was deleted an empty response will be returned.
- </p></td>
-</tr>
-<tr>
-<td>404
-</td>
-<td><p>
+ </p></td></tr><tr><td>404
+</td><td><p>
  <b>Not Found</b>
  </p>
  <p>
  If the job does not exist, has been deleted, or was owned by another
  user.
- </p></td>
-</tr>
-<tr>
-<td>500</td>
-<td><p><b>Internal Server Error</b></p><p>This error indicates that there was an unexpected error on the server. This is sometimes temporary so try again after a few minutes. The problem could also be caused by bad input data so verify all input parameters and files. If the problem persists contact the support desk with exact details of the parameters you were using.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+ </p></td></tr><tr><td>500</td><td><p><b>Internal Server Error</b></p><p>This error indicates that there was an unexpected error on the server. This is sometimes temporary so try again after a few minutes. The problem could also be caused by bad input data so verify all input parameters and files. If the problem persists contact the support desk with exact details of the parameters you were using.</p></td></tr></tbody></table></div></div>
 </div>
 </div>
 </div>
 <div class="panel panel-primary">
 <div class="panel-heading">
-<a id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getAuthenticated"></a>
-<h3 class="panel-title" id="ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getAuthenticated">Get Authenticated</h3>
+<a id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getAuthenticated"></a><h3 class="panel-title" id="ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getAuthenticated">Get Authenticated</h3>
 </div>
-<div class="panel-body"><p>Check that a user is authenticated. This can be used by JavaScript applications to force
+<div class="panel-body">
+<p>Check that a user is authenticated. This can be used by JavaScript applications to force
  a login page to be displayed. Returns a map with authenticated=true if the user
  is authenticated. Response is undefined if the user is not authenticated as the authentication
- mechanism will not allow access to the resource.</p>
-<div class="panel panel-info">
+ mechanism will not allow access to the resource.</p><div class="panel panel-info">
 <div class="panel-heading">
 <h4 class="panel-title">HTTP Request Methods</h4>
 </div>
 <div class="panel-body">
-<p>The resource can be accessed using the following HTTP request methods.</p>
-<ul>
-<li>GET</li>
-</ul>
-</div>
+<p>The resource can be accessed using the following HTTP request methods.</p><ul><li>GET</li></ul></div>
 </div>
 <div class="panel panel-info">
 <div class="panel-heading">
 <h4 class="panel-title">URI Templates</h4>
 </div>
 <div class="panel-body">
-<p>The URI templates define the paths that can be appended to the base URL of the service to access this resource.</p>
-<pre>/ws/authenticated</pre>
-</div>
+<p>The URI templates define the paths that can be appended to the base URL of the service to access this resource.</p><pre>/ws/authenticated</pre></div>
 </div>
 <div class="panel panel-info">
 <div class="panel-heading">
 <h4 class="panel-title">HTTP Status Codes</h4>
 </div>
 <div class="panel-body">
-<p>The resource will return one of the following status codes. The HTML error page may include an error message. The descriptions of the messages and the cause are described below.</p>
-<div class="table-responsive">
-<table class="table table-striped table-bordered">
-<thead>
-<tr>
-<th>HTTP Status Code</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>200</td>
-<td><p>The resource will be returned in the body of the HTTP response in the requested format.</p></td>
-</tr>
-<tr>
-<td>500</td>
-<td><p><b>Internal Server Error</b></p><p>This error indicates that there was an unexpected error on the server. This is sometimes temporary so try again after a few minutes. The problem could also be caused by bad input data so verify all input parameters and files. If the problem persists contact the support desk with exact details of the parameters you were using.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p>The resource will return one of the following status codes. The HTML error page may include an error message. The descriptions of the messages and the cause are described below.</p><div class="table-responsive"><table class="table table-striped table-bordered table-condensed"><thead><tr><th>HTTP Status Code</th><th>Description</th></tr></thead><tbody><tr><td>200</td><td><p>The resource will be returned in the body of the HTTP response in the requested format.</p></td></tr><tr><td>500</td><td><p><b>Internal Server Error</b></p><p>This error indicates that there was an unexpected error on the server. This is sometimes temporary so try again after a few minutes. The problem could also be caused by bad input data so verify all input parameters and files. If the problem persists contact the support desk with exact details of the parameters you were using.</p></td></tr></tbody></table></div></div>
 </div>
 </div>
 </div>
 <div class="panel panel-primary">
 <div class="panel-heading">
-<a id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplications"></a>
-<h3 class="panel-title" id="ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getBusinessApplications">Get Business Applications</h3>
+<a id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplications"></a><h3 class="panel-title" id="ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getBusinessApplications">Get Business Applications</h3>
 </div>
-<div class="panel-body"><p>Get the list of links to the
+<div class="panel-body">
+<p>Get the list of links to the
  <a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplicationsResources">Get Business Applications Resources</a>
  resource for each business application the user is authorized to access.</p>
 
- <p>The method returns a <a href="../../reference/resourceDescription.html">Resource Description</a> document. Each child resource supports following custom attributes.</a>
+ <p>The method returns a <a href="../../resourceDescription.html">Resource Description</a> document. Each child resource supports following custom attributes.</a>
 
  <div class="table-responsive">
-   <table class="table table-striped table-bordered">
+   <table class="table table-condensed table-striped tabled-bordered">
+     <caption>Business Application Fields</caption>
      <thead>
        <tr>
          <th>Attribute</th>
@@ -874,63 +328,35 @@
        </tr>
      </tbody>
    </table>
- </div>
-<div class="panel panel-info">
+ </div><div class="panel panel-info">
 <div class="panel-heading">
 <h4 class="panel-title">HTTP Request Methods</h4>
 </div>
 <div class="panel-body">
-<p>The resource can be accessed using the following HTTP request methods.</p>
-<ul>
-<li>GET</li>
-</ul>
-</div>
+<p>The resource can be accessed using the following HTTP request methods.</p><ul><li>GET</li></ul></div>
 </div>
 <div class="panel panel-info">
 <div class="panel-heading">
 <h4 class="panel-title">URI Templates</h4>
 </div>
 <div class="panel-body">
-<p>The URI templates define the paths that can be appended to the base URL of the service to access this resource.</p>
-<pre>/ws/apps</pre>
-</div>
+<p>The URI templates define the paths that can be appended to the base URL of the service to access this resource.</p><pre>/ws/apps</pre></div>
 </div>
 <div class="panel panel-info">
 <div class="panel-heading">
 <h4 class="panel-title">HTTP Status Codes</h4>
 </div>
 <div class="panel-body">
-<p>The resource will return one of the following status codes. The HTML error page may include an error message. The descriptions of the messages and the cause are described below.</p>
-<div class="table-responsive">
-<table class="table table-striped table-bordered">
-<thead>
-<tr>
-<th>HTTP Status Code</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>200</td>
-<td><p>The resource will be returned in the body of the HTTP response in the requested format.</p></td>
-</tr>
-<tr>
-<td>500</td>
-<td><p><b>Internal Server Error</b></p><p>This error indicates that there was an unexpected error on the server. This is sometimes temporary so try again after a few minutes. The problem could also be caused by bad input data so verify all input parameters and files. If the problem persists contact the support desk with exact details of the parameters you were using.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p>The resource will return one of the following status codes. The HTML error page may include an error message. The descriptions of the messages and the cause are described below.</p><div class="table-responsive"><table class="table table-striped table-bordered table-condensed"><thead><tr><th>HTTP Status Code</th><th>Description</th></tr></thead><tbody><tr><td>200</td><td><p>The resource will be returned in the body of the HTTP response in the requested format.</p></td></tr><tr><td>500</td><td><p><b>Internal Server Error</b></p><p>This error indicates that there was an unexpected error on the server. This is sometimes temporary so try again after a few minutes. The problem could also be caused by bad input data so verify all input parameters and files. If the problem persists contact the support desk with exact details of the parameters you were using.</p></td></tr></tbody></table></div></div>
 </div>
 </div>
 </div>
 <div class="panel panel-primary">
 <div class="panel-heading">
-<a id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplicationsInstant"></a>
-<h3 class="panel-title" id="ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getBusinessApplicationsInstant">Get Business Applications Instant</h3>
+<a id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplicationsInstant"></a><h3 class="panel-title" id="ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getBusinessApplicationsInstant">Get Business Applications Instant</h3>
 </div>
-<div class="panel-body"><p>The instant resource has the two modes described below, the specification mode and the
+<div class="panel-body">
+<p>The instant resource has the two modes described below, the specification mode and the
  execute instant request mode. If the <code>format</code> parameter is not included or the
  <code>specification</code> parameter equals <code>true</code> then the specification mode
  is enabled, otherwise the execute instant request mode is enabled.</p>
@@ -939,11 +365,12 @@
 
  <p>Get the specification of the execute instant request mode of this service.</p>
 
- <p>The method returns a <a href="../../reference/resourceDescription.html">Resource Description</a> document with the following additional fields
+ <p>The method returns a <a href="../../resourceDescription.html">Resource Description</a> document with the following additional fields
  which are the parameters to the execute instant request mode.</a>.</p>
 
  <div class="table-responsive">
-   <table class="table table-striped table-bordered">
+   <table class="table table-condensed table-striped tabled-bordered">
+     <caption>Business Application Instant Fields</caption>
      <thead>
        <tr>
          <th>Attribute</th>
@@ -976,7 +403,8 @@
          <td><p>The array of parameters that can be passed to the service. Each parameter is an object
          containing the following fields.</p>
            <div class="table-responsive">
-             <table class="table table-striped table-bordered">
+             <table class="table table-condensed table-striped tabled-bordered">
+               <caption>Parameters</caption>
                <thead>
                  <tr>
                    <th>Attribute</th>
@@ -990,7 +418,7 @@
                  </tr>
                  <tr>
                    <td>type</td>
-                   <td>The <a href="../../reference/dataTypes.html">data type</a> of the parameter.</td>
+                   <td>The <a href="../../dataTypes.html">data type</a> of the parameter.</td>
                  </tr>
                  <tr>
                    <td>description</td>
@@ -1019,7 +447,7 @@
        </tr>
        <tr>
          <td>perRequestInputData</td>
-         <td>Boolean flag indicating that the business application accepts <a href="../../reference/opaqueData.html">opaque data</a> (true) or <a href="../../reference/structuredData.html">structured data</a> (false).</td>
+         <td>Boolean flag indicating that the business application accepts <a href="../../opaqueData.html">opaque data</a> (true) or <a href="../../structuredData.html">structured data</a> (false).</td>
        </tr>
        <tr>
          <td>resultDataContentTypes</td>
@@ -1027,7 +455,7 @@
        </tr>
        <tr>
          <td>perRequestResultData</td>
-         <td>Boolean flag indicating that the business application returns <a href="../../reference/opaqueData.html">opaque data</a> (true) or <a href="../../reference/structuredData.html">structured data</a> (false).</td>
+         <td>Boolean flag indicating that the business application returns <a href="../../opaqueData.html">opaque data</a> (true) or <a href="../../structuredData.html">structured data</a> (false).</td>
        </tr>
      </tbody>
    </table>
@@ -1046,220 +474,58 @@
  application has additional job and request parameters. Invoke the specification mode of this
  resource should be consulted to get the full list of supported parameters. </p>
 
- <p class="note">NOTE: The instant resource does not support opaque input data.</p>
-<div class="panel panel-info">
+ <p class="note">NOTE: The instant resource does not support opaque input data.</p><div class="panel panel-info">
 <div class="panel-heading">
 <h4 class="panel-title">HTTP Request Methods</h4>
 </div>
 <div class="panel-body">
-<p>The resource can be accessed using the following HTTP request methods.</p>
-<ul>
-<li>GET</li>
-<li>POST</li>
-</ul>
-</div>
+<p>The resource can be accessed using the following HTTP request methods.</p><ul><li>GET</li><li>POST</li></ul></div>
 </div>
 <div class="panel panel-info">
 <div class="panel-heading">
 <h4 class="panel-title">URI Templates</h4>
 </div>
 <div class="panel-body">
-<p>The URI templates define the paths that can be appended to the base URL of the service to access this resource.</p>
-<pre>/ws/apps/{businessApplicationName}/instant</pre>
-</div>
+<p>The URI templates define the paths that can be appended to the base URL of the service to access this resource.</p><pre>/ws/apps/{businessApplicationName}/instant</pre></div>
 </div>
 <div class="panel panel-info">
 <div class="panel-heading">
 <h4 class="panel-title">URI Template Parameters</h4>
 </div>
 <div class="panel-body">
-<p>The URI templates support the following parameters which must be replaced with values as described below.</p>
-<div class="table-responsive">
-<table class="table table-striped table-bordered">
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>{businessApplicationName}</td>
-<td>String</td>
-<td class="description">The name of the business application.</td>
-
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p>The URI templates support the following parameters which must be replaced with values as described below.</p><div class="table-responsive"><table class="table table-striped table-bordered table-condensed"><thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>{businessApplicationName}</td><td>String</td><td class="description">The name of the business application.</td>
+</tr></tbody></table></div></div>
 </div>
 <div class="panel panel-info">
 <div class="panel-heading">
 <h4 class="panel-title">Parameters</h4>
 </div>
 <div class="panel-body">
-<p>The resource supports the following parameters. For HTTP get requests these must be specified using query string parameters. For HTTP POST requests these can be specified using query string, application/x-www-form-urlencoded parameters or multipart/form-data unless otherwise specified. Array values [] can be specified by including the parameter multiple times in the request.</p>
-<div class="table-responsive">
-<table class="table table-striped table-bordered">
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Default</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<code>specification</code>
-</td>
-<td>
-<code>boolean</code>
-</td>
-<td>false</td>
-<td>Yes</td>
-<td class="description" />
-
-</tr>
-<tr>
-<td>
-<code>srid</code>
-</td>
-<td>
-<code>String</code>
-</td>
-<td>-</td>
-<td>No</td>
-<td class="description">The coordinate system code of the projection for the input geometry.</td>
-
-</tr>
-<tr>
-<td>
-<code>format</code>
-</td>
-<td>
-<code>String</code>
-</td>
-<td>-</td>
-<td>Yes</td>
-<td class="description">The MIME type of the result data specified to
- be returned after running the request.</td>
-
-</tr>
-<tr>
-<td>
-<code>resultSrid</code>
-</td>
-<td>
-<code>int</code>
-</td>
-<td>3005</td>
-<td>No</td>
-<td class="description">The coordinate system code of the projection for the
- result geometry.</td>
-
-</tr>
-<tr>
-<td>
-<code>resultNumAxis</code>
-</td>
-<td>
-<code>int</code>
-</td>
-<td>2</td>
-<td>No</td>
-<td class="description">The number of coordinate axis in the result geometry
- (e.g. 2 for 2D or 3 for 3D).</td>
-
-</tr>
-<tr>
-<td>
-<code>resultScaleFactorXy</code>
-</td>
-<td>
-<code>int</code>
-</td>
-<td>-1</td>
-<td>No</td>
-<td class="description">The scale factor to apply the x, y coordinates.
- The scale factor is 1 / minimum unit. For example if the minimum unit was
- 1mm (0.001) the scale factor is 1000 (1 / 0.001).</td>
-
-</tr>
-<tr>
-<td>
-<code>resultScaleFactorZ</code>
-</td>
-<td>
-<code>int</code>
-</td>
-<td>-1</td>
-<td>No</td>
-<td class="description">The scale factor to apply the z coordinate. The
- scale factor is 1 / minimum unit. For example if the minimum unit was 1mm
- (0.001) the scale factor is 1000 (1 / 0.001).</td>
-
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p>The resource supports the following parameters. For HTTP get requests these must be specified using query string parameters. For HTTP POST requests these can be specified using query string, application/x-www-form-urlencoded parameters or multipart/form-data unless otherwise specified. Array values [] can be specified by including the parameter multiple times in the request.</p><div class="table-responsive"><table class="table table-striped table-bordered table-condensed"><thead><tr><th>Parameter</th><th>Type</th><th>Default</th><th>Required</th><th>Description</th></tr></thead><tbody /></table></div></div>
 </div>
 <div class="panel panel-info">
 <div class="panel-heading">
 <h4 class="panel-title">HTTP Status Codes</h4>
 </div>
 <div class="panel-body">
-<p>The resource will return one of the following status codes. The HTML error page may include an error message. The descriptions of the messages and the cause are described below.</p>
-<div class="table-responsive">
-<table class="table table-striped table-bordered">
-<thead>
-<tr>
-<th>HTTP Status Code</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>200</td>
-<td><p>The resource will be returned in the body of the HTTP response in the requested format.</p></td>
-</tr>
-<tr>
-<td>403</td>
-<td><p>If the user does not have permission for this resource on the business application.</p></td>
-</tr>
-<tr>
-<td>404</td>
-<td><p>If the business application does not exist, or is not enabled.</p></td>
-</tr>
-<tr>
-<td>500</td>
-<td><p><b>Internal Server Error</b></p><p>This error indicates that there was an unexpected error on the server. This is sometimes temporary so try again after a few minutes. The problem could also be caused by bad input data so verify all input parameters and files. If the problem persists contact the support desk with exact details of the parameters you were using.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p>The resource will return one of the following status codes. The HTML error page may include an error message. The descriptions of the messages and the cause are described below.</p><div class="table-responsive"><table class="table table-striped table-bordered table-condensed"><thead><tr><th>HTTP Status Code</th><th>Description</th></tr></thead><tbody><tr><td>200</td><td><p>The resource will be returned in the body of the HTTP response in the requested format.</p></td></tr><tr><td>403</td><td><p>If the user does not have permission for this resource on the business application.</p></td></tr><tr><td>404</td><td><p>If the business application does not exist, or is not enabled.</p></td></tr><tr><td>500</td><td><p><b>Internal Server Error</b></p><p>This error indicates that there was an unexpected error on the server. This is sometimes temporary so try again after a few minutes. The problem could also be caused by bad input data so verify all input parameters and files. If the problem persists contact the support desk with exact details of the parameters you were using.</p></td></tr></tbody></table></div></div>
 </div>
 </div>
 </div>
 <div class="panel panel-primary">
 <div class="panel-heading">
-<a id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplicationsJobs"></a>
-<h3 class="panel-title" id="ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getBusinessApplicationsJobs">Get Business Applications Jobs</h3>
+<a id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplicationsJobs"></a><h3 class="panel-title" id="ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getBusinessApplicationsJobs">Get Business Applications Jobs</h3>
 </div>
-<div class="panel-body"><p>Get the list of links to the
+<div class="panel-body">
+<p>Get the list of links to the
  <a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getJobsInfo">Get Jobs Info</a>
  resource for each of the user's jobs for the business application.</p>
 
- <p>The method returns a <a href="../../reference/resourceDescription.html">Resource Description</a> document. Each child resource supports following custom attributes.</a>
+ <p>The method returns a <a href="../../resourceDescription.html">Resource Description</a> document. Each child resource supports following custom attributes.</a>
 
  <div class="table-responsive">
-   <table class="table table-striped table-bordered">
+   <table class="table table-condensed table-striped tabled-bordered">
+     <caption>Job Fields</caption>
      <thead>
        <tr>
          <th>Attribute</th>
@@ -1285,99 +551,53 @@
        </tr>
      </tbody>
    </table>
- </div>
-<div class="panel panel-info">
+ </div><div class="panel panel-info">
 <div class="panel-heading">
 <h4 class="panel-title">HTTP Request Methods</h4>
 </div>
 <div class="panel-body">
-<p>The resource can be accessed using the following HTTP request methods.</p>
-<ul>
-<li>GET</li>
-</ul>
-</div>
+<p>The resource can be accessed using the following HTTP request methods.</p><ul><li>GET</li></ul></div>
 </div>
 <div class="panel panel-info">
 <div class="panel-heading">
 <h4 class="panel-title">URI Templates</h4>
 </div>
 <div class="panel-body">
-<p>The URI templates define the paths that can be appended to the base URL of the service to access this resource.</p>
-<pre>/ws/apps/{businessApplicationName}/jobs</pre>
-</div>
+<p>The URI templates define the paths that can be appended to the base URL of the service to access this resource.</p><pre>/ws/apps/{businessApplicationName}/jobs</pre></div>
 </div>
 <div class="panel panel-info">
 <div class="panel-heading">
 <h4 class="panel-title">URI Template Parameters</h4>
 </div>
 <div class="panel-body">
-<p>The URI templates support the following parameters which must be replaced with values as described below.</p>
-<div class="table-responsive">
-<table class="table table-striped table-bordered">
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>{businessApplicationName}</td>
-<td>String</td>
-<td class="description">The name of the business application.</td>
-
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p>The URI templates support the following parameters which must be replaced with values as described below.</p><div class="table-responsive"><table class="table table-striped table-bordered table-condensed"><thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>{businessApplicationName}</td><td>String</td><td class="description">The name of the business application.</td>
+</tr></tbody></table></div></div>
 </div>
 <div class="panel panel-info">
 <div class="panel-heading">
 <h4 class="panel-title">HTTP Status Codes</h4>
 </div>
 <div class="panel-body">
-<p>The resource will return one of the following status codes. The HTML error page may include an error message. The descriptions of the messages and the cause are described below.</p>
-<div class="table-responsive">
-<table class="table table-striped table-bordered">
-<thead>
-<tr>
-<th>HTTP Status Code</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>200</td>
-<td><p>The resource will be returned in the body of the HTTP response in the requested format.</p></td>
-</tr>
-<tr>
-<td>500</td>
-<td><p><b>Internal Server Error</b></p><p>This error indicates that there was an unexpected error on the server. This is sometimes temporary so try again after a few minutes. The problem could also be caused by bad input data so verify all input parameters and files. If the problem persists contact the support desk with exact details of the parameters you were using.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p>The resource will return one of the following status codes. The HTML error page may include an error message. The descriptions of the messages and the cause are described below.</p><div class="table-responsive"><table class="table table-striped table-bordered table-condensed"><thead><tr><th>HTTP Status Code</th><th>Description</th></tr></thead><tbody><tr><td>200</td><td><p>The resource will be returned in the body of the HTTP response in the requested format.</p></td></tr><tr><td>500</td><td><p><b>Internal Server Error</b></p><p>This error indicates that there was an unexpected error on the server. This is sometimes temporary so try again after a few minutes. The problem could also be caused by bad input data so verify all input parameters and files. If the problem persists contact the support desk with exact details of the parameters you were using.</p></td></tr></tbody></table></div></div>
 </div>
 </div>
 </div>
 <div class="panel panel-primary">
 <div class="panel-heading">
-<a id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplicationsMultiple"></a>
-<h3 class="panel-title" id="ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getBusinessApplicationsMultiple">Get Business Applications Multiple</h3>
+<a id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplicationsMultiple"></a><h3 class="panel-title" id="ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getBusinessApplicationsMultiple">Get Business Applications Multiple</h3>
 </div>
-<div class="panel-body"><p>Get the specification of the
+<div class="panel-body">
+<p>Get the specification of the
  <a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.createJobWithMultipleRequests">Create Job With Multiple Requests</a> service.</p>
 
- <p>The method returns a <a href="../../reference/resourceDescription.html">Resource Description</a> document with the following additional fields
+ <p>The method returns a <a href="../../resourceDescription.html">Resource Description</a> document with the following additional fields
  which are the parameters to the
  <a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.createJobWithMultipleRequests">Create Job With Multiple Requests</a>
  service.</a>.</p>
 
  <div class="table-responsive">
-   <table class="table table-striped table-bordered">
+   <table class="table table-condensed table-striped tabled-bordered">
+     <caption>Business Application Fields</caption>
      <thead>
        <tr>
          <th>Attribute</th>
@@ -1409,8 +629,9 @@
          <td>parameters</td>
          <td><p>The array of parameters that can be passed to the service. Each parameter is an object
          containing the following fields.</p>
-           <div class="table-responsive">
-             <table class="table table-striped table-bordered">
+ <div class="table-responsive">
+   <table class="table table-condensed table-striped tabled-bordered">
+     <caption>Parameters</caption>
                <thead>
                  <tr>
                    <th>Attribute</th>
@@ -1424,7 +645,7 @@
                  </tr>
                  <tr>
                    <td>type</td>
-                   <td>The <a href="../../reference/dataTypes.html">data type</a> of the parameter.</td>
+                   <td>The <a href="../../dataTypes.html">data type</a> of the parameter.</td>
                  </tr>
                  <tr>
                    <td>description</td>
@@ -1453,7 +674,7 @@
        </tr>
        <tr>
          <td>perRequestInputData</td>
-         <td>Boolean flag indicating that the business application accepts <a href="../../reference/opaqueData.html">opaque data</a> (true) or <a href="../../reference/structuredData.html">structured data</a> (false).</td>
+         <td>Boolean flag indicating that the business application accepts <a href="../../opaqueData.html">opaque data</a> (true) or <a href="../../structuredData.html">structured data</a> (false).</td>
        </tr>
        <tr>
          <td>resultDataContentTypes</td>
@@ -1461,206 +682,97 @@
        </tr>
        <tr>
          <td>perRequestResultData</td>
-         <td>Boolean flag indicating that the business application returns <a href="../../reference/opaqueData.html">opaque data</a> (true) or <a href="../../reference/structuredData.html">structured data</a> (false).</td>
+         <td>Boolean flag indicating that the business application returns <a href="../../opaqueData.html">opaque data</a> (true) or <a href="../../structuredData.html">structured data</a> (false).</td>
        </tr>
      </tbody>
    </table>
- </div>
-<div class="panel panel-info">
+ </div><div class="panel panel-info">
 <div class="panel-heading">
 <h4 class="panel-title">HTTP Request Methods</h4>
 </div>
 <div class="panel-body">
-<p>The resource can be accessed using the following HTTP request methods.</p>
-<ul>
-<li>GET</li>
-</ul>
-</div>
+<p>The resource can be accessed using the following HTTP request methods.</p><ul><li>GET</li></ul></div>
 </div>
 <div class="panel panel-info">
 <div class="panel-heading">
 <h4 class="panel-title">URI Templates</h4>
 </div>
 <div class="panel-body">
-<p>The URI templates define the paths that can be appended to the base URL of the service to access this resource.</p>
-<pre>/ws/apps/{businessApplicationName}/multiple</pre>
-</div>
+<p>The URI templates define the paths that can be appended to the base URL of the service to access this resource.</p><pre>/ws/apps/{businessApplicationName}/multiple</pre></div>
 </div>
 <div class="panel panel-info">
 <div class="panel-heading">
 <h4 class="panel-title">URI Template Parameters</h4>
 </div>
 <div class="panel-body">
-<p>The URI templates support the following parameters which must be replaced with values as described below.</p>
-<div class="table-responsive">
-<table class="table table-striped table-bordered">
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>{businessApplicationName}</td>
-<td>String</td>
-<td class="description">The name of the business application.</td>
-
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p>The URI templates support the following parameters which must be replaced with values as described below.</p><div class="table-responsive"><table class="table table-striped table-bordered table-condensed"><thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>{businessApplicationName}</td><td>String</td><td class="description">The name of the business application.</td>
+</tr></tbody></table></div></div>
 </div>
 <div class="panel panel-info">
 <div class="panel-heading">
 <h4 class="panel-title">HTTP Status Codes</h4>
 </div>
 <div class="panel-body">
-<p>The resource will return one of the following status codes. The HTML error page may include an error message. The descriptions of the messages and the cause are described below.</p>
-<div class="table-responsive">
-<table class="table table-striped table-bordered">
-<thead>
-<tr>
-<th>HTTP Status Code</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>200</td>
-<td><p>The resource will be returned in the body of the HTTP response in the requested format.</p></td>
-</tr>
-<tr>
-<td>403</td>
-<td><p>If the user does not have permission for this resource on the business application.</p></td>
-</tr>
-<tr>
-<td>404</td>
-<td><p>If the business application does not exist, or is not enabled.</p></td>
-</tr>
-<tr>
-<td>500</td>
-<td><p><b>Internal Server Error</b></p><p>This error indicates that there was an unexpected error on the server. This is sometimes temporary so try again after a few minutes. The problem could also be caused by bad input data so verify all input parameters and files. If the problem persists contact the support desk with exact details of the parameters you were using.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p>The resource will return one of the following status codes. The HTML error page may include an error message. The descriptions of the messages and the cause are described below.</p><div class="table-responsive"><table class="table table-striped table-bordered table-condensed"><thead><tr><th>HTTP Status Code</th><th>Description</th></tr></thead><tbody><tr><td>200</td><td><p>The resource will be returned in the body of the HTTP response in the requested format.</p></td></tr><tr><td>403</td><td><p>If the user does not have permission for this resource on the business application.</p></td></tr><tr><td>404</td><td><p>If the business application does not exist, or is not enabled.</p></td></tr><tr><td>500</td><td><p><b>Internal Server Error</b></p><p>This error indicates that there was an unexpected error on the server. This is sometimes temporary so try again after a few minutes. The problem could also be caused by bad input data so verify all input parameters and files. If the problem persists contact the support desk with exact details of the parameters you were using.</p></td></tr></tbody></table></div></div>
 </div>
 </div>
 </div>
 <div class="panel panel-primary">
 <div class="panel-heading">
-<a id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplicationsResources"></a>
-<h3 class="panel-title" id="ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getBusinessApplicationsResources">Get Business Applications Resources</h3>
+<a id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplicationsResources"></a><h3 class="panel-title" id="ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getBusinessApplicationsResources">Get Business Applications Resources</h3>
 </div>
-<div class="panel-body"><p>Get the resources for a business application. The resource contains links to the
+<div class="panel-body">
+<p>Get the resources for a business application. The resource contains links to the
  <a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplicationsInstant">instant</a>,
  <a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplicationsSingle">create single request job</a>, and
  <a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplicationsMultiple">create multi request jobs</a>
  resources.</p>
 
- <p>The method returns a <a href="../../reference/resourceDescription.html">Resource Description</a> document.</p>
-<div class="panel panel-info">
+ <p>The method returns a <a href="../../resourceDescription.html">Resource Description</a> document.</p><div class="panel panel-info">
 <div class="panel-heading">
 <h4 class="panel-title">HTTP Request Methods</h4>
 </div>
 <div class="panel-body">
-<p>The resource can be accessed using the following HTTP request methods.</p>
-<ul>
-<li>GET</li>
-</ul>
-</div>
+<p>The resource can be accessed using the following HTTP request methods.</p><ul><li>GET</li></ul></div>
 </div>
 <div class="panel panel-info">
 <div class="panel-heading">
 <h4 class="panel-title">URI Templates</h4>
 </div>
 <div class="panel-body">
-<p>The URI templates define the paths that can be appended to the base URL of the service to access this resource.</p>
-<pre>/ws/apps/{businessApplicationName}</pre>
-</div>
+<p>The URI templates define the paths that can be appended to the base URL of the service to access this resource.</p><pre>/ws/apps/{businessApplicationName}</pre></div>
 </div>
 <div class="panel panel-info">
 <div class="panel-heading">
 <h4 class="panel-title">URI Template Parameters</h4>
 </div>
 <div class="panel-body">
-<p>The URI templates support the following parameters which must be replaced with values as described below.</p>
-<div class="table-responsive">
-<table class="table table-striped table-bordered">
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>{businessApplicationName}</td>
-<td>String</td>
-<td class="description">The name of the business application.</td>
-
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p>The URI templates support the following parameters which must be replaced with values as described below.</p><div class="table-responsive"><table class="table table-striped table-bordered table-condensed"><thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>{businessApplicationName}</td><td>String</td><td class="description">The name of the business application.</td>
+</tr></tbody></table></div></div>
 </div>
 <div class="panel panel-info">
 <div class="panel-heading">
 <h4 class="panel-title">HTTP Status Codes</h4>
 </div>
 <div class="panel-body">
-<p>The resource will return one of the following status codes. The HTML error page may include an error message. The descriptions of the messages and the cause are described below.</p>
-<div class="table-responsive">
-<table class="table table-striped table-bordered">
-<thead>
-<tr>
-<th>HTTP Status Code</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>200</td>
-<td><p>The resource will be returned in the body of the HTTP response in the requested format.</p></td>
-</tr>
-<tr>
-<td>403</td>
-<td><p>If the user does not have permission for this resource on the business application.</p></td>
-</tr>
-<tr>
-<td>404</td>
-<td><p>If the business application does not exist, or is not enabled.</p></td>
-</tr>
-<tr>
-<td>500</td>
-<td><p><b>Internal Server Error</b></p><p>This error indicates that there was an unexpected error on the server. This is sometimes temporary so try again after a few minutes. The problem could also be caused by bad input data so verify all input parameters and files. If the problem persists contact the support desk with exact details of the parameters you were using.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p>The resource will return one of the following status codes. The HTML error page may include an error message. The descriptions of the messages and the cause are described below.</p><div class="table-responsive"><table class="table table-striped table-bordered table-condensed"><thead><tr><th>HTTP Status Code</th><th>Description</th></tr></thead><tbody><tr><td>200</td><td><p>The resource will be returned in the body of the HTTP response in the requested format.</p></td></tr><tr><td>403</td><td><p>If the user does not have permission for this resource on the business application.</p></td></tr><tr><td>404</td><td><p>If the business application does not exist, or is not enabled.</p></td></tr><tr><td>500</td><td><p><b>Internal Server Error</b></p><p>This error indicates that there was an unexpected error on the server. This is sometimes temporary so try again after a few minutes. The problem could also be caused by bad input data so verify all input parameters and files. If the problem persists contact the support desk with exact details of the parameters you were using.</p></td></tr></tbody></table></div></div>
 </div>
 </div>
 </div>
 <div class="panel panel-primary">
 <div class="panel-heading">
-<a id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplicationsSingle"></a>
-<h3 class="panel-title" id="ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getBusinessApplicationsSingle">Get Business Applications Single</h3>
+<a id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplicationsSingle"></a><h3 class="panel-title" id="ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getBusinessApplicationsSingle">Get Business Applications Single</h3>
 </div>
-<div class="panel-body"><p>Get the specification of the
+<div class="panel-body">
+<p>Get the specification of the
  <a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.createJobWithSingleRequest">Create Job With Single Request</a> service.</p>
 
- <p>The method returns a <a href="../../reference/resourceDescription.html">Resource Description</a> document with the following additional fields
+ <p>The method returns a <a href="../../resourceDescription.html">Resource Description</a> document with the following additional fields
  which are the parameters to the <a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.createJobWithSingleRequest">Create Job With Single Request</a> service.</a>.</p>
 
  <div class="table-responsive">
-   <table class="table table-striped table-bordered">
+   <table class="table table-condensed table-striped tabled-bordered">
+     <caption>Business Application Single Request Fields</caption>
      <thead>
        <tr>
          <th>Attribute</th>
@@ -1692,8 +804,9 @@
          <td>parameters</td>
          <td><p>The array of parameters that can be passed to the service. Each parameter is an object
          containing the following fields.</p>
-           <div class="table-responsive">
-             <table class="table table-striped table-bordered">
+ <div class="table-responsive">
+   <table class="table table-condensed table-striped tabled-bordered">
+     <caption>Patameters</caption>
                <thead>
                  <tr>
                    <th>Attribute</th>
@@ -1707,7 +820,7 @@
                  </tr>
                  <tr>
                    <td>type</td>
-                   <td>The <a href="../../reference/dataTypes.html">data type</a> of the parameter.</td>
+                   <td>The <a href="../../dataTypes.html">data type</a> of the parameter.</td>
                  </tr>
                  <tr>
                    <td>description</td>
@@ -1736,7 +849,7 @@
        </tr>
        <tr>
          <td>perRequestInputData</td>
-         <td>Boolean flag indicating that the business application accepts <a href="../../reference/opaqueData.html">opaque data</a> (true) or <a href="../../reference/structuredData.html">structured data</a> (false).</td>
+         <td>Boolean flag indicating that the business application accepts <a href="../../opaqueData.html">opaque data</a> (true) or <a href="../../structuredData.html">structured data</a> (false).</td>
        </tr>
        <tr>
          <td>resultDataContentTypes</td>
@@ -1744,109 +857,55 @@
        </tr>
        <tr>
          <td>perRequestResultData</td>
-         <td>Boolean flag indicating that the business application returns <a href="../../reference/opaqueData.html">opaque data</a> (true) or <a href="../../reference/structuredData.html">structured data</a> (false).</td>
+         <td>Boolean flag indicating that the business application returns <a href="../../opaqueData.html">opaque data</a> (true) or <a href="../../structuredData.html">structured data</a> (false).</td>
        </tr>
      </tbody>
    </table>
- </div>
-<div class="panel panel-info">
+ </div><div class="panel panel-info">
 <div class="panel-heading">
 <h4 class="panel-title">HTTP Request Methods</h4>
 </div>
 <div class="panel-body">
-<p>The resource can be accessed using the following HTTP request methods.</p>
-<ul>
-<li>GET</li>
-</ul>
-</div>
+<p>The resource can be accessed using the following HTTP request methods.</p><ul><li>GET</li></ul></div>
 </div>
 <div class="panel panel-info">
 <div class="panel-heading">
 <h4 class="panel-title">URI Templates</h4>
 </div>
 <div class="panel-body">
-<p>The URI templates define the paths that can be appended to the base URL of the service to access this resource.</p>
-<pre>/ws/apps/{businessApplicationName}/single</pre>
-</div>
+<p>The URI templates define the paths that can be appended to the base URL of the service to access this resource.</p><pre>/ws/apps/{businessApplicationName}/single</pre></div>
 </div>
 <div class="panel panel-info">
 <div class="panel-heading">
 <h4 class="panel-title">URI Template Parameters</h4>
 </div>
 <div class="panel-body">
-<p>The URI templates support the following parameters which must be replaced with values as described below.</p>
-<div class="table-responsive">
-<table class="table table-striped table-bordered">
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>{businessApplicationName}</td>
-<td>String</td>
-<td class="description">The name of the business application.</td>
-
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p>The URI templates support the following parameters which must be replaced with values as described below.</p><div class="table-responsive"><table class="table table-striped table-bordered table-condensed"><thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>{businessApplicationName}</td><td>String</td><td class="description">The name of the business application.</td>
+</tr></tbody></table></div></div>
 </div>
 <div class="panel panel-info">
 <div class="panel-heading">
 <h4 class="panel-title">HTTP Status Codes</h4>
 </div>
 <div class="panel-body">
-<p>The resource will return one of the following status codes. The HTML error page may include an error message. The descriptions of the messages and the cause are described below.</p>
-<div class="table-responsive">
-<table class="table table-striped table-bordered">
-<thead>
-<tr>
-<th>HTTP Status Code</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>200</td>
-<td><p>The resource will be returned in the body of the HTTP response in the requested format.</p></td>
-</tr>
-<tr>
-<td>403</td>
-<td><p>If the user does not have permission for this resource on the business application.</p></td>
-</tr>
-<tr>
-<td>404</td>
-<td><p>If the business application does not exist, or is not enabled.</p></td>
-</tr>
-<tr>
-<td>500</td>
-<td><p><b>Internal Server Error</b></p><p>This error indicates that there was an unexpected error on the server. This is sometimes temporary so try again after a few minutes. The problem could also be caused by bad input data so verify all input parameters and files. If the problem persists contact the support desk with exact details of the parameters you were using.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p>The resource will return one of the following status codes. The HTML error page may include an error message. The descriptions of the messages and the cause are described below.</p><div class="table-responsive"><table class="table table-striped table-bordered table-condensed"><thead><tr><th>HTTP Status Code</th><th>Description</th></tr></thead><tbody><tr><td>200</td><td><p>The resource will be returned in the body of the HTTP response in the requested format.</p></td></tr><tr><td>403</td><td><p>If the user does not have permission for this resource on the business application.</p></td></tr><tr><td>404</td><td><p>If the business application does not exist, or is not enabled.</p></td></tr><tr><td>500</td><td><p><b>Internal Server Error</b></p><p>This error indicates that there was an unexpected error on the server. This is sometimes temporary so try again after a few minutes. The problem could also be caused by bad input data so verify all input parameters and files. If the problem persists contact the support desk with exact details of the parameters you were using.</p></td></tr></tbody></table></div></div>
 </div>
 </div>
 </div>
 <div class="panel panel-primary">
 <div class="panel-heading">
-<a id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getJobs"></a>
-<h3 class="panel-title" id="ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getJobs">Get Jobs</h3>
+<a id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getJobs"></a><h3 class="panel-title" id="ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getJobs">Get Jobs</h3>
 </div>
-<div class="panel-body"><p>Get the list of links to the
+<div class="panel-body">
+<p>Get the list of links to the
  <a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getJobsInfo">Get Jobs Info</a>
  resource for each of the user's jobs.</p>
 
- <p>The method returns a <a href="../../reference/resourceDescription.html">Resource Description</a> document. Each child resource supports following custom attributes.</a>
+ <p>The method returns a <a href="../../resourceDescription.html">Resource Description</a> document. Each child resource supports following custom attributes.</a>
 
  <div class="table-responsive">
-   <table class="table table-striped table-bordered">
+   <table class="table table-condensed table-striped tabled-bordered">
+     <caption>Job Fields</caption>
      <thead>
        <tr>
          <th>Attribute</th>
@@ -1872,69 +931,42 @@
        </tr>
      </tbody>
    </table>
- </div>
-<div class="panel panel-info">
+ </div><div class="panel panel-info">
 <div class="panel-heading">
 <h4 class="panel-title">HTTP Request Methods</h4>
 </div>
 <div class="panel-body">
-<p>The resource can be accessed using the following HTTP request methods.</p>
-<ul>
-<li>GET</li>
-</ul>
-</div>
+<p>The resource can be accessed using the following HTTP request methods.</p><ul><li>GET</li></ul></div>
 </div>
 <div class="panel panel-info">
 <div class="panel-heading">
 <h4 class="panel-title">URI Templates</h4>
 </div>
 <div class="panel-body">
-<p>The URI templates define the paths that can be appended to the base URL of the service to access this resource.</p>
-<pre>/ws/jobs</pre>
-</div>
+<p>The URI templates define the paths that can be appended to the base URL of the service to access this resource.</p><pre>/ws/jobs</pre></div>
 </div>
 <div class="panel panel-info">
 <div class="panel-heading">
 <h4 class="panel-title">HTTP Status Codes</h4>
 </div>
 <div class="panel-body">
-<p>The resource will return one of the following status codes. The HTML error page may include an error message. The descriptions of the messages and the cause are described below.</p>
-<div class="table-responsive">
-<table class="table table-striped table-bordered">
-<thead>
-<tr>
-<th>HTTP Status Code</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>200</td>
-<td><p>The resource will be returned in the body of the HTTP response in the requested format.</p></td>
-</tr>
-<tr>
-<td>500</td>
-<td><p><b>Internal Server Error</b></p><p>This error indicates that there was an unexpected error on the server. This is sometimes temporary so try again after a few minutes. The problem could also be caused by bad input data so verify all input parameters and files. If the problem persists contact the support desk with exact details of the parameters you were using.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p>The resource will return one of the following status codes. The HTML error page may include an error message. The descriptions of the messages and the cause are described below.</p><div class="table-responsive"><table class="table table-striped table-bordered table-condensed"><thead><tr><th>HTTP Status Code</th><th>Description</th></tr></thead><tbody><tr><td>200</td><td><p>The resource will be returned in the body of the HTTP response in the requested format.</p></td></tr><tr><td>500</td><td><p><b>Internal Server Error</b></p><p>This error indicates that there was an unexpected error on the server. This is sometimes temporary so try again after a few minutes. The problem could also be caused by bad input data so verify all input parameters and files. If the problem persists contact the support desk with exact details of the parameters you were using.</p></td></tr></tbody></table></div></div>
 </div>
 </div>
 </div>
 <div class="panel panel-primary">
 <div class="panel-heading">
-<a id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getJobsInfo"></a>
-<h3 class="panel-title" id="ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getJobsInfo">Get Jobs Info</h3>
+<a id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getJobsInfo"></a><h3 class="panel-title" id="ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getJobsInfo">Get Jobs Info</h3>
 </div>
-<div class="panel-body"><p>Get the details of a job.</p>
+<div class="panel-body">
+<p>Get the details of a job.</p>
 
 
  <p>The method returns a BatchJob object with the following attributes.</a>
 
  <div class="table-responsive">
-   <table class="table table-striped table-bordered">
+   <table class="table table-condensed table-striped tabled-bordered">
+     <caption>Job Fields</caption>
      <thead>
        <tr>
          <th>Attribute</th>
@@ -2000,188 +1032,89 @@
        </tr>
      </tbody>
    </table>
- </div>
-<div class="panel panel-info">
+ </div><div class="panel panel-info">
 <div class="panel-heading">
 <h4 class="panel-title">HTTP Request Methods</h4>
 </div>
 <div class="panel-body">
-<p>The resource can be accessed using the following HTTP request methods.</p>
-<ul>
-<li>GET</li>
-</ul>
-</div>
+<p>The resource can be accessed using the following HTTP request methods.</p><ul><li>GET</li></ul></div>
 </div>
 <div class="panel panel-info">
 <div class="panel-heading">
 <h4 class="panel-title">URI Templates</h4>
 </div>
 <div class="panel-body">
-<p>The URI templates define the paths that can be appended to the base URL of the service to access this resource.</p>
-<pre>/ws/jobs/{batchJobId}</pre>
-</div>
+<p>The URI templates define the paths that can be appended to the base URL of the service to access this resource.</p><pre>/ws/jobs/{batchJobId}</pre></div>
 </div>
 <div class="panel panel-info">
 <div class="panel-heading">
 <h4 class="panel-title">URI Template Parameters</h4>
 </div>
 <div class="panel-body">
-<p>The URI templates support the following parameters which must be replaced with values as described below.</p>
-<div class="table-responsive">
-<table class="table table-striped table-bordered">
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>{batchJobId}</td>
-<td>long</td>
-<td class="description">The unique identifier of the job.</td>
-
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p>The URI templates support the following parameters which must be replaced with values as described below.</p><div class="table-responsive"><table class="table table-striped table-bordered table-condensed"><thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>{batchJobId}</td><td>Long</td><td class="description">The unique identifier of the job.</td>
+</tr></tbody></table></div></div>
 </div>
 <div class="panel panel-info">
 <div class="panel-heading">
 <h4 class="panel-title">HTTP Status Codes</h4>
 </div>
 <div class="panel-body">
-<p>The resource will return one of the following status codes. The HTML error page may include an error message. The descriptions of the messages and the cause are described below.</p>
-<div class="table-responsive">
-<table class="table table-striped table-bordered">
-<thead>
-<tr>
-<th>HTTP Status Code</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>200</td>
-<td><p>The resource will be returned in the body of the HTTP response in the requested format.</p></td>
-</tr>
-<tr>
-<td>500</td>
-<td><p><b>Internal Server Error</b></p><p>This error indicates that there was an unexpected error on the server. This is sometimes temporary so try again after a few minutes. The problem could also be caused by bad input data so verify all input parameters and files. If the problem persists contact the support desk with exact details of the parameters you were using.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p>The resource will return one of the following status codes. The HTML error page may include an error message. The descriptions of the messages and the cause are described below.</p><div class="table-responsive"><table class="table table-striped table-bordered table-condensed"><thead><tr><th>HTTP Status Code</th><th>Description</th></tr></thead><tbody><tr><td>200</td><td><p>The resource will be returned in the body of the HTTP response in the requested format.</p></td></tr><tr><td>500</td><td><p><b>Internal Server Error</b></p><p>This error indicates that there was an unexpected error on the server. This is sometimes temporary so try again after a few minutes. The problem could also be caused by bad input data so verify all input parameters and files. If the problem persists contact the support desk with exact details of the parameters you were using.</p></td></tr></tbody></table></div></div>
 </div>
 </div>
 </div>
 <div class="panel panel-primary">
 <div class="panel-heading">
-<a id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getJobsResult"></a>
-<h3 class="panel-title" id="ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getJobsResult">Get Jobs Result</h3>
+<a id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getJobsResult"></a><h3 class="panel-title" id="ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getJobsResult">Get Jobs Result</h3>
 </div>
-<div class="panel-body"><p>Get the contents of a user's job result file. The content type will be the content type
- requested in the job.</p>
-<div class="panel panel-info">
+<div class="panel-body">
+<p>Get the contents of a user's job result file. The content type will be the content type
+ requested in the job.</p><div class="panel panel-info">
 <div class="panel-heading">
 <h4 class="panel-title">HTTP Request Methods</h4>
 </div>
 <div class="panel-body">
-<p>The resource can be accessed using the following HTTP request methods.</p>
-<ul>
-<li>GET</li>
-<li>POST</li>
-</ul>
-</div>
+<p>The resource can be accessed using the following HTTP request methods.</p><ul><li>GET</li><li>POST</li></ul></div>
 </div>
 <div class="panel panel-info">
 <div class="panel-heading">
 <h4 class="panel-title">URI Templates</h4>
 </div>
 <div class="panel-body">
-<p>The URI templates define the paths that can be appended to the base URL of the service to access this resource.</p>
-<pre>/ws/jobs/{batchJobId}/results/{resultId}</pre>
-</div>
+<p>The URI templates define the paths that can be appended to the base URL of the service to access this resource.</p><pre>/ws/jobs/{batchJobId}/results/{resultId}</pre></div>
 </div>
 <div class="panel panel-info">
 <div class="panel-heading">
 <h4 class="panel-title">URI Template Parameters</h4>
 </div>
 <div class="panel-body">
-<p>The URI templates support the following parameters which must be replaced with values as described below.</p>
-<div class="table-responsive">
-<table class="table table-striped table-bordered">
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>{batchJobId}</td>
-<td>long</td>
-<td class="description">The unique identifier of the job.</td>
-
-</tr>
-<tr>
-<td>{resultId}</td>
-<td>long</td>
-<td class="description">The unique identifier of the result file.</td>
-
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p>The URI templates support the following parameters which must be replaced with values as described below.</p><div class="table-responsive"><table class="table table-striped table-bordered table-condensed"><thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>{batchJobId}</td><td>Long</td><td class="description">The unique identifier of the job.</td>
+</tr><tr><td>{resultId}</td><td>int</td><td class="description">The unique identifier of the result file.</td>
+</tr></tbody></table></div></div>
 </div>
 <div class="panel panel-info">
 <div class="panel-heading">
 <h4 class="panel-title">HTTP Status Codes</h4>
 </div>
 <div class="panel-body">
-<p>The resource will return one of the following status codes. The HTML error page may include an error message. The descriptions of the messages and the cause are described below.</p>
-<div class="table-responsive">
-<table class="table table-striped table-bordered">
-<thead>
-<tr>
-<th>HTTP Status Code</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>200</td>
-<td><p>The resource will be returned in the body of the HTTP response.</p></td>
-</tr>
-<tr>
-<td>500</td>
-<td><p><b>Internal Server Error</b></p><p>This error indicates that there was an unexpected error on the server. This is sometimes temporary so try again after a few minutes. The problem could also be caused by bad input data so verify all input parameters and files. If the problem persists contact the support desk with exact details of the parameters you were using.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p>The resource will return one of the following status codes. The HTML error page may include an error message. The descriptions of the messages and the cause are described below.</p><div class="table-responsive"><table class="table table-striped table-bordered table-condensed"><thead><tr><th>HTTP Status Code</th><th>Description</th></tr></thead><tbody><tr><td>200</td><td><p>The resource will be returned in the body of the HTTP response.</p></td></tr><tr><td>500</td><td><p><b>Internal Server Error</b></p><p>This error indicates that there was an unexpected error on the server. This is sometimes temporary so try again after a few minutes. The problem could also be caused by bad input data so verify all input parameters and files. If the problem persists contact the support desk with exact details of the parameters you were using.</p></td></tr></tbody></table></div></div>
 </div>
 </div>
 </div>
 <div class="panel panel-primary">
 <div class="panel-heading">
-<a id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getJobsResults"></a>
-<h3 class="panel-title" id="ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getJobsResults">Get Jobs Results</h3>
+<a id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getJobsResults"></a><h3 class="panel-title" id="ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getJobsResults">Get Jobs Results</h3>
 </div>
-<div class="panel-body"><p>Get the list of links to the
- <a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getJobsResult">Get Jobs Result</a>
+<div class="panel-body">
+<p>Get the list of links to the
+ <a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getrsJobsResult">Get Jobs Result</a>
  resource for each of the results for a user's job.</p>
 
- <p>The method returns a <a href="../../reference/resourceDescription.html">Resource Description</a> document. Each child resource supports following custom attributes.</a>
+ <p>The method returns a <a href="../../resourceDescription.html">Resource Description</a> document. Each child resource supports following custom attributes.</a>
 
  <div class="table-responsive">
-   <table class="table table-striped table-bordered">
+   <table class="table table-condensed table-striped tabled-bordered">
+     <caption>Result Fields</caption>
      <thead>
        <tr>
          <th>Attribute</th>
@@ -2199,140 +1132,67 @@
        </tr>
      </tbody>
    </table>
- </div>
-<div class="panel panel-info">
+ </div><div class="panel panel-info">
 <div class="panel-heading">
 <h4 class="panel-title">HTTP Request Methods</h4>
 </div>
 <div class="panel-body">
-<p>The resource can be accessed using the following HTTP request methods.</p>
-<ul>
-<li>GET</li>
-</ul>
-</div>
+<p>The resource can be accessed using the following HTTP request methods.</p><ul><li>GET</li></ul></div>
 </div>
 <div class="panel panel-info">
 <div class="panel-heading">
 <h4 class="panel-title">URI Templates</h4>
 </div>
 <div class="panel-body">
-<p>The URI templates define the paths that can be appended to the base URL of the service to access this resource.</p>
-<pre>/ws/jobs/{batchJobId}/results</pre>
-</div>
+<p>The URI templates define the paths that can be appended to the base URL of the service to access this resource.</p><pre>/ws/jobs/{batchJobId}/results</pre></div>
 </div>
 <div class="panel panel-info">
 <div class="panel-heading">
 <h4 class="panel-title">URI Template Parameters</h4>
 </div>
 <div class="panel-body">
-<p>The URI templates support the following parameters which must be replaced with values as described below.</p>
-<div class="table-responsive">
-<table class="table table-striped table-bordered">
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>{batchJobId}</td>
-<td>long</td>
-<td class="description">The unique identifier of the job.</td>
-
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p>The URI templates support the following parameters which must be replaced with values as described below.</p><div class="table-responsive"><table class="table table-striped table-bordered table-condensed"><thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>{batchJobId}</td><td>Long</td><td class="description" />
+</tr></tbody></table></div></div>
 </div>
 <div class="panel panel-info">
 <div class="panel-heading">
 <h4 class="panel-title">HTTP Status Codes</h4>
 </div>
 <div class="panel-body">
-<p>The resource will return one of the following status codes. The HTML error page may include an error message. The descriptions of the messages and the cause are described below.</p>
-<div class="table-responsive">
-<table class="table table-striped table-bordered">
-<thead>
-<tr>
-<th>HTTP Status Code</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>200</td>
-<td><p>The resource will be returned in the body of the HTTP response in the requested format.</p></td>
-</tr>
-<tr>
-<td>500</td>
-<td><p><b>Internal Server Error</b></p><p>This error indicates that there was an unexpected error on the server. This is sometimes temporary so try again after a few minutes. The problem could also be caused by bad input data so verify all input parameters and files. If the problem persists contact the support desk with exact details of the parameters you were using.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p>The resource will return one of the following status codes. The HTML error page may include an error message. The descriptions of the messages and the cause are described below.</p><div class="table-responsive"><table class="table table-striped table-bordered table-condensed"><thead><tr><th>HTTP Status Code</th><th>Description</th></tr></thead><tbody><tr><td>200</td><td><p>The resource will be returned in the body of the HTTP response in the requested format.</p></td></tr><tr><td>500</td><td><p><b>Internal Server Error</b></p><p>This error indicates that there was an unexpected error on the server. This is sometimes temporary so try again after a few minutes. The problem could also be caused by bad input data so verify all input parameters and files. If the problem persists contact the support desk with exact details of the parameters you were using.</p></td></tr></tbody></table></div></div>
 </div>
 </div>
 </div>
 <div class="panel panel-primary">
 <div class="panel-heading">
-<a id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getRoot"></a>
-<h3 class="panel-title" id="ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getRoot">Get Root</h3>
+<a id="ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getRoot"></a><h3 class="panel-title" id="ca_bc_gov_open_cpf_api_web_rest_ConcurrentProcessingFramework_getRoot">Get Root</h3>
 </div>
-<div class="panel-body"><p>Get the root resource of the CPF web services. The resource contains links to the
- <a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getJobs">Get Jobs</a> and
- <a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplications">Get Business Applications</a>
+<div class="panel-body">
+<p>Get the root resource of the CPF web services. The resource contains links to the
+ <a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getJobs">Get Jobs</a>
+ and <a href="#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.getBusinessApplications">Get Business Applications</a>
  resources.</p>
 
- <p>The method returns a <a href="../../reference/resourceDescription.html">Resource Description</a> document.</a>
-<div class="panel panel-info">
+ <p>The method returns a <a href="../../resourceDescription.html">Resource Description</a> document.</a><div class="panel panel-info">
 <div class="panel-heading">
 <h4 class="panel-title">HTTP Request Methods</h4>
 </div>
 <div class="panel-body">
-<p>The resource can be accessed using the following HTTP request methods.</p>
-<ul>
-<li>GET</li>
-</ul>
-</div>
+<p>The resource can be accessed using the following HTTP request methods.</p><ul><li>GET</li></ul></div>
 </div>
 <div class="panel panel-info">
 <div class="panel-heading">
 <h4 class="panel-title">URI Templates</h4>
 </div>
 <div class="panel-body">
-<p>The URI templates define the paths that can be appended to the base URL of the service to access this resource.</p>
-<pre>/ws</pre>
-</div>
+<p>The URI templates define the paths that can be appended to the base URL of the service to access this resource.</p><pre>/ws</pre></div>
 </div>
 <div class="panel panel-info">
 <div class="panel-heading">
 <h4 class="panel-title">HTTP Status Codes</h4>
 </div>
 <div class="panel-body">
-<p>The resource will return one of the following status codes. The HTML error page may include an error message. The descriptions of the messages and the cause are described below.</p>
-<div class="table-responsive">
-<table class="table table-striped table-bordered">
-<thead>
-<tr>
-<th>HTTP Status Code</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>200</td>
-<td><p>The resource will be returned in the body of the HTTP response in the requested format.</p></td>
-</tr>
-<tr>
-<td>500</td>
-<td><p><b>Internal Server Error</b></p><p>This error indicates that there was an unexpected error on the server. This is sometimes temporary so try again after a few minutes. The problem could also be caused by bad input data so verify all input parameters and files. If the problem persists contact the support desk with exact details of the parameters you were using.</p></td>
-</tr>
-</tbody>
-</table>
+<p>The resource will return one of the following status codes. The HTML error page may include an error message. The descriptions of the messages and the cause are described below.</p><div class="table-responsive"><table class="table table-striped table-bordered table-condensed"><thead><tr><th>HTTP Status Code</th><th>Description</th></tr></thead><tbody><tr><td>200</td><td><p>The resource will be returned in the body of the HTTP response in the requested format.</p></td></tr><tr><td>500</td><td><p><b>Internal Server Error</b></p><p>This error indicates that there was an unexpected error on the server. This is sometimes temporary so try again after a few minutes. The problem could also be caused by bad input data so verify all input parameters and files. If the problem persists contact the support desk with exact details of the parameters you were using.</p></td></tr></tbody></table></div></div>
 </div>
 </div>
 </div>
@@ -2341,9 +1201,16 @@
 </div>
 </div>
 </div>
-</div>
-</div>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-</body>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js">
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js">
+</script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js">
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js">
+</script>
+<script>$(function() {
+  prettyPrint();
+});
+</script></body>
 </html>
