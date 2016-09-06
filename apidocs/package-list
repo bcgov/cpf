@@ -15,7 +15,6 @@ ca.bc.gov.open.cpf.api.web.service
 ca.bc.gov.open.cpf.api.worker
 ca.bc.gov.open.cpf.client.api
 ca.bc.gov.open.cpf.client.httpclient
-ca.bc.gov.open.cpf.openid
 ca.bc.gov.open.cpf.plugin.api
 ca.bc.gov.open.cpf.plugin.api.log
 ca.bc.gov.open.cpf.plugin.api.security
