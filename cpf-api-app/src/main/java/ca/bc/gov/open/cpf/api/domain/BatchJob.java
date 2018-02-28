@@ -153,13 +153,14 @@ public class BatchJob extends DelegatingRecord implements Common {
         group.cancelInternal();
       }
       this.resheduledGroups.clear();
-      this.completedRequests.clear();
-      this.completedGroups.clear();
       final int numSubmittedRequests = getInteger(NUM_SUBMITTED_REQUESTS, 0);
       if (numSubmittedRequests == 0) {
         this.failedRequests.clear();
       } else {
-        this.failedRequests.addRange(1, numSubmittedRequests);
+        final RangeSet cancelledRequests = new RangeSet();
+        cancelledRequests.addRange(1, numSubmittedRequests);
+        cancelledRequests.remove(this.completedRequests);
+        this.failedRequests.addRanges(cancelledRequests);
       }
       this.groupsToProcess.clear();
       this.scheduledGroups.clear();

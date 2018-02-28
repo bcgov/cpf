@@ -45,7 +45,7 @@ public class CpfLog4jContextListener implements ServletContextListener {
     final ServletContext context = event.getServletContext();
     String cpfLogDirectory = context.getInitParameter("cpfLogDirectory");
     if (!Property.hasValue(cpfLogDirectory)) {
-      cpfLogDirectory = "logs/cpf";
+      cpfLogDirectory = System.getProperty("cpfLogDirectory", "logs/cpf");
     }
     File rootDirectory = new File(cpfLogDirectory);
     if (rootDirectory.exists()) {

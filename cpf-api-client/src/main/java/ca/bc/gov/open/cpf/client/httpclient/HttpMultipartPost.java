@@ -25,20 +25,18 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.InputStreamBody;
 import org.apache.http.entity.mime.content.StringBody;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.HttpContext;
 
 import com.revolsys.spring.resource.Resource;
 
 @SuppressWarnings("javadoc")
 public class HttpMultipartPost {
-  private HttpClient httpclient = null;
+  private CpfHttpClient httpclient = null;
 
   private HttpPost httppost = new HttpPost();
 
@@ -55,37 +53,15 @@ public class HttpMultipartPost {
 
   private String url;
 
-  private final String userAgent = "";
-
-  public HttpMultipartPost(final HttpClient httpclient, final String url) {
-    this(new HttpPost(url));
+  public HttpMultipartPost(final CpfHttpClient httpclient, final String url) {
+    this.httppost = new HttpPost(url);
     this.url = url;
     this.httpclient = httpclient;
   }
 
-  public HttpMultipartPost(final HttpClient httpclient, final URL url) {
-    this(url.toString());
-  }
-
-  public HttpMultipartPost(final HttpPost httppost) {
-    this.httpclient = new DefaultHttpClient();
-    this.httppost = httppost;
-
-  }
-
-  public HttpMultipartPost(final String urlString) {
-    this(new HttpPost(urlString));
-    if (!"".equals(this.userAgent)) {
-      this.httppost.setHeader("User-Agent", this.userAgent);
-    }
+  public HttpMultipartPost(final CpfHttpClient httpclient, final URL url) {
+    this.httppost = new HttpPost(url.toString());
     this.httppost.setHeader("Accept", "text/csv");
-    if (this.httpclient == null) {
-      this.httpclient = new DefaultHttpClient();
-    }
-  }
-
-  public HttpMultipartPost(final URL url) {
-    this(url.toString());
   }
 
   public void addHeader(final String name, final String value) {
@@ -146,7 +122,7 @@ public class HttpMultipartPost {
     this.httppost.setEntity(this.requestEntity);
 
     try {
-      this.response = this.httpclient.execute(this.httppost, context);
+      this.response = this.httpclient.getHttpClient().execute(this.httppost, context);
       statusCode = this.response.getStatusLine().getStatusCode();
       if (statusCode < HttpStatus.SC_BAD_REQUEST) {
         this.responseEntity = this.response.getEntity();

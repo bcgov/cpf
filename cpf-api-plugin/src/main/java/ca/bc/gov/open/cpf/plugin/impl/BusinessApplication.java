@@ -103,6 +103,8 @@ public class BusinessApplication extends BaseObjectWithProperties
     return defaultValue;
   }
 
+  private String detailedDescription;
+
   private final List<String> resultFieldNames = new ArrayList<>();
 
   private String packageName;
@@ -510,6 +512,10 @@ public class BusinessApplication extends BaseObjectWithProperties
     return this.descriptionUrl;
   }
 
+  public String getDetailedDescription() {
+    return this.detailedDescription;
+  }
+
   public GeometryFactory getGeometryFactory() {
     return this.geometryFactory;
   }
@@ -855,7 +861,12 @@ public class BusinessApplication extends BaseObjectWithProperties
     for (final FieldDefinition field : requestRecordDefinition.getFields()) {
       final String parameterName = field.getName();
       Object parameterValue = parameters.get(parameterName);
-      parameterValue = field.validate(parameterValue);
+      if (!"resultDataContentType".equals(parameterName)) {
+        if (parameterValue == null) {
+          parameterValue = field.getDefaultValue();
+        }
+        parameterValue = field.validate(parameterValue);
+      }
       try {
         final Method method = this.requestFieldMethodMap.get(parameterName);
         if (method == null) {
@@ -917,6 +928,10 @@ public class BusinessApplication extends BaseObjectWithProperties
 
   public void setDescriptionUrl(final String descriptionUrl) {
     this.descriptionUrl = descriptionUrl;
+  }
+
+  public void setDetailedDescription(final String detailedDescription) {
+    this.detailedDescription = detailedDescription;
   }
 
   public void setExecuteMethod(final Method method) {

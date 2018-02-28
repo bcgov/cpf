@@ -43,9 +43,6 @@ public interface JobController {
 
   String JOB_INPUTS = "jobInputs";
 
-  default void cancelJob(final Identifier batchJobId) {
-  }
-
   default void deleteJob(final Identifier jobId) {
     final CpfDataAccessObject dataAccessObject = getDataAccessObject();
     dataAccessObject.deleteBatchJob(jobId);

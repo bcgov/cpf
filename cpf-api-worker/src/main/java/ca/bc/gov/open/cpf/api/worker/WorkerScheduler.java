@@ -22,7 +22,6 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -171,7 +170,7 @@ public class WorkerScheduler extends ThreadPoolExecutor
   }
 
   public void addExecutingGroupsMessage() {
-    final Map<String, Object> message = newExecutingGroupsMessage();
+    final MapEx message = newExecutingGroupsMessage();
     final WorkerMessageHandler messageHandler = this.messageHandler;
     if (messageHandler != null) {
       messageHandler.sendMessage(message);
@@ -179,7 +178,7 @@ public class WorkerScheduler extends ThreadPoolExecutor
   }
 
   public void addFailedGroup(final String groupId) {
-    final Map<String, Object> message = new LinkedHashMap<>();
+    final MapEx message = new LinkedHashMapEx();
     message.put("type", "failedGroupId");
     message.put("groupId", groupId);
     final WorkerMessageHandler messageHandler = this.messageHandler;
@@ -202,7 +201,7 @@ public class WorkerScheduler extends ThreadPoolExecutor
     }
   }
 
-  public void cancelGroup(final Map<String, Object> message) {
+  public void cancelGroup(final MapEx message) {
     final String groupId = (String)message.get("groupId");
     removeExecutingGroupId(groupId);
     final Future<?> future = this.futureTaskByGroupId.get(groupId);
@@ -363,15 +362,19 @@ public class WorkerScheduler extends ThreadPoolExecutor
   private void initConfig() {
     final Resource configResource = new ClassPathResource("/cpfWorker.json");
     try {
-      final Map<String, Object> config = Json.toMap(configResource);
-      final String importName = (String)config.get("j:import");
+      final MapEx config = Json.toMap(configResource);
+      String importName = (String)config.get("j:import");
       if (Property.hasValue(importName)) {
+        if (importName.startsWith("${cpfConfigDirectory}")) {
+          importName = importName.replace("${cpfConfigDirectory}",
+            System.getProperty("cpfConfigDirectory", "config"));
+        }
         final Resource importResource = Resource.getResource(importName);
         try {
           if (importResource.exists()) {
             final String importExtension = importResource.getFileNameExtension();
             if ("json".equals(importExtension)) {
-              final Map<String, Object> importConfig = Json.toMap(configResource);
+              final MapEx importConfig = Json.toMap(importResource);
               config.putAll(importConfig);
             } else if ("properties".equals(importExtension)) {
               final Properties properties = new Properties();
@@ -385,7 +388,14 @@ public class WorkerScheduler extends ThreadPoolExecutor
       }
       for (final Entry<String, Object> entry : config.entrySet()) {
         String key = entry.getKey();
-        final Object value = entry.getValue();
+        Object value = entry.getValue();
+        if (value instanceof String) {
+          final String string = (String)value;
+          if (string.contains("${cpfLogDirectory}")) {
+            value = importName.replace("${cpfLogDirectory}",
+              System.getProperty("cpfLogDirectory", "log"));
+          }
+        }
         if (key.startsWith("cpfWorker.")) {
           key = key.substring(10);
           Property.setSimple(this, key, value);
@@ -441,8 +451,8 @@ public class WorkerScheduler extends ThreadPoolExecutor
     }
   }
 
-  protected Map<String, Object> newExecutingGroupsMessage() {
-    final Map<String, Object> message = new LinkedHashMap<>();
+  protected MapEx newExecutingGroupsMessage() {
+    final MapEx message = new LinkedHashMapEx();
     message.put("type", "executingGroupIds");
     message.put("workerId", this.id);
     synchronized (this.executingGroupIds) {

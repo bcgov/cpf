@@ -25,7 +25,7 @@ import ca.bc.gov.open.cpf.api.scheduler.StatisticsService;
 import ca.bc.gov.open.cpf.plugin.impl.BusinessApplicationRegistry;
 import ca.bc.gov.open.cpf.plugin.impl.ConfigPropertyLoader;
 import ca.bc.gov.open.cpf.plugin.impl.module.ClassLoaderModule;
-import ca.bc.gov.open.cpf.plugin.impl.module.ClassLoaderModuleLoader;
+import ca.bc.gov.open.cpf.plugin.impl.module.ModuleLoader;
 
 import com.revolsys.maven.MavenPom;
 import com.revolsys.maven.MavenRepository;
@@ -49,7 +49,7 @@ public class ConfigPropertyModule extends ClassLoaderModule {
     final BusinessApplicationRegistry businessApplicationRegistry, final String moduleName,
     final MavenRepository mavenRepository, final String mavenModuleId,
     final Set<String> excludeMavenIds, final ConfigPropertyLoader configPropertyLoader) {
-    super(businessApplicationRegistry, moduleName);
+    super(businessApplicationRegistry, moduleName, "INFO");
     this.moduleLoader = moduleLoader;
     this.mavenRepository = mavenRepository;
     this.configMavenModuleId = mavenModuleId;
@@ -155,7 +155,7 @@ public class ConfigPropertyModule extends ClassLoaderModule {
               clearModuleError();
 
               final ClassLoader classLoader = getClassLoader();
-              final List<URL> configUrls = ClassLoaderModuleLoader.getConfigUrls(classLoader,
+              final List<URL> configUrls = ModuleLoader.getConfigUrls(classLoader,
                 false);
               if (configUrls.size() == 1) {
                 final URL configUrl = configUrls.get(0);

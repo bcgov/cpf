@@ -3,11 +3,6 @@
   "title":"Business Appliations",
   "resources":[
     {
-      "resourceUri":"https:\/\/delivery.apps.gov.bc.ca\/pub\/cpf\/secure\/ws\/apps\/bsoe.json",
-      "title":"Batch Spatial Overlay",
-      "businessApplicationName":"bsoe"
-    },
-    {
       "resourceUri":"https:\/\/delivery.apps.gov.bc.ca\/pub\/cpf\/secure\/ws\/apps\/geocoder.json",
       "title":"Batch Geocoder",
       "businessApplicationName":"geocoder"

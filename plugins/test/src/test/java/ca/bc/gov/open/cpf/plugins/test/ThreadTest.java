@@ -26,7 +26,7 @@ import com.revolsys.collection.map.MapEx;
 import com.revolsys.io.map.MapReader;
 import com.revolsys.parallel.channel.Channel;
 import com.revolsys.parallel.channel.store.Buffer;
-import com.revolsys.spring.resource.FileSystemResource;
+import com.revolsys.spring.resource.PathResource;
 import com.revolsys.spring.resource.Resource;
 
 public class ThreadTest {
@@ -41,8 +41,7 @@ public class ThreadTest {
 
   private final int numThreads = 10;
 
-  private final Resource inputDataResource = new FileSystemResource(
-    "src/data/NTS-250000-by-name.csv");
+  private final Resource inputDataResource = new PathResource("src/data/NTS-250000-by-name.csv");
 
   private BusinessApplicationPluginExecutor executor = new BusinessApplicationPluginExecutor();
 

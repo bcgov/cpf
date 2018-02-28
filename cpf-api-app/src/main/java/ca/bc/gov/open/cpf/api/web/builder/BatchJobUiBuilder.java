@@ -57,6 +57,7 @@ import com.revolsys.ui.web.annotation.ColumnSortOrder;
 import com.revolsys.ui.web.annotation.RequestMapping;
 import com.revolsys.ui.web.config.Page;
 import com.revolsys.ui.web.exception.PageNotFoundException;
+import com.revolsys.ui.web.rest.interceptor.MediaTypeUtil;
 import com.revolsys.ui.web.utils.HttpServletUtils;
 import com.revolsys.util.Dates;
 import com.revolsys.util.Property;
@@ -80,18 +81,22 @@ public class BatchJobUiBuilder extends CpfUiBuilder {
   }
 
   @RequestMapping(value = {
-    "/ws/jobs/{batchJobId}/cancel"
+    "/ws/jobs/{batchJobId}/cancelJob"
   }, method = RequestMethod.POST)
   public void clientCancel(@PathVariable("batchJobId") final Long batchJobId) {
-    final Identifier jobId = Identifier.newIdentifier(batchJobId);
-    final String consumerKey = getConsumerKey();
-    final Record batchJob = getDataAccessObject().getBatchJob(consumerKey, jobId);
-    if (batchJob == null) {
-      throw new PageNotFoundException("The job " + batchJobId + " does not exist");
+    if (MediaTypeUtil.isHtmlPage()) {
+      final Identifier jobId = Identifier.newIdentifier(batchJobId);
+      final String consumerKey = getConsumerKey();
+      final Record batchJob = getDataAccessObject().getBatchJob(consumerKey, jobId);
+      if (batchJob == null) {
+        throw new PageNotFoundException("The job " + batchJobId + " does not exist");
+      } else {
+        final BatchJobService batchJobService = getBatchJobService();
+        batchJobService.cancelBatchJob(jobId);
+        redirectPage("clientList");
+      }
     } else {
-      final BatchJobService batchJobService = getBatchJobService();
-      batchJobService.cancelBatchJob(jobId);
-      redirectPage("clientList");
+
     }
   }
 
@@ -228,7 +233,7 @@ public class BatchJobUiBuilder extends CpfUiBuilder {
 
     addPage(new Page("clientList", "Batch Jobs", "/ws/jobs/"));
     addPage(new Page("clientView", "Batch Job {batchJobId}", "/ws/jobs/{batchJobId}/"));
-    addPage(new Page("clientCancel", "Job", "/ws/jobs/{batchJobId}/cancel/"));
+    addPage(new Page("clientCancel", "Job", "/ws/jobs/{batchJobId}/cancelJob/"));
     addPage(new Page("clientDelete", "Job", "/ws/jobs/{batchJobId}/delete/"));
     addPage(new Page("clientAppList", "Batch Jobs", "/ws/apps/{businessApplicationName}/jobs/"));
   }

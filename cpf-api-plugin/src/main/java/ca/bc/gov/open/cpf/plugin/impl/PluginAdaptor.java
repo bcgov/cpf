@@ -349,7 +349,7 @@ public class PluginAdaptor {
             final double scaleZ = Maps.getDouble(this.parameters, "resultScaleFactorZ",
               geometryFactory.getScaleZ());
 
-            geometryFactory = GeometryFactory.fixed(srid, axisCount, scaleXY, scaleZ);
+            geometryFactory = GeometryFactory.fixed(srid, axisCount, scaleXY, scaleXY, scaleZ);
             geometry = geometryFactory.geometry(geometry);
             if (geometry.getCoordinateSystemId() == 0) {
               throw new IllegalArgumentException(

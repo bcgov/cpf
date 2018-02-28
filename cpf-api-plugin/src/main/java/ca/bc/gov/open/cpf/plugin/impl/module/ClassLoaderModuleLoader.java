@@ -16,12 +16,9 @@
 package ca.bc.gov.open.cpf.plugin.impl.module;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,41 +34,6 @@ import com.revolsys.spring.ClassLoaderFactoryBean;
 import com.revolsys.util.Property;
 
 public class ClassLoaderModuleLoader implements ModuleLoader {
-
-  public static List<URL> getConfigUrls(final ClassLoader classLoader,
-    final boolean useParentClassloader) {
-    final List<URL> configUrls = new ArrayList<>();
-    try {
-      final Enumeration<URL> urls = classLoader
-        .getResources("META-INF/ca.bc.gov.open.cpf.plugin.sf.xml");
-      while (urls.hasMoreElements()) {
-        final URL configUrl = urls.nextElement();
-        if (isDefinedInClassLoader(classLoader, useParentClassloader, configUrl)) {
-          configUrls.add(configUrl);
-        }
-      }
-    } catch (final IOException e) {
-      Logs.error(ClassLoaderModuleLoader.class, "Unable to get spring config URLs", e);
-    }
-    return configUrls;
-  }
-
-  public static boolean isDefinedInClassLoader(final ClassLoader classLoader,
-    final boolean useParentClassLoader, final URL resourceUrl) {
-    if (useParentClassLoader) {
-      return true;
-    } else if (classLoader instanceof URLClassLoader) {
-      final URLClassLoader urlClassLoader = (URLClassLoader)classLoader;
-      for (final URL url : urlClassLoader.getURLs()) {
-        if (resourceUrl.toString().contains(url.toString())) {
-          return true;
-        }
-      }
-      return false;
-    } else {
-      return true;
-    }
-  }
 
   private BusinessApplicationRegistry businessApplicationRegistry;
 
@@ -99,7 +61,8 @@ public class ClassLoaderModuleLoader implements ModuleLoader {
     if (this.modulesByName == null) {
       this.modulesByName = new HashMap<>();
       try {
-        final List<URL> configUrls = getConfigUrls(this.classLoader, this.useParentClassLoader);
+        final List<URL> configUrls = ModuleLoader.getConfigUrls(this.classLoader,
+          this.useParentClassLoader);
         for (final URL configUrl : configUrls) {
           try {
             String moduleName = configUrl.toString();
@@ -110,10 +73,7 @@ public class ClassLoaderModuleLoader implements ModuleLoader {
             moduleName = moduleName.replaceAll(".*/", "");
             moduleName = moduleName.replaceAll(".jar", "");
             if (moduleName.indexOf('.') == -1) {
-              final int dashIndex = moduleName.lastIndexOf('-');
-              if (dashIndex != -1) {
-                moduleName = moduleName.substring(dashIndex + 1);
-              }
+              moduleName = moduleName.replace('-', '_');
             } else {
               moduleName = FileUtil.getFileNameExtension(PathUtil.getName(moduleName));
             }
@@ -123,7 +83,7 @@ public class ClassLoaderModuleLoader implements ModuleLoader {
             final ConfigPropertyLoader configPropertyLoader = this.businessApplicationRegistry
               .getConfigPropertyLoader();
             final ClassLoaderModule module = new ClassLoaderModule(this.businessApplicationRegistry,
-              moduleName, this.classLoader, configPropertyLoader, configUrl);
+              moduleName, this.classLoader, configPropertyLoader, configUrl, "ERROR");
             this.businessApplicationRegistry.addModule(module);
             this.modulesByName.put(moduleName, module);
             module.enable();
@@ -132,7 +92,7 @@ public class ClassLoaderModuleLoader implements ModuleLoader {
           }
         }
       } catch (final Throwable e) {
-        Logs.error(ClassLoaderModuleLoader.class, "Unable to register modules", e);
+        Logs.error(this, "Unable to register modules", e);
       }
     }
   }

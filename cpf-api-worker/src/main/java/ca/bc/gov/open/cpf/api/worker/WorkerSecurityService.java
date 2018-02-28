@@ -21,7 +21,8 @@ import java.util.Map;
 import ca.bc.gov.open.cpf.plugin.impl.module.Module;
 import ca.bc.gov.open.cpf.plugin.impl.security.AbstractCachingSecurityService;
 
-import com.revolsys.collection.map.Maps;
+import com.revolsys.collection.map.LinkedHashMapEx;
+import com.revolsys.collection.map.MapEx;
 import com.revolsys.websocket.json.JsonAsyncSender;
 import com.revolsys.websocket.json.JsonPropertyAsyncResult;
 
@@ -44,7 +45,7 @@ public class WorkerSecurityService extends AbstractCachingSecurityService {
       if (messageSender == null) {
         return false;
       } else {
-        final Map<String, Object> message = Maps.newLinkedHash("type", "securityCanAccessResource");
+        final MapEx message = new LinkedHashMapEx("type", "securityCanAccessResource");
         message.put("moduleName", this.moduleName);
         message.put("consumerKey", getUsername());
         message.put("actionName", actionName);
@@ -64,7 +65,7 @@ public class WorkerSecurityService extends AbstractCachingSecurityService {
       if (messageSender == null) {
         return false;
       } else {
-        final Map<String, Object> message = Maps.newLinkedHash("type", "securityIsMemberOfGroup");
+        final MapEx message = new LinkedHashMapEx("type", "securityIsMemberOfGroup");
         message.put("moduleName", this.moduleName);
         message.put("consumerKey", getUsername());
         message.put("groupName", groupName);
@@ -84,7 +85,7 @@ public class WorkerSecurityService extends AbstractCachingSecurityService {
       if (messageSender == null) {
         return false;
       } else {
-        final Map<String, Object> message = Maps.newLinkedHash("type", "securityCanAccessResource");
+        final MapEx message = new LinkedHashMapEx("type", "securityCanAccessResource");
         message.put("moduleName", this.moduleName);
         message.put("consumerKey", getUsername());
         message.put("resourceClass", resourceClass);
@@ -106,7 +107,7 @@ public class WorkerSecurityService extends AbstractCachingSecurityService {
       if (messageSender == null) {
         return Collections.emptyMap();
       } else {
-        final Map<String, Object> message = Maps.newLinkedHash("type", "securityCanAccessResource");
+        final MapEx message = new LinkedHashMapEx("type", "securityCanAccessResource");
         message.put("moduleName", this.moduleName);
         message.put("consumerKey", getUsername());
         return messageSender.sendAndWait(message, new JsonPropertyAsyncResult("attributes"));

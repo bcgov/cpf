@@ -20,9 +20,12 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -106,15 +109,14 @@ public class StatisticsService extends BaseInProcess<Map<String, ? extends Objec
 
   public boolean canDeleteStatistic(final BusinessApplicationStatistics statistics,
     final Date currentTime) {
-    final String durationType = statistics.getDurationType();
+    final DurationType durationType = statistics.getDurationType();
 
     if (BusinessApplicationStatistics.MONTH_OR_YEAR.contains(durationType)) {
       return false;
     } else {
-      final String parentDurationType = statistics.getParentDurationType();
+      final DurationType parentDurationType = statistics.getParentDurationType();
       final String parentId = statistics.getParentId();
-      final String currentParentId = BusinessApplicationStatistics.getId(parentDurationType,
-        currentTime);
+      final String currentParentId = parentDurationType.getId(currentTime);
       return parentId.compareTo(currentParentId) < 0;
     }
   }
@@ -128,6 +130,8 @@ public class StatisticsService extends BaseInProcess<Map<String, ? extends Objec
         collateInMemoryStatistics(statisticsByAppAndId);
 
         collateDatabaseStatistics(statisticsByAppAndId);
+
+        collateYearStatistics(statisticsByAppAndId);
 
         saveStatistics(statisticsByAppAndId);
 
@@ -151,14 +155,13 @@ public class StatisticsService extends BaseInProcess<Map<String, ? extends Objec
         boolean delete = false;
         final Date startTime = statisticsRecord
           .getValue(BusinessApplicationStatistics.START_TIMESTAMP);
-        final String durationType = statisticsRecord
-          .getValue(BusinessApplicationStatistics.DURATION_TYPE);
+        final DurationType durationType = DurationType.getDurationType(statisticsRecord);
         final String businessApplicationName = statisticsRecord
           .getValue(BusinessApplicationStatistics.BUSINESS_APPLICATION_NAME);
         final BusinessApplication businessApplication = this.batchJobService
           .getBusinessApplication(businessApplicationName);
         if (businessApplication != null) {
-          final String statisticsId = BusinessApplicationStatistics.getId(durationType, startTime);
+          final String statisticsId = durationType.getId(startTime);
           final String valuesString = statisticsRecord
             .getValue(BusinessApplicationStatistics.STATISTIC_VALUES);
           if (Property.hasValue(valuesString)) {
@@ -203,8 +206,8 @@ public class StatisticsService extends BaseInProcess<Map<String, ? extends Objec
     final Map<String, Map<String, BusinessApplicationStatistics>> oldStatistics = getStatisticsByAppAndId();
     for (final Map<String, BusinessApplicationStatistics> statsById : oldStatistics.values()) {
       for (final BusinessApplicationStatistics statistics : statsById.values()) {
-        final String durationType = statistics.getDurationType();
-        if (durationType.equals(BusinessApplicationStatistics.HOUR)) {
+        final DurationType durationType = statistics.getDurationType();
+        if (durationType == DurationType.HOUR) {
           final Identifier databaseId = statistics.getDatabaseId();
           if (databaseId == null || statistics.isModified()) {
             addStatistics(statisticsByAppAndId, statistics);
@@ -217,6 +220,27 @@ public class StatisticsService extends BaseInProcess<Map<String, ? extends Objec
   public void collateStatistics() {
     final Map<String, ?> values = Collections.singletonMap(COLLATE, Boolean.TRUE);
     sendStatistics(values);
+  }
+
+  private void collateYearStatistics(
+    final Map<String, Map<String, BusinessApplicationStatistics>> statisticsByAppAndId) {
+    for (final Entry<String, Map<String, BusinessApplicationStatistics>> entry : statisticsByAppAndId
+      .entrySet()) {
+      final String businessApplicationName = entry.getKey();
+      final Map<String, BusinessApplicationStatistics> statsById = entry.getValue();
+      final Set<String> yearsWithMonthStats = new HashSet<>();
+      for (final BusinessApplicationStatistics statistics : statsById.values()) {
+        if (DurationType.MONTH == statistics.getDurationType()) {
+          final String yearId = statistics.getParentId();
+          final BusinessApplicationStatistics yearStatistics = getStatistics(statisticsByAppAndId,
+            businessApplicationName, yearId);
+          if (yearsWithMonthStats.add(yearId)) {
+            yearStatistics.clearStatistics();
+          }
+          yearStatistics.addStatistics(statistics);
+        }
+      }
+    }
   }
 
   @Override
@@ -299,8 +323,8 @@ public class StatisticsService extends BaseInProcess<Map<String, ? extends Objec
       } else {
         final Date time = (Date)values.get("time");
         final String businessApplicationName = (String)values.get("businessApplicationName");
-        for (final String durationType : BusinessApplicationStatistics.DURATION_TYPES) {
-          final String statisticsId = BusinessApplicationStatistics.getId(durationType, time);
+        for (final DurationType durationType : BusinessApplicationStatistics.DURATION_TYPES) {
+          final String statisticsId = durationType.getId(time);
           final BusinessApplicationStatistics statistics = getStatistics(businessApplicationName,
             statisticsId);
           statistics.addStatistics(values);
@@ -328,8 +352,8 @@ public class StatisticsService extends BaseInProcess<Map<String, ? extends Objec
       }
       if (statisticsById != null) {
         for (final BusinessApplicationStatistics statistics : statisticsById.values()) {
-          final String durationType = statistics.getDurationType();
-          if (durationType.equals(BusinessApplicationStatistics.HOUR)) {
+          final DurationType durationType = statistics.getDurationType();
+          if (durationType == DurationType.HOUR) {
             this.dataAccessObject.saveStatistics(statistics);
           }
         }
@@ -349,8 +373,8 @@ public class StatisticsService extends BaseInProcess<Map<String, ? extends Objec
           this.dataAccessObject.deleteBusinessApplicationStatistics(databaseId);
         }
       } else {
-        final String durationType = statistics.getDurationType();
-        final String currentId = BusinessApplicationStatistics.getId(durationType, currentTime);
+        final DurationType durationType = statistics.getDurationType();
+        final String currentId = durationType.getId(currentTime);
         if (!currentId.equals(statistics.getId())) {
           this.dataAccessObject.saveStatistics(statistics);
         } else {

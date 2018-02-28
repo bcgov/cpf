@@ -85,6 +85,7 @@ import com.revolsys.io.FileUtil;
 import com.revolsys.io.IoFactory;
 import com.revolsys.io.map.MapReader;
 import com.revolsys.io.map.MapReaderFactory;
+import com.revolsys.open.compiler.annotation.Documentation;
 import com.revolsys.record.io.RecordWriterFactory;
 import com.revolsys.record.property.FieldProperties;
 import com.revolsys.record.schema.FieldDefinition;
@@ -205,20 +206,20 @@ public class ClassLoaderModule implements Module {
   private List<String> beanImports = Collections.emptyList();
 
   public ClassLoaderModule(final BusinessApplicationRegistry businessApplicationRegistry,
-    final String moduleName) {
-    this.businessApplicationRegistry = businessApplicationRegistry;
-    this.name = moduleName;
-    this.log = new AppLog(moduleName, "INFO");
-    this.environmentId = businessApplicationRegistry.getEnvironmentId();
-  }
-
-  public ClassLoaderModule(final BusinessApplicationRegistry businessApplicationRegistry,
     final String moduleName, final ClassLoader classLoader,
-    final ConfigPropertyLoader configPropertyLoader, final URL configUrl) {
-    this(businessApplicationRegistry, moduleName);
+    final ConfigPropertyLoader configPropertyLoader, final URL configUrl, final String logLevel) {
+    this(businessApplicationRegistry, moduleName, logLevel);
     this.classLoader = classLoader;
     this.configPropertyLoader = configPropertyLoader;
     this.configUrl = configUrl;
+  }
+
+  public ClassLoaderModule(final BusinessApplicationRegistry businessApplicationRegistry,
+    final String moduleName, final String logLevel) {
+    this.businessApplicationRegistry = businessApplicationRegistry;
+    this.name = moduleName;
+    this.log = new AppLog(moduleName, logLevel);
+    this.environmentId = businessApplicationRegistry.getEnvironmentId();
   }
 
   @Override
@@ -483,6 +484,14 @@ public class ClassLoaderModule implements Module {
       final String description = pluginAnnotation.description();
       businessApplication.setDescription(description);
 
+      final Documentation detailedDescriptionAnnotation = pluginClass
+        .getAnnotation(Documentation.class);
+      if (detailedDescriptionAnnotation != null) {
+        final String detailedDescription = detailedDescriptionAnnotation.value();
+        if (Property.hasValue(detailedDescription)) {
+          businessApplication.setDetailedDescription(detailedDescription);
+        }
+      }
       final String title = pluginAnnotation.title();
       if (title != null && title.trim().length() > 0) {
         businessApplication.setTitle(title);
@@ -563,9 +572,8 @@ public class ClassLoaderModule implements Module {
         try {
           pluginClass.getMethod("setResultDataContentType", String.class);
         } catch (final Throwable e) {
-          throw new IllegalArgumentException(
-            "Business Application " + businessApplicationName
-              + " must have a public voud setResultDataContentType(String resultContentType) method",
+          throw new IllegalArgumentException("Business Application " + businessApplicationName
+            + " must have a public voud setResultDataContentType(String resultContentType) method",
             e);
         }
         businessApplication.setPerRequestResultData(true);
@@ -715,9 +723,8 @@ public class ClassLoaderModule implements Module {
         businessApplication.setSecurityServiceRequired(true);
       } catch (final NoSuchMethodException e) {
       } catch (final Throwable e) {
-        throw new IllegalArgumentException(
-          "Business Application " + businessApplicationName
-            + " has a setSecurityService(SecurityService) method but there was an error accessing it",
+        throw new IllegalArgumentException("Business Application " + businessApplicationName
+          + " has a setSecurityService(SecurityService) method but there was an error accessing it",
           e);
       }
 
@@ -794,7 +801,7 @@ public class ClassLoaderModule implements Module {
       this.log.warn(message + " scaleZ must be >= 0");
       scaleZ = geometryFactory.getScaleZ();
     }
-    return GeometryFactory.fixed(srid, axisCount, scaleXy, scaleZ);
+    return GeometryFactory.fixed(srid, axisCount, scaleXy, scaleXy, scaleZ);
   }
 
   public Set<String> getGroupNamesToDelete() {
@@ -1656,6 +1663,11 @@ public class ClassLoaderModule implements Module {
         setStatus(DISABLED);
       }
     }
+  }
+
+  @Override
+  public String toString() {
+    return this.configUrl.toString();
   }
 
 }

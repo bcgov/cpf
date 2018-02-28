@@ -22,13 +22,13 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import javax.websocket.ClientEndpoint;
 import javax.websocket.OnClose;
+import javax.websocket.OnError;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
@@ -45,13 +45,14 @@ import ca.bc.gov.open.cpf.plugin.api.log.AppLog;
 import ca.bc.gov.open.cpf.plugin.impl.BusinessApplicationRegistry;
 import ca.bc.gov.open.cpf.plugin.impl.ConfigPropertyLoader;
 import ca.bc.gov.open.cpf.plugin.impl.module.ClassLoaderModule;
-import ca.bc.gov.open.cpf.plugin.impl.module.ClassLoaderModuleLoader;
 import ca.bc.gov.open.cpf.plugin.impl.module.Module;
 import ca.bc.gov.open.cpf.plugin.impl.module.ModuleEvent;
 import ca.bc.gov.open.cpf.plugin.impl.module.ModuleEventListener;
+import ca.bc.gov.open.cpf.plugin.impl.module.ModuleLoader;
 import ca.bc.gov.open.cpf.plugin.impl.security.SignatureUtil;
 
-import com.revolsys.collection.map.Maps;
+import com.revolsys.collection.map.LinkedHashMapEx;
+import com.revolsys.collection.map.MapEx;
 import com.revolsys.io.BaseCloseable;
 import com.revolsys.io.FileUtil;
 import com.revolsys.logging.Logs;
@@ -137,8 +138,8 @@ public class WorkerMessageHandler implements ModuleEventListener, BaseCloseable 
         }
         try {
           synchronized (this) {
-            // Wait 2 minutes before trying again
-            wait(1000 * 60 * 2);
+            // Wait 1 minutes before trying again
+            wait(1000 * 60);
           }
         } catch (final InterruptedException e) {
         }
@@ -193,7 +194,7 @@ public class WorkerMessageHandler implements ModuleEventListener, BaseCloseable 
     final String action = event.getAction();
     final Module module = event.getModule();
     final String moduleName = module.getName();
-    Map<String, Object> message = null;
+    MapEx message = null;
     if (action.equals(ModuleEvent.START)) {
 
     } else if (action.equals(ModuleEvent.START_FAILED)) {
@@ -212,8 +213,8 @@ public class WorkerMessageHandler implements ModuleEventListener, BaseCloseable 
     }
   }
 
-  private void moduleSecurityChanged(final Map<String, Object> message) {
-    final String moduleName = Maps.getString(message, "moduleName");
+  private void moduleSecurityChanged(final MapEx message) {
+    final String moduleName = message.getString("moduleName");
     final ClassLoaderModule module = (ClassLoaderModule)getBusinessApplicationRegistry()
       .getModule(moduleName);
     if (module != null) {
@@ -224,10 +225,10 @@ public class WorkerMessageHandler implements ModuleEventListener, BaseCloseable 
     }
   }
 
-  protected void moduleStart(final Map<String, Object> message) {
+  protected void moduleStart(final MapEx message) {
     final String moduleName = (String)message.get("moduleName");
-    final Long moduleTime = Maps.getLong(message, "moduleTime");
-    final int moduleJarCount = Maps.getInteger(message, "moduleJarCount", 0);
+    final Long moduleTime = message.getLong("moduleTime");
+    final int moduleJarCount = message.getInteger("moduleJarCount", 0);
     if ((this.includedModuleNames.isEmpty() || this.includedModuleNames.contains(moduleName))
       && !this.excludedModuleNames.contains(moduleName)) {
       final AppLog log = new AppLog(moduleName);
@@ -268,11 +269,11 @@ public class WorkerMessageHandler implements ModuleEventListener, BaseCloseable 
         final ClassLoader parentClassLoader = getClass().getClassLoader();
         final ClassLoader classLoader = ClassLoaderFactoryBean.newClassLoader(parentClassLoader,
           urls);
-        final List<URL> configUrls = ClassLoaderModuleLoader.getConfigUrls(classLoader, false);
+        final List<URL> configUrls = ModuleLoader.getConfigUrls(classLoader, false);
         if (configUrls.isEmpty()) {
           final String urlsMessage = "Cannot load classes for module " + moduleName;
           log.error(urlsMessage);
-          final Map<String, Object> responseMessage = new LinkedHashMap<>();
+          final MapEx responseMessage = new LinkedHashMapEx();
           responseMessage.put("type", "moduleStartFailed");
           responseMessage.put("moduleName", moduleName);
           responseMessage.put("moduleTime", moduleTime);
@@ -283,14 +284,14 @@ public class WorkerMessageHandler implements ModuleEventListener, BaseCloseable 
           }
         } else {
           module = new ClassLoaderModule(businessApplicationRegistry, moduleName, classLoader,
-            this.configPropertyLoader, configUrls.get(0));
+            this.configPropertyLoader, configUrls.get(0), "INFO");
           businessApplicationRegistry.addModule(module);
           final Module startModule = module;
           this.scheduler.execute(() -> startApplications(startModule));
         }
       } catch (final Throwable e) {
         log.error("Unable to load module " + moduleName, e);
-        final Map<String, Object> responseMessage = new LinkedHashMap<>();
+        final MapEx responseMessage = new LinkedHashMapEx();
         responseMessage.put("type", "moduleStartFailed");
         responseMessage.put("moduleName", moduleName);
         responseMessage.put("moduleTime", moduleTime);
@@ -301,14 +302,13 @@ public class WorkerMessageHandler implements ModuleEventListener, BaseCloseable 
         }
       }
     } else {
-      final Map<String, Object> responseMessage = newModuleMessage(moduleName, moduleTime,
-        "moduleDisabled");
+      final MapEx responseMessage = newModuleMessage(moduleName, moduleTime, "moduleDisabled");
       sendMessage(responseMessage);
     }
   }
 
-  protected void moduleStop(final Map<String, Object> message) {
-    final String moduleName = Maps.getString(message, "moduleName");
+  protected void moduleStop(final MapEx message) {
+    final String moduleName = message.getString("moduleName");
     final ClassLoaderModule module = (ClassLoaderModule)this.getBusinessApplicationRegistry()
       .getModule(moduleName);
     if (module != null) {
@@ -316,15 +316,15 @@ public class WorkerMessageHandler implements ModuleEventListener, BaseCloseable 
     }
   }
 
-  protected Map<String, Object> newModuleMessage(final Module module, final String action) {
+  protected MapEx newModuleMessage(final Module module, final String action) {
     final String moduleName = module.getName();
     final long moduleTime = module.getStartedTime();
     return newModuleMessage(moduleName, moduleTime, action);
   }
 
-  protected Map<String, Object> newModuleMessage(final String moduleName, final long moduleTime,
+  protected MapEx newModuleMessage(final String moduleName, final long moduleTime,
     final String action) {
-    final Map<String, Object> message = new LinkedHashMap<>();
+    final MapEx message = new LinkedHashMapEx();
     message.put("type", action);
     message.put("moduleName", moduleName);
     message.put("moduleTime", moduleTime);
@@ -336,9 +336,14 @@ public class WorkerMessageHandler implements ModuleEventListener, BaseCloseable 
     this.messageSender = null;
   }
 
+  @OnError
+  public void onError(final Session session, final Throwable e) {
+    Logs.error(this, "Websocket error: " + session, e);
+  }
+
   @OnMessage
-  public void onMessage(final Map<String, Object> message) {
-    final String type = Maps.getString(message, "type");
+  public void onMessage(final MapEx message) {
+    final String type = message.getString("type");
     if (ModuleEvent.STOP.equals(type)) {
       moduleStop(message);
     } else if (ModuleEvent.START.equals(type)) {
@@ -360,7 +365,7 @@ public class WorkerMessageHandler implements ModuleEventListener, BaseCloseable 
     this.messageSender = new JsonAsyncSender(session);
   }
 
-  public void sendMessage(final Map<String, Object> message) {
+  public void sendMessage(final MapEx message) {
     final JsonAsyncSender messageSender = getMessageSender();
     if (messageSender != null) {
       messageSender.sendMessage(message);
@@ -383,7 +388,7 @@ public class WorkerMessageHandler implements ModuleEventListener, BaseCloseable 
 
   public void startApplications(final Module module) {
     final String moduleName = module.getName();
-    Map<String, Object> message;
+    MapEx message;
     try {
       module.enable();
       module.loadApplications();

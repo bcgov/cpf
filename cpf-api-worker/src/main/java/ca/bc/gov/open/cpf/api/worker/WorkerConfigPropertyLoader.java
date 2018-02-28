@@ -25,7 +25,8 @@ import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 
 import ca.bc.gov.open.cpf.plugin.impl.ConfigPropertyLoader;
 
-import com.revolsys.collection.map.Maps;
+import com.revolsys.collection.map.LinkedHashMapEx;
+import com.revolsys.collection.map.MapEx;
 import com.revolsys.datatype.DataType;
 import com.revolsys.datatype.DataTypes;
 import com.revolsys.logging.Logs;
@@ -60,13 +61,13 @@ public class WorkerConfigPropertyLoader extends BeanConfigurrer implements Confi
     try {
       final JsonAsyncSender messageSender = this.messageHandler.getMessageSender();
       if (messageSender != null) {
-        final Map<String, Object> message = Maps.newLinkedHash("type", "moduleConfigLoad");
+        final MapEx message = new LinkedHashMapEx("type", "moduleConfigLoad");
         message.put("moduleName", moduleName);
         message.put("environmentName", environmentName);
         message.put("componentName", componentName);
-        return messageSender.sendAndWait(message, new AsyncResult<Map<String, Object>>() {
+        return messageSender.sendAndWait(message, new AsyncResult<MapEx>() {
           @Override
-          public <V> V getResult(final Map<String, Object> result) {
+          public <V> V getResult(final MapEx result) {
             final Map<String, Object> configProperties = new HashMap<>();
             final List<Map<String, Object>> configPropertyList = (List<Map<String, Object>>)result
               .get("properties");

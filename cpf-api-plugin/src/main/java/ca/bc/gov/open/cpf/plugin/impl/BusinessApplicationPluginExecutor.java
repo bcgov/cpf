@@ -29,6 +29,7 @@ import ca.bc.gov.open.cpf.plugin.api.security.SecurityService;
 import ca.bc.gov.open.cpf.plugin.impl.log.AppLogUtil;
 import ca.bc.gov.open.cpf.plugin.impl.module.ClassLoaderModuleLoader;
 import ca.bc.gov.open.cpf.plugin.impl.module.Module;
+import ca.bc.gov.open.cpf.plugin.impl.module.ModuleLoader;
 import ca.bc.gov.open.cpf.plugin.impl.security.MockSecurityService;
 import ca.bc.gov.open.cpf.plugin.impl.security.MockSecurityServiceFactory;
 import ca.bc.gov.open.cpf.plugin.impl.security.SecurityServiceFactory;
@@ -53,7 +54,7 @@ public class BusinessApplicationPluginExecutor {
 
   public BusinessApplicationPluginExecutor() {
     final ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-    final ClassLoaderModuleLoader moduleLoader = new ClassLoaderModuleLoader(classLoader);
+    final ModuleLoader moduleLoader = new ClassLoaderModuleLoader(classLoader);
     this.businessApplicationRegistry = new BusinessApplicationRegistry(false, moduleLoader);
   }
 
@@ -84,6 +85,7 @@ public class BusinessApplicationPluginExecutor {
    */
   public Map<String, Object> execute(final String businessApplicationName,
     final Map<String, ? extends Object> inputParameters) {
+    final Object sequenceNumber = inputParameters.get("sequenceNumber");
     final PluginAdaptor plugin = getPlugin(businessApplicationName);
     final StopWatch stopWatch = new StopWatch();
     stopWatch.start();
@@ -114,6 +116,8 @@ public class BusinessApplicationPluginExecutor {
     final RecordDefinition resultRecordDefinition = businessApplication.getResultRecordDefinition();
     final Map<String, Object> response = plugin.getResponseFields();
     final Record result = getResultRecord(resultRecordDefinition, response);
+    result.setValue("sequenceNumber", sequenceNumber);
+
     AppLogUtil.info(log, "End\tExecution", stopWatch);
     return result;
   }

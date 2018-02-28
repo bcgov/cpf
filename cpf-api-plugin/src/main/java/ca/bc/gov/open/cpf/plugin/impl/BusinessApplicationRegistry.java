@@ -85,8 +85,8 @@ public final class BusinessApplicationRegistry
 
   private File appLogDirectory;
 
-  private Channel<Map<String, Object>> moduleControlChannel = new Channel<>(
-    "moduleControlChannel", new Buffer<Map<String, Object>>(10000));
+  private Channel<Map<String, Object>> moduleControlChannel = new Channel<>("moduleControlChannel",
+    new Buffer<Map<String, Object>>(10000));
 
   private Thread moduleControlThread;
 
@@ -126,7 +126,7 @@ public final class BusinessApplicationRegistry
         this.modulesByName.put(name, module);
       } else {
         module.clearModuleError();
-        module.addModuleError("Module with the same name is already loaded");
+        module.addModuleError("Module with the same name is already loaded: " + name);
       }
     }
   }

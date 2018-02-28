@@ -19,9 +19,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 @SuppressWarnings("javadoc")
-public class OAuthHttpClientPool {
+public class CpfHttpClientPool {
 
-  private Set<OAuthHttpClient> clients = new HashSet<>();
+  private Set<CpfHttpClient> clients = new HashSet<>();
 
   private String consumerKey;
 
@@ -31,10 +31,10 @@ public class OAuthHttpClientPool {
 
   private String webServiceUrl;
 
-  public OAuthHttpClientPool() {
+  public CpfHttpClientPool() {
   }
 
-  public OAuthHttpClientPool(final String webServiceUrl, final String consumerKey,
+  public CpfHttpClientPool(final String webServiceUrl, final String consumerKey,
     final String consumerSecret, final int maxConnections) {
     this.webServiceUrl = webServiceUrl;
     this.consumerKey = consumerKey;
@@ -44,16 +44,16 @@ public class OAuthHttpClientPool {
 
   public void close() {
     synchronized (this.clients) {
-      for (final OAuthHttpClient client : this.clients) {
+      for (final CpfHttpClient client : this.clients) {
         client.close();
       }
-      final Set<OAuthHttpClient> oldClients = this.clients;
+      final Set<CpfHttpClient> oldClients = this.clients;
       this.clients = null;
       oldClients.notifyAll();
     }
   }
 
-  public OAuthHttpClient getClient() {
+  public CpfHttpClient getClient() {
     synchronized (this.clients) {
       while (this.clients != null && this.clients.size() >= this.maxConnections) {
         try {
@@ -64,8 +64,8 @@ public class OAuthHttpClientPool {
       if (this.clients == null) {
         throw new IllegalStateException("Connection pool closed");
       } else {
-        final OAuthHttpClient client = new OAuthHttpClient(this, this.webServiceUrl,
-          this.consumerKey, this.consumerSecret);
+        final CpfHttpClient client = new CpfHttpClient(this, this.webServiceUrl, this.consumerKey,
+          this.consumerSecret);
         return client;
       }
     }
@@ -87,10 +87,10 @@ public class OAuthHttpClientPool {
     return this.webServiceUrl;
   }
 
-  public void releaseClient(final OAuthHttpClient client) {
+  public void releaseClient(final CpfHttpClient client) {
     synchronized (this.clients) {
       if (client != null) {
-        client.getConnectionManager().shutdown();
+        client.getHttpClient().getConnectionManager().shutdown();
         if (this.clients != null) {
           this.clients.remove(client);
           this.clients.notifyAll();

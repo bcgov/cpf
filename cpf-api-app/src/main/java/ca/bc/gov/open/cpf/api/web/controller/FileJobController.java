@@ -23,7 +23,6 @@ import java.io.InputStream;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -77,15 +76,6 @@ public class FileJobController extends AbstractJobController {
   public FileJobController(final BatchJobService batchJobService, final File rootDirectory) {
     super(batchJobService.getDataAccessObject());
     this.rootDirectory = rootDirectory;
-  }
-
-  @Override
-  public void cancelJob(final Identifier jobId) {
-    for (final String directoryName : Arrays.asList(JOB_INPUTS, JOB_RESULTS, GROUP_INPUTS,
-      GROUP_RESULTS)) {
-      final File directory = getJobDirectory(jobId, directoryName);
-      deleteDirectory(jobId, directory);
-    }
   }
 
   protected void deleteDirectory(final Identifier jobId, final File directory) {

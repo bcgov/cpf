@@ -88,6 +88,7 @@ import ca.bc.gov.open.cpf.plugin.impl.module.ModuleEventListener;
 import ca.bc.gov.open.cpf.plugin.impl.security.SecurityServiceFactory;
 
 import com.revolsys.collection.list.Lists;
+import com.revolsys.collection.map.LinkedHashMapEx;
 import com.revolsys.collection.map.MapEx;
 import com.revolsys.collection.map.Maps;
 import com.revolsys.collection.map.NamedLinkedHashMapEx;
@@ -124,7 +125,7 @@ import com.revolsys.record.query.Query;
 import com.revolsys.record.schema.FieldDefinition;
 import com.revolsys.record.schema.RecordDefinition;
 import com.revolsys.record.schema.RecordStore;
-import com.revolsys.spring.resource.FileSystemResource;
+import com.revolsys.spring.resource.PathResource;
 import com.revolsys.transaction.Propagation;
 import com.revolsys.transaction.SendToChannelAfterCommit;
 import com.revolsys.transaction.Transaction;
@@ -220,7 +221,7 @@ public class BatchJobService implements ModuleEventListener {
           geometry = (Geometry)parameterValue;
           if (geometry.getCoordinateSystemId() == 0 && Property.hasValue(sridString)) {
             final int srid = Integer.parseInt(sridString);
-            final GeometryFactory sourceGeometryFactory = GeometryFactory.floating3(srid);
+            final GeometryFactory sourceGeometryFactory = GeometryFactory.floating3d(srid);
             geometry = sourceGeometryFactory.geometry(geometry);
           }
         } else {
@@ -237,7 +238,7 @@ public class BatchJobService implements ModuleEventListener {
           try {
             if (Property.hasValue(sridString)) {
               final int srid = Integer.parseInt(sridString);
-              final GeometryFactory sourceGeometryFactory = GeometryFactory.floating3(srid);
+              final GeometryFactory sourceGeometryFactory = GeometryFactory.floating3d(srid);
               geometry = sourceGeometryFactory.geometry(wkt, false);
             } else {
               geometry = geometryFactory.geometry(wkt, false);
@@ -350,7 +351,6 @@ public class BatchJobService implements ModuleEventListener {
     final BatchJob batchJob = getBatchJob(batchJobId);
     if (batchJob != null) {
       if (batchJob.cancelJob(this, this.scheduler)) {
-        this.jobController.cancelJob(batchJobId);
         synchronized (this.workersById) {
           for (final Worker worker : this.workersById.values()) {
             worker.cancelBatchJob(batchJobId);
@@ -668,7 +668,7 @@ public class BatchJobService implements ModuleEventListener {
         geometryFactory.getScaleXY());
       final double scaleZ = Maps.getDouble(parameters, "resultScaleFactorZ",
         geometryFactory.getScaleZ());
-      return GeometryFactory.fixed(srid, axisCount, scaleXY, scaleZ);
+      return GeometryFactory.fixed(srid, axisCount, scaleXY, scaleXY, scaleZ);
     }
   }
 
@@ -930,7 +930,7 @@ public class BatchJobService implements ModuleEventListener {
       resultRecordDefinition.getGeometryFactory(), businessApplicationParameters);
     final String title = "Job " + batchJobId + " Result";
 
-    final FileSystemResource resource = new FileSystemResource(structuredResultFile);
+    final PathResource resource = new PathResource(structuredResultFile);
     return newStructuredResultWriter(resource, application, resultRecordDefinition, resultFormat,
       title, geometryFactory);
   }
@@ -1553,7 +1553,7 @@ public class BatchJobService implements ModuleEventListener {
     }
   }
 
-  public void sendWorkerMessage(final Map<String, Object> message) {
+  public void sendWorkerMessage(final MapEx message) {
     synchronized (this.workersById) {
       for (final Worker worker : this.workersById.values()) {
         worker.sendMessage(message);
@@ -1655,7 +1655,7 @@ public class BatchJobService implements ModuleEventListener {
           this.workersByKey.put(worker.getKey(), worker);
           for (final Module module : this.businessApplicationRegistry.getModules()) {
             if (module.isStarted()) {
-              final LinkedHashMap<String, Object> message = new LinkedHashMap<>();
+              final MapEx message = new LinkedHashMapEx();
               message.put("type", "moduleStart");
 
               final String name = module.getName();

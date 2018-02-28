@@ -98,7 +98,8 @@ public class GeometryValidatorPlugin {
         this.resultScaleFactorZ = sourceGeometryFactory.getScaleZ();
       }
       final GeometryFactory geometryFactory = GeometryFactory.fixed(this.resultSrid,
-        this.resultNumAxis, this.resultScaleFactorXy, this.resultScaleFactorZ);
+        this.resultNumAxis, this.resultScaleFactorXy, this.resultScaleFactorXy,
+        this.resultScaleFactorZ);
       this.geometry = geometryFactory.geometry(this.geometry);
 
       final IsValidOp validOp = new IsValidOp(this.geometry);

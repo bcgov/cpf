@@ -25,7 +25,7 @@ import com.revolsys.collection.map.MapEx;
 import com.revolsys.io.map.MapReader;
 import com.revolsys.parallel.channel.Channel;
 import com.revolsys.parallel.channel.store.Buffer;
-import com.revolsys.spring.resource.FileSystemResource;
+import com.revolsys.spring.resource.PathResource;
 import com.revolsys.spring.resource.Resource;
 
 public class MtwsThreadTest {
@@ -35,7 +35,7 @@ public class MtwsThreadTest {
 
   private static final int NUM_THREADS = 10;
 
-  private static final Resource inputDataResource = new FileSystemResource(
+  private static final Resource inputDataResource = new PathResource(
     "src/data/NTS-250000-by-name.csv");
 
   public static void main(final String[] args) {

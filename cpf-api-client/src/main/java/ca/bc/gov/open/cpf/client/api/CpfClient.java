@@ -33,15 +33,18 @@ import org.apache.http.HttpStatus;
 import org.apache.http.StatusLine;
 import org.apache.http.util.EntityUtils;
 
+import ca.bc.gov.open.cpf.client.httpclient.CpfHttpClient;
+import ca.bc.gov.open.cpf.client.httpclient.CpfHttpClientPool;
 import ca.bc.gov.open.cpf.client.httpclient.HttpMultipartPost;
-import ca.bc.gov.open.cpf.client.httpclient.OAuthHttpClient;
-import ca.bc.gov.open.cpf.client.httpclient.OAuthHttpClientPool;
+import ca.bc.gov.open.cpf.client.httpclient.HttpStatusCodeException;
 
+import com.revolsys.collection.map.MapEx;
 import com.revolsys.io.BaseCloseable;
 import com.revolsys.io.IoFactory;
 import com.revolsys.io.map.MapReader;
 import com.revolsys.io.map.MapWriter;
 import com.revolsys.io.map.MapWriterFactory;
+import com.revolsys.record.io.format.json.Json;
 import com.revolsys.spring.resource.ByteArrayResource;
 import com.revolsys.spring.resource.Resource;
 import com.revolsys.util.Property;
@@ -96,7 +99,7 @@ import com.revolsys.util.Property;
  */
 public class CpfClient implements BaseCloseable {
   /** DigestHttpClient using OAuth credentials */
-  private OAuthHttpClientPool httpClientPool;
+  private CpfHttpClientPool httpClientPool;
 
   /**
    * <p>Construct a new CpfClient connected to the specified server using the
@@ -118,7 +121,7 @@ public class CpfClient implements BaseCloseable {
    */
   public CpfClient(String url, final String consumerKey, final String consumerSecret) {
     url = url.replaceAll("(/ws)?/*$", "");
-    this.httpClientPool = new OAuthHttpClientPool(url, consumerKey, consumerSecret, 1);
+    this.httpClientPool = new CpfHttpClientPool(url, consumerKey, consumerSecret, 1);
   }
 
   /**
@@ -135,6 +138,38 @@ public class CpfClient implements BaseCloseable {
         final Object value = jobParameters.get(parameterName);
         request.addParameter(parameterName, value);
       }
+    }
+  }
+
+  /**
+   * <p>Cancel the job
+   * using the <a href="../rest-api/#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.cancelJob">Cancel Job</a> REST API.</p>
+   *
+   * <p>The following code fragment shows an example of using the API.</p>
+   *
+   * <pre class="prettyprint language-java">  String url = "https://apps.gov.bc.ca/pub/cpf";
+  String consumerKey = "cpftest";
+  String consumerSecret = "cpftest";
+  try (CpfClient client = new CpfClient(url, consumerKey, consumerSecret){
+    Map&lt;String, Object&gt; parameters = new HashMap&lt;String, Object&gt;();
+    parameters.put("mapGridName", "BCGS 1:20 000");
+    parameters.put("mapTileId", "92g025");
+    String jobId = client.createJobWithStructuredSingleRequest(
+      "MapTileByTileId", parameters, "application/json");
+    // Download the results of the job
+    client.closeJob(jobId);
+  }</pre>
+   *
+   * @param jobUrl The URL of the job to be closed.
+   */
+  public void cancelJob(final String jobUrl) {
+    final CpfHttpClient httpClient = this.httpClientPool.getClient();
+    try {
+      httpClient.postResource(jobUrl + "/cancel");
+    } catch (final IOException e) {
+      throw new RuntimeException("Unable to cancel job " + jobUrl, e);
+    } finally {
+      this.httpClientPool.releaseClient(httpClient);
     }
   }
 
@@ -183,38 +218,15 @@ public class CpfClient implements BaseCloseable {
   }
 
   /**
-   * <p>Delete the job
-   * using the <a href="../rest-api/#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.deleteJob">Delete Job</a> REST API.</p>
-   *
-   * <p>The following code fragment shows an example of using the API.</p>
-   *
-   * <pre class="prettyprint language-java">  String url = "https://apps.gov.bc.ca/pub/cpf";
-  String consumerKey = "cpftest";
-  String consumerSecret = "cpftest";
-  CpfClient client = new CpfClient(url, consumerKey, consumerSecret);
-  try {
-    Map&lt;String, Object&gt; parameters = new HashMap&lt;String, Object&gt;();
-    parameters.put("mapGridName", "BCGS 1:20 000");
-    parameters.put("mapTileId", "92g025");
-    String jobId = client.createJobWithStructuredSingleRequest(
-      "MapTileByTileId", parameters, "application/json");
-    // Download the results of the job
-    client.closeJob(jobId);
-  } finally {
-    client.closeConnection();
-  }</pre>
+   * Replace by {@link #cancelJob(String)}. Or use {@link #deleteJob(String)} to actually delete the job.
    *
    * @param jobUrl The URL of the job to be closed.
+   * @see #cancelJob(String)
+   * @see #deleteJob(String)
    */
+  @Deprecated
   public void closeJob(final String jobUrl) {
-    final OAuthHttpClient httpClient = this.httpClientPool.getClient();
-    try {
-      httpClient.deleteUrl(jobUrl);
-    } catch (final IOException e) {
-      throw new RuntimeException("Unable to close job " + jobUrl, e);
-    } finally {
-      this.httpClientPool.releaseClient(httpClient);
-    }
+    deleteJob(jobUrl);
   }
 
   /**
@@ -263,7 +275,7 @@ public class CpfClient implements BaseCloseable {
   public String createJobWithOpaqueResourceRequests(final String businessApplicationName,
     final Map<String, Object> jobParameters, final String inputDataContentType,
     final String resultContentType, final Collection<Resource> requests) {
-    final OAuthHttpClient httpClient = this.httpClientPool.getClient();
+    final CpfHttpClient httpClient = this.httpClientPool.getClient();
     try {
       final String url = httpClient.getUrl("/ws/apps/" + businessApplicationName + "/multiple/");
 
@@ -375,7 +387,7 @@ public class CpfClient implements BaseCloseable {
   public String createJobWithOpaqueUrlRequests(final String businessApplicationName,
     final Map<String, ? extends Object> jobParameters, final String inputDataContentType,
     final String resultContentType, final Collection<String> inputDataUrls) {
-    final OAuthHttpClient httpClient = this.httpClientPool.getClient();
+    final CpfHttpClient httpClient = this.httpClientPool.getClient();
     try {
       final String url = httpClient.getUrl("/ws/apps/" + businessApplicationName + "/multiple/");
 
@@ -490,8 +502,8 @@ public class CpfClient implements BaseCloseable {
    */
   public String createJobWithStructuredMultipleRequestsList(final String businessApplicationName,
     final Map<String, ? extends Object> jobParameters,
-    final List<Map<String, ? extends Object>> requests, final String resultContentType) {
-    final String inputDataType = "application/json";
+    final List<? extends Map<String, ? extends Object>> requests, final String resultContentType) {
+    final String inputDataType = Json.MIME_TYPE;
     final int numRequests = requests.size();
 
     final MapWriterFactory factory = IoFactory.factoryByMediaType(MapWriterFactory.class,
@@ -568,7 +580,7 @@ public class CpfClient implements BaseCloseable {
     final String businessApplicationName, final Map<String, ? extends Object> jobParameters,
     final int numRequests, final Resource inputData, final String inputDataContentType,
     final String resultContentType) {
-    final OAuthHttpClient httpClient = this.httpClientPool.getClient();
+    final CpfHttpClient httpClient = this.httpClientPool.getClient();
     try {
       final String url = httpClient.getUrl("/ws/apps/" + businessApplicationName + "/multiple/");
 
@@ -639,7 +651,7 @@ public class CpfClient implements BaseCloseable {
   public String createJobWithStructuredMultipleRequestsUrl(final String businessApplicationName,
     final Map<String, ? extends Object> jobParameters, final int numRequests,
     final String inputDataUrl, final String inputDataContentType, final String resultContentType) {
-    final OAuthHttpClient httpClient = this.httpClientPool.getClient();
+    final CpfHttpClient httpClient = this.httpClientPool.getClient();
     try {
       final String url = httpClient.getUrl("/ws/apps/" + businessApplicationName + "/multiple/");
 
@@ -697,7 +709,7 @@ public class CpfClient implements BaseCloseable {
    */
   public String createJobWithStructuredSingleRequest(final String businessApplicationName,
     final Map<String, ? extends Object> parameters, final String resultContentType) {
-    final OAuthHttpClient httpClient = this.httpClientPool.getClient();
+    final CpfHttpClient httpClient = this.httpClientPool.getClient();
     try {
       final String url = httpClient.getUrl("/ws/apps/" + businessApplicationName + "/single/");
 
@@ -707,6 +719,38 @@ public class CpfClient implements BaseCloseable {
       request.addParameter("resultDataContentType", resultContentType);
 
       return httpClient.postResourceRedirect(request);
+    } finally {
+      this.httpClientPool.releaseClient(httpClient);
+    }
+  }
+
+  /**
+   * <p>Delete the job
+   * using the <a href="../rest-api/#ca.bc.gov.open.cpf.api.web.rest.ConcurrentProcessingFramework.deleteJob">Cancel Job</a> REST API.</p>
+   *
+   * <p>The following code fragment shows an example of using the API.</p>
+   *
+   * <pre class="prettyprint language-java">  String url = "https://apps.gov.bc.ca/pub/cpf";
+  String consumerKey = "cpftest";
+  String consumerSecret = "cpftest";
+  try (CpfClient client = new CpfClient(url, consumerKey, consumerSecret){
+    Map&lt;String, Object&gt; parameters = new HashMap&lt;String, Object&gt;();
+    parameters.put("mapGridName", "BCGS 1:20 000");
+    parameters.put("mapTileId", "92g025");
+    String jobId = client.createJobWithStructuredSingleRequest(
+      "MapTileByTileId", parameters, "application/json");
+    // Download the results of the job
+    client.deleteJob(jobId);
+  }</pre>
+   *
+   * @param jobUrl The URL of the job to be closed.
+   */
+  public void deleteJob(final String jobUrl) {
+    final CpfHttpClient httpClient = this.httpClientPool.getClient();
+    try {
+      httpClient.deleteUrl(jobUrl);
+    } catch (final IOException e) {
+      throw new RuntimeException("Unable to close job " + jobUrl, e);
     } finally {
       this.httpClientPool.releaseClient(httpClient);
     }
@@ -735,7 +779,7 @@ public class CpfClient implements BaseCloseable {
    */
   public Map<String, Object> getBusinessApplicationInstantSpecification(
     final String businessApplicationName) {
-    final OAuthHttpClient httpClient = this.httpClientPool.getClient();
+    final CpfHttpClient httpClient = this.httpClientPool.getClient();
     try {
       final String url = httpClient
         .getUrl("/ws/apps/" + businessApplicationName + "/instant/?format=json&specification=true");
@@ -769,7 +813,7 @@ public class CpfClient implements BaseCloseable {
    */
   public Map<String, Object> getBusinessApplicationMultipleSpecification(
     final String businessApplicationName) {
-    final OAuthHttpClient httpClient = this.httpClientPool.getClient();
+    final CpfHttpClient httpClient = this.httpClientPool.getClient();
     try {
       final String url = httpClient.getUrl("/ws/apps/" + businessApplicationName + "/multiple/");
       final Map<String, Object> result = httpClient.getJsonResource(url);
@@ -801,7 +845,7 @@ public class CpfClient implements BaseCloseable {
    * @return The list of business application names.
    */
   public List<String> getBusinessApplicationNames() {
-    final OAuthHttpClient httpClient = this.httpClientPool.getClient();
+    final CpfHttpClient httpClient = this.httpClientPool.getClient();
     final String url = httpClient.getUrl("/ws/apps/");
     try {
       final Map<String, Object> result = httpClient.getJsonResource(url);
@@ -846,7 +890,7 @@ public class CpfClient implements BaseCloseable {
    */
   public Map<String, Object> getBusinessApplicationSingleSpecification(
     final String businessApplicationName) {
-    final OAuthHttpClient httpClient = this.httpClientPool.getClient();
+    final CpfHttpClient httpClient = this.httpClientPool.getClient();
     try {
       final String url = httpClient.getUrl("/ws/apps/" + businessApplicationName + "/single/");
       final Map<String, Object> result = httpClient.getJsonResource(url);
@@ -926,7 +970,7 @@ public class CpfClient implements BaseCloseable {
     "unchecked", "rawtypes"
   })
   public List<Map<String, Object>> getJobErrorResults(final String jobIdUrl, final long maxWait) {
-    final OAuthHttpClient httpClient = this.httpClientPool.getClient();
+    final CpfHttpClient httpClient = this.httpClientPool.getClient();
     try {
       for (final Map<String, Object> resultFile : getJobResultFileList(jobIdUrl, maxWait)) {
         final String resultType = (String)resultFile.get("batchJobResultType");
@@ -954,7 +998,7 @@ public class CpfClient implements BaseCloseable {
    * @return The list of job id URLs.
    */
   private List<String> getJobIdUrls(final String path) {
-    final OAuthHttpClient httpClient = this.httpClientPool.getClient();
+    final CpfHttpClient httpClient = this.httpClientPool.getClient();
     try {
       final String url = httpClient.getUrl(path);
       final Map<String, Object> jobs = httpClient.getJsonResource(url);
@@ -1041,7 +1085,7 @@ public class CpfClient implements BaseCloseable {
    */
   @SuppressWarnings("unchecked")
   public List<Map<String, Object>> getJobResultFileList(final String jobIdUrl, final long maxWait) {
-    final OAuthHttpClient httpClient = this.httpClientPool.getClient();
+    final CpfHttpClient httpClient = this.httpClientPool.getClient();
     try {
       if (isJobCompleted(jobIdUrl, maxWait)) {
         final String resultsUrl = jobIdUrl + "results/";
@@ -1085,10 +1129,15 @@ public class CpfClient implements BaseCloseable {
    * @return A map containing the <a href="../../jobStatus.html">job status</a>.
    */
   public Map<String, Object> getJobStatus(final String jobUrl) {
-    final OAuthHttpClient httpClient = this.httpClientPool.getClient();
+    final CpfHttpClient httpClient = this.httpClientPool.getClient();
     try {
-      final Map<String, Object> jobStatusMap = httpClient.getJsonResource(jobUrl);
-      return jobStatusMap;
+      return httpClient.getJsonResource(jobUrl);
+    } catch (final HttpStatusCodeException e) {
+      if (e.getStatusCode() == 404) {
+        return MapEx.EMPTY;
+      } else {
+        throw e;
+      }
     } finally {
       this.httpClientPool.releaseClient(httpClient);
     }
@@ -1165,7 +1214,7 @@ public class CpfClient implements BaseCloseable {
   })
   public List<Map<String, Object>> getJobStructuredResults(final String jobIdUrl,
     final long maxWait) {
-    final OAuthHttpClient httpClient = this.httpClientPool.getClient();
+    final CpfHttpClient httpClient = this.httpClientPool.getClient();
     try {
       for (final Map<String, Object> resultFile : getJobResultFileList(jobIdUrl, maxWait)) {
         final String resultType = (String)resultFile.get("batchJobResultType");
@@ -1305,7 +1354,7 @@ public class CpfClient implements BaseCloseable {
       while (currentTime < maxEnd) {
         final Map<String, Object> jobStatusMap = getJobStatus(jobIdUrl);
         final String jobStatus = (String)jobStatusMap.get("jobStatus");
-        if ("resultsCreated".equals(jobStatus)) {
+        if ("resultsCreated".equals(jobStatus) || "downloadInitiated".equals(jobStatus)) {
           return true;
         }
         long sleepTime = ((Number)jobStatusMap.get("secondsToWaitForStatusCheck")).intValue()
@@ -1399,25 +1448,28 @@ public class CpfClient implements BaseCloseable {
    */
   public int processJobErrorResults(final String jobIdUrl, final long maxWait,
     final Callback<Map<String, Object>> callback) {
-    int i = 0;
-    final OAuthHttpClient httpClient = this.httpClientPool.getClient();
+    final CpfHttpClient httpClient = this.httpClientPool.getClient();
     try {
-      for (final Map<String, Object> resultFile : getJobResultFileList(jobIdUrl, maxWait)) {
-        final String resultType = (String)resultFile.get("batchJobResultType");
-        if ("errorResultData".equals(resultType)) {
-          final String resultUrl = (String)resultFile.get("resourceUri");
-
-          try (
-            final MapReader reader = httpClient.getMapReader(resultUrl)) {
-            for (final Map<String, Object> object : reader) {
-              callback.process(object);
-              i++;
+      final List<Map<String, Object>> jobResultFileList = getJobResultFileList(jobIdUrl, maxWait);
+      if (jobResultFileList.isEmpty()) {
+        throw new IllegalStateException("Cannot find error result file for " + jobIdUrl);
+      } else {
+        int i = 0;
+        for (final Map<String, Object> resultFile : jobResultFileList) {
+          final String resultType = (String)resultFile.get("batchJobResultType");
+          if ("errorResultData".equals(resultType)) {
+            final String resultUrl = (String)resultFile.get("resourceUri");
+            try (
+              final MapReader reader = httpClient.getMapReader(resultUrl)) {
+              for (final Map<String, Object> object : reader) {
+                callback.process(object);
+                i++;
+              }
             }
           }
         }
         return i;
       }
-      throw new IllegalStateException("Cannot find error result file for " + jobIdUrl);
     } finally {
       this.httpClientPool.releaseClient(httpClient);
     }
@@ -1468,24 +1520,28 @@ public class CpfClient implements BaseCloseable {
    */
   public int processJobStructuredResults(final String jobIdUrl, final long maxWait,
     final Callback<Map<String, Object>> callback) {
-    int i = 0;
-    final OAuthHttpClient httpClient = this.httpClientPool.getClient();
+    final CpfHttpClient httpClient = this.httpClientPool.getClient();
     try {
-      for (final Map<String, Object> resultFile : getJobResultFileList(jobIdUrl, maxWait)) {
-        final String resultType = (String)resultFile.get("batchJobResultType");
-        if ("structuredResultData".equals(resultType)) {
-          final String resultUrl = (String)resultFile.get("resourceUri");
-          try (
-            final MapReader reader = httpClient.getMapReader(resultUrl)) {
-            for (final Map<String, Object> object : reader) {
-              callback.process(object);
-              i++;
+      final List<Map<String, Object>> jobResultFileList = getJobResultFileList(jobIdUrl, maxWait);
+      if (jobResultFileList.isEmpty()) {
+        throw new IllegalStateException("Cannot find structured result file for " + jobIdUrl);
+      } else {
+        int i = 0;
+        for (final Map<String, Object> resultFile : jobResultFileList) {
+          final String resultType = (String)resultFile.get("batchJobResultType");
+          if ("structuredResultData".equals(resultType)) {
+            final String resultUrl = (String)resultFile.get("resourceUri");
+            try (
+              final MapReader reader = httpClient.getMapReader(resultUrl)) {
+              for (final Map<String, Object> object : reader) {
+                callback.process(object);
+                i++;
+              }
             }
           }
         }
         return i;
       }
-      throw new IllegalStateException("Cannot find structured result file for " + jobIdUrl);
     } finally {
       this.httpClientPool.releaseClient(httpClient);
     }
@@ -1534,7 +1590,7 @@ public class CpfClient implements BaseCloseable {
    */
   public void processResultFile(final String jobResultUrl,
     final Callback<InputStream> resultProcessor) {
-    final OAuthHttpClient httpClient = this.httpClientPool.getClient();
+    final CpfHttpClient httpClient = this.httpClientPool.getClient();
     try {
       final HttpResponse response = httpClient.getResource(jobResultUrl);
       final HttpEntity entity = response.getEntity();
@@ -1558,4 +1614,5 @@ public class CpfClient implements BaseCloseable {
       this.httpClientPool.releaseClient(httpClient);
     }
   }
+
 }

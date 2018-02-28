@@ -356,11 +356,11 @@ public class WorkerGroupRunnable implements Runnable {
    * <h2>Fields</h2>
    * batchJobId long
    * groupId long
-
+  
    * errorCode String
    * errorMessage String
    * errorDebugMessage String
-
+  
    * results List<MapEx>
    * logRecords List<MapEx>
    * groupExecutionTime long
@@ -615,7 +615,7 @@ public class WorkerGroupRunnable implements Runnable {
             final double scaleZ = Maps.getDouble(parameters, "resultScaleFactorZ",
               geometryFactory.getScaleZ());
 
-            geometryFactory = GeometryFactory.fixed(srid, axisCount, scaleXY, scaleZ);
+            geometryFactory = GeometryFactory.fixed(srid, axisCount, scaleXY, scaleXY, scaleZ);
             geometry = geometryFactory.geometry(geometry);
             if (geometry.getCoordinateSystemId() == 0) {
               throw new IllegalArgumentException(

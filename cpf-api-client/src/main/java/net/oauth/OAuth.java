@@ -170,9 +170,9 @@ public class OAuth {
     public static final String VERSION_REJECTED = "version_rejected";
 
     private static Map<String, Integer> mapToHttpCode() {
-      final Integer badRequest = new Integer(400);
-      final Integer unauthorized = new Integer(401);
-      final Integer serviceUnavailable = new Integer(503);
+      final Integer badRequest = 400;
+      final Integer unauthorized = 401;
+      final Integer serviceUnavailable = 503;
       final Map<String, Integer> map = new HashMap<>();
 
       map.put(Problems.VERSION_REJECTED, badRequest);

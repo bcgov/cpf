@@ -39,6 +39,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URLEncoder;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -94,7 +95,7 @@ public class OAuthUrlUtil {
 
   public static Collection<Entry<String, String>> getParameters(final String uri)
     throws URISyntaxException {
-    final List<NameValuePair> parameters = URLEncodedUtils.parse(new URI(uri), null);
+    final List<NameValuePair> parameters = URLEncodedUtils.parse(new URI(uri), (Charset)null);
     final List<Entry<String, String>> parameterEntries = new ArrayList<>();
     for (final NameValuePair parameter : parameters) {
       final String name = parameter.getName();

@@ -39,23 +39,15 @@ public class BusinessApplicationStatistics {
 
   public static final String BUSINESS_APPLICATION_NAME = "BUSINESS_APPLICATION_NAME";
 
-  public static final String DAY = "day";
-
-  public static final String DURATION_TYPE = "DURATION_TYPE";
-
-  public static final String HOUR = "hour";
-
-  public static final String MONTH = "month";
-
   public static final String START_TIMESTAMP = "START_TIMESTAMP";
 
   public static final String STATISTIC_VALUES = "STATISTIC_VALUES";
 
-  public static final String YEAR = "year";
+  public static final Set<DurationType> MONTH_OR_YEAR = Sets.newHash(DurationType.MONTH,
+    DurationType.YEAR);
 
-  public static final Set<String> MONTH_OR_YEAR = Sets.newHash(MONTH, YEAR);
-
-  public static final List<String> DURATION_TYPES = Arrays.asList(HOUR, DAY, MONTH, YEAR);
+  public static final List<DurationType> DURATION_TYPES = Arrays.asList(DurationType.HOUR,
+    DurationType.DAY, DurationType.MONTH, DurationType.YEAR);
 
   public static final List<String> STATISTIC_NAMES = Arrays.asList(
     "applicationExecutedFailedRequestsCount", "applicationExecutedGroupsCount",
@@ -67,36 +59,9 @@ public class BusinessApplicationStatistics {
 
   public static final String APPLICATION_STATISTIC_ID = "APPLICATION_STATISTIC_ID";
 
-  public static String getId(final String durationType) {
-    final Date date = new Date();
-    return getId(durationType, date);
-  }
-
-  public static String getId(final String durationType, final Date date) {
-    String pattern;
-    if (durationType.equals(HOUR)) {
-      pattern = "yyyy-MM-dd-HH";
-    } else {
-      if (durationType.equals(DAY)) {
-        pattern = "yyyy-MM-dd";
-      } else {
-        if (durationType.equals(MONTH)) {
-          pattern = "yyyy-MM";
-        } else {
-          if (durationType.equals(YEAR)) {
-            pattern = "yyyy";
-          } else {
-            throw new IllegalArgumentException("Invalid duration type : " + durationType);
-          }
-        }
-      }
-    }
-    return Dates.format(pattern, date);
-  }
-
   public static BusinessApplicationStatistics newStatistics(final String businessApplicationName,
-    final String durationType) {
-    final String id = getId(durationType);
+    final DurationType durationType) {
+    final String id = durationType.getId();
     return new BusinessApplicationStatistics(businessApplicationName, id);
   }
 
@@ -120,7 +85,7 @@ public class BusinessApplicationStatistics {
 
   private long completedTime;
 
-  private String durationType;
+  private DurationType durationType;
 
   private Date endTime;
 
@@ -155,25 +120,25 @@ public class BusinessApplicationStatistics {
   private boolean modified;
 
   public BusinessApplicationStatistics(final String businessApplicationName, final String id) {
-    String durationType;
+    DurationType durationType;
     final String dateString = id;
     String pattern;
     final int length = id.length();
     if (length == 13) {
       pattern = "yyyy-MM-dd-HH";
-      durationType = HOUR;
+      durationType = DurationType.HOUR;
     } else {
       if (length == 10) {
         pattern = "yyyy-MM-dd";
-        durationType = DAY;
+        durationType = DurationType.DAY;
       } else {
         if (length == 7) {
           pattern = "yyyy-MM";
-          durationType = MONTH;
+          durationType = DurationType.MONTH;
         } else {
           if (length == 4) {
             pattern = "yyyy";
-            durationType = YEAR;
+            durationType = DurationType.YEAR;
           } else {
             throw new IllegalArgumentException("Invalid ID : " + id);
           }
@@ -189,22 +154,22 @@ public class BusinessApplicationStatistics {
     calendar.set(Calendar.SECOND, 0);
     calendar.set(Calendar.MILLISECOND, 0);
     int incrementField;
-    if (durationType.equals(HOUR)) {
+    if (durationType == DurationType.HOUR) {
       incrementField = Calendar.HOUR;
       pattern = "yyyy-MM-dd-HH";
     } else {
       calendar.set(Calendar.HOUR, 1);
-      if (durationType.equals(DAY)) {
+      if (durationType == DurationType.DAY) {
         incrementField = Calendar.DAY_OF_MONTH;
         pattern = "yyyy-MM-dd";
       } else {
         calendar.set(Calendar.DAY_OF_MONTH, 1);
-        if (durationType.equals(MONTH)) {
+        if (durationType == DurationType.MONTH) {
           incrementField = Calendar.MONTH;
           pattern = "yyyy-MM";
         } else {
           calendar.set(Calendar.MONTH, 1);
-          if (durationType.equals(YEAR)) {
+          if (durationType == DurationType.YEAR) {
             incrementField = Calendar.YEAR;
             pattern = "yyyy";
           } else {
@@ -270,6 +235,13 @@ public class BusinessApplicationStatistics {
       final Object value = entry.getValue();
       addStatistic(name, value);
     }
+  }
+
+  public void clearStatistics() {
+    for (final String statisticName : STATISTIC_NAMES) {
+      Property.setSimple(this, statisticName, 0);
+    }
+    this.modified = true;
   }
 
   public boolean containsPeriod(final BusinessApplicationStatistics statistics) {
@@ -403,7 +375,7 @@ public class BusinessApplicationStatistics {
     return this.databaseId;
   }
 
-  public String getDurationType() {
+  public DurationType getDurationType() {
     return this.durationType;
   }
 
@@ -455,16 +427,8 @@ public class BusinessApplicationStatistics {
     return this.id;
   }
 
-  public String getParentDurationType() {
-    if (this.durationType.equals(HOUR)) {
-      return DAY;
-    } else if (this.durationType.equals(DAY)) {
-      return MONTH;
-    } else if (this.durationType.equals(MONTH)) {
-      return YEAR;
-    } else {
-      return null;
-    }
+  public DurationType getParentDurationType() {
+    return this.durationType.getParentDurationType();
   }
 
   public String getParentId() {
@@ -625,7 +589,7 @@ public class BusinessApplicationStatistics {
     this.databaseId = databaseId;
   }
 
-  public void setDurationType(final String durationType) {
+  public void setDurationType(final DurationType durationType) {
     this.durationType = durationType;
   }
 

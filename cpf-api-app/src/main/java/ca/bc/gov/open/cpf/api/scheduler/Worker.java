@@ -17,7 +17,6 @@ package ca.bc.gov.open.cpf.api.scheduler;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -26,6 +25,8 @@ import java.util.TreeMap;
 
 import javax.websocket.Session;
 
+import com.revolsys.collection.map.LinkedHashMapEx;
+import com.revolsys.collection.map.MapEx;
 import com.revolsys.collection.map.Maps;
 import com.revolsys.identifier.Identifier;
 import com.revolsys.util.Property;
@@ -76,7 +77,7 @@ public class Worker {
         final BatchJobRequestExecutionGroup group = entry.getValue();
         if (group.getBatchJobId().equals(batchJobId)) {
           found = true;
-          final Map<String, Object> message = new LinkedHashMap<>();
+          final MapEx message = new LinkedHashMapEx();
           message.put("type", "cancelGroup");
           message.put("batchJobId", batchJobId);
           message.put("groupId", groupId);
@@ -172,7 +173,7 @@ public class Worker {
     }
   }
 
-  public synchronized void sendMessage(final Map<String, Object> message) {
+  public synchronized void sendMessage(final MapEx message) {
     final JsonAsyncSender sender = this.messageSender;
     if (sender != null) {
       sender.sendMessage(message);
@@ -183,7 +184,7 @@ public class Worker {
     this.lastConnectTime = lastConnectTime;
   }
 
-  public boolean setMessageResult(final Map<String, Object> message) {
+  public boolean setMessageResult(final MapEx message) {
     final JsonAsyncSender messageSender = this.messageSender;
     if (messageSender != null) {
       return messageSender.setResult(message);

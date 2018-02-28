@@ -15,7 +15,6 @@
  */
 package ca.bc.gov.open.cpf.api.controller;
 
-import java.beans.PropertyChangeSupport;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,6 +22,7 @@ import java.sql.ResultSet;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
+import com.revolsys.beans.PropertyChangeSupport;
 import com.revolsys.beans.PropertyChangeSupportProxy;
 import com.revolsys.jdbc.io.DataSourceImpl;
 import com.revolsys.logging.Logs;

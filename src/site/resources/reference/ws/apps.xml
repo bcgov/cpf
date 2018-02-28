@@ -4,11 +4,6 @@
   <title>Business Appliations</title>
   <resources>
     <resource>
-      <resourceUri>https://delivery.apps.gov.bc.ca/pub/cpf/secure/ws/apps/bsoe.xml</resourceUri>
-      <title>Batch Spatial Overlay</title>
-      <businessApplicationName>bsoe</businessApplicationName>
-    </resource>
-    <resource>
       <resourceUri>https://delivery.apps.gov.bc.ca/pub/cpf/secure/ws/apps/geocoder.xml</resourceUri>
       <title>Batch Geocoder</title>
       <businessApplicationName>geocoder</businessApplicationName>

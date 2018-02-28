@@ -35,6 +35,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ca.bc.gov.open.cpf.api.domain.BatchJob;
 import ca.bc.gov.open.cpf.api.scheduler.BusinessApplicationStatistics;
+import ca.bc.gov.open.cpf.api.scheduler.DurationType;
 import ca.bc.gov.open.cpf.api.scheduler.StatisticsService;
 import ca.bc.gov.open.cpf.plugin.impl.BusinessApplication;
 
@@ -139,8 +140,8 @@ public class BusinessApplicationStatisticsUiBuilder extends CpfUiBuilder {
     return statistics;
   }
 
-  public List<BusinessApplicationStatistics> getSummaryStatistics(final String durationType) {
-    final String statisticId = BusinessApplicationStatistics.getId(durationType);
+  public List<BusinessApplicationStatistics> getSummaryStatistics(final DurationType durationType) {
+    final String statisticId = durationType.getId();
     final List<BusinessApplication> apps = getBusinessApplications();
     final List<BusinessApplicationStatistics> statistics = new ArrayList<>();
     for (final BusinessApplication businessApplication : apps) {
@@ -264,8 +265,9 @@ public class BusinessApplicationStatisticsUiBuilder extends CpfUiBuilder {
   public Object summaryList(final HttpServletRequest request, final HttpServletResponse response,
     @PathVariable("durationType") final String durationType) throws IOException {
     checkAdminOrAnyModuleAdminExceptSecurity();
+    final DurationType type = DurationType.getDurationType(durationType);
     return newDataTableHandlerOrRedirect(request, durationType + "List", () -> {
-      return getSummaryStatistics(durationType);
+      return getSummaryStatistics(type);
     }, this, "summary");
   }
 

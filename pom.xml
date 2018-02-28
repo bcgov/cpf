@@ -10,7 +10,7 @@
   <packaging>pom</packaging>
   <name>Concurrent Processing Framework</name>
   <description>The parent module of the Concurrent Processing Framework Library.</description>
-  <version>5.0.6-SNAPSHOT</version>
+  <version>5.1.0-SNAPSHOT</version>
   <inceptionYear>2008</inceptionYear>
   <url>https://bcgov.github.io/cpf/</url>
 
@@ -375,7 +375,7 @@
       <dependency>
         <groupId>org.apache.httpcomponents</groupId>
         <artifactId>httpclient</artifactId>
-        <version>${org.apache.httpcomponents.version}</version>
+        <version>${org.apache.httpcomponents.httpmime.version}</version>
         <exclusions>
           <exclusion>
             <artifactId>commons-logging</artifactId>
@@ -386,7 +386,7 @@
       <dependency>
         <groupId>org.apache.httpcomponents</groupId>
         <artifactId>httpmime</artifactId>
-        <version>${org.apache.httpcomponents.version}</version>
+        <version>${org.apache.httpcomponents.httpmime.version}</version>
         <exclusions>
           <exclusion>
             <artifactId>commons-logging</artifactId>
@@ -621,7 +621,8 @@
     <com.revolsys.open.version>TRUNK-SNAPSHOT</com.revolsys.open.version>
     <org.springframework.version>4.1.9.RELEASE</org.springframework.version>
     <org.springframework.security.version>4.0.4.RELEASE</org.springframework.security.version>
-    <org.apache.httpcomponents.version>4.4.1</org.apache.httpcomponents.version>
+    <org.apache.httpcomponents.version>4.4.8</org.apache.httpcomponents.version>
+    <org.apache.httpcomponents.httpmime.version>4.5.3</org.apache.httpcomponents.httpmime.version>
     <org.slf4j.version>1.7.21</org.slf4j.version>
     <skipWebDeploy>true</skipWebDeploy>
     <license.skipAggregateAddThirdParty>true</license.skipAggregateAddThirdParty>

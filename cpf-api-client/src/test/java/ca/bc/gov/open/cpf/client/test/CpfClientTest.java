@@ -28,7 +28,7 @@ import java.util.Map;
 import ca.bc.gov.open.cpf.client.api.Callback;
 import ca.bc.gov.open.cpf.client.api.CpfClient;
 
-import com.revolsys.spring.resource.FileSystemResource;
+import com.revolsys.spring.resource.PathResource;
 import com.revolsys.spring.resource.Resource;
 
 @SuppressWarnings("javadoc")
@@ -48,7 +48,7 @@ public class CpfClientTest {
     testGetBusinessApplicationInstantSpecification();
     testGetBusinessApplicationMultipleSpecification();
 
-    testCloseBatchJob();
+    testDeleteBatchJob();
 
     // testCreateOpaqueResource();
     // testCreateOpaqueResourceCollection();
@@ -71,20 +71,6 @@ public class CpfClientTest {
     testUserGetBatchJobIds();
     testUserAppGetBatchJobIds();
     testProcessBatchJobResultFile();
-  }
-
-  private static void testCloseBatchJob() {
-    System.out.println("Close Batch Job");
-    try (
-      final CpfClient client = new CpfClient(url, consumerKey, consumerSecret)) {
-      final Map<String, Object> parameters = new HashMap<>();
-      parameters.put("mapGridName", "BCGS 1:20 000");
-      parameters.put("mapTileId", "92g025");
-      final String batchJobId = client.createJobWithStructuredSingleRequest("MapTileByTileId",
-        parameters, "application/json");
-      // Download the results of the job
-      client.closeJob(batchJobId);
-    }
   }
 
   private static void testCloseConnection() {
@@ -121,7 +107,7 @@ public class CpfClientTest {
           System.out.println(result);
         }
       } finally {
-        client.closeJob(batchJobId);
+        client.deleteJob(batchJobId);
       }
     }
   }
@@ -134,8 +120,8 @@ public class CpfClientTest {
       jobParameters.put("mapGridName", "NTS 1:500 000");
 
       final int numRequests = 48;
-      final Resource inputData = new FileSystemResource(
-        "../cpf-war-app/src/main/webapp/docs/sample/NTS-500000-by-name.csv");
+      final Resource inputData = new PathResource(
+        "../plugins/map-tile/src/data/NTS-500000-by-name.csv");
 
       final String batchJobId = client.createJobWithStructuredMultipleRequestsResource(
         "MapTileByTileId", jobParameters, numRequests, inputData, "text/csv", "application/json");
@@ -145,7 +131,7 @@ public class CpfClientTest {
           System.out.println(result);
         }
       } finally {
-        client.closeJob(batchJobId);
+        client.deleteJob(batchJobId);
       }
     }
   }
@@ -159,7 +145,7 @@ public class CpfClientTest {
 
       final int numRequests = 48;
 
-      final String inputDataUrl = "http://localhost/pub/cpf/docs/sample/NTS-500000-by-name.csv";
+      final String inputDataUrl = "https://bcgov.github.io/cpf/sample/NTS-500000-by-name.csv";
       final String batchJobId = client.createJobWithStructuredMultipleRequestsUrl("MapTileByTileId",
         jobParameters, numRequests, inputDataUrl, "text/csv", "application/json");
       try {
@@ -168,7 +154,7 @@ public class CpfClientTest {
           System.out.println(result);
         }
       } finally {
-        client.closeJob(batchJobId);
+        client.deleteJob(batchJobId);
       }
     }
   }
@@ -183,13 +169,36 @@ public class CpfClientTest {
       final String batchJobId = client.createJobWithStructuredSingleRequest("MapTileByTileId",
         parameters, "application/json");
       try {
-        final List<Map<String, Object>> results = client.getJobStructuredResults(batchJobId, 10000);
-        for (final Map<String, Object> result : results) {
-          System.out.println(result);
+        try {
+          final List<Map<String, Object>> results = client.getJobStructuredResults(batchJobId,
+            10000);
+          for (final Map<String, Object> result : results) {
+            System.out.println(result);
+          }
+        } catch (final IllegalStateException e) {
+          final List<Map<String, Object>> jobErrorResults = client.getJobErrorResults(batchJobId,
+            1000);
+          for (final Map<String, Object> result : jobErrorResults) {
+            System.err.println(result);
+          }
         }
       } finally {
-        client.closeJob(batchJobId);
+        client.deleteJob(batchJobId);
       }
+    }
+  }
+
+  private static void testDeleteBatchJob() {
+    System.out.println("Close Batch Job");
+    try (
+      final CpfClient client = new CpfClient(url, consumerKey, consumerSecret)) {
+      final Map<String, Object> parameters = new HashMap<>();
+      parameters.put("mapGridName", "BCGS 1:20 000");
+      parameters.put("mapTileId", "92g025");
+      final String batchJobId = client.createJobWithStructuredSingleRequest("MapTileByTileId",
+        parameters, "application/json");
+      // Download the results of the job
+      client.deleteJob(batchJobId);
     }
   }
 
@@ -208,7 +217,7 @@ public class CpfClientTest {
           System.out.println(error);
         }
       } finally {
-        client.closeJob(batchJobId);
+        client.deleteJob(batchJobId);
       }
     }
   }
@@ -228,7 +237,7 @@ public class CpfClientTest {
           System.out.println(file);
         }
       } finally {
-        client.closeJob(batchJobId);
+        client.deleteJob(batchJobId);
       }
     }
   }
@@ -249,7 +258,7 @@ public class CpfClientTest {
         final Map<String, Object> status = client.getJobStatus(batchJobId);
         System.out.println(status);
       } finally {
-        client.closeJob(batchJobId);
+        client.deleteJob(batchJobId);
       }
     }
   }
@@ -272,7 +281,7 @@ public class CpfClientTest {
           System.out.println(result);
         }
       } finally {
-        client.closeJob(batchJobId);
+        client.deleteJob(batchJobId);
       }
     }
   }
@@ -336,7 +345,7 @@ public class CpfClientTest {
           System.out.println("Job Completed");
         }
       } finally {
-        client.closeJob(batchJobId);
+        client.deleteJob(batchJobId);
       }
     }
   }
@@ -370,7 +379,7 @@ public class CpfClientTest {
           });
         }
       } finally {
-        client.closeJob(batchJobId);
+        client.deleteJob(batchJobId);
       }
     }
   }
@@ -394,7 +403,7 @@ public class CpfClientTest {
           });
         System.out.println(numErrors);
       } finally {
-        client.closeJob(batchJobId);
+        client.deleteJob(batchJobId);
       }
     }
   }
@@ -418,7 +427,7 @@ public class CpfClientTest {
           });
         System.out.println(numResults);
       } finally {
-        client.closeJob(batchJobId);
+        client.deleteJob(batchJobId);
       }
     }
   }
@@ -441,7 +450,7 @@ public class CpfClientTest {
           System.err.println("Missing job " + batchJobId);
         }
       } finally {
-        client.closeJob(batchJobId);
+        client.deleteJob(batchJobId);
       }
     }
   }
@@ -464,7 +473,7 @@ public class CpfClientTest {
           System.err.println("Missing job " + batchJobId);
         }
       } finally {
-        client.closeJob(batchJobId);
+        client.deleteJob(batchJobId);
       }
     }
   }

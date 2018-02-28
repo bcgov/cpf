@@ -172,6 +172,13 @@ public class DatabaseJobController extends AbstractJobController {
     final CpfDataAccessObject dataAccessObject = getDataAccessObject();
     try (
       Transaction transaction = dataAccessObject.newTransaction(Propagation.REQUIRED)) {
+      final Query deleteQuery = new Query(BatchJobFile.BATCH_JOB_FILE, Q.and(//
+        Q.equal(BatchJobFile.BATCH_JOB_ID, jobId), //
+        Q.equal(BatchJobFile.FILE_TYPE, path), //
+        Q.equal(BatchJobFile.SEQUENCE_NUMBER, sequenceNumber) //
+      ));
+      final RecordStore recordStore = dataAccessObject.getRecordStore();
+      recordStore.deleteRecords(deleteQuery);
       final Record result = dataAccessObject.newRecord(BatchJobFile.BATCH_JOB_FILE);
       result.setValue(BatchJobFile.BATCH_JOB_ID, jobId);
       result.setValue(BatchJobFile.FILE_TYPE, path);

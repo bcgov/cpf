@@ -1,3 +1,24 @@
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+nav.navbar-fixed-top {
+  position: static;
+}
+body > div.container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+footer.footer {
+  position: static;
+  width: auto;
+  height: auto;
+}
 div.dataTables_wrapper td.NUM_SUBMITTED_REQUESTS,
 div.dataTables_wrapper td.COMPLETED_REQUEST_RANGE,
 div.dataTables_wrapper td.FAILED_REQUEST_RANGE,

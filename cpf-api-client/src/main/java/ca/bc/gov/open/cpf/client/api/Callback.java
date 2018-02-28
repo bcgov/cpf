@@ -15,6 +15,8 @@
  */
 package ca.bc.gov.open.cpf.client.api;
 
+import java.util.function.Consumer;
+
 /**
  * <p>The callback interface is used by the CpfClient API to invoke code in a client application
  * to process a objects returned from the CPF REST API.</p>
@@ -29,7 +31,13 @@ package ca.bc.gov.open.cpf.client.api;
  *
  * @param <T> The Java class of the object to be processed by the callback.
  */
-public interface Callback<T> {
+@FunctionalInterface
+public interface Callback<T> extends Consumer<T> {
+  @Override
+  default void accept(final T object) {
+    process(object);
+  }
+
   /**
    * Process the object.
    *
