@@ -278,7 +278,7 @@
                     </goals>
                   </pluginExecutionFilter>
                   <action>
-                    <ignore></ignore>
+                    <ignore/>
                   </action>
                 </pluginExecution>
               </pluginExecutions>
@@ -619,7 +619,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <com.revolsys.open.version>TRUNK-SNAPSHOT</com.revolsys.open.version>
-    <org.springframework.version>4.1.9.RELEASE</org.springframework.version>
+    <org.springframework.version>4.3.15.RELEASE</org.springframework.version>
     <org.springframework.security.version>4.0.4.RELEASE</org.springframework.security.version>
     <org.apache.httpcomponents.version>4.4.8</org.apache.httpcomponents.version>
     <org.apache.httpcomponents.httpmime.version>4.5.3</org.apache.httpcomponents.httpmime.version>
