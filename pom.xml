@@ -404,6 +404,6 @@
     <skipWebDeploy>true</skipWebDeploy>
     <org.springframework.version>4.1.9.RELEASE</org.springframework.version>
     <org.springframework.security.version>4.0.2.RELEASE</org.springframework.security.version>
-    <ca.bc.gov.open.cpf.version></ca.bc.gov.open.cpf.version>
+    <ca.bc.gov.open.cpf.version>5.1.3-RELEASE</ca.bc.gov.open.cpf.version>
   </properties>
 </project>
