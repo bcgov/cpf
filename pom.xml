@@ -8,7 +8,7 @@
   <packaging>pom</packaging>
   <name>Concurrent Processing Framework</name>
   <description>The parent module of the Concurrent Processing Framework Library.</description>
-  <version>6.1.x-SNAPSHOT</version>
+  <version>6.1.0-RELEASE</version>
   <inceptionYear>2008</inceptionYear>
   <url>https://revolsys.github.io/cpf/</url>
 
@@ -764,7 +764,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <com.revolsys.open.version>TRUNK-SNAPSHOT</com.revolsys.open.version>
+    <com.revolsys.open.version>0.CPF-6.1.0-RELEASE</com.revolsys.open.version>
     <org.springframework.version>5.2.3.RELEASE</org.springframework.version>
     <org.springframework.security.version>5.2.1.RELEASE</org.springframework.security.version>
     <org.apache.httpcomponents.version>4.5.11</org.apache.httpcomponents.version>
