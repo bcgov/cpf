@@ -88,7 +88,6 @@ Source Code Management:
   (*) Subversion:
     Repository URL:                 http://apps.bcgov/svn/cpf/source/trunk/
 MVN Goals and options:              clean install
-E-Mail Notification:                leo.lou@gov.bc.ca paul.austin@revolsys.com
 Resolve Artifacts from Artifactory: Yes
 Post-build Actions:
  Deploy artifacts to Artifactory:

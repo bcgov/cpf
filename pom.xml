@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd"
 >
   <modelVersion>4.0.0</modelVersion>
 
@@ -9,14 +9,14 @@
   <artifactId>cpf-bcgov</artifactId>
   <packaging>pom</packaging>
   <name>BCGOV Concurrent Processing Framework</name>
-  <version>6.0.0-SNAPSHOT</version>
+  <version>6.1.x-SNAPSHOT</version>
 
   <developers>
     <developer>
       <name>Paul Austin</name>
       <organization>Revolution Systems Inc.</organization>
       <organizationUrl>http://www.revolsys.com/</organizationUrl>
-      <email>paul.austin@revolsys.com</email>
+      <email>445537+pauldaustin@users.noreply.github.com</email>
       <timezone>PST</timezone>
     </developer>
   </developers>
@@ -53,7 +53,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-enforcer-plugin</artifactId>
-        <version>3.0.0-M2</version>
+        <version>3.0.0-M3</version>
         <executions>
           <execution>
             <id>enforce-maven</id>
@@ -76,7 +76,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.8.0</version>
+        <version>3.8.1</version>
         <configuration>
           <release>11</release>
           <debug>true</debug>
@@ -88,7 +88,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-war-plugin</artifactId>
-        <version>3.2.2</version>
+        <version>3.2.3</version>
         <configuration>
           <failOnMissingWebXml>false</failOnMissingWebXml>
         </configuration>
@@ -96,7 +96,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
-        <version>3.1.1</version>
+        <version>3.2.0</version>
         <configuration>
           <archive>
             <manifestEntries>
@@ -121,7 +121,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>
-        <version>3.0.1</version>
+        <version>3.2.1</version>
         <configuration>
           <includePom>true</includePom>
         </configuration>
@@ -138,7 +138,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
-        <version>3.0.1</version>
+        <version>3.1.1</version>
         <executions>
           <execution>
             <id>javadoc-html</id>
@@ -178,7 +178,7 @@
           <plugin>
             <groupId>org.codehaus.cargo</groupId>
             <artifactId>cargo-maven2-plugin</artifactId>
-            <version>1.7.7</version>
+            <version>1.7.9</version>
             <executions>
               <execution>
                 <id>redeploy</id>
@@ -224,7 +224,7 @@
       <dependency>
         <groupId>commons-codec</groupId>
         <artifactId>commons-codec</artifactId>
-        <version>1.11</version>
+        <version>1.14</version>
       </dependency>
       <dependency>
         <groupId>ca.bc.gov.open.cpf</groupId>
@@ -255,6 +255,6 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <skipWebDeploy>true</skipWebDeploy>
-    <ca.bc.gov.open.cpf.version>6.0.0-SNAPSHOT</ca.bc.gov.open.cpf.version>
+    <ca.bc.gov.open.cpf.version>6.1.x-SNAPSHOT</ca.bc.gov.open.cpf.version>
   </properties>
 </project>
