@@ -71,7 +71,7 @@ import com.revolsys.util.UrlUtil;
  * jobs will take a longer undetermined time to execute. Applications should use the
  * <a href="../../notificationCallback.html">notification callback</a> mechanism rather than polling the
  * server or if that is not possible something like the Java
- * <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/concurrent/ScheduledExecutorService.html">ScheduledExecutorService</a>.</p>
+ * <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java.base/java/util/concurrent/ScheduledExecutorService.html">ScheduledExecutorService</a>.</p>
  *
  * <pre class="prettyprint language-java">  String url = "https://apps.gov.bc.ca/pub/cpf";
   String consumerKey = "cpftest";
