@@ -26,8 +26,6 @@ import javax.crypto.Mac;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
-import com.revolsys.util.Base64;
-
 public interface SignatureUtil {
   static String getQueryString(final Map<String, ? extends Object> parameters) throws Error {
     if (parameters == null || parameters.isEmpty()) {
@@ -89,8 +87,7 @@ public interface SignatureUtil {
       mac.init(key);
       final byte[] dataBytes = data.getBytes("UTF-8");
       final byte[] digestBytes = mac.doFinal(dataBytes);
-      final String signature = Base64.encodeBytes(digestBytes);
-      return signature;
+      return java.util.Base64.getEncoder().encodeToString(digestBytes);
     } catch (final Throwable e) {
       throw new IllegalArgumentException("Unable to encrypt data " + data, e);
     }
