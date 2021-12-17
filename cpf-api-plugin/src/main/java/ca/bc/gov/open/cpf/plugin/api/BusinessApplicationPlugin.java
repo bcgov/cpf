@@ -51,7 +51,7 @@ import ca.bc.gov.open.cpf.plugin.api.BusinessApplicationPlugin;
   version                 = "1.1.2",
   compatibleVersions      = { "1.1.0", "1.1.1" },
   description             = "Demonstrates how to use the CPF plug-in API"
-  descriptionUrl          = "http://demo.gov.bc.ca",
+  descriptionUrl          = "https://demo.gov.bc.ca",
   inputDataContentTypes   = { "image/png", "image/jpeg" },
   resultDataContentTypes  = { "image/png", "image/jpeg" },
   perRequestInputData     = true,

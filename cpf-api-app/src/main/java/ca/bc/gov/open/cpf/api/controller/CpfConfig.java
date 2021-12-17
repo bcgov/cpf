@@ -15,9 +15,15 @@
  */
 package ca.bc.gov.open.cpf.api.controller;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Arrays;
+import java.util.Locale;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
@@ -27,6 +33,8 @@ import org.jeometry.common.logging.Logs;
 import com.revolsys.beans.PropertyChangeSupport;
 import com.revolsys.beans.PropertyChangeSupportProxy;
 import com.revolsys.jdbc.io.DataSourceImpl;
+import com.revolsys.record.io.format.json.Json;
+import com.revolsys.record.io.format.json.JsonObject;
 import com.revolsys.util.Property;
 
 public class CpfConfig implements PropertyChangeSupportProxy {
@@ -35,6 +43,11 @@ public class CpfConfig implements PropertyChangeSupportProxy {
   private String secureBaseUrl = "https://localhost/pub/cpf/secure";
 
   private String internalWebServiceUrl = "https://localhost/pub/cpf";
+
+  private final JsonObject fileFormatPropertiesByFormat = JsonObject.hash()//
+    .add("geojson", JsonObject.hash()//
+      .add("allowCustomCoordinateSystem", true)//
+    );
 
   @Resource(name = "cpfDataSource")
   private DataSourceImpl dataSource;
@@ -55,6 +68,19 @@ public class CpfConfig implements PropertyChangeSupportProxy {
 
   public int getDatabaseConnectionPoolSize() {
     return this.dataSource.getMaxTotal();
+  }
+
+  public JsonObject getFileFormatProperties(final String mimeType) {
+    return this.fileFormatPropertiesByFormat.getValue(mimeType, JsonObject.EMPTY);
+  }
+
+  private JsonObject getFileFormatPropertiesRequired(final String extension) {
+    JsonObject fileFormatProperties = this.fileFormatPropertiesByFormat.getValue(extension);
+    if (fileFormatProperties == null) {
+      fileFormatProperties = JsonObject.hash();
+      this.fileFormatPropertiesByFormat.add(extension, fileFormatProperties);
+    }
+    return fileFormatProperties;
   }
 
   public int getGroupResultPoolSize() {
@@ -88,6 +114,8 @@ public class CpfConfig implements PropertyChangeSupportProxy {
 
   @PostConstruct
   public void init() {
+    initJson();
+
     final String sql = "SELECT PROPERTY_NAME, PROPERTY_VALUE FROM CPF.CPF_CONFIG_PROPERTIES WHERE ENVIRONMENT_NAME = 'default' AND MODULE_NAME = 'CPF_TUNING' AND COMPONENT_NAME = 'GLOBAL'";
     try (
       Connection connection = this.dataSource.getConnection();
@@ -100,6 +128,56 @@ public class CpfConfig implements PropertyChangeSupportProxy {
       }
     } catch (final Throwable e) {
       Logs.error(this, "Unable to load configuration", e);
+    }
+  }
+
+  private void initJson() {
+    for (final String filePath : Arrays.asList("../../src/config/cpf.json", "src/config/cpf.json",
+      "/apps/config/cpf/cpf.json", "conf/cpf.json")) {
+      final Path file = Paths.get(filePath);
+      if (Files.exists(file)) {
+        try {
+          final JsonObject properties = Json.toMap(file);
+          if (properties != null) {
+            for (final Object key : properties.keySet()) {
+              final String name = key.toString();
+              final Object value = properties.get(name);
+              if (value != null) {
+                if ("fileFormatProperties".equals(name)) {
+                  if (value instanceof JsonObject) {
+                    final JsonObject fileFormatPropertiesByType = (JsonObject)value;
+                    for (final String format : fileFormatPropertiesByType.keySet()) {
+                      final Object fileFormatProperties = fileFormatPropertiesByType
+                        .getValue(format);
+                      if (fileFormatProperties instanceof JsonObject) {
+                        final JsonObject defaultProperties = getFileFormatPropertiesRequired(
+                          format);
+                        defaultProperties.putAll((JsonObject)fileFormatProperties);
+
+                      } else {
+                        Logs.error(this, "Ignored: fileFormatProperties[" + format + "]=" + value
+                          + " as it is not a object in: " + file);
+                      }
+                    }
+                  } else {
+                    Logs.error(this, "Ignored: fileFormatProperties=" + value
+                      + " as it is not a object in: " + file);
+                  }
+                } else {
+                  try {
+                    Property.setSimple(this, name, value);
+                  } catch (final Exception e) {
+                    Logs.error(this,
+                      "Ignored: " + name + "=" + value + " as value is invalid: " + file, e);
+                  }
+                }
+              }
+            }
+          }
+        } catch (final Exception e) {
+          Logs.error(this, "Properties invalid: " + file, e);
+        }
+      }
     }
   }
 
@@ -124,6 +202,15 @@ public class CpfConfig implements PropertyChangeSupportProxy {
 
   public void setInternalWebServiceUrl(final String internalWebServiceUrl) {
     this.internalWebServiceUrl = internalWebServiceUrl;
+  }
+
+  public void setMediaTypes(final Map<String, String> mediaTypes) {
+    for (final Map.Entry<String, String> entry : mediaTypes.entrySet()) {
+      final String extension = entry.getKey().toLowerCase(Locale.ENGLISH);
+      final String mediaType = entry.getValue();
+      final JsonObject fileFormatProperties = getFileFormatPropertiesRequired(extension);
+      this.fileFormatPropertiesByFormat.add(mediaType, fileFormatProperties);
+    }
   }
 
   public void setPostProcessPoolSize(final int postProcessPoolSize) {
@@ -160,4 +247,5 @@ public class CpfConfig implements PropertyChangeSupportProxy {
   public void setSecureBaseUrl(final String secureBaseUrl) {
     this.secureBaseUrl = secureBaseUrl;
   }
+
 }

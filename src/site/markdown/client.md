@@ -11,7 +11,7 @@ Clients must use one of the approved [Authentication](reference/authentication.m
 
 ### Direct Web Browser Access
 The [REST Web Service API](cpf-api-app/rest-api/) can be accessed directly using a web browser.
-In this mode the service returns styled HTML pages and forms that canbe used without any programming.
+In this mode the service returns styled HTML pages and forms that can be used without any programming.
 
 ### Java
 

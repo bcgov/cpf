@@ -21,15 +21,15 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.core.Logger;
-
 import ca.bc.gov.open.cpf.plugin.impl.module.ClassLoaderModule;
 
-import com.revolsys.log.LogAppender;
+import com.revolsys.log.LogbackUtil;
 import com.revolsys.util.Property;
 
-public class CpfLog4jContextListener implements ServletContextListener {
+import ch.qos.logback.classic.Level;
+import ch.qos.logback.classic.Logger;
+
+public class CpfLoggingContextListener implements ServletContextListener {
 
   @Override
   public void contextDestroyed(final ServletContextEvent event) {
@@ -37,7 +37,7 @@ public class CpfLog4jContextListener implements ServletContextListener {
 
   @Override
   public void contextInitialized(final ServletContextEvent event) {
-    LogAppender.removeAllAppenders();
+    LogbackUtil.removeAllAppenders();
     final ServletContext context = event.getServletContext();
     String cpfLogDirectory = context.getInitParameter("cpfLogDirectory");
     if (!Property.hasValue(cpfLogDirectory)) {
@@ -53,10 +53,20 @@ public class CpfLog4jContextListener implements ServletContextListener {
         rootDirectory = null;
       }
     }
+    final Logger logger = LogbackUtil.getRootLogger();
+    logger.setLevel(Level.ERROR);
+    LogbackUtil.setLevel("ca.bc.gov", Level.INFO);
+    LogbackUtil.setLevel("ca.bc.gov.open.cpf.module", Level.INFO);
+    LogbackUtil.setLevel("ca.bc.gov.open.cpf.api.scheduler.BatchJobService", Level.INFO);
+    LogbackUtil.setLevel("ca.bc.gov.open.cpf.api.web.service.WorkerServerMessageHandler",
+      Level.INFO);
+    LogbackUtil.setLevel("com.revolsys.maven.MavenRepositoryCache", Level.INFO);
+    LogbackUtil.setLevel("ca.bc.gov.open.cpf.api.security.oauth.OAuthProcessingFilter",
+      Level.ERROR);
+
     if (rootDirectory == null || !(rootDirectory.exists() || rootDirectory.mkdirs())) {
-      LogAppender.addRootAppender("%d\t%p\t%c\t%m%n");
+      LogbackUtil.addRootAppender("%d\t%p\t%c\t%m%n");
     } else {
-      final Logger logger = (Logger)LogManager.getRootLogger();
       ClassLoaderModule.addAppender(logger, rootDirectory + "/master", "cpf-master-all");
       ClassLoaderModule.addAppender(logger, rootDirectory + "/master-app", "cpf-app");
     }

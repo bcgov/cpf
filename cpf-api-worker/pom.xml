@@ -3,13 +3,13 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="
     http://maven.apache.org/POM/4.0.0
-    http://maven.apache.org/maven-v4_0_0.xsd
+    https://maven.apache.org/maven-v4_0_0.xsd
   ">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>ca.bc.gov.open.cpf</groupId>
     <artifactId>cpf-parent</artifactId>
-    <version>6.0.0-SNAPSHOT</version>
+    <version>6.1.x-SNAPSHOT</version>
   </parent>
   <artifactId>cpf-api-worker</artifactId>
   <name>Concurrent Processing Framework API Worker</name>
@@ -18,7 +18,7 @@
   <dependencies>
     <dependency>
       <groupId>com.revolsys.open</groupId>
-      <artifactId>com.revolsys.open.core</artifactId>
+      <artifactId>revolsys-core</artifactId>
     </dependency>
     <dependency>
       <groupId>ca.bc.gov.open.cpf</groupId>
@@ -53,7 +53,6 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-webmvc</artifactId>
-      <version>${org.springframework.version}</version>
       <exclusions>
         <exclusion>
           <artifactId>commons-logging</artifactId>
@@ -67,17 +66,17 @@
     </dependency>
     <dependency>
       <groupId>com.revolsys.open</groupId>
-      <artifactId>com.revolsys.open.oracle</artifactId>
+      <artifactId>revolsys-oracle</artifactId>
       <version>${com.revolsys.open.version}</version>
     </dependency>
     <dependency>
       <groupId>com.revolsys.open</groupId>
-      <artifactId>com.revolsys.open.postgresql</artifactId>
+      <artifactId>revolsys-postgresql</artifactId>
       <version>${com.revolsys.open.version}</version>
     </dependency>
     <dependency>
       <groupId>com.revolsys.open</groupId>
-      <artifactId>com.revolsys.open.web</artifactId>
+      <artifactId>revolsys-web</artifactId>
       <version>${com.revolsys.open.version}</version>
     </dependency>
 
@@ -95,7 +94,8 @@
     <dependency>
       <groupId>org.glassfish.tyrus</groupId>
       <artifactId>tyrus-container-grizzly-client</artifactId>
-      <version>1.14</version>
+      <version>1.15</version>
     </dependency>
+    
   </dependencies>
 </project>

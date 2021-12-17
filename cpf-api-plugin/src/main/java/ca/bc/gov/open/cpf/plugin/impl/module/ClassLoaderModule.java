@@ -39,19 +39,11 @@ import java.util.TreeSet;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.core.Appender;
-import org.apache.logging.log4j.core.Logger;
-import org.apache.logging.log4j.core.appender.RollingFileAppender;
-import org.apache.logging.log4j.core.appender.rolling.CompositeTriggeringPolicy;
-import org.apache.logging.log4j.core.appender.rolling.OnStartupTriggeringPolicy;
-import org.apache.logging.log4j.core.appender.rolling.SizeBasedTriggeringPolicy;
 import org.jeometry.common.data.type.DataType;
 import org.jeometry.common.data.type.DataTypes;
 import org.jeometry.common.exception.Exceptions;
 import org.jeometry.coordinatesystem.model.CoordinateSystem;
 import org.jeometry.coordinatesystem.model.systems.EpsgCoordinateSystems;
-import org.jeometry.coordinatesystem.model.systems.EpsgId;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.ConstructorArgumentValues;
 import org.springframework.beans.factory.support.BeanDefinitionReaderUtils;
@@ -79,7 +71,6 @@ import ca.bc.gov.open.cpf.plugin.impl.PluginAdaptor;
 import ca.bc.gov.open.cpf.plugin.impl.log.AppLogUtil;
 import ca.bc.gov.open.cpf.plugin.impl.log.WrappedAppender;
 
-import com.revolsys.beans.Classes;
 import com.revolsys.collection.ArrayUtil;
 import com.revolsys.collection.map.AttributeMap;
 import com.revolsys.collection.map.MapEx;
@@ -91,7 +82,7 @@ import com.revolsys.io.FileUtil;
 import com.revolsys.io.IoFactory;
 import com.revolsys.io.map.MapReader;
 import com.revolsys.io.map.MapReaderFactory;
-import com.revolsys.log.LogAppender;
+import com.revolsys.log.LogbackUtil;
 import com.revolsys.record.io.RecordWriterFactory;
 import com.revolsys.record.property.FieldProperties;
 import com.revolsys.record.schema.FieldDefinition;
@@ -104,6 +95,16 @@ import com.revolsys.util.JavaBeanUtil;
 import com.revolsys.util.Property;
 import com.revolsys.util.UrlUtil;
 
+import ch.qos.logback.classic.Logger;
+import ch.qos.logback.classic.LoggerContext;
+import ch.qos.logback.classic.PatternLayout;
+import ch.qos.logback.classic.spi.ILoggingEvent;
+import ch.qos.logback.core.Appender;
+import ch.qos.logback.core.rolling.FixedWindowRollingPolicy;
+import ch.qos.logback.core.rolling.RollingFileAppender;
+import ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy;
+import ch.qos.logback.core.util.FileSize;
+
 public class ClassLoaderModule implements Module {
 
   protected static final String STOPPING = "Stopping";
@@ -114,11 +115,12 @@ public class ClassLoaderModule implements Module {
 
   protected static final String STARTED = "Started";
 
-  @SuppressWarnings("unchecked")
   private static final Class<? extends Annotation>[] STANDARD_METHOD_EXCLUDE_ANNOTATIONS = ArrayUtil
     .newArray(JobParameter.class, RequestParameter.class, Required.class);
 
-  private static final Map<String, Class<?>[]> STANDARD_METHODS = new HashMap<>();
+  public static final Map<String, Class<?>> STANDARD_PARAMETERS = new HashMap<>();
+
+  public static final String[] STANDARD_PARAMETER_NAMES;
 
   protected static final String STOPPED = "Stopped";
 
@@ -129,25 +131,55 @@ public class ClassLoaderModule implements Module {
     "application/vnd.geo+json", "application/vnd.google-earth.kml+xml",
     "application/vnd.google-earth.kmz", "application/x-geo+json", "application/x-shp",
     "application/x-shp+zip", "application/xhtml+xml", "text/csv", "text/html",
-    "text/tab-separated-values", "text/x-wkt", "text/xml");
+    "text/tab-separated-values", "text/x-wkt", "text/xml", "application/geopackage+vnd.sqlite3");
 
-  public static void addAppender(final org.apache.logging.log4j.core.Logger logger,
+  static {
+    STANDARD_PARAMETERS.put("inputDataUrl", URL.class);
+    STANDARD_PARAMETERS.put("inputDataContentType", String.class);
+    STANDARD_PARAMETERS.put("resultSrid", Integer.TYPE);
+    STANDARD_PARAMETERS.put("resultNumAxis", Integer.TYPE);
+    STANDARD_PARAMETERS.put("resultScaleFactorXy", Double.TYPE);
+    STANDARD_PARAMETERS.put("resultScaleFactorZ", Double.TYPE);
+    STANDARD_PARAMETERS.put("resultData", OutputStream.class);
+    STANDARD_PARAMETERS.put("resultContentType", String.class);
+    STANDARD_PARAMETER_NAMES = new ArrayList<>(STANDARD_PARAMETERS.keySet())
+      .toArray(new String[STANDARD_PARAMETERS.size()]);
+  }
+
+  public static void addAppender(final ch.qos.logback.classic.Logger logger,
     final String baseFileName, final String name) {
-    final String activeFileName = baseFileName + ".log";
+    final LoggerContext context = logger.getLoggerContext();
 
-    final RollingFileAppender appender = RollingFileAppender.newBuilder() //
-      .withName(name) //
-      .withFileName(activeFileName)//
-      .withFilePattern(baseFileName + ".%i.log") //
-      .withLayout(LogAppender.newLayout("%d\t%p\t%c\t%m%n"))//
-      .withPolicy( //
-        CompositeTriggeringPolicy.createPolicy( //
-          OnStartupTriggeringPolicy.createPolicy(1), //
-          SizeBasedTriggeringPolicy.createPolicy("10MB")//
-        )//
-      )//
-      .build();
+    final FixedWindowRollingPolicy rollingPolicy = new FixedWindowRollingPolicy();
+    rollingPolicy.setContext(context);
+    final String rollingFileName = baseFileName + ".%i.log";
+    rollingPolicy.setFileNamePattern(rollingFileName);
+    rollingPolicy.setMaxIndex(3);
+
+    final SizeBasedTriggeringPolicy<ILoggingEvent> triggeringPolicy = new SizeBasedTriggeringPolicy<>();
+    triggeringPolicy.setContext(context);
+    final FileSize fileSize = FileSize.valueOf("10mb");
+    triggeringPolicy.setMaxFileSize(fileSize);
+    triggeringPolicy.start();
+
+    final PatternLayout layout = LogbackUtil.newLayout(context, "%d\t%p\t%c\t%m%n");
+    layout.start();
+
+    final RollingFileAppender<ILoggingEvent> appender = new RollingFileAppender<>();
+    appender.setContext(context);
+    appender.setLayout(layout);
+    appender.setName(name);
+    appender.setImmediateFlush(true);
+    final String activeFileName = baseFileName + ".log";
+    appender.setFile(activeFileName);
+    appender.setRollingPolicy(rollingPolicy);
+    appender.setTriggeringPolicy(triggeringPolicy);
+
+    rollingPolicy.setParent(appender);
+    rollingPolicy.start();
+
     appender.start();
+    appender.rollover();
 
     logger.addAppender(appender);
   }
@@ -175,8 +207,7 @@ public class ClassLoaderModule implements Module {
   private final AppLog log;
 
   private final List<CoordinateSystem> coordinateSystems = EpsgCoordinateSystems
-    .getCoordinateSystems(Arrays.asList(EpsgId.WGS84, EpsgId.NAD83, 3005, EpsgId.nad83Utm(7),
-      EpsgId.nad83Utm(8), EpsgId.nad83Utm(9), EpsgId.nad83Utm(10), EpsgId.nad83Utm(11)));
+    .getCoordinateSystems(Arrays.asList(4326, 4269, 3005, 26907, 26908, 26909, 26910, 26911));
 
   private boolean enabled = false;
 
@@ -198,30 +229,6 @@ public class ClassLoaderModule implements Module {
     // Prime the JTS Geometry factory
     ca.bc.gov.open.cpf.plugin.api.GeometryFactory.getFactory();
 
-    STANDARD_METHODS.put("setInputDataUrl", new Class<?>[] {
-      URL.class
-    });
-    STANDARD_METHODS.put("setInputDataContentType", new Class<?>[] {
-      String.class
-    });
-    STANDARD_METHODS.put("setResultSrid", new Class<?>[] {
-      Integer.TYPE
-    });
-    STANDARD_METHODS.put("setResultNumAxis", new Class<?>[] {
-      Integer.TYPE
-    });
-    STANDARD_METHODS.put("setResultScaleFactorXy", new Class<?>[] {
-      Double.TYPE
-    });
-    STANDARD_METHODS.put("setResultScaleFactorZ", new Class<?>[] {
-      Double.TYPE
-    });
-    STANDARD_METHODS.put("setResultData", new Class<?>[] {
-      OutputStream.class
-    });
-    STANDARD_METHODS.put("setResultContentType", new Class<?>[] {
-      String.class
-    });
   }
 
   private boolean started = false;
@@ -287,26 +294,24 @@ public class ClassLoaderModule implements Module {
     resourcePermissionsByGroupName.put(groupName, new HashSet<>(resourcePermissions));
   }
 
-  private void checkStandardMethod(final Method method, final Class<?>[] standardMethodParameters) {
+  private void checkStandardMethod(final Method method, final Class<?> standardParameterClass) {
     final Class<?> pluginClass = method.getDeclaringClass();
     final String pluginClassName = pluginClass.getName();
     final String methodName = method.getName();
     final Class<?>[] methodParameters = method.getParameterTypes();
-    if (methodParameters.length != standardMethodParameters.length) {
-      throw new IllegalArgumentException(pluginClassName + "." + methodName
-        + " must have the parameters " + Arrays.toString(standardMethodParameters));
+    if (methodParameters.length != 1) {
+      throw new IllegalArgumentException(
+        pluginClassName + "." + methodName + " must have the parameters " + standardParameterClass);
     }
-    for (int i = 0; i < standardMethodParameters.length; i++) {
-      final Class<?> parameter1 = standardMethodParameters[i];
-      final Class<?> parameter2 = methodParameters[i];
-      if (parameter1 != parameter2) {
-        throw new IllegalArgumentException(pluginClassName + "." + methodName
-          + " must have the parameters " + Arrays.toString(standardMethodParameters));
-      }
+    final Class<?> parameter1 = standardParameterClass;
+    final Class<?> parameter2 = methodParameters[0];
+    if (parameter1 != parameter2) {
+      throw new IllegalArgumentException(
+        pluginClassName + "." + methodName + " must have the parameters " + standardParameterClass);
+    }
 
-    }
     for (final Class<? extends Annotation> annotationClass : STANDARD_METHOD_EXCLUDE_ANNOTATIONS) {
-      if (!method.isAnnotationPresent(annotationClass)) {
+      if (method.isAnnotationPresent(annotationClass)) {
         throw new IllegalArgumentException(pluginClassName + "." + methodName
           + " standard method must not have annotation " + annotationClass);
       }
@@ -319,11 +324,9 @@ public class ClassLoaderModule implements Module {
   }
 
   private void closeAppLogAppender(final String name) {
-    final Logger logger = (Logger)LogManager.getLogger(name);
+    final Logger logger = LogbackUtil.getLogger(name);
     synchronized (logger) {
-      for (final Appender appender : logger.getAppenders().values()) {
-        logger.removeAppender(appender);
-      }
+      LogbackUtil.removeAllAppenders(logger);
       logger.setAdditive(true);
     }
   }
@@ -514,15 +517,6 @@ public class ClassLoaderModule implements Module {
       final String description = pluginAnnotation.description();
       businessApplication.setDescription(description);
 
-      // final RetainJavaDocComment detailedDescriptionAnnotation = pluginClass
-      // .getAnnotation(RetainJavaDocComment.class);
-      // if (detailedDescriptionAnnotation != null) {
-      // final String detailedDescription =
-      // detailedDescriptionAnnotation.value();
-      // if (Property.hasValue(detailedDescription)) {
-      // businessApplication.setDetailedDescription(detailedDescription);
-      // }
-      // }
       final String title = pluginAnnotation.title();
       if (title != null && title.trim().length() > 0) {
         businessApplication.setTitle(title);
@@ -804,9 +798,9 @@ public class ClassLoaderModule implements Module {
     int srid = geometryConfiguration.srid();
     if (srid < 0) {
       this.log.warn(message + " srid must be >= 0");
-      srid = geometryFactory.getHorizontalCoordinateSystemId();
+      srid = geometryFactory.getCoordinateSystemId();
     } else if (srid == 0) {
-      srid = geometryFactory.getHorizontalCoordinateSystemId();
+      srid = geometryFactory.getCoordinateSystemId();
     }
     int axisCount = geometryConfiguration.numAxis();
     if (axisCount == 0) {
@@ -980,19 +974,23 @@ public class ClassLoaderModule implements Module {
     } else {
       fileName = this.name + "_" + this.environmentId;
     }
-    final Logger logger = (Logger)LogManager.getLogger(logName);
+    final Logger logger = LogbackUtil.getLogger(logName);
     synchronized (logger) {
-
+      LogbackUtil.removeAllAppenders(logger);
       final File rootDirectory = this.businessApplicationRegistry.getAppLogDirectory();
       if (rootDirectory == null || !(rootDirectory.exists() || rootDirectory.mkdirs())) {
         logger.setAdditive(true);
       } else {
         logger.setAdditive(false);
         for (final String appenderName : Arrays.asList("cpf-master-all", "cpf-worker-all")) {
-          final Logger rootLogger = (Logger)LogManager.getRootLogger();
-          final Appender appender = rootLogger.getAppenders().get(appenderName);
+          final Logger rootLogger = LogbackUtil.getRootLogger();
+          final Appender<ILoggingEvent> appender = rootLogger.getAppender(appenderName);
           if (appender != null) {
-            logger.addAppender(new WrappedAppender(appender));
+            final WrappedAppender wrappedAppender = new WrappedAppender(appender);
+            final LoggerContext context = logger.getLoggerContext();
+            wrappedAppender.setContext(context);
+            wrappedAppender.start();
+            logger.addAppender(wrappedAppender);
           }
         }
         File logDirectory = FileUtil.getDirectory(rootDirectory, this.name);
@@ -1291,11 +1289,13 @@ public class ClassLoaderModule implements Module {
     }
     final boolean requestParameter = requestParameterAnnotation != null;
     final boolean jobParameter = jobParameterAnnotation != null;
-    if (requestParameter || jobParameter) {
-      final Class<?>[] parameterTypes = method.getParameterTypes();
-      final Class<?>[] standardMethodParameters = STANDARD_METHODS.get(methodName);
-      if (standardMethodParameters == null) {
-        if (methodName.startsWith("set") && parameterTypes.length == 1) {
+    final Class<?>[] parameterTypes = method.getParameterTypes();
+    if (methodName.startsWith("set") && parameterTypes.length == 1) {
+      final String parameterName = methodName.substring(3, 4).toLowerCase()
+        + methodName.substring(4);
+      final Class<?> standardParameterType = STANDARD_PARAMETERS.get(parameterName);
+      if (standardParameterType == null) {
+        if (requestParameter || jobParameter) {
           String description;
           int length;
           int scale;
@@ -1317,8 +1317,6 @@ public class ClassLoaderModule implements Module {
             minValue = jobParameterAnnotation.minValue();
             maxValue = jobParameterAnnotation.maxValue();
           }
-          final String parameterName = methodName.substring(3, 4).toLowerCase()
-            + methodName.substring(4);
           final boolean required = method.getAnnotation(Required.class) != null;
           final AllowedValues allowedValuesMetadata = method.getAnnotation(AllowedValues.class);
           String[] allowedValues = {};
@@ -1392,7 +1390,7 @@ public class ClassLoaderModule implements Module {
                 businessApplication.setGeometryFactory(geometryFactory);
                 validateGeometry = geometryConfiguration.validate();
               }
-              field.setProperty(FieldProperties.GEOMETRY_FACTORY, geometryFactory);
+              field.setGeometryFactory(geometryFactory);
               field.setProperty(FieldProperties.VALIDATE_GEOMETRY, validateGeometry);
             } else if (geometryConfiguration != null) {
               throw new IllegalArgumentException(pluginClass.getName() + "." + method.getName()
@@ -1404,12 +1402,21 @@ public class ClassLoaderModule implements Module {
             businessApplication.addRequestField(index, field, method);
           }
         } else {
-          throw new IllegalArgumentException(pluginClass.getName() + "." + method.getName()
-            + " has the " + RequestParameter.class.getName() + " or " + JobParameter.class.getName()
-            + " annotation but is not a setXXX(value) method");
+
         }
       } else {
-        checkStandardMethod(method, standardMethodParameters);
+        checkStandardMethod(method, standardParameterType);
+        businessApplication.addStandardMethod(parameterName, method);
+      }
+    } else {
+      if (method.isAnnotationPresent(JobParameter.class)) {
+        throw new IllegalArgumentException(
+          pluginClass.getName() + "." + method.getName() + " has the "
+            + JobParameter.class.getName() + " annotation but is not a setXXX(value) method");
+      } else if (method.isAnnotationPresent(RequestParameter.class)) {
+        throw new IllegalArgumentException(
+          pluginClass.getName() + "." + method.getName() + " has the "
+            + RequestParameter.class.getName() + " annotation but is not a setXXX(value) method");
       }
     }
   }
@@ -1470,7 +1477,7 @@ public class ClassLoaderModule implements Module {
                 businessApplication.setGeometryFactory(geometryFactory);
                 validateGeometry = geometryConfiguration.validate();
               }
-              field.setProperty(FieldProperties.GEOMETRY_FACTORY, geometryFactory);
+              field.setGeometryFactory(geometryFactory);
               field.setProperty(FieldProperties.VALIDATE_GEOMETRY, validateGeometry);
             } else if (geometryConfiguration != null) {
               throw new IllegalArgumentException(pluginClass.getName() + "." + method.getName()

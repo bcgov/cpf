@@ -46,8 +46,6 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.core.Logger;
 import org.glassfish.tyrus.client.ClientManager;
 import org.jeometry.common.exception.Exceptions;
 import org.jeometry.common.logging.Logs;
@@ -61,13 +59,16 @@ import ca.bc.gov.open.cpf.plugin.impl.module.ClassLoaderModule;
 import com.revolsys.collection.map.LinkedHashMapEx;
 import com.revolsys.collection.map.MapEx;
 import com.revolsys.collection.map.Maps;
-import com.revolsys.log.LogAppender;
+import com.revolsys.log.LogbackUtil;
 import com.revolsys.parallel.NamedThreadFactory;
 import com.revolsys.record.io.format.json.Json;
 import com.revolsys.spring.resource.ClassPathResource;
 import com.revolsys.spring.resource.Resource;
 import com.revolsys.ui.web.servlet.listener.DriverManagerCleanupListener;
 import com.revolsys.util.Property;
+
+import ch.qos.logback.classic.Level;
+import ch.qos.logback.classic.Logger;
 
 @WebListener
 public class WorkerScheduler extends ThreadPoolExecutor
@@ -413,11 +414,17 @@ public class WorkerScheduler extends ThreadPoolExecutor
   }
 
   private void initLogging() {
-    final Logger logger = (Logger)LogManager.getRootLogger();
-    LogAppender.removeAllAppenders();
+    final Logger logger = LogbackUtil.getRootLogger();
+    logger.setLevel(Level.ERROR);
+    LogbackUtil.setLevel("ca.bc.gov.cpf", Level.INFO);
+    LogbackUtil.setLevel("ca.bc.gov.open.cpf", Level.INFO);
+    LogbackUtil.setLevel("com.revolsys.maven.MavenRepositoryCache", Level.INFO);
+    LogbackUtil.setLevel("ca.bc.gov.open.cpf.client.api.httpclient", Level.ERROR);
+
+    LogbackUtil.removeAllAppenders(logger);
     final File rootDirectory = this.appLogDirectory;
     if (rootDirectory == null || !(rootDirectory.exists() || rootDirectory.mkdirs())) {
-      LogAppender.addRootAppender("%d\\t%p\\t%c\\t%m%n");
+      LogbackUtil.addRootAppender("%d\\t%p\\t%c\\t%m%n");
     } else {
       final String id = this.id.replaceAll(":", "-");
       ClassLoaderModule.addAppender(logger, rootDirectory + "/worker-" + id, "cpf-worker-all");

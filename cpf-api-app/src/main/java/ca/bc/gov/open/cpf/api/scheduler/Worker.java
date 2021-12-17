@@ -97,6 +97,7 @@ public class Worker implements Closeable {
         for (final BatchJobRequestExecutionGroup group : groups) {
           final String groupId = group.getBaseId();
           this.executingGroupsById.remove(groupId);
+          group.cancel();
         }
       }
       return groups;

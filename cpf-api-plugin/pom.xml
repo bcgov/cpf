@@ -2,13 +2,13 @@
 <project
   xmlns="http://maven.apache.org/POM/4.0.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd"
 >
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <artifactId>cpf-parent</artifactId>
     <groupId>ca.bc.gov.open.cpf</groupId>
-    <version>6.0.0-SNAPSHOT</version>
+    <version>6.1.x-SNAPSHOT</version>
   </parent>
   <artifactId>cpf-api-plugin</artifactId>
   <name>Concurrent Processing Framework Business Application Plugin API</name>
@@ -19,7 +19,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
-        <version>3.0.1</version>
+        <version>3.1.1</version>
         <executions>
           <execution>
             <id>javadoc-html</id>
@@ -70,16 +70,16 @@
               <subpackages>ca.bc.gov.open.cpf.plugin.api</subpackages>
               <doclet>com.revolsys.doclet.client.ClientDoclet</doclet>
               <docletArtifact>
-                <groupId>com.revolsys.open</groupId>
-                <artifactId>com.revolsys.open.doclet</artifactId>
-                <version>${com.revolsys.open.version}</version>
+                <groupId>ca.bc.gov.open.cpf</groupId>
+                <artifactId>cpf-doclet</artifactId>
+                <version>${project.version}</version>
               </docletArtifact>
 
               <useStandardDocletOptions>false</useStandardDocletOptions>
-              <additionalparam>
-                -d ${project.build.directory}/site/java-api
-                -doctitle "Plug-in Java API"
-              </additionalparam>
+              <additionalOptions>
+                <additionalOption>-d ${project.build.directory}/site/java-api</additionalOption>
+                <additionalOption>-doctitle "Plug-in Java API"</additionalOption>
+              </additionalOptions>
             </configuration>
             <goals>
               <goal>javadoc</goal>
@@ -93,16 +93,21 @@
   <dependencies>
     <dependency>
       <groupId>com.revolsys.open</groupId>
-      <artifactId>com.revolsys.open.core</artifactId>
+      <artifactId>revolsys-core</artifactId>
     </dependency>
     <dependency>
       <groupId>com.revolsys.open</groupId>
-      <artifactId>com.revolsys.open.oracle</artifactId>
+      <artifactId>revolsys-oracle</artifactId>
       <version>${com.revolsys.open.version}</version>
     </dependency>
     <dependency>
       <groupId>com.revolsys.open</groupId>
-      <artifactId>com.revolsys.open.postgresql</artifactId>
+      <artifactId>revolsys-postgresql</artifactId>
+      <version>${com.revolsys.open.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.revolsys.open</groupId>
+      <artifactId>revolsys-geopackage</artifactId>
       <version>${com.revolsys.open.version}</version>
     </dependency>
     <dependency>
@@ -120,5 +125,6 @@
         </exclusion>
       </exclusions>
     </dependency>
+    
   </dependencies>
 </project>

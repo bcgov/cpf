@@ -3,13 +3,13 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="
     http://maven.apache.org/POM/4.0.0
-    http://maven.apache.org/maven-v4_0_0.xsd
+    https://maven.apache.org/maven-v4_0_0.xsd
 ">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>ca.bc.gov.open.cpf</groupId>
     <artifactId>cpf-parent</artifactId>
-    <version>6.0.0-SNAPSHOT</version>
+    <version>6.1.x-SNAPSHOT</version>
   </parent>
   <artifactId>cpf-api-client</artifactId>
   <name>Concurrent Processing Framework Client Java API</name>
@@ -20,7 +20,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
-        <version>3.0.1</version>
+        <version>3.1.1</version>
         <executions>
           <execution>
             <id>javadoc-html</id>
@@ -71,17 +71,16 @@
               <subpackages>ca.bc.gov.open.cpf.client.api</subpackages>
               <doclet>com.revolsys.doclet.client.ClientDoclet</doclet>
               <docletArtifact>
-                <groupId>com.revolsys.open</groupId>
-                <artifactId>com.revolsys.open.doclet</artifactId>
-                <version>${com.revolsys.open.version}</version>
+                <groupId>ca.bc.gov.open.cpf</groupId>
+                <artifactId>cpf-doclet</artifactId>
+                <version>${project.version}</version>
               </docletArtifact>
 
               <useStandardDocletOptions>false</useStandardDocletOptions>
-              <additionalparam>
-                -d ${project.build.directory}/site/java-api
-                -doctitle "CPF Client Java
-                API"
-              </additionalparam>
+              <additionalOptions>
+                <additionalOption>-d ${project.build.directory}/site/java-api</additionalOption>
+                <additionalOption>-doctitle "CPF Client Java API"</additionalOption>
+              </additionalOptions>
             </configuration>
             <goals>
               <goal>javadoc</goal>
@@ -151,10 +150,17 @@
     </plugins>
   </build>
 
+  <pluginRepositories>
+    <pluginRepository>
+      <id>jsdoctk2</id>
+      <url>file:///${project.basedir}/src/repository</url>
+    </pluginRepository>
+  </pluginRepositories>
+
   <dependencies>
     <dependency>
       <groupId>com.revolsys.open</groupId>
-      <artifactId>com.revolsys.open.core</artifactId>
+      <artifactId>revolsys-core</artifactId>
       <exclusions>
         <exclusion>
           <artifactId>woodstox-core-asl</artifactId>

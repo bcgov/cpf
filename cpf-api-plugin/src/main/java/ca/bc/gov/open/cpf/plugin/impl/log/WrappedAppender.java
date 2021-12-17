@@ -1,81 +1,26 @@
 package ca.bc.gov.open.cpf.plugin.impl.log;
 
-import java.io.Serializable;
+import ch.qos.logback.classic.spi.ILoggingEvent;
+import ch.qos.logback.core.Appender;
+import ch.qos.logback.core.AppenderBase;
 
-import org.apache.logging.log4j.core.Appender;
-import org.apache.logging.log4j.core.ErrorHandler;
-import org.apache.logging.log4j.core.Layout;
-import org.apache.logging.log4j.core.LogEvent;
+public class WrappedAppender extends AppenderBase<ILoggingEvent> {
 
-public class WrappedAppender implements Appender {
+  private final Appender<ILoggingEvent> appender;
 
-  private final Appender appender;
-
-  public WrappedAppender(final Appender appender) {
+  public WrappedAppender(final Appender<ILoggingEvent> appender) {
     this.appender = appender;
   }
 
   @Override
-  public void append(final LogEvent event) {
-    this.getAppender().append(event);
-  }
-
-  protected Appender getAppender() {
-    return this.appender;
+  protected void append(final ILoggingEvent event) {
+    this.appender.doAppend(event);
   }
 
   @Override
-  public ErrorHandler getHandler() {
-    return this.getAppender().getHandler();
-  }
-
-  @Override
-  public Layout<? extends Serializable> getLayout() {
-    return this.getAppender().getLayout();
-  }
-
-  @Override
-  public String getName() {
-    return this.getAppender().getName();
-  }
-
-  @Override
-  public State getState() {
-    return this.getAppender().getState();
-  }
-
-  @Override
-  public boolean ignoreExceptions() {
-    return this.getAppender().ignoreExceptions();
-  }
-
-  @Override
-  public void initialize() {
-    this.getAppender().initialize();
-  }
-
-  @Override
-  public boolean isStarted() {
-    return this.getAppender().isStarted();
-  }
-
-  @Override
-  public boolean isStopped() {
-    return this.getAppender().isStopped();
-  }
-
-  @Override
-  public void setHandler(final ErrorHandler handler) {
-    this.getAppender().setHandler(handler);
-  }
-
-  @Override
-  public void start() {
-    this.getAppender().start();
-  }
-
-  @Override
-  public void stop() {
-    this.getAppender().stop();
+  public synchronized void doAppend(final ILoggingEvent eventObject) {
+    if (isStarted()) {
+      this.appender.doAppend(eventObject);
+    }
   }
 }

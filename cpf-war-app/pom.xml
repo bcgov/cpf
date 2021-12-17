@@ -1,12 +1,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd"
 >
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>ca.bc.gov.open.cpf</groupId>
     <artifactId>cpf-parent</artifactId>
-    <version>6.0.0-SNAPSHOT</version>
+    <version>6.1.x-SNAPSHOT</version>
   </parent>
   <artifactId>cpf-war-app</artifactId>
   <packaging>war</packaging>
@@ -18,18 +18,8 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-war-plugin</artifactId>
-        <version>3.2.2</version>
+        <version>3.2.3</version>
         <configuration>
-          <overlays>
-            <overlay>
-              <!-- Overlay the project war first -->
-            </overlay>
-            <overlay>
-              <id>revolsys</id>
-              <groupId>com.revolsys.open</groupId>
-              <artifactId>war-overlay</artifactId>
-            </overlay>
-          </overlays>
           <webResources>
             <resource>
               <directory>../cpf-api-client/target</directory>
@@ -72,9 +62,18 @@
     </dependency>
     <dependency>
       <groupId>com.revolsys.open</groupId>
-      <artifactId>war-overlay</artifactId>
+      <artifactId>revolsys-web</artifactId>
       <version>${com.revolsys.open.version}</version>
-      <type>war</type>
+    </dependency>
+    <dependency>
+      <groupId>javax.servlet.jsp.jstl</groupId>
+      <artifactId>javax.servlet.jsp.jstl-api</artifactId>
+      <version>1.2.2</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.taglibs</groupId>
+      <artifactId>taglibs-standard-impl</artifactId>
+      <version>1.2.5</version>
     </dependency>
     <dependency>
       <groupId>xerces</groupId>

@@ -1,0 +1,82 @@
+name: Java CI
+
+on:
+  push:
+    branches:
+    - master
+    - 6.1.x
+
+jobs:
+  java_ci:
+    runs-on: ubuntu-latest
+
+    steps:
+ 
+#### JAVA VERSION ####
+    - name: Set up JDK 11
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11.0.x
+
+#### Checkout jeometry ####
+    - name: Checkout jeometry
+      uses: actions/checkout@v2
+      with:
+        ref: master
+        repository: jeometry-org/jeometry
+        path: jeometry
+
+#### Checkout revolsys ####
+    - name: Checkout revolsys
+      uses: actions/checkout@v2
+      with:
+        ref: master
+        repository: revolsys/com.revolsys.open
+        path: revolsys
+
+#### Checkout cpf ####
+    - name: Checkout cpf
+      uses: actions/checkout@v2
+      with:
+        ref: ${{github.ref}}
+        repository: ${{github.repository}}
+        path: cpf
+
+#### MAVEN REPOSITORY CACHE ####
+    - uses: actions/cache@v1
+      with:
+        path: ~/.m2/repository
+        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+        restore-keys: |
+          ${{ runner.os }}-maven-
+
+#### Build jeometry ####
+    - name: Build jeometry
+      run: mvn -B install -Dmaven.javadoc.skip=true -Dmaven.source.skip=true -Dgpg.skip=true -DskipTests
+      working-directory: ./jeometry
+
+#### Build revolsys ####
+    - name: Build revolsys
+      run: mvn -B install -Dmaven.javadoc.skip=true -Dmaven.source.skip=true -Dgpg.skip=true -DskipTests
+      working-directory: ./revolsys
+
+#### Build cpf ####
+    - name: Build cpf
+      run: mvn -B install -Dmaven.javadoc.skip=true -Dmaven.source.skip=true -Dgpg.skip=true -DskipTests
+      working-directory: ./cpf
+
+#### Deploy site cpf ####
+    - name: Buid Site & Deploy Github Pages
+      run: |
+        mvn -B site:site
+        mvn -B site:stage
+        cd target/staging
+        git init
+        git checkout -B gh-pages
+        git add . 
+        git config --global user.name "${{github.actor}}"
+        git config --global user.email "${{github.actor}}@users.noreply.github.com"
+        git commit -a -m "Docs"
+        git push -f https://token:${{secrets.GITHUB_TOKEN}}@github.com/${{github.repository}}.git gh-pages
+      working-directory: ./cpf
+      

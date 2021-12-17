@@ -50,7 +50,6 @@ import com.revolsys.collection.map.Maps;
 import com.revolsys.io.FileUtil;
 import com.revolsys.io.Reader;
 import com.revolsys.io.Writer;
-import com.revolsys.jdbc.JdbcUtils;
 import com.revolsys.jdbc.io.JdbcRecordStore;
 import com.revolsys.record.Record;
 import com.revolsys.record.RecordState;
@@ -109,8 +108,7 @@ public class CpfDataAccessObject implements Transactionable {
   }
 
   private BatchJob addBatchJob(final Record record, final Identifier batchJobId) {
-    BatchJob batchJob;
-    batchJob = new BatchJob(record);
+    final BatchJob batchJob = new BatchJob(record);
     for (final String fieldName : Arrays.asList(BatchJob.BUSINESS_APPLICATION_PARAMS,
       BatchJob.PROPERTIES, BatchJob.COMPLETED_GROUP_RANGE, BatchJob.COMPLETED_GROUP_RANGE,
       BatchJob.FAILED_REQUEST_RANGE)) {
@@ -129,12 +127,19 @@ public class CpfDataAccessObject implements Transactionable {
         }
       }
     }
-    if (!batchJob.isCancelled()) {
-      this.batchJobById.put(batchJobId, batchJob);
-      final String businessApplicationName = batchJob.getString(BatchJob.BUSINESS_APPLICATION_NAME);
-      Maps.addToSet(this.batchJobIdsByBusinessApplication, businessApplicationName, batchJobId);
-    }
+    cacheBatchJob(batchJob, batchJobId);
     return batchJob;
+  }
+
+  private void cacheBatchJob(final BatchJob batchJob, final Identifier batchJobId) {
+    if (!batchJob.isCancelled()) {
+      synchronized (this.batchJobById) {
+        this.batchJobById.put(batchJobId, batchJob);
+        final String businessApplicationName = batchJob
+          .getString(BatchJob.BUSINESS_APPLICATION_NAME);
+        Maps.addToSet(this.batchJobIdsByBusinessApplication, businessApplicationName, batchJobId);
+      }
+    }
   }
 
   public BatchJob clearBatchJob(final Identifier batchJobId) {
@@ -332,12 +337,7 @@ public class CpfDataAccessObject implements Transactionable {
     final Query query = new Query(this.batchJobRecordDefinition);
     query.setFieldNames(BatchJob.BATCH_JOB_ID);
     // TODO move to scheduling groups
-    String where;
-    if (this.recordStore.getRecordStoreType().equals("Oracle")) {
-      where = "JOB_STATUS IN ( 'processing') AND NUM_SUBMITTED_GROUPS > 0 AND (COMPLETED_GROUP_RANGE IS NULL OR (NUM_SUBMITTED_GROUPS <> 1 AND (DBMS_LOB.GETLENGTH(COMPLETED_GROUP_RANGE) <> LENGTH(concat('1~', NUM_SUBMITTED_GROUPS)) OR TO_CHAR(COMPLETED_GROUP_RANGE) <> concat('1~', NUM_SUBMITTED_GROUPS)) )) AND BUSINESS_APPLICATION_NAME = ?";
-    } else {
-      where = "JOB_STATUS IN ( 'processing') AND NUM_SUBMITTED_GROUPS > 0 AND (COMPLETED_GROUP_RANGE IS NULL OR (NUM_SUBMITTED_GROUPS <> 1 AND COMPLETED_GROUP_RANGE <> concat('1~', NUM_SUBMITTED_GROUPS))) AND BUSINESS_APPLICATION_NAME = ?";
-    }
+    final String where = "JOB_STATUS IN ( 'processing') AND BUSINESS_APPLICATION_NAME = ?";
     query.setWhereCondition(Q.sql(where, businessApplicationName));
     query.addOrderBy(BatchJob.LAST_SCHEDULED_TIMESTAMP, true);
     query.addOrderBy(BatchJob.BATCH_JOB_ID, true);
@@ -644,9 +644,7 @@ public class CpfDataAccessObject implements Transactionable {
     record.setValue(BatchJob.WHEN_STATUS_CHANGED, now);
 
     final BatchJob batchJob = new BatchJob(record);
-    if (!batchJob.isCancelled()) {
-      this.batchJobById.put(batchJobId, batchJob);
-    }
+    cacheBatchJob(batchJob, batchJobId);
     return batchJob;
   }
 
@@ -766,7 +764,7 @@ public class CpfDataAccessObject implements Transactionable {
     }
   }
 
-  public boolean setBatchJobFailed(final Identifier batchJobId) {
+  public boolean setBatchJobFailed(final BatchJob batchJob) {
     final JdbcRecordStore jdbcRecordStore = (JdbcRecordStore)this.recordStore;
 
     final String sql = "UPDATE CPF.CPF_BATCH_JOBS SET " + "COMPLETED_REQUEST_RANGE = null, "//
@@ -776,8 +774,18 @@ public class CpfDataAccessObject implements Transactionable {
     try {
       final Timestamp now = new Timestamp(System.currentTimeMillis());
       final String username = getUsername();
-      return JdbcUtils.executeUpdate(jdbcRecordStore, sql, now, now, now, username,
-        batchJobId.getLong(0)) == 1;
+      final Long batchJobId = batchJob.getIdentifier().getLong(0);
+      final int updateCount = jdbcRecordStore.executeUpdate(sql, now, now, now, username,
+        batchJobId);
+      batchJob.setValue(BatchJob.JOB_STATUS, BatchJobStatus.RESULTS_CREATED);
+      batchJob.setValue(BatchJob.COMPLETED_REQUEST_RANGE, null);
+      batchJob.setValue(BatchJob.FAILED_REQUEST_RANGE,
+        "1~" + batchJob.getValue(BatchJob.NUM_SUBMITTED_REQUESTS));
+      batchJob.setValue(BatchJob.COMPLETED_TIMESTAMP, now);
+      batchJob.setValue(BatchJob.WHEN_STATUS_CHANGED, now);
+      batchJob.setValue(BatchJob.WHEN_UPDATED, now);
+      batchJob.setValue(BatchJob.WHO_UPDATED, username);
+      return updateCount == 1;
     } catch (final Throwable e) {
       throw new RuntimeException("Unable to set started status", e);
     }
@@ -795,12 +803,13 @@ public class CpfDataAccessObject implements Transactionable {
       + "LAST_SCHEDULED_TIMESTAMP = ?, "//
       + "WHEN_STATUS_CHANGED = ?, "//
       + "WHEN_UPDATED = ?, "//
-      + "WHO_UPDATED = ? "//
-      + "WHERE JOB_STATUS IN ('creatingRequests') AND BATCH_JOB_ID = ?";
+      + "WHO_UPDATED = ?  "//
+      + "WHERE JOB_STATUS = ('creatingRequests', 'processed') AND BATCH_JOB_ID = ?";
     final Timestamp now = new Timestamp(System.currentTimeMillis());
-    final boolean result = JdbcUtils.executeUpdate(jdbcRecordStore, sql, numSubmittedRequests,
-      numFailedRequests, groupSize, numGroups, now, now, now, getUsername(),
-      batchJobId.getLong(0)) == 1;
+    final String username = getUsername();
+    final Long id = batchJobId.getLong(0);
+    final boolean result = jdbcRecordStore.executeUpdate(sql, numSubmittedRequests,
+      numFailedRequests, groupSize, numGroups, now, now, now, username, id) == 1;
     return result;
   }
 
@@ -875,7 +884,7 @@ public class CpfDataAccessObject implements Transactionable {
     final JdbcRecordStore jdbcRecordStore = (JdbcRecordStore)this.recordStore;
     final String sql = "UPDATE CPF.CPF_BATCH_JOBS SET USER_ID = ? WHERE USER_ID = ?";
     try {
-      return JdbcUtils.executeUpdate(jdbcRecordStore, sql, newUserId, oldUserId);
+      return jdbcRecordStore.executeUpdate(sql, newUserId, oldUserId);
     } catch (final Throwable e) {
       throw new RuntimeException("Unable to change jobs for user rename", e);
     }

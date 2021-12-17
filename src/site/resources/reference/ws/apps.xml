@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resource>
-  <resourceUri>https:/delivery.apps.gov.bc.ca/pub/cpf/secure/ws/apps.xml</resourceUri>
+  <resourceUri>https://delivery.apps.gov.bc.ca/pub/cpf/secure/ws/apps.xml</resourceUri>
   <title>Business Appliations</title>
   <resources>
     <resource>

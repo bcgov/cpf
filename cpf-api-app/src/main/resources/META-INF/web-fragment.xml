@@ -5,7 +5,7 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="
     http://xmlns.jcp.org/xml/ns/javaee
-    http://xmlns.jcp.org/xml/ns/javaee/web-fragment_3_1.xsd
+    https://xmlns.jcp.org/xml/ns/javaee/web-fragment_3_1.xsd
   "
   version="3.1"
 >
@@ -17,7 +17,7 @@
   </ordering>
   
   <listener>
-    <listener-class>ca.bc.gov.open.cpf.api.web.CpfLog4jContextListener</listener-class>
+    <listener-class>ca.bc.gov.open.cpf.api.web.CpfLoggingContextListener</listener-class>
   </listener>
 
   <listener>

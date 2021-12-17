@@ -29,7 +29,7 @@
  limitations under the License.
 
  $URL: https://secure.revolsys.com/svn/open.revolsys.com/ca.bc.gov.open.cpf/trunk/ca.bc.gov.open.cpf.api/src/main/java/ca/bc/gov/open/cpf/security/oauth/OAuthProcessingFilter.java $
- $Author: paul.austin@revolsys.com $
+
  $Date: 2010-01-06 14:31:17 -0800 (Wed, 06 Jan 2010) $
  $Revision: 2169 $
  */

@@ -22,6 +22,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.jeometry.common.data.identifier.Identifier;
 
 import ca.bc.gov.open.cpf.api.domain.BatchJob;
+import ca.bc.gov.open.cpf.plugin.api.log.AppLog;
 import ca.bc.gov.open.cpf.plugin.impl.BusinessApplication;
 import ca.bc.gov.open.cpf.plugin.impl.module.Module;
 
@@ -76,6 +77,13 @@ public class BatchJobRequestExecutionGroup {
   }
 
   public void cancel() {
+    final BusinessApplication businessApplication = this.businessApplication;
+    if (businessApplication != null) {
+      final AppLog log = businessApplication.getLog();
+      if (log.isInfoEnabled()) {
+        log.info("Cancel group: " + this.batchJob.getIdentifier() + " " + this.id);
+      }
+    }
     this.batchJob.removeGroup(this);
     cancelInternal();
   }
@@ -155,6 +163,11 @@ public class BatchJobRequestExecutionGroup {
 
   public Timestamp getStartedTimestamp() {
     return this.scheduleTimestamp;
+  }
+
+  @Override
+  public int hashCode() {
+    return this.id.hashCode();
   }
 
   public boolean isCancelled() {

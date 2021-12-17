@@ -8,9 +8,15 @@
     "name": "jdbcConfig.username",
     "type": "string",
     "value": "proxy_cpf_web"
-  },{
+  },
+  {
     "name": "jdbcConfig.password",
     "type": "string",
     "value": "c0ncurr3n7"
+  },
+  {
+    "name": "failOnStart",
+    "type": "boolean",
+    "value": "false"
   }
 ]

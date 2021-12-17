@@ -20,12 +20,12 @@ import org.slf4j.LoggerFactory;
 
 import ca.bc.gov.open.cpf.plugin.api.BusinessApplicationPlugin;
 
-import com.revolsys.log.LogAppender;
+import com.revolsys.log.LogbackUtil;
 
 /**
  * <p>The AppLog class is a logging API for use by a {@link BusinessApplicationPlugin} class.
  * Plug-in classes can record error, info and debug messages in the execute method. These messages
- * will be recorded in the Log4j log file (if that log level is enabled in the worker for the AppLog
+ * will be recorded in the log file (if that log level is enabled in the worker for the AppLog
  * class). The message will also be recorded in the module log file on the master if that log level
  * is enabled for the business application. This functionality allows viewing the logs for the
  * all the workers from the CPF admin console.</p>
@@ -151,7 +151,7 @@ public class AppLog {
    */
   public void setLogLevel(final String level) {
     this.logLevel = level;
-    LogAppender.setLevel(this.name, level);
+    LogbackUtil.setLevel(this.name, level);
   }
 
   @Override

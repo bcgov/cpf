@@ -19,6 +19,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.ConcurrentModificationException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -94,18 +95,22 @@ public class BatchJobScheduler extends ThreadPoolExecutor
   }
 
   public void clearBusinessApplication(final String businessApplicationName) {
-    synchronized (this.queuedJobById) {
-      for (final Iterator<BatchJob> iterator = this.queuedJobById.values().iterator(); iterator
-        .hasNext();) {
-        final BatchJob batchJob = iterator.next();
-        final Object appName = batchJob.getValue(BatchJob.BUSINESS_APPLICATION_NAME);
-        if (businessApplicationName.equals(appName)) {
-          iterator.remove();
+    while (true) {
+      try {
+        for (final Iterator<BatchJob> iterator = this.queuedJobById.values().iterator(); iterator
+          .hasNext();) {
+          final BatchJob batchJob = iterator.next();
+          final Object appName = batchJob.getValue(BatchJob.BUSINESS_APPLICATION_NAME);
+          if (businessApplicationName.equals(appName)) {
+            iterator.remove();
+          }
         }
+        synchronized (this.scheduledGroupsByBusinessApplication) {
+          this.scheduledGroupsByBusinessApplication.remove(businessApplicationName);
+        }
+        return;
+      } catch (final ConcurrentModificationException e) {
       }
-    }
-    synchronized (businessApplicationName) {
-      this.scheduledGroupsByBusinessApplication.remove(businessApplicationName);
     }
   }
 
@@ -214,8 +219,8 @@ public class BatchJobScheduler extends ThreadPoolExecutor
       final BatchJobRequestExecutionGroup group = batchJob.getNextGroup(businessApplication);
       if (group != null) {
         final String businessApplicationName = group.getBusinessApplicationName();
-        synchronized (this.scheduledGroupsByBusinessApplication) {
-          if (!group.isCancelled()) {
+        if (!group.isCancelled()) {
+          synchronized (this.scheduledGroupsByBusinessApplication) {
             Maps.addToSet(this.scheduledGroupsByBusinessApplication, businessApplicationName,
               group);
           }
@@ -289,10 +294,8 @@ public class BatchJobScheduler extends ThreadPoolExecutor
             ThreadUtil.pause(60000);
           }
           final BatchJob batchJob = in.read();
-          synchronized (this.queuedJobById) {
-            final Identifier batchJobId = batchJob.getIdentifier();
-            this.queuedJobById.put(batchJobId, batchJob);
-          }
+          final Identifier batchJobId = batchJob.getIdentifier();
+          this.queuedJobById.put(batchJobId, batchJob);
         }
         scheduleQueuedJobs();
       } catch (final ClosedException e) {
@@ -311,25 +314,29 @@ public class BatchJobScheduler extends ThreadPoolExecutor
   }
 
   private void scheduleQueuedJobs() {
-    synchronized (this.queuedJobById) {
-      for (final Iterator<BatchJob> iterator = this.queuedJobById.values().iterator(); iterator
-        .hasNext();) {
-        final BatchJob batchJob = iterator.next();
-        final String businessApplicationName = batchJob
-          .getValue(BatchJob.BUSINESS_APPLICATION_NAME);
-        final BusinessApplication businessApplication = this.batchJobService
-          .getBusinessApplication(businessApplicationName);
-        if (businessApplication != null && businessApplication.getModule().isStarted()) {
-          final int maxCount = businessApplication.getMaxConcurrentRequests();
-          final int scheduledCount = getScheduledGroupCount(businessApplicationName);
-          if (scheduledCount < maxCount) {
+    while (!this.queuedJobById.isEmpty()) {
+      try {
+        for (final Iterator<BatchJob> iterator = this.queuedJobById.values().iterator(); iterator
+          .hasNext();) {
+          final BatchJob batchJob = iterator.next();
+          final String businessApplicationName = batchJob
+            .getValue(BatchJob.BUSINESS_APPLICATION_NAME);
+          final BusinessApplication businessApplication = this.batchJobService
+            .getBusinessApplication(businessApplicationName);
+          if (businessApplication != null && businessApplication.getModule().isStarted()) {
+            final int maxCount = businessApplication.getMaxConcurrentRequests();
+            final int scheduledCount = getScheduledGroupCount(businessApplicationName);
+            if (scheduledCount < maxCount) {
+              iterator.remove();
+              newExecutionGroup(businessApplication, batchJob);
+              schedule(batchJob);
+            }
+          } else {
             iterator.remove();
-            newExecutionGroup(businessApplication, batchJob);
-            schedule(batchJob);
           }
-        } else {
-          iterator.remove();
         }
+        return;
+      } catch (final ConcurrentModificationException e) {
       }
     }
   }

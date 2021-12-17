@@ -7,11 +7,11 @@
   xmlns:context="http://www.springframework.org/schema/context"
   xsi:schemaLocation="
     http://www.springframework.org/schema/beans 
-    http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+    https://www.springframework.org/schema/beans/spring-beans.xsd
     http://www.springframework.org/schema/context 
-    http://www.springframework.org/schema/context/spring-context-4.1.xsd
+    https://www.springframework.org/schema/context/spring-context.xsd
     http://www.springframework.org/schema/util
-    http://www.springframework.org/schema/util/spring-util-4.1.xsd
+    https://www.springframework.org/schema/util/spring-util.xsd
   "
 >
   <bean
@@ -47,54 +47,6 @@
       <bean class="com.revolsys.ui.web.controller.UriTemplatePathMatcher" />
     </property>
   </bean>
-
-  <util:map id="mediaTypes">
-    <entry
-      key="csv"
-      value="text/csv" />
-    <entry
-      key="geojson"
-      value="application/vnd.geo+json" />
-    <entry
-      key="gml"
-      value="application/gml+xml" />
-    <entry
-      key="kmz"
-      value="application/vnd.google-earth.kmz" />
-    <entry
-      key="kml"
-      value="application/vnd.google-earth.kml+xml" />
-    <entry
-      key="dbf"
-      value="application/dbf" />
-    <entry
-      key="html"
-      value="text/html" />
-    <entry
-      key="json"
-      value="application/json" />
-    <entry
-      key="shp"
-      value="application/x-shp" />
-    <entry
-      key="shpz"
-      value="application/x-shp+zip" />
-    <entry
-      key="tsv"
-      value="text/tab-separated-values" />
-    <entry
-      key="uri-list"
-      value="text/uri-list" />
-    <entry
-      key="wadl"
-      value="application/vnd.sun.wadl+xml" />
-    <entry
-      key="xhtml"
-      value="application/xhtml+xml" />
-    <entry
-      key="xml"
-      value="text/xml" />
-  </util:map>
 
   <bean
     class="com.revolsys.ui.web.rest.interceptor.WebAnnotationMethodHandlerAdapter"

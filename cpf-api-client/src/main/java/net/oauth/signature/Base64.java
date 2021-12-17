@@ -100,11 +100,11 @@ class Base64 {
   // some state be preserved between calls of encode() and decode().
 
   /*
-   * Tests a given byte array to see if it contains only valid characters within the Base64
-   * alphabet.
+   * Tests a given byte array to see if it contains only valid characters within
+   * the Base64 alphabet.
    * @param arrayOctet byte array to test
-   * @return <code>true</code> if any byte is a valid character in the Base64 alphabet; false
-   * herwise
+   * @return <code>true</code> if any byte is a valid character in the Base64
+   * alphabet; false herwise
    */
   private static boolean containsBase64Byte(final byte[] arrayOctet) {
     for (final byte element : arrayOctet) {

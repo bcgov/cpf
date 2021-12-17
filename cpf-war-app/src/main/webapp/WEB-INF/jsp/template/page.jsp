@@ -47,6 +47,7 @@
   </div>
   <footer class="footer">
     <c:import url="/view/footer/footerMenu" charEncoding="UTF-8" />
+    <!-- ${applicationCommit} -->
   <div class="version"><small>
     (v <c:out value="${applicationVersion}" /> )
     <c:set var="now" value="<%=new java.util.Date()%>" />

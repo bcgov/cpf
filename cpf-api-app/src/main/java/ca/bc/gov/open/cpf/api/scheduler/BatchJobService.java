@@ -116,6 +116,7 @@ import com.revolsys.record.io.RecordWriterFactory;
 import com.revolsys.record.io.format.csv.Csv;
 import com.revolsys.record.io.format.html.XhtmlMapWriter;
 import com.revolsys.record.io.format.json.Json;
+import com.revolsys.record.io.format.json.JsonObject;
 import com.revolsys.record.io.format.kml.Kml22Constants;
 import com.revolsys.record.io.format.tsv.Tsv;
 import com.revolsys.record.io.format.tsv.TsvWriter;
@@ -214,12 +215,12 @@ public class BatchJobService implements ModuleEventListener {
     final Class<?> dataClass = dataType.getJavaClass();
     if (Geometry.class.isAssignableFrom(dataClass)) {
       if (parameterValue != null) {
-        final GeometryFactory geometryFactory = field.getProperty(FieldProperties.GEOMETRY_FACTORY);
+        final GeometryFactory geometryFactory = field.getGeometryFactory();
         Geometry geometry;
         if (parameterValue instanceof Geometry) {
 
           geometry = (Geometry)parameterValue;
-          if (geometry.getHorizontalCoordinateSystemId() == 0 && Property.hasValue(sridString)) {
+          if (geometry.getCoordinateSystemId() == 0 && Property.hasValue(sridString)) {
             final int srid = Integer.parseInt(sridString);
             final GeometryFactory sourceGeometryFactory = GeometryFactory.floating3d(srid);
             geometry = sourceGeometryFactory.geometry(geometry);
@@ -251,7 +252,7 @@ public class BatchJobService implements ModuleEventListener {
           geometry = geometryFactory.geometry(geometry);
         }
         final Boolean validateGeometry = field.getProperty(FieldProperties.VALIDATE_GEOMETRY);
-        if (geometry.getHorizontalCoordinateSystemId() == 0) {
+        if (geometry.getCoordinateSystemId() == 0) {
           throw new IllegalArgumentException("does not have a coordinate system (SRID) specified");
         }
         if (validateGeometry == true) {
@@ -298,6 +299,9 @@ public class BatchJobService implements ModuleEventListener {
   private String fromEmail;
 
   private NamedChannelBundle<BatchJobRequestExecutionGroup> groupsToSchedule = new NamedChannelBundle<>();
+
+  // private final Map<String, Set<BatchJobRequestExecutionGroup>>
+  // scheduledGroups = new HashMap<>();
 
   /** The class used to send email. */
   private JavaMailSender mailSender;
@@ -378,6 +382,14 @@ public class BatchJobService implements ModuleEventListener {
 
         group.resetId();
         rescheduleGroup(group);
+      }
+    }
+  }
+
+  private void cancelGroups(final Collection<BatchJobRequestExecutionGroup> groups) {
+    if (groups != null) {
+      for (final BatchJobRequestExecutionGroup group : groups) {
+        group.cancel();
       }
     }
   }
@@ -667,7 +679,7 @@ public class BatchJobService implements ModuleEventListener {
       return null;
     } else {
       final int srid = Maps.getInteger(parameters, "resultSrid",
-        geometryFactory.getHorizontalCoordinateSystemId());
+        geometryFactory.getCoordinateSystemId());
       final int axisCount = Maps.getInteger(parameters, "resultNumAxis",
         geometryFactory.getAxisCount());
       final double scaleXY = Maps.getDouble(parameters, "resultScaleFactorXy",
@@ -729,6 +741,9 @@ public class BatchJobService implements ModuleEventListener {
           }
         }
       } catch (final ClosedException e) {
+        if (this.running) {
+          Logs.error(this, "Groups to schedule unexpectedly closed");
+        }
       }
       if (this.running && group != null && !group.isCancelled()) {
         final BusinessApplication businessApplication = group.getBusinessApplication();
@@ -746,6 +761,7 @@ public class BatchJobService implements ModuleEventListener {
             if (worker == null || moduleStartTime == -1 || !module.isStarted()) {
               scheduleGroup(group);
             } else {
+              // Maps.addToSet(this.scheduledGroups, moduleName, group);
               try {
                 response.put("workerId", workerId);
                 response.put("moduleName", moduleName);
@@ -878,6 +894,11 @@ public class BatchJobService implements ModuleEventListener {
                   this.scheduler.clearBusinessApplication(businessApplicationName);
                 }
                 this.dataAccessObject.clearBatchJobs(businessApplicationName);
+                final long moduleStartTime = module.getStartedTime();
+                final String moduleNameAndTime = moduleName + ":" + moduleStartTime;
+                for (final Worker worker : this.workersById.values()) {
+                  worker.cancelExecutingGroups(moduleNameAndTime);
+                }
               } else if (action.equals(ModuleEvent.START)) {
                 this.dataAccessObject.clearBatchJobs(businessApplicationName);
                 resetProcessingBatchJobs(moduleName, businessApplicationName);
@@ -959,10 +980,12 @@ public class BatchJobService implements ModuleEventListener {
     } else {
       final RecordWriter recordWriter = writerFactory.newRecordWriter(resultRecordDefinition,
         resource);
+      final JsonObject fileFormatProperties = this.config.getFileFormatProperties(resultFormat);
+      recordWriter.setProperties(fileFormatProperties);
       recordWriter.setProperty(Kml22Constants.STYLE_URL_PROPERTY,
-        this.getBaseUrl() + "/kml/defaultStyle.kml#default");
+        getBaseUrl() + "/kml/defaultStyle.kml#default");
       recordWriter.setProperty(IoConstants.TITLE_PROPERTY, title);
-      recordWriter.setProperty("htmlCssStyleUrl", this.getBaseUrl() + "/css/default.css");
+      recordWriter.setProperty("htmlCssStyleUrl", getBaseUrl() + "/css/default.css");
 
       recordWriter.setProperty(IoConstants.GEOMETRY_FACTORY, geometryFactory);
       recordWriter.setProperties(application.getProperties());
@@ -1312,12 +1335,14 @@ public class BatchJobService implements ModuleEventListener {
       if (groupsToSchedule != null) {
         final Collection<BatchJobRequestExecutionGroup> groups = groupsToSchedule
           .remove(moduleName);
-        if (groups != null) {
-          for (final BatchJobRequestExecutionGroup group : groups) {
-            group.cancel();
-          }
-        }
+        cancelGroups(groups);
       }
+
+      // final Collection<BatchJobRequestExecutionGroup> groups =
+      // this.scheduledGroups
+      // .remove(moduleName);
+      // cancelGroups(groups);
+
       final int numCleanedStatus = this.dataAccessObject
         .updateBatchJobProcessedStatus(businessApplicationName);
       if (numCleanedStatus > 0) {
@@ -1374,7 +1399,24 @@ public class BatchJobService implements ModuleEventListener {
       for (final Identifier batchJobId : batchJobIds) {
         getAppLog(businessApplicationName).info("Schedule from database\tbatchJobId=" + batchJobId);
         final BatchJob batchJob = getBatchJob(batchJobId);
-        scheduleJob(batchJob);
+        synchronized (batchJob) {
+          if (batchJob.isStatus(BatchJobStatus.PROCESSING)) {
+            if (batchJob.isCompleted()) {
+              try (
+                Transaction transaction = this.dataAccessObject
+                  .newTransaction(Propagation.REQUIRES_NEW)) {
+                batchJob.setStatus(this, BatchJobStatus.PROCESSING, BatchJobStatus.PROCESSED);
+                try {
+                  postProcess(batchJobId);
+                } catch (final Throwable e) {
+                  throw transaction.setRollbackOnly(e);
+                }
+              }
+            } else {
+              scheduleJob(batchJob);
+            }
+          }
+        }
       }
     }
   }

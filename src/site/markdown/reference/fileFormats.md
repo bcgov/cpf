@@ -47,8 +47,8 @@ unless a .cpg file is provided in the .shpz archive.
       <td><img src="../images/tick.png" alt="Yes" /><br />
         <a
         href="result/result.geojson" >view</a></td>
-      <td><p> <a href="http:/geojson.org/">GeoJSON</a> is a geospatial data
-        interchange format based on <a href="http:/json.org/">JavaScript
+      <td><p> <a href="https://geojson.org">GeoJSON</a> is a geospatial data
+        interchange format based on <a href="https://json.org/">JavaScript
           Object Notation (JSON)</a>. GeoJSON can be used to create web browser
         based GIS applications in JavaScript. </p>
         <p>Each feature record is one feature object in a feature collection
@@ -63,11 +63,11 @@ unless a .cpg file is provided in the .shpz archive.
       <td><img src="../images/tick.png" alt="Yes" /><br />
         <a
         href="result/result.gml" >view</a></td>
-      <td><p> <a href="http:/en.wikipedia.org/wiki/Geography_Markup_Language">Geography
+      <td><p> <a href="https://en.wikipedia.org/wiki/Geography_Markup_Language">Geography
         Markup Language (GML)</a> is an <a
-            href="http:/www.opengeospatial.org/standards/gml">international
+            href="https://www.opengeospatial.org/standards/gml">international
           standard</a> for exchange of geographical feature maintained by the <a
-            href="http:/www.opengeospatial.org/">Open Geospatial Consortium
+            href="https://www.opengeospatial.org/">Open Geospatial Consortium
             (OGC)</a>. </p>
         <p>Each feature is one GML feature of the Feature Type from the
           'Geomark Geometry Representations' table. The features are wrapped in
@@ -104,12 +104,12 @@ unless a .cpg file is provided in the .shpz archive.
       <td><img src="../images/cross.png" alt="No" /></td>
       <td><img src="../images/tick.png" alt="Yes" /><br /> <a href="result/result.kml" >view</a></td>
       <td><p>
-          <a href="http:/code.google.com/apis/kml/">Keyhole Markup Language
+          <a href="https://code.google.com/apis/kml/">Keyhole Markup Language
             (KML)</a> is used to display geographic data in an Earth browser, such
-          as <a href="http:/www.google.com/earth/">Google Earth</a>. <a
-            href="http:/www.opengeospatial.org/standards/kml/">KML is an
+          as <a href="https://www.google.com/earth/">Google Earth</a>. <a
+            href="https://www.opengeospatial.org/standards/kml/">KML is an
             international standard</a> maintained by the <a
-            href="http:/www.opengeospatial.org/">Open Geospatial Consortium,
+            href="https://www.opengeospatial.org/">Open Geospatial Consortium,
             Inc. (OGC)</a>.
         </p>
         <p>Each feature record will be encoded using a Placemark with the
@@ -124,12 +124,12 @@ unless a .cpg file is provided in the .shpz archive.
       <td><img src="../images/cross.png" alt="No" /></td>
       <td><img src="../images/tick.png" alt="Yes" /><br /> <a href="result/result.kmz" >view</a></td>
       <td><p>
-          <a href="http:/code.google.com/apis/kml/">Keyhole Markup Language
+          <a href="https://code.google.com/apis/kml/">Keyhole Markup Language
             (KML)</a> is used to display geographic data in an Earth browser, such
-          as <a href="http:/www.google.com/earth/">Google Earth</a>. <a
-            href="http:/www.opengeospatial.org/standards/kml/">KML is an
+          as <a href="https://www.google.com/earth/">Google Earth</a>. <a
+            href="https://www.opengeospatial.org/standards/kml/">KML is an
             international standard</a> maintained by the <a
-            href="http:/www.opengeospatial.org/">Open Geospatial Consortium,
+            href="https://www.opengeospatial.org/">Open Geospatial Consortium,
             Inc. (OGC)</a>.
         </p>        
         <p>The KMZ is a Zip file with a single kml document. Typically named doc.kml.</p>       
@@ -149,12 +149,12 @@ unless a .cpg file is provided in the .shpz archive.
       <td>
         <p>
           developed by ESRI for ArcMap which is a multi-file GIS format that
-          <a href="http:/en.wikipedia.org/wiki/Shapefile">ESRI Shapefile</a>
+          <a href="https://en.wikipedia.org/wiki/Shapefile">Shapefile (ESRI)</a>
           uses <a href="https://en.wikipedia.org/wiki/DBase">DBase</a> file for the attribution and a prj file for the coordinate
           system. Due to the multi-file nature the shp, dbf, shx and prj files
           are compressed into a ZIP file for download or upload.
         </p>
-        <p>Each feature record is one record in the ESRI shapefile.</p>
+        <p>Each feature record is one record in the Shapefile.</p>
       </td>
     </tr>
     <tr id="xhtml">

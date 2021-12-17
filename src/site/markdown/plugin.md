@@ -75,7 +75,7 @@ Use the links in the following table to view the Plug-in API documentation or do
   </thead>
   <tbody>
     <tr>
-      <td>Plug-in Java (6+)</td>
+      <td>Plug-in Java (11+)</td>
       <td><a href="java-api">API Docs</a></td>
       <td><a href="../../lib/cpf-api-plugin-${project.version}.jar">Download</a></td>
     </tr>
@@ -221,14 +221,14 @@ CPF application. These must be approved prior to delivering to the Ministry.
 All plug-ins must either be available in the [Maven central repository](https://search.maven.org/).
 Or a private repository that the CPF is configured to access.
 
-If any of the dependencies include dependencies to logging frameworks such as LOG4J, SLF4J and
+If any of the dependencies include dependencies to logging frameworks such as Logback, LOG4J, SLF4J and
 especially commons-logging these must be
 [excluded](https://maven.apache.org/guides/introduction/introduction-to-optional-and-excludes-dependencies.html#Dependency_Exclusions)
 from those dependencies. This ensures that carefully controlled versions of these files are used.
-The CPF internally uses SLF4J as the logging API with a LOG4J binding to perform the actual logging
+The CPF internally uses SLF4J as the logging API with a Logback binding to perform the actual logging
 and a bridge so that commons logging is logged via SLF4J. It is recommended for plug-ins to use
-SLF4J for logging in their module. Plug-ins must not include a `log4j.xml`
-file in their Jar file. A `log4j.xml` file can however be included in `src/test/resources` for
+SLF4J for logging in their module. Plug-ins must not include a `log4j.xml`, or `log4j2.xml`, or `logback.xml`
+file in their Jar file. They can however be included in `src/test/resources` for
 testing the plug-in.
 
 Any dependencies that are included in the CPF application itself must be marked with a scope of
@@ -321,9 +321,9 @@ The following file shows an example of this file.
   xmlns:p="http://www.springframework.org/schema/p"
   xsi:schemaLocation="
     http://www.springframework.org/schema/beans
-    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    https://www.springframework.org/schema/beans/spring-beans.xsd
     http://www.springframework.org/schema/util
-    http://www.springframework.org/schema/util/spring-util-3.0.xsd
+    https://www.springframework.org/schema/util/spring-util.xsd
   "
 >
   <util:list id="beanImports">
@@ -425,9 +425,9 @@ Finally the demoDataSource bean will be injected into the `dataSource` property 
   xmlns:p="http://www.springframework.org/schema/p"
   xsi:schemaLocation="
     http://www.springframework.org/schema/beans
-    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    https://www.springframework.org/schema/beans/spring-beans.xsd
     http://www.springframework.org/schema/util
-    http://www.springframework.org/schema/util/spring-util-3.0.xsd
+    https://www.springframework.org/schema/util/spring-util.xsd
   "
 >
   <util:list id="beanImports">
@@ -511,7 +511,7 @@ to return multiple results from a single request.
 The CPF includes spatial support for structured input data and result data files.
 This enables plug-ins to define job parameters, request parameters and result attributes to use
 [Java Topology Suite](http://tsusiatsoftware.net/jts/main.html) (JTS) Geometry objects.
-The CPF reads the input data files (e.g. ESRI Shapefile in a Zip file) and converts the values into
+The CPF reads the input data files (e.g. Shapefile (ESRI) in a Zip file) and converts the values into
 JTS Geometry objects for processing by the business application. After processing the JTS Geometry
 objects are converted back into the requested output spatial file format. The CPF also handles
 projection of the geometries if required.
@@ -556,12 +556,12 @@ public void setResultNumAxis(final int resultNumAxis) {
   this.resultNumAxis = resultNumAxis;
 }
 
-public void setResultScaleXy(final double resultScaleXy) {
-  this.resultScaleXy = resultScaleXy;
+public void setResultScaleFactorXy(final double resultScaleFactorXy) {
+  this.resultScaleFactorXy = resultScaleFactorXy;
 }
 
-public void setResultScaleZ(final double resultScaleZ) {
-  this.resultScaleZ = resultScaleZ;
+public void setResultScaleFactorZ(final double resultScaleFactorZ) {
+  this.resultScaleFactorZ = resultScaleFactorZ;
 }
 
 public void setResultSrid(final int resultSrid) {
@@ -685,8 +685,7 @@ The preferred approach is for business application plug-ins to use the
 [AppLog](cpf-api-plugin/java-api//#ca.bc.gov.open.cpf.plugin.api.log.AppLog) class for logging to
 have the messages appear in the appropriate log file.
 
-The plug-in The plug-in may also use [slf4j](https://www.slf4j.org/) (preferred) or
-[log4j](https://logging.apache.org/log4j/) or with the following logger name sub trees.
+The plug-in The plug-in may also use [slf4j](https://www.slf4j.org/) (preferred) with the following logger name sub trees.
 
 * Loggers below `{ModuleName}.{BusinessApplicationName}` (e.g. `DEMO.demoApp`).
 * Loggers below the [BusinessApplicationPlugin.packageName](cpf-api-plugin/java-api//#ca.bc.gov.open.cpf.plugin.api.BusinessApplicationPlugin.packageName)

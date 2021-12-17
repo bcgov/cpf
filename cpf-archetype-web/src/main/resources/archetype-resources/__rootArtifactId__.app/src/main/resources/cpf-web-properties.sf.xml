@@ -6,9 +6,9 @@
   xmlns:p="http://www.springframework.org/schema/p"
   xsi:schemaLocation="
     http://www.springframework.org/schema/beans
-    http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+    https://www.springframework.org/schema/beans/spring-beans.xsd
     http://www.springframework.org/schema/util
-    http://www.springframework.org/schema/util/spring-util-4.1.xsd
+    https://www.springframework.org/schema/util/spring-util.xsd
   "
 >
   <bean
@@ -30,7 +30,7 @@
 
     <entry key="mavenRepository.repositoryLocations">
       <list>
-        <value>http://repo1.maven.org/maven2/</value>
+        <value>https://repo1.maven.org/maven2/</value>
       </list>
     </entry>
   </util:map>

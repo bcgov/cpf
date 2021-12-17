@@ -356,15 +356,10 @@ public class WorkerGroupRunnable implements Runnable {
    * <h2>Fields</h2>
    * batchJobId long
    * groupId long
-  
+
    * errorCode String
    * errorMessage String
    * errorDebugMessage String
-<<<<<<< HEAD
-  
-=======
-
->>>>>>> branch '6.0.x' of git@github.com:revolsys/ca.bc.gov.open.cpf.git
    * results List&lt;MapEx&gt;
    * logRecords List&lt;MapEx&gt;
    * groupExecutionTime long
@@ -626,12 +621,12 @@ public class WorkerGroupRunnable implements Runnable {
           }
           if (value instanceof Geometry) {
             Geometry geometry = (Geometry)value;
-            GeometryFactory geometryFactory = field.getProperty(FieldProperties.GEOMETRY_FACTORY);
+            GeometryFactory geometryFactory = field.getGeometryFactory();
             if (geometryFactory == GeometryFactory.DEFAULT_3D) {
               geometryFactory = geometry.getGeometryFactory();
             }
             final int srid = parameters.getInteger("resultSrid",
-              geometryFactory.getHorizontalCoordinateSystemId());
+              geometryFactory.getCoordinateSystemId());
             final int axisCount = parameters.getInteger("resultNumAxis",
               geometryFactory.getAxisCount());
             final double scaleXY = Maps.getDouble(parameters, "resultScaleFactorXy",
@@ -641,7 +636,7 @@ public class WorkerGroupRunnable implements Runnable {
 
             geometryFactory = GeometryFactory.fixed(srid, axisCount, scaleXY, scaleXY, scaleZ);
             geometry = geometryFactory.geometry(geometry);
-            if (geometry.getHorizontalCoordinateSystemId() == 0) {
+            if (geometry.getCoordinateSystemId() == 0) {
               throw new IllegalArgumentException(
                 "Geometry does not have a coordinate system (SRID) specified");
             }

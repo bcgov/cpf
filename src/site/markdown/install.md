@@ -264,7 +264,7 @@ with the correct values for your environment.
 **UNIX/Mac**
 
 ```bash
-CPF_VERSION=6.0.0-SNAPSHOT
+CPF_VERSION=6.1.x-SNAPSHOT
 cd ~/projects
 mvn \
   archetype:generate \
@@ -289,7 +289,7 @@ mvn \
 **Windows**
 
 ```winbatch
-set CPF_VERSION=6.0.0-SNAPSHOT
+set CPF_VERSION=6.1.x-SNAPSHOT
 cd %HOMEDRIVE%%HOMEPATH%\projects
 mvn ^
   archetype:generate ^

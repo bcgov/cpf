@@ -610,7 +610,7 @@ public class ConcurrentProcessingFramework {
    *
    * <h4>Opaque input data</h4>
    *
-   * <p>For opaque input data (e.g. JPEG image, ESRI Shapefile) the requests can be
+   * <p>For opaque input data (e.g. JPEG image, Shapefile) the requests can be
    * specified as one or more inputData files or one or more inputDataUrl
    * parameters. It is not possible to mix inputData and inputDataUrl parameters
    * in the same job. If all the requests have the same content type a
@@ -876,7 +876,7 @@ public class ConcurrentProcessingFramework {
    *
    * <h4>Opaque input data</h4>
    *
-   * <p>For opaque input data (e.g. JPEG image, ESRI Shapefile) the requests can be
+   * <p>For opaque input data (e.g. JPEG image, Shapefile) the requests can be
    * specified as one inputData files or one inputDataUrl
    * parameter. It is not possible to mix inputData and inputDataUrl parameters
    * in the same job.</p>
@@ -1620,7 +1620,7 @@ public class ConcurrentProcessingFramework {
               } else {
                 final String contentType = writerFactory.getMediaType(format);
                 response.setContentType(contentType);
-                final String fileExtension = writerFactory.getFileExtension(format);
+                final String fileExtension = writerFactory.getFileExtension(contentType);
                 final String fileName = businessApplicationName + "-instant." + fileExtension;
                 response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
               }
