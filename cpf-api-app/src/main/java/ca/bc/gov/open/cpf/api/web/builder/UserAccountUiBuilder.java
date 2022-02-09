@@ -207,7 +207,7 @@ public class UserAccountUiBuilder extends CpfUiBuilder implements UserAccount {
     checkHasAnyRole(ADMIN);
 
     final Record userAccount = getUserAccount(consumerKey);
-    if (userAccount != null && userAccount.getValue(USER_ACCOUNT_CLASS).equals("CPF")) {
+    if (userAccount != null) {
 
       getDataAccessObject().deleteUserAccount(userAccount);
       redirectPage("list");
