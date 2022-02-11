@@ -242,7 +242,7 @@ public class ConfigPropertyModuleLoader implements ModuleLoader {
       final String moduleName = module.getName();
       final ClassLoader classLoader = module.getClassLoader();
 
-      InputStream in = new FileInputStream("/apps/conf/cpf/" + moduleName + "/ca.bc.gov.open.cpf.plugin.ConfigProperties.json");
+      InputStream in = new FileInputStream("/apps/conf/cpf/" + moduleName + "/config.json");
 
       if (in == null)
       {
