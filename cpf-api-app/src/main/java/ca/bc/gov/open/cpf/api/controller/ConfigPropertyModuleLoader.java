@@ -55,6 +55,7 @@ import com.revolsys.transaction.Propagation;
 import com.revolsys.transaction.Transaction;
 import com.revolsys.util.Property;
 import java.io.FileInputStream;
+import java.io.IOException;
 
 public class ConfigPropertyModuleLoader implements ModuleLoader {
   private static final String ACTION = "action";
@@ -241,10 +242,15 @@ public class ConfigPropertyModuleLoader implements ModuleLoader {
     try {
       final String moduleName = module.getName();
       final ClassLoader classLoader = module.getClassLoader();
-
-      InputStream in = new FileInputStream("/apps/conf/cpf/" + moduleName + "/config.json");
-
-      if (in == null)
+      InputStream in;
+      try {
+        in = new FileInputStream("/apps/conf/cpf/" + moduleName + "/config.json");
+        if (in == null)
+        {
+          in = classLoader.getResourceAsStream("META-INF/ca.bc.gov.open.cpf.plugin.ConfigProperties.json");
+        }
+      }
+      catch(IOException e)
       {
         in = classLoader.getResourceAsStream("META-INF/ca.bc.gov.open.cpf.plugin.ConfigProperties.json");
       }
