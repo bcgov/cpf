@@ -7,7 +7,7 @@
   <parent>
     <artifactId>cpf-parent</artifactId>
     <groupId>ca.bc.gov.open.cpf</groupId>
-    <version>6.1.x-SNAPSHOT</version>
+    <version>6.1.2-SNAPSHOT</version>
   </parent>
   <artifactId>cpf-archetype-plugin</artifactId>
   <name>CPF Plug-in Maven Arechtype</name>
