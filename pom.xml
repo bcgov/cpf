@@ -9,7 +9,7 @@
   <artifactId>cpf-bcgov</artifactId>
   <packaging>pom</packaging>
   <name>BCGOV Concurrent Processing Framework</name>
-  <version>6.1.x-SNAPSHOT</version>
+  <version>6.1.2-SNAPSHOT</version>
 
   <developers>
     <developer>
@@ -255,6 +255,6 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <skipWebDeploy>true</skipWebDeploy>
-    <ca.bc.gov.open.cpf.version>6.1.x-SNAPSHOT</ca.bc.gov.open.cpf.version>
+    <ca.bc.gov.open.cpf.version>6.1.2-SNAPSHOT</ca.bc.gov.open.cpf.version>
   </properties>
 </project>
