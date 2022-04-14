@@ -1,0 +1,143 @@
+apiVersion: v1
+objects:
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    generation: 36
+    labels:
+      app: cpf-db
+    name: cpf-db
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        deployment: cpf-db
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        labels:
+          deployment: cpf-db
+      spec:
+        initContainers:
+        - name: init-resources
+          image: busybox:latest
+          command: ['sh', '-c']
+          args:
+            - cd /var/lib/pgsql/data && if [ -d cpf-docker ]; then rm -fr cpf-docker; fi;
+              wget https://github.com/revolsys/cpf/archive/docker.zip && unzip docker.zip && rm docker.zip;
+              ln -s cpf-docker/database/sql .;
+              mv cpf-docker/database/docker-entrypoint-initdb.d/cpf-install.sh .;
+              cp cpf-docker/config/db-sample.properties /apps/cpf/sql/db.properties;
+              mkdir /var/lib/pgsql/data/pgdata;
+              echo done;
+          volumeMounts:
+          - name: cpf-db-data
+            mountPath: /var/lib/pgsql/data
+          - name: cpf-db-data
+            mountPath: /apps/cpf
+          - name: cpf-db-data
+            mountPath: /docker-entrypoint-initdb.d
+        containers:
+        - env:
+          - name: POSTGRES_HOST_AUTH_METHOD
+            value: trust
+          - name: POSTGRES_USER
+            valueFrom:
+              secretKeyRef:
+                key: database-user
+                name: cpf-db
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                key: database-password
+                name: cpf-db
+          - name: POSTGRES_DATABASE
+            valueFrom:
+              secretKeyRef:
+                key: database-name
+                name: cpf-db
+          - name: PGDATA
+            value: /var/lib/pgsql/data/pgdata
+          image: docker-remote.artifacts.developer.gov.bc.ca/postgres:13.4
+          imagePullPolicy: IfNotPresent
+          name: cpf-db
+          ports:
+          - containerPort: 5432
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - name: cpf-db-data
+            mountPath: /var/lib/pgsql/data
+          - name: cpf-db-data
+            mountPath: /apps/cpf
+          - name: cpf-db-data
+            mountPath: /docker-entrypoint-initdb.d
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - name: cpf-db-data
+          persistentVolumeClaim:
+            claimName: cpf-db-vol
+- apiVersion: v1
+  kind: Service
+  metadata:
+    labels:
+      app: cpf-db
+    name: cpf-db
+  spec:
+    ports:
+    - name: 5432-tcp
+      port: 5432
+      protocol: TCP
+      targetPort: 5432
+    selector:
+      deployment: cpf-db
+    sessionAffinity: None
+    type: ClusterIP
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    finalizers:
+    - kubernetes.io/pvc-protection
+    labels:
+      app: cpf-db
+    name: cpf-db-vol
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 1Gi
+    storageClassName: netapp-file-standard
+    volumeMode: Filesystem
+- kind: Secret
+  apiVersion: v1
+  metadata:
+    annotations:
+      template.openshift.io/expose-database_name: '{.data[''database-name'']}'
+      template.openshift.io/expose-password: '{.data[''postgres-password'']}'
+      template.openshift.io/expose-username: '{.data[''database-user'']}'
+    creationTimestamp: null
+    name: cpf-db
+  type: Opaque
+  data:
+    database-name: Y3Bm
+    database-password: Y3BmXzB3bjNy
+    database-user: cG9zdGdyZXM=
+    postgres-password: UDA1dGdyM3M=
+kind: Template
+parameters:
+- name: NAMESPACE
+  description: "project namespace"
+  value: 988040-prod
