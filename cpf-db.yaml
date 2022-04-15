@@ -26,15 +26,28 @@ objects:
       spec:
         initContainers:
         - name: init-resources
-          image: busybox:latest
+          env:
+          - name: GITHUB_USER
+            valueFrom:
+              secretKeyRef:
+                key: username
+                name: loc-tools-repo
+          - name: GITHUB_PASS
+            valueFrom:
+              secretKeyRef:
+                key: password
+                name: loc-tools-repo
+          image: alpine/git:latest
           command: ['sh', '-c']
           args:
-            - cd /var/lib/pgsql/data && if [ -d cpf-docker ]; then rm -fr cpf-docker; fi;
-              wget https://github.com/revolsys/cpf/archive/docker.zip && unzip docker.zip && rm docker.zip;
-              ln -s cpf-docker/database/sql .;
-              mv cpf-docker/database/docker-entrypoint-initdb.d/cpf-install.sh .;
-              cp cpf-docker/config/db-sample.properties /apps/cpf/sql/db.properties;
-              mkdir /var/lib/pgsql/data/pgdata;
+            - cd /var/lib/pgsql/data && if [ -d cpf-db ]; then rm -fr cpf-db; fi;
+              path="https://${GITHUB_USER}:${GITHUB_PASS}@github.com/bcgov-dss/loc-tools.git";
+              git clone ${path};
+              cp -r loc-tools/cpf-db .;
+              rm -r loc-tools;
+              ln -s cpf-db/sql .;
+              mv cpf-db/docker-entrypoint-initdb.d/cpf-install.sh .;
+              cp cpf-db/sql/db.properties /apps/cpf/sql/db.properties;
               echo done;
           volumeMounts:
           - name: cpf-db-data
@@ -141,3 +154,6 @@ parameters:
 - name: NAMESPACE
   description: "project namespace"
   value: 988040-prod
+- name: TOOLS_NAMESPACE
+  description: "image managing namespace"
+  value: 988040-tools
