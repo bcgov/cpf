@@ -5197,4 +5197,4 @@ kind: Template
 parameters:
 - name: BASE_URL
   description: "exposed service url"
-  value: data-integration-prod-cpf.apps.gov.bc.ca
+  value: data-integration-cpf.apps.gov.bc.ca
