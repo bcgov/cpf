@@ -137,7 +137,7 @@ public class SiteminderUserDetailsService implements UserDetailsService, GroupNa
       Transaction transaction = this.dataAccessObject.newTransaction(Propagation.REQUIRES_NEW)) {
       try {
         Record user = this.dataAccessObject.getUserAccount(USER_ACCOUNT_CLASS, userGuid);
-
+        System.out.println("inside load user by name");
         final SecurityContext context = SecurityContextHolder.getContext();
         String consumerSecret = null;
         String username;
@@ -163,6 +163,18 @@ public class SiteminderUserDetailsService implements UserDetailsService, GroupNa
 
           user = this.dataAccessObject.newUserAccount(USER_ACCOUNT_CLASS, userGuid, username,
             consumerSecret);
+
+          for (String admin : admins) {
+            System.out.println(admin);
+            if (username.endsWith(admin))
+            {
+              final Record userGroup = this.dataAccessObject.getUserGroup("ADMIN");
+              this.dataAccessObject.newUserGroupAccountXref(userGroup, user);
+              System.out.println("Added admin");
+            }
+          }
+          System.out.println("Printed list of admins");
+
         } else {
           username = user.getValue(UserAccount.CONSUMER_KEY);
 
@@ -209,27 +221,29 @@ public class SiteminderUserDetailsService implements UserDetailsService, GroupNa
 
   private void initPropertiesFile() {
     final Path file = Paths.get("/apps/config/cpf/cpf.properties");
+    System.out.println("inside init properties file");
     if (Files.exists(file)) {
       try {
         final Properties properties = new Properties();
         try (
           FileReader reader = new FileReader(file.toFile())) {
-              properties.load(reader);
-              for (final Object key : properties.keySet()) {
-                final String name = key.toString();
-                final String value = properties.getProperty(name);
-                if (value != null) {
-                  if (key == "cpfAdmins") {
-                    List<String> cpf_admins = Arrays.asList(value.split(",[ ]*"));
-                    for (String admin : cpf_admins) {
-                      admins.add(admin);
-                    }
+            properties.load(reader);
+            for (final Object key : properties.keySet()) {
+              final String name = key.toString();
+              final String value = properties.getProperty(name);
+              System.out.println(value);
+              if (value != null) {
+                if (key == "cpfAdmins") {
+                  List<String> cpf_admins = Arrays.asList(value.split(",[ ]*"));
+                  for (String admin : cpf_admins) {
+                    System.out.println(admin);
+                    admins.add(admin);
                   }
                 }
-               }
+              }
+            }
           }
-      } catch (final Exception e) {
-      }
+      } catch (final Exception e) { }
     }
   }
 
