@@ -221,7 +221,6 @@ public class SiteminderUserDetailsService implements UserDetailsService, GroupNa
 
   private void initPropertiesFile() {
     final Path file = Paths.get("/apps/config/cpf/cpf.properties");
-    System.out.println("inside init properties file");
     if (Files.exists(file)) {
       try {
         final Properties properties = new Properties();
@@ -231,14 +230,10 @@ public class SiteminderUserDetailsService implements UserDetailsService, GroupNa
             for (final Object key : properties.keySet()) {
               final String name = key.toString();
               final String value = properties.getProperty(name);
-              System.out.println(name);
-              System.out.println(value);
               if (value != null) {
                 if (name.equals("cpfAdmins")) {
-                  System.out.println("inside admins");
                   List<String> cpf_admins = Arrays.asList(value.split(",[ ]*"));
                   for (String admin : cpf_admins) {
-                    System.out.println(admin);
                     admins.add(admin);
                   }
                 }
