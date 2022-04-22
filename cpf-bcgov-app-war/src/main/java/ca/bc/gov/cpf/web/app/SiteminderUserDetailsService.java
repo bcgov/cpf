@@ -231,9 +231,8 @@ public class SiteminderUserDetailsService implements UserDetailsService, GroupNa
             for (final Object key : properties.keySet()) {
               final String name = key.toString();
               final String value = properties.getProperty(name);
-              System.out.println(value);
               if (value != null) {
-                if (key == "cpfAdmins") {
+                if (name == "cpfAdmins") {
                   List<String> cpf_admins = Arrays.asList(value.split(",[ ]*"));
                   for (String admin : cpf_admins) {
                     System.out.println(admin);
