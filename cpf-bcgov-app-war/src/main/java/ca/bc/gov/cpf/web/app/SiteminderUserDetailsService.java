@@ -125,6 +125,8 @@ public class SiteminderUserDetailsService implements UserDetailsService, GroupNa
         this.userAccountSecurityService.addGrantedAuthorityService(this);
       } catch (final Throwable e) {
         throw transaction.setRollbackOnly(e);
+      } finally {
+          initPropertiesFile();
       }
     }
   }
