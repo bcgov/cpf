@@ -3,6 +3,12 @@ package ca.bc.gov.cpf.web.app;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.Properties;
+import java.util.Arrays;
+import java.io.FileReader;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import javax.annotation.PreDestroy;
 import javax.servlet.http.HttpServletRequest;
@@ -53,6 +59,8 @@ public class SiteminderUserDetailsService implements UserDetailsService, GroupNa
   /** The class to use to check that the user is valid. */
   private UserDetailsChecker userDetailsChecker = new AccountStatusUserDetailsChecker();
 
+  private List<String> admins = new ArrayList<String>();
+
   @PreDestroy
   public void close() {
     this.userAccountSecurityService = null;
@@ -68,6 +76,12 @@ public class SiteminderUserDetailsService implements UserDetailsService, GroupNa
       if (username.startsWith("idir:")) {
         groupNames.add(BCGOV_ALL);
         groupNames.add(BCGOV_INTERNAL);
+        for(String admin : admins){
+          if (username.endsWith(admin))
+          {
+            groupNames.add("ADMIN");
+          }
+        }
       } else if (username.startsWith("bceid:")) {
         groupNames.add(BCGOV_ALL);
         groupNames.add(BCGOV_EXTERNAL);
@@ -189,6 +203,32 @@ public class SiteminderUserDetailsService implements UserDetailsService, GroupNa
 
   public void setUserDetailsChecker(final UserDetailsChecker userDetailsChecker) {
     this.userDetailsChecker = userDetailsChecker;
+  }
+
+  private void initPropertiesFile() {
+    final Path file = Paths.get("/apps/config/cpf/cpf.properties");
+    if (Files.exists(file)) {
+      try {
+        final Properties properties = new Properties();
+        try (
+          FileReader reader = new FileReader(file.toFile())) {
+              properties.load(reader);
+              for (final Object key : properties.keySet()) {
+                final String name = key.toString();
+                final String value = properties.getProperty(name);
+                if (value != null) {
+                  if (key == "cpfAdmins") {
+                    List<String> cpf_admins = Arrays.asList(value.split(",[ ]*"));
+                    for (String admin : cpf_admins) {
+                      admins.add(admin);
+                    }
+                  }
+                }
+               }
+          }
+      } catch (final Exception e) {
+      }
+    }
   }
 
 }
