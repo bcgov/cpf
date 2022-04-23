@@ -76,12 +76,6 @@ public class SiteminderUserDetailsService implements UserDetailsService, GroupNa
       if (username.startsWith("idir:")) {
         groupNames.add(BCGOV_ALL);
         groupNames.add(BCGOV_INTERNAL);
-        for(String admin : admins){
-          if (username.endsWith(admin))
-          {
-            groupNames.add("ADMIN");
-          }
-        }
       } else if (username.startsWith("bceid:")) {
         groupNames.add(BCGOV_ALL);
         groupNames.add(BCGOV_EXTERNAL);
@@ -166,7 +160,7 @@ public class SiteminderUserDetailsService implements UserDetailsService, GroupNa
           if (userType.equalsIgnoreCase("INTERNAL")) {
             for (String admin : admins) {
               if (username.endsWith(admin)) {
-                final Record userGroup = this.dataAccessObject.getUserGroup("ROLE_ADMIN");
+                final Record userGroup = this.dataAccessObject.getUserGroup("ADMIN");
                 this.dataAccessObject.newUserGroupAccountXref(userGroup, user);
               }
             }
