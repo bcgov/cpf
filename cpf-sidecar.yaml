@@ -35,9 +35,9 @@ spec:
           value: >-
             delivery.apps.gov.bc.ca/artifactory/libs-snapshot-local/ca/bc/gov/cpf
         - name: APP_VERSION
-          value: 6.1.2-SNAPSHOT
+          value: 6.3.0-SNAPSHOT
         - name: SNAPSHOT_VERSION
-          value: 6.1.2-20211217.163738-1
+          value: 6.3.0-20220423.062734-1
       pullSecret:
         name: artifactory-creds
     type: Docker
