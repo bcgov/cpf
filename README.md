@@ -19,7 +19,7 @@ oc -n f8d638-tools tag cpf-sidecar:latest cpf-sidecar:dev
 Add image puller
 ```
 oc -n f8d638-tools policy add-role-to-user system:image-puller system:serviceaccount:f8d638-dev:default
-
+```
 Create config maps
 
 ```
