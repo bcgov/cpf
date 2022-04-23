@@ -166,7 +166,7 @@ public class SiteminderUserDetailsService implements UserDetailsService, GroupNa
           if (userType.equalsIgnoreCase("INTERNAL")) {
             for (String admin : admins) {
               if (username.endsWith(admin)) {
-                final Record userGroup = this.dataAccessObject.getUserGroup("ADMIN");
+                final Record userGroup = this.dataAccessObject.getUserGroup("ROLE_ADMIN");
                 this.dataAccessObject.newUserGroupAccountXref(userGroup, user);
               }
             }
