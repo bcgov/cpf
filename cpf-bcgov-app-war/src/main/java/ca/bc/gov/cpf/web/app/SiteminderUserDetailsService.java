@@ -3,6 +3,12 @@ package ca.bc.gov.cpf.web.app;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.Properties;
+import java.util.Arrays;
+import java.io.FileReader;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import javax.annotation.PreDestroy;
 import javax.servlet.http.HttpServletRequest;
@@ -52,6 +58,8 @@ public class SiteminderUserDetailsService implements UserDetailsService, GroupNa
 
   /** The class to use to check that the user is valid. */
   private UserDetailsChecker userDetailsChecker = new AccountStatusUserDetailsChecker();
+
+  private List<String> admins = new ArrayList<String>();
 
   @PreDestroy
   public void close() {
@@ -111,6 +119,8 @@ public class SiteminderUserDetailsService implements UserDetailsService, GroupNa
         this.userAccountSecurityService.addGrantedAuthorityService(this);
       } catch (final Throwable e) {
         throw transaction.setRollbackOnly(e);
+      } finally {
+          initPropertiesFile();
       }
     }
   }
@@ -121,7 +131,6 @@ public class SiteminderUserDetailsService implements UserDetailsService, GroupNa
       Transaction transaction = this.dataAccessObject.newTransaction(Propagation.REQUIRES_NEW)) {
       try {
         Record user = this.dataAccessObject.getUserAccount(USER_ACCOUNT_CLASS, userGuid);
-
         final SecurityContext context = SecurityContextHolder.getContext();
         String consumerSecret = null;
         String username;
@@ -147,6 +156,15 @@ public class SiteminderUserDetailsService implements UserDetailsService, GroupNa
 
           user = this.dataAccessObject.newUserAccount(USER_ACCOUNT_CLASS, userGuid, username,
             consumerSecret);
+
+          if (userType.equalsIgnoreCase("INTERNAL")) {
+            for (String admin : admins) {
+              if (username.endsWith(admin)) {
+                final Record userGroup = this.dataAccessObject.getUserGroup("ADMIN");
+                this.dataAccessObject.newUserGroupAccountXref(userGroup, user);
+              }
+            }
+          }
         } else {
           username = user.getValue(UserAccount.CONSUMER_KEY);
 
@@ -189,6 +207,31 @@ public class SiteminderUserDetailsService implements UserDetailsService, GroupNa
 
   public void setUserDetailsChecker(final UserDetailsChecker userDetailsChecker) {
     this.userDetailsChecker = userDetailsChecker;
+  }
+
+  private void initPropertiesFile() {
+    final Path file = Paths.get("/apps/config/cpf/cpf.properties");
+    if (Files.exists(file)) {
+      try {
+        final Properties properties = new Properties();
+        try (
+          FileReader reader = new FileReader(file.toFile())) {
+            properties.load(reader);
+            for (final Object key : properties.keySet()) {
+              final String name = key.toString();
+              final String value = properties.getProperty(name);
+              if (value != null) {
+                if (name.equals("cpfAdmins")) {
+                  List<String> cpf_admins = Arrays.asList(value.split(",[ ]*"));
+                  for (String admin : cpf_admins) {
+                    admins.add(admin);
+                  }
+                }
+              }
+            }
+          }
+      } catch (final Exception e) { }
+    }
   }
 
 }
