@@ -231,7 +231,6 @@ public class SiteminderUserDetailsService implements UserDetailsService, GroupNa
                   List<String> cpf_admins = Arrays.asList(value.split(",[ ]*"));
                   for (String admin : cpf_admins) {
                     admins.add(admin);
-                    System.out.println(admin);
                   }
                 }
               }
