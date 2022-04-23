@@ -26,7 +26,6 @@ Create config maps
 oc process -f cfg-maps.yaml | oc apply -f -
 ```
 
-```
 ## Redeploy (may need to update the target namespace, as 988040-prod is used only for demonstration purposes)
 ```
 oc -n 988040-prod delete route,deployment,service,secret,networkpolicy -l app=cpf-tomcat
