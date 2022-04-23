@@ -31,6 +31,7 @@ oc process -f cfg-maps.yaml | oc apply -f -
 oc -n 988040-prod delete route,deployment,service,secret,networkpolicy -l app=cpf-tomcat
 oc -n 988040-prod delete secret,deployment,service,configmap -l app=cpf-db
 
-oc process -f cpf-db.yaml -p NAMESPACE=988040-prod | oc apply -f -
-oc process -f cpf-tomcat.yaml -p NAMESPACE=988040-prod -p TOOLS_NAMESPACE= 988040-tools | oc apply -f -
+oc process -f cfg-maps.yaml | oc apply -f -
+oc process -f cpf-db.yaml | oc apply -f -
+oc process -f cpf-tomcat.yaml | oc apply -f -
 ```
