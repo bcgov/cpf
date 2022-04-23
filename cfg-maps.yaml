@@ -5173,6 +5173,29 @@ objects:
 - kind: ConfigMap
   apiVersion: v1
   metadata:
+    name: geocoder-properties
+  data:
+    config.json: |-
+        [
+          {
+            "name": "geocoderFactory.dummyMode",
+            "type": "string",
+            "value": "false"
+          },
+          {
+            "name": "geocoderFactory.fileConfigurationUrl",
+            "type": "string",
+            "value": "file://apps/conf/bgeo/"
+          },
+          {
+            "name": "geocoderFactory.configurationStore",
+            "type": "string",
+            "value": "ca.bc.gov.ols.geocoder.config.FileGeocoderConfigurationStore"
+          }
+        ]
+- kind: ConfigMap
+  apiVersion: v1
+  metadata:
     name: cpf-properties
   data:
     cpf.properties: |-
@@ -5184,7 +5207,7 @@ objects:
         cpfDataSource.url=jdbc:postgresql://cpf-db:5432/cpf
         cpfDataSource.password=c0ncurr3n7
         cpfAdmins=abolyach,bsparks,dkelsey,bkelsey
-        
+
         batchJobService.maxWorkerWaitTime=60
         batchJobService.fromEmail=noreply@domain.com
         mailSender.host=smtp.domain.com

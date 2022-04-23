@@ -90,6 +90,8 @@ objects:
             mountPath: /apps/cpf/repository
           - name: bgeo-file-based-config
             mountPath: /apps/conf/bgeo
+          - name: geocoder-config
+            mountPath: /apps/conf/cpf/BGEO
 
         dnsPolicy: ClusterFirst
         initContainers:
@@ -116,6 +118,9 @@ objects:
         - name: conf-vol
           configMap:
             name: cpf-properties
+        - name: geocoder-config
+          configMap:
+            name: geocoder-properties
         - name: bgeo-file-based-config
           configMap:
             name: bgeo-file-based-config
