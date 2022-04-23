@@ -5183,7 +5183,8 @@ objects:
 
         cpfDataSource.url=jdbc:postgresql://cpf-db:5432/cpf
         cpfDataSource.password=c0ncurr3n7
-
+        cpfAdmins=abolyach,bsparks,dkelsey,bkelsey
+        
         batchJobService.maxWorkerWaitTime=60
         batchJobService.fromEmail=noreply@domain.com
         mailSender.host=smtp.domain.com
