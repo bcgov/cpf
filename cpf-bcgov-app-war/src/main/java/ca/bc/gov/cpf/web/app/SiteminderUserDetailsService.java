@@ -137,7 +137,6 @@ public class SiteminderUserDetailsService implements UserDetailsService, GroupNa
       Transaction transaction = this.dataAccessObject.newTransaction(Propagation.REQUIRES_NEW)) {
       try {
         Record user = this.dataAccessObject.getUserAccount(USER_ACCOUNT_CLASS, userGuid);
-        System.out.println("inside load user by name");
         final SecurityContext context = SecurityContextHolder.getContext();
         String consumerSecret = null;
         String username;
@@ -166,14 +165,11 @@ public class SiteminderUserDetailsService implements UserDetailsService, GroupNa
 
           if (userType.equalsIgnoreCase("INTERNAL")) {
             for (String admin : admins) {
-              System.out.println(admin);
               if (username.endsWith(admin)) {
                 final Record userGroup = this.dataAccessObject.getUserGroup("ADMIN");
                 this.dataAccessObject.newUserGroupAccountXref(userGroup, user);
-                System.out.println("Added admin");
               }
             }
-            System.out.println("Printed list of admins");
           }
         } else {
           username = user.getValue(UserAccount.CONSUMER_KEY);
@@ -235,6 +231,7 @@ public class SiteminderUserDetailsService implements UserDetailsService, GroupNa
                   List<String> cpf_admins = Arrays.asList(value.split(",[ ]*"));
                   for (String admin : cpf_admins) {
                     admins.add(admin);
+                    System.out.println(admin);
                   }
                 }
               }
