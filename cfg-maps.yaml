@@ -346,7 +346,7 @@ objects:
       "BGEO","blockFaceOffset","0.5"
       "BGEO","copyrightLicenseURI","https://www2.gov.bc.ca/gov/content?id=A519A56BC2BF44E4A008B33FCF527F61"
       "BGEO","copyrightNotice","Copyright © 2020 Province of British Columbia - Open Government License"
-      "BGEO","dataSource.baseFileUrl","https://minio-geocoder-datastore-prod.apps.silver.devops.gov.bc.ca/geocoder/"
+      "BGEO","dataSource.baseFileUrl",${DATA_PROVIDER}
       "BGEO","dataSource.baseFileUrl.deliv","http://caddy-gc-datastore-dlv.pathfinder.bcgov/geocoder/"
       "BGEO","dataSource.baseFileUrl.devel","https://ols-release.data.gov.bc.ca/"
       "BGEO","dataSource.baseFileUrl.prod","http://caddy-gc-datastore-prod.pathfinder.bcgov/geocoder/"
@@ -5222,3 +5222,6 @@ parameters:
 - name: BASE_URL
   description: "exposed service url"
   value: data-integration-cpf.apps.gov.bc.ca
+- name: DATA_PROVIDER
+  description: "minio data provider url"
+  value: https://data-integration-datastore.apps.silver.devops.gov.bc.ca/geocoder/

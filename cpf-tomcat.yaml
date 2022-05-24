@@ -1,31 +1,34 @@
 apiVersion: v1
 objects:
-# - apiVersion: route.openshift.io/v1
-#   kind: Route
-#   metadata:
-#     annotations:
-#       openshift.io/host.generated: "true"
-#     labels:
-#       app: cpf-tomcat
-#       app.kubernetes.io/component: cpf-tomcat
-#       app.kubernetes.io/instance: cpf-tomcat
-#     name: cpf-tomcat
-#   spec:
-#     host: cpf-tomcat-${NAMESPACE}.apps.silver.devops.gov.bc.ca
-#     path: /pub/cpf
-#     port:
-#       targetPort: 8080-tcp
-#     tls:
-#       insecureEdgeTerminationPolicy: Redirect
-#       termination: edge
-#     to:
-#       kind: Service
-#       name: cpf-tomcat
-#       weight: 100
-#     wildcardPolicy: None
+- apiVersion: route.openshift.io/v1
+  kind: Route
+  metadata:
+    annotations:
+      openshift.io/host.generated: "true"
+    labels:
+      app: cpf-tomcat
+      app.kubernetes.io/component: cpf-tomcat
+      app.kubernetes.io/instance: cpf-tomcat
+    name: cpf-tomcat
+  spec:
+    host: cpf-tomcat-${NAMESPACE}.apps.silver.devops.gov.bc.ca
+    path: /pub/cpf
+    port:
+      targetPort: 8080-tcp
+    tls:
+      insecureEdgeTerminationPolicy: Redirect
+      termination: edge
+    to:
+      kind: Service
+      name: cpf-tomcat
+      weight: 100
+    wildcardPolicy: None
 - apiVersion: apps/v1
   kind: Deployment
   metadata:
+    annotations:
+      image.openshift.io/triggers: >-
+        [{"from":{"kind":"ImageStreamTag","name":"cpf-tomcat:${TAG}","namespace":"${TOOLS_NAMESPACE}"},"fieldPath":"spec.template.spec.containers[?(@.name==\"cpf-tomcat\")].image"}]
     labels:
       app: cpf-tomcat
       app.kubernetes.io/component: cpf-tomcat
@@ -39,10 +42,7 @@ objects:
       matchLabels:
         deployment: cpf-tomcat
     strategy:
-      rollingUpdate:
-        maxSurge: 25%
-        maxUnavailable: 25%
-      type: RollingUpdate
+      type: Recreate
     template:
       metadata:
         annotations:
@@ -52,7 +52,7 @@ objects:
       spec:
         containers:
         - envFrom:
-          image: tomcat:9-jdk11-openjdk-slim-bullseye
+          image: image-registry.openshift-image-registry.svc:5000/${TOOLS_NAMESPACE}/cpf-tomcat:${TAG}
           imagePullPolicy: IfNotPresent
           name: cpf-tomcat
           ports:
@@ -68,8 +68,6 @@ objects:
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
           volumeMounts:
-          - mountPath: /usr/local/tomcat/webapps
-            name: war-vol
           - name: conf-vol
             mountPath: /apps/conf/cpf
           - name: conf-vol
@@ -94,22 +92,6 @@ objects:
             mountPath: /apps/conf/cpf/BGEO
 
         dnsPolicy: ClusterFirst
-        initContainers:
-        - args:
-          command:
-            - cp
-            - /pub#cpf.war
-            - /pub#cpf-worker.war
-            - /app/
-          image: image-registry.openshift-image-registry.svc:5000/${TOOLS_NAMESPACE}/cpf-sidecar:prod
-          imagePullPolicy: Always
-          name: war-init
-          resources: {}
-          terminationMessagePath: /dev/termination-log
-          terminationMessagePolicy: File
-          volumeMounts:
-          - mountPath: /app
-            name: war-vol
         restartPolicy: Always
         schedulerName: default-scheduler
         securityContext: {}
@@ -124,8 +106,6 @@ objects:
         - name: bgeo-file-based-config
           configMap:
             name: bgeo-file-based-config
-        - emptyDir: {}
-          name: war-vol
         - name: cpf-tomcat-vol
           persistentVolumeClaim:
             claimName: cpf-tomcat-vol
@@ -180,7 +160,7 @@ objects:
     - ReadWriteMany
     resources:
       requests:
-        storage: 100Mi
+        storage: 1Gi
     storageClassName: netapp-file-standard
     volumeMode: Filesystem
 - apiVersion: networking.k8s.io/v1
@@ -243,7 +223,11 @@ kind: Template
 parameters:
 - name: NAMESPACE
   description: "project namespace"
-  value: 988040-prod
+  value: 988040-test
 - name: TOOLS_NAMESPACE
   description: "image managing namespace"
   value: 988040-tools
+- name: TAG
+  description: "imagestream tags to subscribe to"
+  value: test
+  required: true
