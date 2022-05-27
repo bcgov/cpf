@@ -32,6 +32,10 @@ or with non-default parameters
  oc process -f cfg-maps.yaml -p BASE_URL=test-cpf.apps.gov.bc.ca -p DATA_PROVIDER=https://geocoder-datastore-prod.apps.silver.devops.gov.bc.ca/geocoder/ | oc apply -f -
 ```
 
+## Create relevant secrets
+
+For example, cpf-db requires loc-tools-repo secret to pull database initialization scripts (check 988040 namespace for secret's content).
+
 ## Redeploy (may need to update the target namespace, as 988040-prod is used only for demonstration purposes)
 ```
 oc -n 988040-prod delete route,deployment,service,secret,networkpolicy -l app=cpf-tomcat
