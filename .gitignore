@@ -7,7 +7,6 @@ target
 *.stackdump
 *.class
 .DS_Store
-.idea
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
@@ -19,3 +18,4 @@ db.properties
 *.log
 /log
 /logs
+

@@ -1,0 +1,145 @@
+name: Release Build
+
+on:
+  push:
+    branches:
+    - release/*
+
+jobs:
+  release_build:
+    runs-on: ubuntu-latest
+ 
+    steps:
+
+#### JAVA VERSION ####
+    - name: Set up JDK 11
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11.0.x
+
+#### Checkout jeometry ####
+    - name: Checkout jeometry
+      uses: actions/checkout@v2
+      with:
+        ref: master
+        repository: jeometry-org/jeometry
+        path: jeometry
+
+#### Checkout revolsys ####
+    - name: Checkout revolsys
+      uses: actions/checkout@v2
+      with:
+        ref: master
+        repository: revolsys/com.revolsys.open
+        path: revolsys
+
+#### Checkout cpf ####
+    - name: Checkout cpf
+      uses: actions/checkout@v2
+      with:
+        ref: ${{github.ref}}
+        repository: ${{github.repository}}
+        path: cpf
+
+#### MAVEN REPOSITORY CACHE ####
+    - name: Maven Cache
+      uses: actions/cache@v1
+      with:
+        path: ~/.m2/repository
+        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+        restore-keys: |
+          ${{ runner.os }}-maven-
+
+#### Tag jeometry ####
+    - name: Tag jeometry
+      env:
+        GITHUB_REF: ${{github.ref}}
+      run: |
+        VERSION_BASE=${GITHUB_REF/refs\/heads\/release\//}-RELEASE
+        VERSION=${VERSION_BASE}-CPF-JEOMETRY
+        git config --global user.name "${{github.actor}}"
+        git config --global user.email "${{github.actor}}@users.noreply.github.com"
+        git rm -rf .github
+        mvn -B versions:set -DnewVersion="${VERSION}" -DgenerateBackupPoms=false
+        git commit -a -m "Version ${VERSION}"
+        git fetch --unshallow origin
+        git tag -f "${VERSION}"
+        git push -f https://github.com/${{github.repository}} ${VERSION}
+      working-directory: ./jeometry
+      
+#### Tag revolsys ####
+    - name: Tag revolsys
+      env:
+        GITHUB_REF: ${{github.ref}}
+      run: |
+        VERSION_BASE=${GITHUB_REF/refs\/heads\/release\//}-RELEASE
+        JEOMETRY_VERSION=${VERSION_BASE}-CPF-JEOMETRY
+        VERSION=${VERSION_BASE}-CPF-REVOLSYS
+        git config --global user.name "${{github.actor}}"
+        git config --global user.email "${{github.actor}}@users.noreply.github.com"
+        git rm -rf .github
+        mvn -B versions:set -DnewVersion="${VERSION}" -DgenerateBackupPoms=false
+        sed -i "s/<org.jeometry.version>.*<\\/org.jeometry.version>/<org.jeometry.version>${JEOMETRY_VERSION}<\\/org.jeometry.version>/g" pom.xml
+        git commit -a -m "Version ${VERSION}"
+        git fetch --unshallow origin
+        git tag -f "${VERSION}"
+        git push -f https://github.com/${{github.repository}} ${VERSION}
+      working-directory: ./revolsys
+
+#### Tag cpf ####
+    - name: Tag cpf
+      env:
+        GITHUB_REF: ${{github.ref}}
+      run: |
+        VERSION_BASE=${GITHUB_REF/refs\/heads\/release\//}-RELEASE
+        JEOMETRY_VERSION=${VERSION_BASE}-CPF-JEOMETRY
+        REVOLSYS_VERSION=${VERSION_BASE}-CPF-REVOLSYS
+        VERSION=${VERSION_BASE}
+        git config --global user.name "${{github.actor}}"
+        git config --global user.email "${{github.actor}}@users.noreply.github.com"
+        git rm -rf .github
+        mvn -B versions:set -DnewVersion="${VERSION}" -DgenerateBackupPoms=false
+        sed -i "s/<org.jeometry.version>.*<\\/org.jeometry.version>/<org.jeometry.version>${JEOMETRY_VERSION}<\\/org.jeometry.version>/g" pom.xml
+        sed -i "s/<com.revolsys.open.version>.*<\\/com.revolsys.open.version>/<com.revolsys.open.version>${REVOLSYS_VERSION}<\\/com.revolsys.open.version>/g" pom.xml
+        git commit -a -m "Version ${VERSION}"
+        git fetch --unshallow origin
+        git tag -f "${VERSION}"
+        git push -f https://github.com/${{github.repository}} ${VERSION}
+      working-directory: ./cpf
+
+#### Build jeometry ####
+    - name: Build jeometry
+      run: mvn -B install -Dmaven.javadoc.skip=true
+      working-directory: ./jeometry
+      
+#### Build revolsys ####
+    - name: Build revolsys
+      run: mvn -B install -Dmaven.javadoc.skip=true
+      working-directory: ./revolsys
+
+#### Build cpf ####
+    - name: Build cpf
+      run: mvn -B install -Dmaven.javadoc.skip=true
+      working-directory: ./cpf
+
+#### Maven settings ####
+    - name: maven-settings-xml-action
+      uses: whelk-io/maven-settings-xml-action@v4
+      with:
+        repositories: '[{"id": "github", "url": "https://maven.pkg.github.com/pauldaustin/gba"}]'
+        servers: '[{ "id": "github", "username": "pauldaustin", "password": "${{ secrets.GITHUB_TOKEN}}" }]'
+    
+#### Deploy jeometry ####
+    - name: Deploy jeometry
+      run: mvn -B deploy -DaltDeploymentRepository=github::https://maven.pkg.github.com/pauldaustin/gba
+      working-directory: ./jeometry
+      
+#### Deploy revolsys ####
+    - name: Deploy revolsys
+      run: mvn -B deploy -DaltDeploymentRepository=github::https://maven.pkg.github.com/pauldaustin/gba
+      working-directory: ./revolsys
+
+#### Deploy cpf ####
+    - name: Deploy cpf
+      run: mvn -B deploy -DaltDeploymentRepository=github::https://maven.pkg.github.com/pauldaustin/gba
+      working-directory: ./cpf
