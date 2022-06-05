@@ -755,11 +755,16 @@
   </profiles>
 
   <distributionManagement>
-    <site>
-      <id>cpf-gh-pages</id>
-      <name>Deployment through GitHub's site deployment plugin</name>
-      <url>github:https://revolsys.github.io/cpf/</url>
-    </site>
+    <repository>
+      <id>central</id>
+      <name>artifactory-ha-primary-0-releases</name>
+      <url>https://artifacts.developer.gov.bc.ca/artifactory/g988-release</url>
+    </repository>
+      <snapshotRepository>
+      <id>snapshots</id>
+      <name>artifactory-ha-primary-0-snapshots</name>
+      <url>https://artifacts.developer.gov.bc.ca/artifactory/g988-snapshot</url>
+    </snapshotRepository>
   </distributionManagement>
 
   <properties>
