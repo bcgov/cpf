@@ -86,7 +86,7 @@ objects:
 
           - name: cpf-repository
             mountPath: /apps/cpf/repository
-          - name: bgeo-file-based-config
+          - name: bgeo-configs
             mountPath: /apps/conf/bgeo
           - name: geocoder-config
             mountPath: /apps/conf/cpf/BGEO
@@ -103,9 +103,9 @@ objects:
         - name: geocoder-config
           configMap:
             name: geocoder-properties
-        - name: bgeo-file-based-config
-          configMap:
-            name: bgeo-file-based-config
+        - name: bgeo-configs
+          persistentVolumeClaim:
+            claimName: bgeo-configs
         - name: cpf-tomcat-vol
           persistentVolumeClaim:
             claimName: cpf-tomcat-vol
