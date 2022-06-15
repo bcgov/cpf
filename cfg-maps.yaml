@@ -15,7 +15,7 @@ objects:
           {
             "name": "geocoderFactory.fileConfigurationUrl",
             "type": "string",
-            "value": "file://apps/conf/bgeo/app-configs/"
+            "value": "file://apps/conf/bgeo/${MINIO_BUCKET}/"
           },
           {
             "name": "geocoderFactory.configurationStore",
@@ -52,5 +52,9 @@ parameters:
 - name: BASE_URL
   description: "exposed service url"
   value: cpf-tomcat-988040-test.apps.silver.devops.gov.bc.ca
+- name: MINIO_BUCKET
+  description: "minio bucket containing config files"
+  value: geocoder-configs-test
 - name: PULLER_PASSWORD
   description: "artifactory puller password"
+  value: PASSWORD
