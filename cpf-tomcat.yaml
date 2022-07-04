@@ -63,8 +63,8 @@ objects:
               cpu: "8"
               memory: 6Gi
             requests:
-              cpu: 500m
-              memory: 512Mi
+              cpu: 250m
+              memory: 3Gi
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
           volumeMounts:
