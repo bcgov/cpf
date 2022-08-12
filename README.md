@@ -29,7 +29,7 @@ Issues with the library or documentation can be submitted using the [GitHub Issu
 
 ## Troubleshooting
 
-[CPF Playbook](https://github.com/bcgov-dss/loc-tools/blob/main/app-playbooks/CPF_PLAYBOOK.md)
+[CPF Playbook](https://github.com/bcgov-dss/loc-tools/blob/main/app-playbooks/CPF/CPF_PLAYBOOK.md)
 
 ## Pipelines
 
