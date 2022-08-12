@@ -380,11 +380,6 @@
         </exclusions>
       </dependency>
       <dependency>
-        <groupId>xalan</groupId>
-        <artifactId>xalan</artifactId>
-        <version>2.7.2</version>
-      </dependency>
-      <dependency>
         <groupId>javax.servlet</groupId>
         <artifactId>javax.servlet-api</artifactId>
         <version>4.0.1</version>
@@ -753,7 +748,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <com.revolsys.open.version>TRUNK-SNAPSHOT</com.revolsys.open.version>
+    <com.revolsys.open.version>6.3.1-RELEASE</com.revolsys.open.version>
     <org.springframework.version>5.2.22.RELEASE</org.springframework.version>
     <org.springframework.security.version>5.3.0.RELEASE</org.springframework.security.version>
     <org.apache.httpcomponents.version>4.5.11</org.apache.httpcomponents.version>
