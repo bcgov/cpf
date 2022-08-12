@@ -39,10 +39,6 @@
           <groupId>org.slf4j</groupId>
         </exclusion>
         <exclusion>
-          <artifactId>xalan</artifactId>
-          <groupId>xalan</groupId>
-        </exclusion>
-        <exclusion>
           <artifactId>xercesImpl</artifactId>
           <groupId>xerces</groupId>
         </exclusion>

@@ -115,16 +115,5 @@
       <artifactId>jts</artifactId>
       <version>1.13</version>
     </dependency>
-    <dependency>
-      <groupId>xalan</groupId>
-      <artifactId>xalan</artifactId>
-      <exclusions>
-        <exclusion>
-          <groupId>xml-apis</groupId>
-          <artifactId>xml-apis</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    
   </dependencies>
 </project>
