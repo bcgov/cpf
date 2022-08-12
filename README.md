@@ -27,6 +27,14 @@ developing custom plug-ins.
 
 Issues with the library or documentation can be submitted using the [GitHub Issues List](https://github.com/bcgov/cpf/issues).
 
+## Troubleshooting
+
+[CPF Playbook](https://github.com/bcgov-dss/loc-tools/blob/main/app-playbooks/CPF_PLAYBOOK.md)
+
+## Pipelines
+
+See cpf-pr-triggers.yaml [Helm Chart](https://github.com/bcgov-dss/loc-tools/tree/main/helm)
+
 ## License
 
     Copyright © 2008-2016 Province of British Columbia
