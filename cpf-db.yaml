@@ -75,7 +75,7 @@ objects:
                 name: cpf-db
           - name: PGDATA
             value: /var/lib/pgsql/data/pgdata
-          image: docker-remote.artifacts.developer.gov.bc.ca/postgres:13.4
+          image: artifacts.developer.gov.bc.ca/docker-remote/postgres:13.4
           imagePullPolicy: IfNotPresent
           name: cpf-db
           ports:
