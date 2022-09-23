@@ -1,2 +1,0 @@
-# cpf-config-snapshot
-
