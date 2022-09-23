@@ -1,0 +1,17 @@
+[
+  {
+    "name": "geocoderFactory.dummyMode",
+    "type": "string",
+    "value": "false"
+  },
+  {
+    "name": "geocoderFactory.fileConfigurationUrl",
+    "type": "string",
+    "value": "https://geocoder-datastore-prod.apps.silver.devops.gov.bc.ca/geocoder-configs-prod/"
+  },
+  {
+    "name": "geocoderFactory.configurationStore",
+    "type": "string",
+    "value": "ca.bc.gov.ols.geocoder.config.FileGeocoderConfigurationStore"
+  }
+]

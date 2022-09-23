@@ -1,0 +1,17 @@
+[
+  {
+    "name": "geocoderFactory.dummyMode",
+    "type": "string",
+    "value": "false"
+  },
+  {
+    "name": "geocoderFactory.fileConfigurationUrl",
+    "type": "string",
+    "value": "file://apps/cpfcat/conf-bgeo/"
+  },
+  {
+    "name": "geocoderFactory.configurationStore",
+    "type": "string",
+    "value": "ca.bc.gov.ols.geocoder.config.FileGeocoderConfigurationStore"
+  }
+]
