@@ -38,9 +38,15 @@ package ca.bc.gov.open.cpf.api.security.oauth;
 import java.io.IOException;
 import java.util.Collection;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+import jakarta.servlet.Filter;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.FilterConfig;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -84,6 +90,22 @@ public class OAuthProcessingFilter extends AbstractAuthenticationProcessingFilte
       // the result from getParameters(request).
     }
     return new HttpRequestMessage(request, URL);
+  }
+
+  @Override
+  public void doFilter(final ServletRequest request, final ServletResponse response,
+    final FilterChain chain) throws IOException, ServletException {
+    try {
+      chain.doFilter(request, response);
+    } catch (final IOException e) {
+      throw e;
+    } catch (final ServletException e) {
+      throw e;
+    } catch (final RuntimeException e) {
+      throw e;
+    } catch (final Error e) {
+      throw e;
+    }
   }
 
   /** Reconstruct the requested URL, complete with query string (if any). */

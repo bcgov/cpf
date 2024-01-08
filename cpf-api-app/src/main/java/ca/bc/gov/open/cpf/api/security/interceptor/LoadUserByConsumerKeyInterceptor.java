@@ -35,13 +35,13 @@
  */
 package ca.bc.gov.open.cpf.api.security.interceptor;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+import org.springframework.web.servlet.HandlerInterceptor;
 
 import ca.bc.gov.open.cpf.api.domain.CpfDataAccessObject;
 import ca.bc.gov.open.cpf.api.domain.UserAccount;
@@ -54,7 +54,7 @@ import com.revolsys.record.Record;
  * external user name identified in the HTTP request Principal within the
  * specified userAccountClass.
  */
-public class LoadUserByConsumerKeyInterceptor extends HandlerInterceptorAdapter {
+public class LoadUserByConsumerKeyInterceptor implements HandlerInterceptor {
 
   private CpfDataAccessObject dataAccessObject;
 
