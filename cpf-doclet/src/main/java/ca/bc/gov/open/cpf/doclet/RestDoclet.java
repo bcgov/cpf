@@ -28,7 +28,7 @@ import com.sun.javadoc.Tag;
 public class RestDoclet extends BaseDoclet {
 
   private static Set<String> PARAMETER_IGNORE_CLASS_NAMES = Sets
-    .newHash("javax.servlet.http.HttpServletRequest", "javax.servlet.http.HttpServletResponse");
+    .newHash("jakarta.servlet.http.HttpServletRequest", "jakarta.servlet.http.HttpServletResponse");
 
   public static LanguageVersion languageVersion() {
     return LanguageVersion.JAVA_1_5;
