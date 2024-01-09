@@ -11,9 +11,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import javax.annotation.PreDestroy;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Required;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AccountStatusUserDetailsChecker;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -197,7 +197,7 @@ public class SiteminderUserDetailsService implements UserDetailsService, GroupNa
     }
   }
 
-  @Required
+  @Autowired
   public void setUserAccountSecurityService(
     final UserAccountSecurityService userAccountSecurityService) {
     this.userAccountSecurityService = userAccountSecurityService;
