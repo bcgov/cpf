@@ -22,7 +22,6 @@
     auto-config="false"
     entry-point-ref="cpfOpenIdFilterEntryPoint"
     security-context-repository-ref="cpfOpenIdSpringSecurityContext"
-    access-decision-manager-ref="cpfOpenIdAccessDecisionManager"
   >
     <security:csrf disabled="true" />
     <security:custom-filter
