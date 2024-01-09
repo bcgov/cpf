@@ -30,7 +30,6 @@
     auto-config="false"
     security-context-repository-ref="cpfSiteminderSpringSecurityContext"
     entry-point-ref="cpfSiteminderEntryPoint"
-    access-decision-manager-ref="cpfSiteminderAccessDecisionManager"
     pattern="/secure/**"
   >
     <security:csrf disabled="true" />
