@@ -38,8 +38,8 @@ package ca.bc.gov.open.cpf.api.security.oauth;
 import java.io.IOException;
 
 import jakarta.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletResponse;
 
 import org.apache.commons.codec.binary.Base64;
