@@ -126,6 +126,8 @@
     class="org.springframework.security.web.access.ExceptionTranslationFilter"
     p:accessDeniedHandler-ref="cpfSiteminderAccessDeniedHandler"
   >
+  <bean id="mvcHandlerMappingIntrospector" class="org.springframework.web.servlet.handler.HandlerMappingIntrospector"/>
+
     <constructor-arg ref="cpfSiteminderEntryPoint" />
   </bean>
 </beans>
