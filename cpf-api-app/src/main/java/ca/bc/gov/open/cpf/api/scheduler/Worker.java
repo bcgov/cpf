@@ -25,7 +25,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
 
-import javax.websocket.Session;
+import jakarta.websocket.Session;
 
 import org.jeometry.common.data.identifier.Identifier;
 
