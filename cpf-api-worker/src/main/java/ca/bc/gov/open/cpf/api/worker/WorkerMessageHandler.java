@@ -243,13 +243,13 @@ public class WorkerMessageHandler implements ModuleEventListener, BaseCloseable 
         return handleMessage(message, exception);
       }
 
-      @Override
-      public boolean onDisconnect(final CloseReason closeReason) {
-        final int code = closeReason.getCloseCode().getCode();
-        final CloseCode closeCode = CloseCodes.getCloseCode(code);
-        final String reason = closeCode + " " + closeReason.getReasonPhrase();
-        return handleMessage("Master disconnected " + reason, null);
-      }
+      // @Override
+      // public boolean onDisconnect(final CloseReason closeReason) {
+      //   final int code = closeReason.getCloseCode().getCode();
+      //   final CloseCode closeCode = CloseCodes.getCloseCode(code);
+      //   final String reason = closeCode + " " + closeReason.getReasonPhrase();
+      //   return handleMessage("Master disconnected " + reason, null);
+      // }
     });
   }
 
