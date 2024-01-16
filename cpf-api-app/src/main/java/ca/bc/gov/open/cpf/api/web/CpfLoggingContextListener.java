@@ -17,9 +17,9 @@ package ca.bc.gov.open.cpf.api.web;
 
 import java.io.File;
 
-import javax.servlet.ServletContext;
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.ServletContextEvent;
+import jakarta.servlet.ServletContextListener;
 
 import ca.bc.gov.open.cpf.plugin.impl.module.ClassLoaderModule;
 

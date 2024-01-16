@@ -203,28 +203,28 @@
     </property>
     <property name="attributeMappings">
       <map>
-        <entry key="/admin/**">
+        <entry key="/admin/{path:[^\\.]*}">
           <map>
             <entry
               key="mainMenu"
               value-ref="adminMainMenu" />
           </map>
         </entry>
-        <entry key="/secure/admin/**">
+        <entry key="/secure/admin/{path:[^\\.]*}">
           <map>
             <entry
               key="mainMenu"
               value-ref="adminMainMenu" />
           </map>
         </entry>
-        <entry key="/ws/**">
+        <entry key="/ws/{path:[^\\.]*}">
           <map>
             <entry
               key="breadcrumbHidePrefix"
               value="/ws" />
           </map>
         </entry>
-        <entry key="/**">
+        <entry key="/{path:[^\\.]*}">
           <map>
             <entry
               key="httpMessageConverterTemplatePath"

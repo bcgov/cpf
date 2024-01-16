@@ -18,7 +18,7 @@ package ca.bc.gov.open.cpf.api.security.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Required;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.authentication.AccountStatusUserDetailsChecker;
 import org.springframework.security.core.AuthenticationException;
@@ -93,14 +93,14 @@ public class UserAccountByConsumerKeyDetailsService implements UserDetailsServic
     }
   }
 
-  @Required
+  @Autowired
   public void setUserAccountSecurityService(
     final UserAccountSecurityService userAccountSecurityService) {
     this.userAccountSecurityService = userAccountSecurityService;
     this.dataAccessObject = userAccountSecurityService.getDataAccessObject();
   }
 
-  @Required
+  @Autowired
   public void setUserDetailsChecker(final UserDetailsChecker userDetailsChecker) {
     this.userDetailsChecker = userDetailsChecker;
   }

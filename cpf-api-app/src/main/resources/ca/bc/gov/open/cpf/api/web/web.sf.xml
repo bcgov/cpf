@@ -22,6 +22,9 @@
   <bean
     id="methodSecurityHandler"
     class="com.revolsys.spring.security.RsMethodSecurityExpressionHandler" />
+  
+  <bean id="mvcHandlerMappingIntrospector" class="org.springframework.web.servlet.handler.HandlerMappingIntrospector"/>
+
 
   <security:global-method-security
   >

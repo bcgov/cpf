@@ -106,7 +106,7 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.8.1</version>
         <configuration>
-          <release>11</release>
+          <release>17</release>
           <debug>true</debug>
           <parameters>true</parameters>
           <compilerArgument>-parameters</compilerArgument>
@@ -379,10 +379,11 @@
           </exclusion>
         </exclusions>
       </dependency>
+      
       <dependency>
-        <groupId>javax.servlet</groupId>
-        <artifactId>javax.servlet-api</artifactId>
-        <version>4.0.1</version>
+        <groupId>jakarta.servlet</groupId>
+        <artifactId>jakarta.servlet-api</artifactId>
+        <version>5.0.0</version>
         <scope>provided</scope>
       </dependency>
       <dependency>
@@ -746,11 +747,19 @@
     </snapshotRepository>
   </distributionManagement>
 
+  <repositories>
+    <repository>
+        <id>jakartaee-ambassador</id>
+        <url>https://repo.eclipse.org/content/groups/jakartaee-ambassador</url>
+    </repository>
+  </repositories>
+
+
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <com.revolsys.open.version>6.3.1-RELEASE</com.revolsys.open.version>
-    <org.springframework.version>5.2.22.RELEASE</org.springframework.version>
-    <org.springframework.security.version>5.3.0.RELEASE</org.springframework.security.version>
+    <com.revolsys.open.version>6.1.x-SNAPSHOT</com.revolsys.open.version>
+    <org.springframework.version>6.0.0</org.springframework.version>
+    <org.springframework.security.version>6.0.0</org.springframework.security.version>
     <org.apache.httpcomponents.version>4.5.11</org.apache.httpcomponents.version>
     <org.apache.httpcomponents.httpmime.version>4.5.11</org.apache.httpcomponents.httpmime.version>
     <org.slf4j.version>1.7.30</org.slf4j.version>

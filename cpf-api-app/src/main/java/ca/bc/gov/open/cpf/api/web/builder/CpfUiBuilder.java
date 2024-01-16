@@ -25,7 +25,7 @@ import java.util.regex.Pattern;
 
 import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.jeometry.common.data.identifier.Identifier;
 import org.jeometry.common.io.PathName;

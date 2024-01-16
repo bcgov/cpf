@@ -22,7 +22,7 @@ import java.util.Map;
 
 import javax.annotation.PreDestroy;
 
-import org.springframework.beans.factory.annotation.Required;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import ca.bc.gov.open.cpf.api.domain.CpfDataAccessObject;
 import ca.bc.gov.open.cpf.api.domain.UserAccount;
@@ -124,7 +124,7 @@ public class BaseAuthorizationService implements AuthorizationService {
     this.dataAccessObject = dataAccessObject;
   }
 
-  @Required
+  @Autowired
   public void setUserAccountSecurityService(
     final UserAccountSecurityService userAccountSecurityService) {
     this.userAccountSecurityService = userAccountSecurityService;
