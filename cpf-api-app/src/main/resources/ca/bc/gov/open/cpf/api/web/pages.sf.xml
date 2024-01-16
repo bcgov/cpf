@@ -224,7 +224,7 @@
               value="/ws" />
           </map>
         </entry>
-        <entry key="/**">
+        <entry key="/{path:[^\\.]*}">
           <map>
             <entry
               key="httpMessageConverterTemplatePath"
