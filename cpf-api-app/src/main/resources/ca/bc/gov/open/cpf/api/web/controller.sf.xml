@@ -19,7 +19,7 @@
     class="org.springframework.web.multipart.support.StandardServletMultipartResolver"
     p:maxUploadSize="20000000" />
 
-  <bean
+  <!-- <bean
     class="com.revolsys.ui.web.rest.interceptor.DefaultAnnotationHandlerMapping"
     p:alwaysUseFullPath="true"
   >
@@ -28,7 +28,7 @@
         <ref bean="cpfAttributeInterceptor" />
       </list>
     </property>
-  </bean>
+  </bean> -->
 
   <bean
     id="htmlUiBuilderFactory"

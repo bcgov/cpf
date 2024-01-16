@@ -201,7 +201,81 @@
     <property name="pathMatcher">
       <bean class="com.revolsys.ui.web.controller.UriTemplatePathMatcher" />
     </property>
-    
+    <property name="attributeMappings">
+      <map>
+        <entry key="/admin/{path:[^\\.]*}">
+          <map>
+            <entry
+              key="mainMenu"
+              value-ref="adminMainMenu" />
+          </map>
+        </entry>
+        <entry key="/secure/admin/{path:[^\\.]*}">
+          <map>
+            <entry
+              key="mainMenu"
+              value-ref="adminMainMenu" />
+          </map>
+        </entry>
+        <entry key="/ws/{path:[^\\.]*}">
+          <map>
+            <entry
+              key="breadcrumbHidePrefix"
+              value="/ws" />
+          </map>
+        </entry>
+        <entry key="/{path:[^\\.]*}">
+          <map>
+            <entry
+              key="httpMessageConverterTemplatePath"
+              value="/view/page" />
+            <entry
+              key="body"
+              value="/view/httpMessageConverter" />
+            <entry
+              key="headerPage"
+              value="/WEB-INF/jsp/template/header.jsp" />
+            <entry
+              key="breadcrumbUrl"
+              value="/view/breadcrumb" />
+            <entry
+              key="title"
+              value="Concurrent Processing Framework Web Services" />
+            <entry
+              key="applicationName"
+              value="Concurrent Processing Framework" />
+            <entry key="applicationVersion">
+              <bean
+                class="com.revolsys.util.ManifestUtil"
+                factory-method="getImplementationVersion"
+              >
+                <constructor-arg value="Concurrent Processing Framework Application Java API" />
+              </bean>
+            </entry>
+            <entry key="applicationCommit">
+              <bean
+                class="com.revolsys.util.ManifestUtil"
+                factory-method="getScmCommit"
+              >
+                <constructor-arg value="Concurrent Processing Framework Application Java API" />
+              </bean>
+            </entry>
+            <entry
+              key="cssUrls"
+              value-ref="cpfCssUrls" />
+            <entry
+              key="javascriptUrls"
+              value-ref="cpfJavaScriptUrls" />
+            <entry
+              key="mainMenu"
+              value-ref="mainMenu" />
+            <entry
+              key="footerMenu"
+              value-ref="footerMenu" />
+          </map>
+        </entry>
+      </map>
+    </property>
   </bean>
   <bean
     name="/index"
